@@ -1,0 +1,299 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2213130592918780180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2213130592918780182}
+  - component: {fileID: 2213130592918780183}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2213130592918780182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2213130592918780180}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2213130592918780183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2213130592918780180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea1a3508d7729c4c9b04e0aca4c79a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterType_And_Texts:
+  - characterType: 1
+    canvas: {fileID: 0}
+    tmp_Text: {fileID: 0}
+    dialogueObj: {fileID: 0}
+  - characterType: 0
+    canvas: {fileID: 0}
+    tmp_Text: {fileID: 0}
+    dialogueObj: {fileID: 0}
+  dialogue_Chapter: {fileID: 11400000, guid: 5bb26452886afa94891c26e3044ba28e, type: 2}
+  last_DialogueChapter: {fileID: 11400000, guid: 5bb26452886afa94891c26e3044ba28e, type: 2}
+  dialogueDatas:
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 0
+    sequence: 0
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u59B3\u597D"
+    eng_charactername: granny
+    eng_sentence: Hi
+  - charactertype: 0
+    area: 0
+    txttypes: 0
+    puzzle: 0
+    sequence: 1
+    ch_charactername: "\u52AA\u746A"
+    ch_sentence: "\u6BD4\u4F60\u8070\u660E\u7684\u4EBA\u90FD\u6BD4\u4F60\u52AA\u529B\u4E86\uFF0C\u90A3\u4F60\u52AA\u529B\u6709\u500B\u5C41\u7528\u3002"
+    eng_charactername: pneuma
+    eng_sentence: Meow
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 0
+    sequence: 2
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u6210\u529F\u5C31\u50CF\u61F7\u5B55\uFF0C\u5927\u5BB6\u90FD\u6703\u606D\u559C\u4F60\uFF0C\u4F46\u6C92\u4EBA\u77E5\u9053\u4F60\u88AB\u641E\u4E86\u5E7E\u6B21\u624D\u6210\u529F\uFF01"
+    eng_charactername: granny
+    eng_sentence: Me
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 0
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u5982\u679C\u4F60\u89BA\u5F97\u81EA\u5DF1\u7D2F\u5F97\u8DDF\u72D7\u4E00\u6A23\uFF0C\u90A3\u4F60\u771F\u7684\u662F\u8AA4\u6703\u4E86\uFF0C\u56E0\u70BA\u72D7\u90FD\u6C92\u4F60\u9019\u9EBC\u7D2F\u3002"
+    eng_charactername: granny
+    eng_sentence: Great
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 1
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u9A0E\u5728\u767D\u99AC\u4E0A\u7684\u4E0D\u4E00\u5B9A\u662F\u738B\u5B50\uFF0C\u4E5F\u53EF\u80FD\u662F\u5510\u4E09\u85CF\u3002"
+    eng_charactername: granny
+    eng_sentence: Hi
+  - charactertype: 0
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 2
+    ch_charactername: "\u52AA\u746A"
+    ch_sentence: "\u73FE\u5728\u505A\u4EC0\u9EBC\u4E8B\u90FD\u597D\u96E3\uFF0C\u9023\u60F3\u7576\u500B\u5B85\u7537\uFF0C\u90FD\u9084\u8981\u5148\u8CB7\u5F97\u8D77\u623F\u5B50\u3002"
+    eng_charactername: pneuma
+    eng_sentence: Meow
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 3
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u5225\u518D\u8AAA\u4E16\u754C\u4E0A\u5E7E\u5341\u5104\u4EBA\uFF0C\u4E5F\u9047\u4E0D\u5230\u4E00\u500B\u5C0D\u7684\u4EBA\uFF0C\u5C31\u7B97\u662F\u9078\u64C7\u984C\u53EA\u6709\u56DB\u500B\u9078\u9805\uFF0C\u4F60\u9084\u4E0D\u662F\u4E00\u6A23\u7167\u6A23\u9078\u4E0D\u5C0D\u3002"
+    eng_charactername: granny
+    eng_sentence: Me
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 4
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u7576\u5168\u4E16\u754C\u90FD\u4E0D\u8981\u4F60\u7684\u6642\u5019\uFF0C\u8ACB\u8A18\u5F97\u9084\u6709\u6211\uFF0C\u6211\u4E5F\u4E0D\u8981\u4F60\u3002"
+    eng_charactername: granny
+    eng_sentence: Great
+  - charactertype: 1
+    area: 0
+    txttypes: 1
+    puzzle: -1
+    sequence: 0
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u4EE5\u524D\u6211\u4EE5\u70BA\u9322\u53EF\u4EE5\u8CB7\u5230\u4E00\u5207\uFF0C\u5F8C\u4F86\u624D\u767C\u73FE\u6C92\u6709\u8FA6\u6CD5\uFF0C\u56E0\u70BA\u6211\u9322\u4E0D\u5920\u3002"
+    eng_charactername: granny
+    eng_sentence: Hi
+  - charactertype: 0
+    area: 0
+    txttypes: 1
+    puzzle: -1
+    sequence: 1
+    ch_charactername: "\u52AA\u746A"
+    ch_sentence: "\u4E0D\u7528\u592A\u5728\u610F\u4E00\u4E9B\u4EBA\u8AAA\u7684\u8A71\uFF0C\u56E0\u70BA\u4ED6\u5011\u6709\u5634\u537B\u4E0D\u4E00\u5B9A\u6709\u8166\u3002"
+    eng_charactername: pneuma
+    eng_sentence: Meow
+  - charactertype: 1
+    area: 1
+    txttypes: 0
+    puzzle: 0
+    sequence: 0
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u5225\u52D5\u4E0D\u52D5\u5C31\u628A\u932F\u8AA4\u4E1F\u7D66\u6642\u9593\u53BB\u8655\u7406\uFF0C\u6642\u9593\u624D\u61F6\u5F97\u7406\u4F60\u9019\u500B\u721B\u6524\u5B50\u3002"
+    eng_charactername: granny
+    eng_sentence: Me
+  - charactertype: 1
+    area: 1
+    txttypes: 0
+    puzzle: 0
+    sequence: 1
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u559C\u6B61\u5C31\u53BB\u544A\u767D\u5440\uFF0C\u8AAA\u4E0D\u5B9A\u4EBA\u5BB6\u4E5F\u7B49\u8457\u62D2\u7D55\u4F60\u5462\uFF01"
+    eng_charactername: granny
+    eng_sentence: Great
+  - charactertype: 1
+    area: 1
+    txttypes: 0
+    puzzle: 0
+    sequence: 2
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u5982\u679C\u64FA\u932F\u5730\u65B9\uFF0C\u947D\u77F3\u4E5F\u6703\u88AB\u7576\u77F3\u982D\u3002\u4F46\u662F\u77F3\u982D\u4E0D\u7BA1\u64FA\u54EA\u88E1\uFF0C\u90FD\u9084\u662F\u77F3\u982D\u3002"
+    eng_charactername: granny
+    eng_sentence: Me
+  - charactertype: 1
+    area: 1
+    txttypes: 0
+    puzzle: 0
+    sequence: 3
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u751F\u6D3B\u4E2D\u90A3\u4E9B\u8A0E\u53AD\u7684\u4EBA\u8868\u9762\u4E0A\u98A8\u5149\uFF0C\u5176\u5BE6\u79C1\u5E95\u4E0B\u4E5F\u904E\u5F97\u5982\u9B5A\u5F97\u6C34\u5594\uFF01"
+    eng_charactername: granny
+    eng_sentence: Great
+  - charactertype: 1
+    area: 1
+    txttypes: 0
+    puzzle: 1
+    sequence: 0
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u7537\u5973\u4E4B\u9593\u4E00\u5B9A\u6709\u7D14\u53CB\u8ABC\uFF0C\u56E0\u70BA\u6BCF\u4E00\u500B\u6211\u8A8D\u8B58\u7684\u5973\u751F\uFF0C\u90FD\u8AAA\u6700\u591A\u53EA\u80FD\u8DDF\u6211\u7576\u670B\u53CB\u3002"
+    eng_charactername: granny
+    eng_sentence: Me
+  - charactertype: 1
+    area: 1
+    txttypes: 0
+    puzzle: 1
+    sequence: 1
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u4F60\u8981\u597D\u597D\u611B\u81EA\u5DF1\uFF0C\u56E0\u70BA\u6C92\u6709\u4EBA\u611B\u4F60\u3002"
+    eng_charactername: granny
+    eng_sentence: Great
+  keys_AreaNum: 0000000001000000
+  struct_PlaceSpeaks:
+  - areaNum: 0
+    puzzleNum: 0
+    puzzleState: {fileID: 0}
+    struct_Speaks:
+    - character: 1
+      txt: "\u59B3\u597D"
+    - character: 0
+      txt: "\u6BD4\u4F60\u8070\u660E\u7684\u4EBA\u90FD\u6BD4\u4F60\u52AA\u529B\u4E86\uFF0C\u90A3\u4F60\u52AA\u529B\u6709\u500B\u5C41\u7528\u3002"
+    - character: 1
+      txt: "\u6210\u529F\u5C31\u50CF\u61F7\u5B55\uFF0C\u5927\u5BB6\u90FD\u6703\u606D\u559C\u4F60\uFF0C\u4F46\u6C92\u4EBA\u77E5\u9053\u4F60\u88AB\u641E\u4E86\u5E7E\u6B21\u624D\u6210\u529F\uFF01"
+  - areaNum: 0
+    puzzleNum: 1
+    puzzleState: {fileID: 0}
+    struct_Speaks:
+    - character: 1
+      txt: "\u5982\u679C\u4F60\u89BA\u5F97\u81EA\u5DF1\u7D2F\u5F97\u8DDF\u72D7\u4E00\u6A23\uFF0C\u90A3\u4F60\u771F\u7684\u662F\u8AA4\u6703\u4E86\uFF0C\u56E0\u70BA\u72D7\u90FD\u6C92\u4F60\u9019\u9EBC\u7D2F\u3002"
+    - character: 1
+      txt: "\u9A0E\u5728\u767D\u99AC\u4E0A\u7684\u4E0D\u4E00\u5B9A\u662F\u738B\u5B50\uFF0C\u4E5F\u53EF\u80FD\u662F\u5510\u4E09\u85CF\u3002"
+    - character: 0
+      txt: "\u73FE\u5728\u505A\u4EC0\u9EBC\u4E8B\u90FD\u597D\u96E3\uFF0C\u9023\u60F3\u7576\u500B\u5B85\u7537\uFF0C\u90FD\u9084\u8981\u5148\u8CB7\u5F97\u8D77\u623F\u5B50\u3002"
+    - character: 1
+      txt: "\u5225\u518D\u8AAA\u4E16\u754C\u4E0A\u5E7E\u5341\u5104\u4EBA\uFF0C\u4E5F\u9047\u4E0D\u5230\u4E00\u500B\u5C0D\u7684\u4EBA\uFF0C\u5C31\u7B97\u662F\u9078\u64C7\u984C\u53EA\u6709\u56DB\u500B\u9078\u9805\uFF0C\u4F60\u9084\u4E0D\u662F\u4E00\u6A23\u7167\u6A23\u9078\u4E0D\u5C0D\u3002"
+    - character: 1
+      txt: "\u7576\u5168\u4E16\u754C\u90FD\u4E0D\u8981\u4F60\u7684\u6642\u5019\uFF0C\u8ACB\u8A18\u5F97\u9084\u6709\u6211\uFF0C\u6211\u4E5F\u4E0D\u8981\u4F60\u3002"
+  - areaNum: 0
+    puzzleNum: -1
+    puzzleState: {fileID: 0}
+    struct_Speaks:
+    - character: 1
+      txt: "\u4EE5\u524D\u6211\u4EE5\u70BA\u9322\u53EF\u4EE5\u8CB7\u5230\u4E00\u5207\uFF0C\u5F8C\u4F86\u624D\u767C\u73FE\u6C92\u6709\u8FA6\u6CD5\uFF0C\u56E0\u70BA\u6211\u9322\u4E0D\u5920\u3002"
+    - character: 0
+      txt: "\u4E0D\u7528\u592A\u5728\u610F\u4E00\u4E9B\u4EBA\u8AAA\u7684\u8A71\uFF0C\u56E0\u70BA\u4ED6\u5011\u6709\u5634\u537B\u4E0D\u4E00\u5B9A\u6709\u8166\u3002"
+  - areaNum: 1
+    puzzleNum: 0
+    puzzleState: {fileID: 0}
+    struct_Speaks:
+    - character: 1
+      txt: "\u5225\u52D5\u4E0D\u52D5\u5C31\u628A\u932F\u8AA4\u4E1F\u7D66\u6642\u9593\u53BB\u8655\u7406\uFF0C\u6642\u9593\u624D\u61F6\u5F97\u7406\u4F60\u9019\u500B\u721B\u6524\u5B50\u3002"
+    - character: 1
+      txt: "\u559C\u6B61\u5C31\u53BB\u544A\u767D\u5440\uFF0C\u8AAA\u4E0D\u5B9A\u4EBA\u5BB6\u4E5F\u7B49\u8457\u62D2\u7D55\u4F60\u5462\uFF01"
+    - character: 1
+      txt: "\u5982\u679C\u64FA\u932F\u5730\u65B9\uFF0C\u947D\u77F3\u4E5F\u6703\u88AB\u7576\u77F3\u982D\u3002\u4F46\u662F\u77F3\u982D\u4E0D\u7BA1\u64FA\u54EA\u88E1\uFF0C\u90FD\u9084\u662F\u77F3\u982D\u3002"
+    - character: 1
+      txt: "\u751F\u6D3B\u4E2D\u90A3\u4E9B\u8A0E\u53AD\u7684\u4EBA\u8868\u9762\u4E0A\u98A8\u5149\uFF0C\u5176\u5BE6\u79C1\u5E95\u4E0B\u4E5F\u904E\u5F97\u5982\u9B5A\u5F97\u6C34\u5594\uFF01"
+  - areaNum: 1
+    puzzleNum: 1
+    puzzleState: {fileID: 0}
+    struct_Speaks:
+    - character: 1
+      txt: "\u7537\u5973\u4E4B\u9593\u4E00\u5B9A\u6709\u7D14\u53CB\u8ABC\uFF0C\u56E0\u70BA\u6BCF\u4E00\u500B\u6211\u8A8D\u8B58\u7684\u5973\u751F\uFF0C\u90FD\u8AAA\u6700\u591A\u53EA\u80FD\u8DDF\u6211\u7576\u670B\u53CB\u3002"
+    - character: 1
+      txt: "\u4F60\u8981\u597D\u597D\u611B\u81EA\u5DF1\uFF0C\u56E0\u70BA\u6C92\u6709\u4EBA\u611B\u4F60\u3002"
+  cameraActivate: {fileID: 0}
+  placeInfo: {fileID: 0}
+  event_Talk:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2213130592918780183}
+        m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+        m_MethodName: StartDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AiBehaviour, Assembly-CSharp
+        m_MethodName: SetIsFin
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  event_Fin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AiBehaviour, Assembly-CSharp
+        m_MethodName: SetIsFin
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2

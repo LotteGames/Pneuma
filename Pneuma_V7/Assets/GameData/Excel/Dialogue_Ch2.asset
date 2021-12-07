@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e6a1d514930d74aa70a4bdb03bfe3b, type: 3}
+  m_Name: Dialogue_Ch2
+  m_EditorClassIdentifier: 
+  SheetName: Assets/GameData/Excel/Pneuma.xlsx
+  WorksheetName: Dialogue_Ch2
+  dataArray:
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 0
+    sequence: 0
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: 1
+    eng_charactername: granny
+    eng_sentence: Hi
+  - charactertype: 0
+    area: 0
+    txttypes: 0
+    puzzle: 0
+    sequence: 1
+    ch_charactername: "\u52AA\u746A"
+    ch_sentence: 2
+    eng_charactername: pneuma
+    eng_sentence: Meow
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 0
+    sequence: 2
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: 3
+    eng_charactername: granny
+    eng_sentence: Me
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 0
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: 4
+    eng_charactername: granny
+    eng_sentence: Great
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 1
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: 5
+    eng_charactername: granny
+    eng_sentence: Hi
+  - charactertype: 0
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 2
+    ch_charactername: "\u52AA\u746A"
+    ch_sentence: 6
+    eng_charactername: pneuma
+    eng_sentence: Meow
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 3
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: 7
+    eng_charactername: granny
+    eng_sentence: Me
+  dataList:
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 0
+    sequence: 0
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: 1
+    eng_charactername: granny
+    eng_sentence: Hi
+  - charactertype: 0
+    area: 0
+    txttypes: 0
+    puzzle: 0
+    sequence: 1
+    ch_charactername: "\u52AA\u746A"
+    ch_sentence: 2
+    eng_charactername: pneuma
+    eng_sentence: Meow
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 0
+    sequence: 2
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: 3
+    eng_charactername: granny
+    eng_sentence: Me
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 0
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: 4
+    eng_charactername: granny
+    eng_sentence: Great
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 1
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: 5
+    eng_charactername: granny
+    eng_sentence: Hi
+  - charactertype: 0
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 2
+    ch_charactername: "\u52AA\u746A"
+    ch_sentence: 6
+    eng_charactername: pneuma
+    eng_sentence: Meow
+  - charactertype: 1
+    area: 0
+    txttypes: 0
+    puzzle: 1
+    sequence: 3
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: 7
+    eng_charactername: granny
+    eng_sentence: Me

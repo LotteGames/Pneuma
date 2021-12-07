@@ -1,0 +1,2 @@
+CameraActivate放到玩家上。
+其他腳本不用動。

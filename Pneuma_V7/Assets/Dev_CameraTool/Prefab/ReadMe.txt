@@ -1,0 +1,4 @@
+CameraArea就是一個相機區域。
+
+要調整相機視野大小，請調整Prefab的子物件CinemachineCamera。
+他的Lens的Size。
