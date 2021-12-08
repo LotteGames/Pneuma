@@ -5,13 +5,19 @@ using UnityEngine;
 public class PlaceInfo : MonoBehaviour
 {
     public int puzzleNum = -1;
+    public PuzzleState puzzleState;
+
+    public void SetPuzzleNum(int value)
+    {
+        puzzleNum = value;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("PuzzleRange"))
         {
             Debug.LogError("Execute");
-            PuzzleState puzzleState = collision.GetComponentInParent<PuzzleState>();
+            puzzleState = collision.GetComponentInParent<PuzzleState>();
             puzzleNum = puzzleState.puzzleNum;
 
             if (puzzleNum == -2)
@@ -30,6 +36,7 @@ public class PlaceInfo : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("PuzzleRange"))
         {
+            puzzleState = null;
             puzzleNum = -1;
         }
     }

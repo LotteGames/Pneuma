@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 /// <summary>
 /// 包含人與話
@@ -40,5 +41,14 @@ public struct PlaceSpeaks
         puzzleState = null;
     }
 
-   
+    //public void Initial(int areaNum, int puzzleNum, List<Speak> speaks)
+    //{
+    //    this.areaNum = areaNum;
+    //    this.puzzleNum = puzzleNum;
+    //    this.speaks = speaks;
+
+    //    puzzleState = null;
+    //}
+
+    //public UnityEvent finishEvents;
 }

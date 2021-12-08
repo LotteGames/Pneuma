@@ -37,6 +37,7 @@ public class TalkBehav : MonoBehaviour
 
     public void SetIsFin(bool value)
     {
+        Debug.LogError("IsFin");
         IsFin = value;
     }
 }

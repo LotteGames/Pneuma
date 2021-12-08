@@ -62,7 +62,7 @@ MonoBehaviour:
     eng_charactername: granny
     eng_sentence: Hi
   - charactertype: 1
-    area: 7
+    area: 6
     txttypes: 1
     puzzle: 1
     sequence: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
     eng_charactername: pneuma
     eng_sentence: Meow
   - charactertype: 0
-    area: 7
+    area: 6
     txttypes: 1
     puzzle: 1
     sequence: 1
@@ -80,7 +80,7 @@ MonoBehaviour:
     eng_charactername: granny
     eng_sentence: Me
   - charactertype: 1
-    area: 7
+    area: 6
     txttypes: 1
     puzzle: 1
     sequence: 2
@@ -91,8 +91,8 @@ MonoBehaviour:
   - charactertype: 1
     area: 7
     txttypes: 1
-    puzzle: 1
-    sequence: 3
+    puzzle: 0
+    sequence: 0
     ch_charactername: "\u5976\u5976"
     ch_sentence: "\u9999\u83C7\u548C\u4E0A\u9762\u7684\u5149\u7403\u6709\u95DC\uFF0C\u4F60\u8981\u4E0D\u8981\u8A66\u8A66\u770B?"
     eng_charactername: granny
@@ -100,7 +100,16 @@ MonoBehaviour:
   - charactertype: 1
     area: 7
     txttypes: 1
-    puzzle: 2
+    puzzle: 1
+    sequence: 0
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u770B\u4F86\u4F60\u62FF\u5230\u5149\u7403\u4E86\uFF0C\u6211\u5011\u5FEB\u4F86\u8A66\u8A66\u770B\u5427\u3002"
+    eng_charactername: granny
+    eng_sentence: Hi
+  - charactertype: 1
+    area: 7
+    txttypes: 1
+    puzzle: -2
     sequence: 0
     ch_charactername: "\u5976\u5976"
     ch_sentence: "\u770B\u4F86\u4F60\u628A\u9580\u6253\u958B\u4E86\uFF0C\u4F46\u6211\u9084\u6709\u9EDE\u4E8B\u60C5\u6211\u5011\u53EF\u80FD\u9084\u6703\u518D\u76F8\u898B\u3002"
@@ -154,7 +163,7 @@ MonoBehaviour:
     eng_charactername: granny
     eng_sentence: Hi
   - charactertype: 1
-    area: 7
+    area: 6
     txttypes: 1
     puzzle: 1
     sequence: 0
@@ -163,7 +172,7 @@ MonoBehaviour:
     eng_charactername: pneuma
     eng_sentence: Meow
   - charactertype: 0
-    area: 7
+    area: 6
     txttypes: 1
     puzzle: 1
     sequence: 1
@@ -172,7 +181,7 @@ MonoBehaviour:
     eng_charactername: granny
     eng_sentence: Me
   - charactertype: 1
-    area: 7
+    area: 6
     txttypes: 1
     puzzle: 1
     sequence: 2
@@ -183,8 +192,8 @@ MonoBehaviour:
   - charactertype: 1
     area: 7
     txttypes: 1
-    puzzle: 1
-    sequence: 3
+    puzzle: 0
+    sequence: 0
     ch_charactername: "\u5976\u5976"
     ch_sentence: "\u9999\u83C7\u548C\u4E0A\u9762\u7684\u5149\u7403\u6709\u95DC\uFF0C\u4F60\u8981\u4E0D\u8981\u8A66\u8A66\u770B?"
     eng_charactername: granny
@@ -192,7 +201,16 @@ MonoBehaviour:
   - charactertype: 1
     area: 7
     txttypes: 1
-    puzzle: 2
+    puzzle: 1
+    sequence: 0
+    ch_charactername: "\u5976\u5976"
+    ch_sentence: "\u770B\u4F86\u4F60\u62FF\u5230\u5149\u7403\u4E86\uFF0C\u6211\u5011\u5FEB\u4F86\u8A66\u8A66\u770B\u5427\u3002"
+    eng_charactername: granny
+    eng_sentence: Hi
+  - charactertype: 1
+    area: 7
+    txttypes: 1
+    puzzle: -2
     sequence: 0
     ch_charactername: "\u5976\u5976"
     ch_sentence: "\u770B\u4F86\u4F60\u628A\u9580\u6253\u958B\u4E86\uFF0C\u4F46\u6211\u9084\u6709\u9EDE\u4E8B\u60C5\u6211\u5011\u53EF\u80FD\u9084\u6703\u518D\u76F8\u898B\u3002"

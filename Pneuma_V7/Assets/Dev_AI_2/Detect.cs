@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class Detect
 { 
-    public static bool IsGround(Point from, Point to, float length = 0.5f)
+    public static bool IsGround(Point from, Point to, float length =1f)
     {
         LayerMask layerGround = 1 << LayerMask.NameToLayer("Ground");
         LayerMask layerWall = 1 << LayerMask.NameToLayer("Wall");
@@ -15,7 +15,7 @@ public static class Detect
         return Physics2D.Raycast(checkPos, Vector2.down, length, layerGround.value) || Physics2D.Raycast(checkPos, Vector2.down, length, layerWall.value);
     }
 
-    public static bool IsGround(Vector3 from, Point to, float length = 0.5f)
+    public static bool IsGround(Vector3 from, Point to, float length = 1f)
     {
         LayerMask layerGround = 1 << LayerMask.NameToLayer("Ground");
         LayerMask layerWall = 1 << LayerMask.NameToLayer("Wall");
@@ -26,7 +26,7 @@ public static class Detect
 
     }
 
-    public static bool IsGround(Vector3 pos, float length = 0.5f)
+    public static bool IsGround(Vector3 pos, float length = 1f)
     {
         LayerMask layerGround = 1 << LayerMask.NameToLayer("Ground");
         LayerMask layerWall = 1 << LayerMask.NameToLayer("Wall");

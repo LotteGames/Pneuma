@@ -130,7 +130,7 @@ public class DialogueManager : MonoBehaviour
                     //增加PlaceSpeak
                     struct_PlaceSpeaks.Add(new PlaceSpeaks(areaNum, last_PuzzleNum, struct_Speaks));
 
-                    Debug.Log(last_PuzzleNum + " , " + current_PuzzleNum);
+                    //Debug.Log(last_PuzzleNum + " , " + current_PuzzleNum);
 
                     //增加新Area的Speak
                     struct_Speaks = new List<Speak>();
@@ -192,10 +192,10 @@ public class DialogueManager : MonoBehaviour
     {
         int cam_AreaNum = cameraActivate.CurrentCam_AreaNum;
 
-        //Debug.LogError("camAreaNum : " + cam_AreaNum);
+        Debug.LogError("camAreaNum : " + cam_AreaNum);
 
         PlaceSpeaks struct_PlaceSpeak = new PlaceSpeaks();
-        //Debug.LogError("puzzleNum : " + puzzleNum);
+        Debug.LogError("puzzleNum : " + puzzleNum);
         for (int i = 0; i < struct_PlaceSpeaks.Count; i++)
         {
             if (struct_PlaceSpeaks[i].areaNum == cam_AreaNum)
@@ -209,8 +209,13 @@ public class DialogueManager : MonoBehaviour
         }
         return struct_PlaceSpeak;
     }
+    PuzzleState puzzleState;
+
     public void StartDialogue()
     {
+        puzzleState = placeInfo.puzzleState;
+
+        Debug.LogError("StartDialogue");
         if (coroutine != null)
         {
             StopCoroutine(coroutine);
@@ -227,12 +232,12 @@ public class DialogueManager : MonoBehaviour
         {
             if (placeSpeaks.puzzleState.isCompelete)
             {
-                //Debug.LogError(-1);
+                Debug.LogError(-1);
                 placeSpeaks = Find_PlaceSpeak(-1);
             }
         }
 
-         
+
 
         int i = 0; bool finDialogue = false, finSentence = true;
 
@@ -347,6 +352,12 @@ public class DialogueManager : MonoBehaviour
             }
         }
         InvokeEvent_TalkFin();
+
+        if (puzzleState != null)
+        {
+            puzzleState.InvokeEvent();
+            puzzleState = null;
+        }
     }
 
     public RoleBubble FindText(Role role)

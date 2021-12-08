@@ -25,6 +25,11 @@ public class Behaviour : MonoBehaviour
 
     private Rigidbody2D rb2D;
 
+    public void SetTarget(Transform transform) 
+    {
+        target = transform;
+    }
+
     private void Awake()
     {
         physicSetting.CalculateValues();
