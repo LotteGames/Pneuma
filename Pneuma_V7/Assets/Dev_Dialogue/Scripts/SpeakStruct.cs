@@ -2,34 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+/// <summary>
+/// 包含人與話
+/// </summary>
 [Serializable]
-public struct Struct_Speak
+public struct Speak
 {
-    public CharacterType character;
+    public Role character;
 
     public string txt;
 
-    public Struct_Speak(CharacterType characterType, string txt)
+    public Speak(Role characterType, string txt)
     {
         this.character = characterType;
         this.txt = txt;
     }
 }
+
+/// <summary>
+/// 包含地區、謎題編號跟Speaks
+/// </summary>
 [Serializable]
-public struct Struct_PlaceSpeak
+public struct PlaceSpeaks
 {
     public int areaNum, puzzleNum;
 
     public PuzzleState puzzleState;
 
-    public List<Struct_Speak> struct_Speaks;
+    public List<Speak> speaks;
 
-    public Struct_PlaceSpeak(int areaNum, int puzzleNum, List<Struct_Speak> struct_Speaks)
+    public PlaceSpeaks(int areaNum, int puzzleNum, List<Speak> speaks)
     {
         this.areaNum = areaNum;
         this.puzzleNum = puzzleNum;
-        this.struct_Speaks = struct_Speaks;
+        this.speaks = speaks;
 
         puzzleState = null;
     }

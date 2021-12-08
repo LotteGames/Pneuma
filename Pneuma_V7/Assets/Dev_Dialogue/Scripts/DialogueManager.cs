@@ -2,61 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class DialogueManager : MonoBehaviour
 {
-    public List<CharacterType_and_Text> characterType_And_Texts;
+    public List<RoleBubble> RoleBubbles;
 
-    public DialogueChapter dialogue_Chapter;
+    public DialogueChapter chapter;
 
     [SerializeField, HideInInspector]
-    private DialogueChapter last_DialogueChapter;
+    private DialogueChapter lastChapter;
 
     [HideInInspector]
     public DialogueData[] dialogueDatas;
 
     private void OnValidate()
     {
-
-        if (dialogue_Chapter != null && last_DialogueChapter != null)
+        if (chapter != null && lastChapter != null)
         {
-            if (last_DialogueChapter != dialogue_Chapter)
+            if (lastChapter != chapter)
             {
                 ClearData();
 
-                dialogueDatas = dialogue_Chapter.dataArray;
+                dialogueDatas = chapter.dataArray;
 
-                //Debug.Log(dialogue_Chapter.dataArray.Length);
+                //Debug.Log(chapter.dataArray.Length);
                 //Debug.Log(dialogueDatas.Length);
 
                 SeparateAreas();
 
                 SeparatePuzzle();
 
-                last_DialogueChapter = dialogue_Chapter;
+                lastChapter = chapter;
             }
         }
-        else if (dialogue_Chapter != null && last_DialogueChapter == null)
+        else if (chapter != null && lastChapter == null)
         {
-            last_DialogueChapter = dialogue_Chapter;
+            lastChapter = chapter;
         }
     }
 
     [HideInInspector]
-    public List<int> keys_AreaNum = new List<int>();
+    public List<int> areaNums = new List<int>();
 
-    public Dictionary<int, List<int>> dic_Area_ExcelIndexs = new Dictionary<int, List<int>>();
+    public Dictionary<int, List<int>> Area_To_ExcelIndex = new Dictionary<int, List<int>>();
 
     public void SeparateAreas()
     {
         int lastNum = dialogueDatas[0].Area;
 
-        keys_AreaNum.Add(lastNum);
+        areaNums.Add(lastNum);
 
         List<int> dialogues = new List<int>();
 
-        dic_Area_ExcelIndexs.Add(lastNum, dialogues);
-        dic_Area_ExcelIndexs[lastNum].Add(0);
+        Area_To_ExcelIndex.Add(lastNum, dialogues);
+        Area_To_ExcelIndex[lastNum].Add(0);
 
 
         for (int i = 1; i < dialogueDatas.Length; i++)
@@ -65,17 +65,17 @@ public class DialogueManager : MonoBehaviour
 
             if (num == lastNum)
             {
-                dic_Area_ExcelIndexs[lastNum].Add(i);
+                Area_To_ExcelIndex[lastNum].Add(i);
             }
             else
             {
                 dialogues = new List<int>();
 
-                dic_Area_ExcelIndexs.Add(num, dialogues);
+                Area_To_ExcelIndex.Add(num, dialogues);
 
-                dic_Area_ExcelIndexs[num].Add(i);
+                Area_To_ExcelIndex[num].Add(i);
 
-                keys_AreaNum.Add(num);
+                areaNums.Add(num);
             }
             lastNum = num;
         }
@@ -83,11 +83,11 @@ public class DialogueManager : MonoBehaviour
 
     public void LogAreaIndex()
     {
-        for (int i = 0; i < keys_AreaNum.Count; i++)
+        for (int i = 0; i < areaNums.Count; i++)
         {
-            int num = keys_AreaNum[i];
+            int num = areaNums[i];
 
-            List<int> indexs = dic_Area_ExcelIndexs[num];
+            List<int> indexs = Area_To_ExcelIndex[num];
 
             string logIndexs = string.Empty;
 
@@ -101,20 +101,20 @@ public class DialogueManager : MonoBehaviour
     }
 
     //=========================================
-    public List<Struct_PlaceSpeak> struct_PlaceSpeaks = new List<Struct_PlaceSpeak>();
+    public List<PlaceSpeaks> struct_PlaceSpeaks = new List<PlaceSpeaks>();
 
     public void SeparatePuzzle()
     {
-        for (int i = 0; i < keys_AreaNum.Count; i++)
+        for (int i = 0; i < areaNums.Count; i++)
         {
-            int areaNum = keys_AreaNum[i];
+            int areaNum = areaNums[i];
 
-            List<int> excelIndexs = dic_Area_ExcelIndexs[areaNum];
+            List<int> excelIndexs = Area_To_ExcelIndex[areaNum];
 
             int last_PuzzleNum = dialogueDatas[excelIndexs[0]].Puzzle;
 
-            List<Struct_Speak> struct_Speaks = new List<Struct_Speak>();
-            struct_Speaks.Add(new Struct_Speak(dialogueDatas[excelIndexs[0]].CHARACTERTYPE, dialogueDatas[excelIndexs[0]].Ch_Sentence));
+            List<Speak> struct_Speaks = new List<Speak>();
+            struct_Speaks.Add(new Speak(dialogueDatas[excelIndexs[0]].CHARACTERTYPE, dialogueDatas[excelIndexs[0]].Ch_Sentence));
 
             for (int j = 1; j < excelIndexs.Count; j++)
             {
@@ -123,33 +123,33 @@ public class DialogueManager : MonoBehaviour
                 if (last_PuzzleNum == current_PuzzleNum)
                 {
                     //增加Speak
-                    struct_Speaks.Add(new Struct_Speak(dialogueDatas[excelIndexs[j]].CHARACTERTYPE, dialogueDatas[excelIndexs[j]].Ch_Sentence));
+                    struct_Speaks.Add(new Speak(dialogueDatas[excelIndexs[j]].CHARACTERTYPE, dialogueDatas[excelIndexs[j]].Ch_Sentence));
                 }
                 else
                 {
                     //增加PlaceSpeak
-                    struct_PlaceSpeaks.Add(new Struct_PlaceSpeak(areaNum, last_PuzzleNum, struct_Speaks));
+                    struct_PlaceSpeaks.Add(new PlaceSpeaks(areaNum, last_PuzzleNum, struct_Speaks));
 
                     Debug.Log(last_PuzzleNum + " , " + current_PuzzleNum);
 
                     //增加新Area的Speak
-                    struct_Speaks = new List<Struct_Speak>();
-                    struct_Speaks.Add(new Struct_Speak(dialogueDatas[excelIndexs[j]].CHARACTERTYPE, dialogueDatas[excelIndexs[j]].Ch_Sentence));
+                    struct_Speaks = new List<Speak>();
+                    struct_Speaks.Add(new Speak(dialogueDatas[excelIndexs[j]].CHARACTERTYPE, dialogueDatas[excelIndexs[j]].Ch_Sentence));
                 }
 
                 last_PuzzleNum = current_PuzzleNum;
             }
 
-            struct_PlaceSpeaks.Add(new Struct_PlaceSpeak(areaNum, last_PuzzleNum, struct_Speaks));
+            struct_PlaceSpeaks.Add(new PlaceSpeaks(areaNum, last_PuzzleNum, struct_Speaks));
             //增加該Area最後一個的資料
         }
     }
 
     public void ClearData()
     {
-        dic_Area_ExcelIndexs.Clear();
+        Area_To_ExcelIndex.Clear();
 
-        keys_AreaNum.Clear();
+        areaNums.Clear();
 
         struct_PlaceSpeaks.Clear();
     }
@@ -158,42 +158,44 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < characterType_And_Texts.Count; i++)
+        for (int i = 0; i < RoleBubbles.Count; i++)
         {
-            characterType_And_Texts[i].SetDialogueActive(false);
+            RoleBubbles[i].SetBubbleActive(false);
         }
     }
 
     public CameraActivate cameraActivate;
     public PlaceInfo placeInfo;
 
-    public Struct_PlaceSpeak Find_PlaceSpeak()
+    //public PlaceSpeaks Find_PlaceSpeak()
+    //{
+    //    int cam_AreaNum = cameraActivate.CurrentCam_AreaNum;
+    //    int puzzleNum = placeInfo.puzzleNum;
+
+
+    //    PlaceSpeaks struct_PlaceSpeak = new PlaceSpeaks();
+
+    //    for (int i = 0; i < struct_PlaceSpeaks.Count; i++)
+    //    {
+    //        if (struct_PlaceSpeaks[i].areaNum == cam_AreaNum)
+    //        {
+    //            if (struct_PlaceSpeaks[i].puzzleNum == puzzleNum)
+    //            {
+    //                struct_PlaceSpeak = struct_PlaceSpeaks[i];
+    //                break;
+    //            }
+    //        }
+    //    }
+    //    return struct_PlaceSpeak;
+    //}
+    public PlaceSpeaks Find_PlaceSpeak(int puzzleNum = -1)
     {
         int cam_AreaNum = cameraActivate.CurrentCam_AreaNum;
-        int puzzleNum = placeInfo.puzzleNum;
 
+        //Debug.LogError("camAreaNum : " + cam_AreaNum);
 
-        Struct_PlaceSpeak struct_PlaceSpeak = new Struct_PlaceSpeak();
-
-        for (int i = 0; i < struct_PlaceSpeaks.Count; i++)
-        {
-            if (struct_PlaceSpeaks[i].areaNum == cam_AreaNum)
-            {
-                if (struct_PlaceSpeaks[i].puzzleNum == puzzleNum)
-                {
-                    struct_PlaceSpeak = struct_PlaceSpeaks[i];
-                    break;
-                }
-            }
-        }
-        return struct_PlaceSpeak;
-    }
-    public Struct_PlaceSpeak Find_PlaceSpeak(int puzzleNum = -1)
-    {
-        int cam_AreaNum = cameraActivate.CurrentCam_AreaNum;
-
-        Struct_PlaceSpeak struct_PlaceSpeak = new Struct_PlaceSpeak();
-
+        PlaceSpeaks struct_PlaceSpeak = new PlaceSpeaks();
+        //Debug.LogError("puzzleNum : " + puzzleNum);
         for (int i = 0; i < struct_PlaceSpeaks.Count; i++)
         {
             if (struct_PlaceSpeaks[i].areaNum == cam_AreaNum)
@@ -209,73 +211,158 @@ public class DialogueManager : MonoBehaviour
     }
     public void StartDialogue()
     {
-        StartCoroutine(iEnum_StartDialogue());
-    }
-    IEnumerator iEnum_StartDialogue()
-    {
-        Struct_PlaceSpeak struct_PlaceSpeak = Find_PlaceSpeak();
-
-        if (struct_PlaceSpeak.puzzleState != null)
+        if (coroutine != null)
         {
-            if (struct_PlaceSpeak.puzzleState.isCompelete)
+            StopCoroutine(coroutine);
+        }
+        coroutine = StartCoroutine(ieum_StartDialogue(placeInfo.puzzleNum));
+    }
+    Coroutine coroutine;
+
+    IEnumerator ieum_StartDialogue(int puzzleNum)
+    {
+        PlaceSpeaks placeSpeaks = Find_PlaceSpeak(puzzleNum);
+
+        if (placeSpeaks.puzzleState != null)
+        {
+            if (placeSpeaks.puzzleState.isCompelete)
             {
-                struct_PlaceSpeak = Find_PlaceSpeak(-1);
+                //Debug.LogError(-1);
+                placeSpeaks = Find_PlaceSpeak(-1);
             }
         }
 
+         
 
-        for (int i = 0; i < struct_PlaceSpeak.struct_Speaks.Count; i++)
+        int i = 0; bool finDialogue = false, finSentence = true;
+
+        yield return new WaitForEndOfFrame();
+
+        if (placeSpeaks.speaks == null)
         {
-            Struct_Speak struct_Speak = struct_PlaceSpeak.struct_Speaks[i];
-
-            CharacterType_and_Text characterType_And_Text = FindText(struct_Speak.character);
-
-
-            if (characterType_And_Text == null)
+            Debug.LogError("資料裡沒有在這個Area、PuzzleNum的對話");
+        }
+        else
+        {
+            while (i < placeSpeaks.speaks.Count)
             {
-                Debug.LogError("Dialogue Manager 沒有對應說話對象的資料與物件參考");
-            }
-            else
-            {
-                characterType_And_Text.dialogueObj.SetActive(true);
-                characterType_And_Text.tmp_Text.text = "";
-                characterType_And_Text.SetCanvasOrder(i);
-
-                string text = struct_Speak.txt;
-
-                for (int j = 0; j < text.Length; j++)
+                if (!finDialogue)
                 {
-                    characterType_And_Text.tmp_Text.text += text[j];
-                    yield return new WaitForSeconds(0.13f);
+                    Speak speak = placeSpeaks.speaks[i];
+
+                    RoleBubble roleBubble = FindText(speak.character);
+
+                    if (finSentence)
+                    {
+                        if (roleBubble == null)
+                        {
+                            Debug.LogError("Dialogue Manager 沒有對應說話對象的資料與物件參考");
+                        }
+                        else
+                        {
+                            roleBubble.SetBubbleActive(true);
+                            roleBubble.dialogueBubble.localScale = Vector3.zero;
+
+                            roleBubble.text.text = "";
+                            //roleBubble.SetCanvasOrder(i);
+
+                            string text = speak.txt;
+                            roleBubble.text.SetText(text);
+                            roleBubble.text.ForceMeshUpdate();
+                            Vector2 textSize = roleBubble.text.GetRenderedValues(false);
+
+                            Debug.LogError(textSize.ToString());
+
+                            Vector2 padding = new Vector2(2, 2);
+
+                            if (textSize.x < textSize.y)
+                            {
+                                textSize = new Vector2(textSize.y, textSize.x);
+                            }
+
+                            roleBubble.dialogueBubble.sizeDelta = textSize + padding;
+
+                            roleBubble.dialogueBubble.DOScale(Vector3.one, scaleUp);
+
+                            roleBubble.text.SetText("");
+                            yield return new WaitForSeconds(scaleUp);
+                            //Debug.LogError(text.Length);
+
+                            for (int j = 0; j < text.Length; j++)
+                            {
+                                //Debug.LogError(j);
+                                roleBubble.text.text = speak.txt.Substring(0, j + 1) +
+                                    "<color=#00000000>" + speak.txt.Substring(j + 1) + "</color>";
+
+                                float timepass = 0, duration = 0.08f;
+                                while (timepass < duration)
+                                {
+                                    if (Input.GetKeyDown(KeyCode.C))
+                                    {
+                                        roleBubble.text.text = text;
+                                        j = text.Length;
+                                    }
+
+                                    timepass += Time.deltaTime;
+                                    yield return new WaitForSeconds(Time.deltaTime);
+                                }
+                            }
+                        }
+
+                        finSentence = false;
+                    }
+                    else
+                    {
+                        if (Input.GetKeyDown(KeyCode.C) && i != placeSpeaks.speaks.Count - 1)
+                        {
+                            //roleBubble.SetBubbleActive(false);
+                            i++;
+                            finSentence = true;
+
+                            roleBubble.text.text = "";
+                            roleBubble.dialogueBubble.DOScale(Vector3.zero, scaleDown);
+                            yield return new WaitForSeconds(scaleDown);
+                        }
+                        else if (Input.GetKeyDown(KeyCode.C) && i == placeSpeaks.speaks.Count - 1)
+                        {
+                            finDialogue = true;
+                            roleBubble.text.text = "";
+                            roleBubble.dialogueBubble.DOScale(Vector3.zero, scaleDown);
+                            yield return new WaitForSeconds(scaleDown);
+                        }
+                        yield return null;
+                    }
+                }
+                else
+                {
+                    yield return new WaitForSeconds(0.5f);
+
+                    for (int k = 0; k < RoleBubbles.Count; k++)
+                    {
+                        RoleBubbles[k].SetBubbleActive(false);
+                        //RoleBubbles[k].SetCanvasOrder(0);
+                    }
+                    i++;
                 }
             }
         }
-
-        yield return new WaitForSeconds(0.5f);
-
-        for (int k = 0; k < characterType_And_Texts.Count; k++)
-        {
-            characterType_And_Texts[k].SetDialogueActive(false);
-            characterType_And_Texts[k].SetCanvasOrder(0);
-        }
-
         InvokeEvent_TalkFin();
     }
 
-    public CharacterType_and_Text FindText(CharacterType characterType)
+    public RoleBubble FindText(Role role)
     //記得檢查puzzleState，如果已經完成就講閒話
     {
-        for (int i = 0; i < characterType_And_Texts.Count; i++)
+        for (int i = 0; i < RoleBubbles.Count; i++)
         {
-            if (characterType_And_Texts[i].characterType == characterType)
+            if (RoleBubbles[i].role == role)
             {
-                return characterType_And_Texts[i];
+                return RoleBubbles[i];
             }
         }
 
         return null;
     }
-
+    public float scaleUp = 0.2f, scaleDown = 0.2f;
 
     public UnityEvent event_Talk, event_Fin;
 

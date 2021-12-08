@@ -6,4 +6,11 @@ public class PuzzleState : MonoBehaviour
     public bool isCompelete = false;
 
     public int puzzleNum;
+
+    public void SetCompelete(bool value) 
+    {
+        isCompelete = value;
+    }
+
 }
+

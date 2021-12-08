@@ -6,8 +6,8 @@ using UnityEngine;
 public class DialogueData
 {
     [SerializeField]
-    CharacterType charactertype;
-    public CharacterType CHARACTERTYPE { get { return charactertype; } set { charactertype = value; } }
+    Role charactertype;
+    public Role CHARACTERTYPE { get { return charactertype; } set { charactertype = value; } }
 
     [SerializeField]
     int area;
