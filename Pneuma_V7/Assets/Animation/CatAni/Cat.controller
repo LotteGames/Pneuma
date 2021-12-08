@@ -359,7 +359,15 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 5842fd709c8bbfc468351415f5496a6d, type: 2}
-    m_Threshold: 0.5
+    m_Threshold: 0.33333334
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: TurnRight
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 1b6319917303a844c80ed18c383976c5, type: 2}
+    m_Threshold: 0.6666667
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -550,6 +558,7 @@ AnimatorState:
   - {fileID: 7825986713111049467}
   - {fileID: 4909442977586787871}
   - {fileID: 3462384729527771488}
+  - {fileID: 5154079610899499383}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -577,7 +586,6 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6292188932020447402}
-  - {fileID: 4845650185462815011}
   - {fileID: -5377640771217969740}
   - {fileID: 1317530550296142516}
   m_StateMachineBehaviours: []
@@ -663,7 +671,6 @@ AnimatorState:
   - {fileID: -8878225649347580336}
   - {fileID: 753467704943883890}
   - {fileID: 1615587133715025393}
-  - {fileID: 5175184506945045416}
   - {fileID: 7784690134435306926}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -742,12 +749,6 @@ AnimatorController:
   m_Name: Cat
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Climb
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: Long
     m_Type: 4
     m_DefaultFloat: 0
@@ -768,7 +769,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: TurnRight
     m_Type: 1
-    m_DefaultFloat: 0
+    m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
@@ -785,6 +786,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: WaterJumpReady
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Climb
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -976,7 +983,7 @@ AnimatorStateMachine:
     m_Position: {x: 570, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2638795566331012341}
-    m_Position: {x: 830, y: 30, z: 0}
+    m_Position: {x: 840, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1027348003328221997}
     m_Position: {x: 560, y: -80, z: 0}
@@ -1002,7 +1009,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: ed804d8cc702afd4b8ba0f63ef1106a4, type: 2}
+    m_Motion: {fileID: 7400000, guid: d5376521c07b59c4a86357e7e932b60f, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1010,7 +1017,15 @@ BlendTree:
     m_DirectBlendParameter: TurnRight
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 471d13c6b4a041b498d7d76167dd575f, type: 2}
+    m_Motion: {fileID: 7400000, guid: bc66144e12cbefb4c87432305817c30e, type: 2}
+    m_Threshold: 0.5
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: TurnRight
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: b86bb8abb6f514040ace5249e78d99c5, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1305,31 +1320,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1101 &4845650185462815011
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: Climb
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -920252332447668941}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 1
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1101 &4909442977586787871
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1355,7 +1345,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1101 &5175184506945045416
+--- !u!1101 &5154079610899499383
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1363,18 +1353,18 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
+  - m_ConditionMode: 2
     m_ConditionEvent: Climb
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -2286926637922803561}
+  m_DstState: {fileID: -920252332447668941}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1625,10 +1615,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.7887324
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
