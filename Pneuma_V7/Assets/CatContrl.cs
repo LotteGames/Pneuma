@@ -77,6 +77,10 @@ public class CatContrl : MonoBehaviour
     [Header("貓咪伸長的最長點")]
     public GameObject LongPos;
 
+    [Header("貓咪彈跳的方向+線")]
+    public GameObject WaterJumpPos_1;
+    public GameObject WaterJumpPos_2;
+
     [Header("死亡的黑暗畫面")]
     public GameObject Black;
 
@@ -415,16 +419,16 @@ public class CatContrl : MonoBehaviour
                         GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                         GetComponent<Rigidbody2D>().gravityScale = 0.01f;
                         GetComponent<Animator>().SetBool("WaterJumpReady", true);
-                        WaterJumpPower = 0.5f;
+                        WaterJumpPower = 0.1f;
                     }
                 }
             }
             else
             {
-                WaterJumpPower += Time.deltaTime * 0.6f;
-                if(WaterJumpPower >= 2f)
+                WaterJumpPower += Time.deltaTime * 0.5f;
+                if(WaterJumpPower >= 1f)
                 {
-                    WaterJumpPower = 2f;
+                    WaterJumpPower = 1f;
                 }
 
                 if (Input.GetMouseButtonUp(0))
@@ -449,7 +453,7 @@ public class CatContrl : MonoBehaviour
 
                         //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                         GetComponent<Rigidbody2D>().gravityScale = CatWeight;
-                        GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * WaterJumpPower);
+                        GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 2 * WaterJumpPower);
                         GetComponent<Animator>().SetBool("WaterJumpReady", false);
                     }
                 }
@@ -674,11 +678,25 @@ public class CatContrl : MonoBehaviour
             CatAni.SetBool("Jump", true);
             if (TurnRight == true)
             {
-                transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 2.5f);
+                if (NowCatMorph != CatMorph.Climb)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 2.5f);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
             }
             else
             {
-                transform.rotation = Quaternion.Euler(0, 180, GetComponent<Rigidbody2D>().velocity.y * 2.5f);
+                if (NowCatMorph != CatMorph.Climb)
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, GetComponent<Rigidbody2D>().velocity.y * 2.5f);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                }
             }
         }
         else if (NowCatAct == CatAct.LongLongCat)
@@ -1098,10 +1116,10 @@ public class CatContrl : MonoBehaviour
     {
 
 
-        RaycastHit2D hit_LeftUp = Physics2D.Raycast(transform.position, new Vector3(-1f, 1, 0), 1);
-        RaycastHit2D hit_LeftDown = Physics2D.Raycast(transform.position, new Vector3(-1, -1f, 0), 1);
-        RaycastHit2D hit_RightUp = Physics2D.Raycast(transform.position, new Vector3(1f, 1, 0), 1);
-        RaycastHit2D hit_RightDown = Physics2D.Raycast(transform.position, new Vector3(1, -1f, 0), 1);
+        RaycastHit2D hit_LeftUp = Physics2D.Raycast(transform.position, new Vector3(-1f, 1, 0), 0.9f);
+        RaycastHit2D hit_LeftDown = Physics2D.Raycast(transform.position, new Vector3(-1, -1f, 0), 0.9f);
+        RaycastHit2D hit_RightUp = Physics2D.Raycast(transform.position, new Vector3(1f, 1, 0), 0.9f);
+        RaycastHit2D hit_RightDown = Physics2D.Raycast(transform.position, new Vector3(1, -1f, 0), 0.9f);
 
         Debug.DrawLine(transform.position, transform.position + new Vector3(-1f, 1, 0), Color.black);
         Debug.DrawLine(transform.position, transform.position + new Vector3(-1, -1f, 0), Color.black);
@@ -1111,174 +1129,206 @@ public class CatContrl : MonoBehaviour
 
         if (Rot == new Vector2(0, 0))
         {
-
-            if (hit_LeftUp.collider != null)
+            if (CanJumpTrue == true)
             {
-                if (hit_LeftUp.collider.gameObject.tag == "Ground" || hit_LeftUp.collider.gameObject.tag == "Wall")
+                if (hit_LeftUp.collider != null)
                 {
-                    GetComponent<Rigidbody2D>().gravityScale = 0;
+                    if (hit_LeftUp.collider.gameObject.tag == "Ground" || hit_LeftUp.collider.gameObject.tag == "Wall")
+                    {
+                        GetComponent<Rigidbody2D>().gravityScale = 0;
+                        CatAni.SetBool("Jump", false);
 
-                    CatAni.SetFloat("TurnRight", 0.5f);
-                    transform.rotation = Quaternion.Euler(0, 0, -90);
+                        CatAni.SetFloat("TurnRight", 0.666f);
+                        transform.rotation = Quaternion.Euler(0, 0, -90);
 
-                    if (Input.GetKey(KeyCode.W))
-                    {
-                        TurnRight = false;
-                        CatAni.SetBool("Move", true);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(0, MoveSpeed * 0.7f);
-                    }
-                    else if (Input.GetKey(KeyCode.A))
-                    {
-                        TurnRight = true;
-                        CatAni.SetBool("Move", true);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed * 0.7f, 0);
-                    }
-                    else
-                    {
-                        CatAni.SetBool("Move", false);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                        if (Input.GetKey(KeyCode.W))
+                        {
+                            TurnRight = false;
+                            CatAni.SetBool("Move", true);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, MoveSpeed * 0.7f);
+                        }
+                        else if (Input.GetKey(KeyCode.A))
+                        {
+                            TurnRight = true;
+                            CatAni.SetBool("Move", true);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed * 0.7f, 0);
+                        }
+                        else
+                        {
+                            CatAni.SetBool("Move", false);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                        }
                     }
                 }
-            }
-            else if (hit_LeftDown.collider != null)
-            {
-                if (hit_LeftDown.collider.gameObject.tag == "Ground" || hit_LeftDown.collider.gameObject.tag == "Wall")
+                else if (hit_LeftDown.collider != null)
                 {
-                    GetComponent<Rigidbody2D>().gravityScale = 0;
+                    if (hit_LeftDown.collider.gameObject.tag == "Ground" || hit_LeftDown.collider.gameObject.tag == "Wall")
+                    {
+                        GetComponent<Rigidbody2D>().gravityScale = 0;
+                        CatAni.SetBool("Jump", false);
 
-                    CatAni.SetFloat("TurnRight", 0.5f);
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
-
-                    if (Input.GetKey(KeyCode.S))
-                    {
-                        TurnRight = true;
-                        CatAni.SetBool("Move", true);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(0, -MoveSpeed * 0.7f);
-                    }
-                    else if (Input.GetKey(KeyCode.A))
-                    {
-                        TurnRight = false;
-                        CatAni.SetBool("Move", true);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed * 0.7f, 0);
-                    }
-                    else
-                    {
-                        CatAni.SetBool("Move", false);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                    }
-                }
-            }
-            else if (hit_RightUp.collider != null)
-            {
-                if (hit_RightUp.collider.gameObject.tag == "Ground" || hit_RightUp.collider.gameObject.tag == "Wall")
-                {
-                    GetComponent<Rigidbody2D>().gravityScale = 0;
-
-                    CatAni.SetFloat("TurnRight", 0.5f);
-                    transform.rotation = Quaternion.Euler(0, 0, 180);
-
-                    if (Input.GetKey(KeyCode.W))
-                    {
-                        TurnRight = true;
-                        CatAni.SetBool("Move", true);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(0, MoveSpeed * 0.7f);
-                    }
-                    else if (Input.GetKey(KeyCode.D))
-                    {
-                        TurnRight = false;
-                        CatAni.SetBool("Move", true);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed * 0.7f, 0);
-                    }
-                    else
-                    {
-                        CatAni.SetBool("Move", false);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                    }
-                }
-            }
-            else if (hit_RightDown.collider != null)
-            {
-                if (hit_RightDown.collider.gameObject.tag == "Ground" || hit_RightDown.collider.gameObject.tag == "Wall")
-                {
-                    GetComponent<Rigidbody2D>().gravityScale = 0;
-
-                    CatAni.SetFloat("TurnRight", 0.5f);
-                    transform.rotation = Quaternion.Euler(0, 0, 90);
-
-                    if (Input.GetKey(KeyCode.S))
-                    {
-                        TurnRight = false;
-                        CatAni.SetBool("Move", true);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(0, -MoveSpeed * 0.7f);
-                    }
-                    else if (Input.GetKey(KeyCode.D))
-                    {
-                        TurnRight = true;
-                        CatAni.SetBool("Move", true);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed * 0.7f, 0);
-                    }
-                    else
-                    {
-                        CatAni.SetBool("Move", false);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                    }
-                }
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().gravityScale = CatWeight;
-
-                if (Input.GetKey(KeyCode.D))
-                {
-                    TurnRight = true;
-                    CatAni.SetFloat("TurnRight", 1);
-                    if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
-                    {
+                        CatAni.SetFloat("TurnRight", 0.666f);
                         transform.rotation = Quaternion.Euler(0, 0, 0);
-                        NowCatAct = CatAct.Run;
+
+                        if (Input.GetKey(KeyCode.S))
+                        {
+                            TurnRight = true;
+                            CatAni.SetBool("Move", true);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -MoveSpeed * 0.7f);
+                        }
+                        else if (Input.GetKey(KeyCode.A))
+                        {
+                            TurnRight = false;
+                            CatAni.SetBool("Move", true);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed * 0.7f, 0);
+                        }
+                        else
+                        {
+                            CatAni.SetBool("Move", false);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                        }
                     }
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
                 }
-                else if (Input.GetKey(KeyCode.A))
+                else if (hit_RightUp.collider != null)
                 {
-                    TurnRight = false;
-                    CatAni.SetFloat("TurnRight", 0);
-                    if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
+                    if (hit_RightUp.collider.gameObject.tag == "Ground" || hit_RightUp.collider.gameObject.tag == "Wall")
                     {
-                        transform.rotation = Quaternion.Euler(0, 180, 0);
-                        NowCatAct = CatAct.Run;
+                        GetComponent<Rigidbody2D>().gravityScale = 0;
+                        CatAni.SetBool("Jump", false);
+
+                        CatAni.SetFloat("TurnRight", 0.666f);
+                        transform.rotation = Quaternion.Euler(0, 0, 180);
+
+                        if (Input.GetKey(KeyCode.W))
+                        {
+                            TurnRight = true;
+                            CatAni.SetBool("Move", true);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, MoveSpeed * 0.7f);
+                        }
+                        else if (Input.GetKey(KeyCode.D))
+                        {
+                            TurnRight = false;
+                            CatAni.SetBool("Move", true);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed * 0.7f, 0);
+                        }
+                        else
+                        {
+                            CatAni.SetBool("Move", false);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                        }
                     }
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
                 }
-                else if (CanJump != false && NowCatAct != CatAct.Jump)
+                else if (hit_RightDown.collider != null)
                 {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+                    if (hit_RightDown.collider.gameObject.tag == "Ground" || hit_RightDown.collider.gameObject.tag == "Wall")
+                    {
+                        GetComponent<Rigidbody2D>().gravityScale = 0;
+                        CatAni.SetBool("Jump", false);
+
+                        CatAni.SetFloat("TurnRight", 0.666f);
+                        transform.rotation = Quaternion.Euler(0, 0, 90);
+
+                        if (Input.GetKey(KeyCode.S))
+                        {
+                            TurnRight = false;
+                            CatAni.SetBool("Move", true);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -MoveSpeed * 0.7f);
+                        }
+                        else if (Input.GetKey(KeyCode.D))
+                        {
+                            TurnRight = true;
+                            CatAni.SetBool("Move", true);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed * 0.7f, 0);
+                        }
+                        else
+                        {
+                            CatAni.SetBool("Move", false);
+                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                        }
+                    }
                 }
-                WaterJump(Rot);
+                else
+                {
+                    GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+
+
+                    if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
+                    {
+                        CatAni.SetFloat("TurnRight", 1);
+                        TurnRight = true;
+                    }
+                    else if (GetComponent<Rigidbody2D>().velocity.x < -0.5f)
+                    {
+                        CatAni.SetFloat("TurnRight", 0);
+                        TurnRight = false;
+                    }
+                    else
+                    {
+                        CatAni.SetFloat("TurnRight", 0.5f);
+                    }
+
+
+                    if (Input.GetKey(KeyCode.D))
+                    {
+                        TurnRight = true;
+                        CatAni.SetFloat("TurnRight", 1);
+                        if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
+                        {
+                            transform.rotation = Quaternion.Euler(0, 0, 0);
+                            CatAni.SetBool("Move", true);
+                            NowCatAct = CatAct.Run;
+                        }
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                    }
+                    else if (Input.GetKey(KeyCode.A))
+                    {
+                        TurnRight = false;
+                        CatAni.SetFloat("TurnRight", 0);
+                        if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
+                        {
+                            transform.rotation = Quaternion.Euler(0, 180, 0);
+                            CatAni.SetBool("Move", true);
+                            NowCatAct = CatAct.Run;
+                        }
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                    }
+                    else if (CanJump != false && NowCatAct != CatAct.Jump)
+                    {
+                        CatAni.SetBool("Move", false);
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+                    }
+                    WaterJump(Rot);
+                }
             }
         }
         else if (Rot == new Vector2(0, -1))
         {
             GetComponent<Rigidbody2D>().gravityScale = CatWeight;
 
-            if (Input.GetKey(KeyCode.D))
+            if(CatAni.GetFloat("TurnRight") == 0.5f)
+            {
+                CatAni.SetFloat("TurnRight", 1);
+            }
+            if (Input.GetKey(KeyCode.D) && WaterJumpReady == false)
             {
                 TurnRight = true;
                 CatAni.SetFloat("TurnRight", 1);
                 if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, 0);
+                    CatAni.SetBool("Move", true);
                     NowCatAct = CatAct.Run;
                 }
                 GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
-            else if (Input.GetKey(KeyCode.A))
+            else if (Input.GetKey(KeyCode.A) && WaterJumpReady == false)
             {
                 TurnRight = false;
                 CatAni.SetFloat("TurnRight", 0);
                 if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
                 {
                     transform.rotation = Quaternion.Euler(0, 180, 0);
+                    CatAni.SetBool("Move", true);
                     NowCatAct = CatAct.Run;
                 }
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
@@ -1294,7 +1344,7 @@ public class CatContrl : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().gravityScale = 0;
 
-            CatAni.SetFloat("TurnRight", 0.5f);
+            CatAni.SetFloat("TurnRight", 0.333f);
 
             transform.rotation = Quaternion.Euler(0, 0, 0);
 
@@ -1320,7 +1370,7 @@ public class CatContrl : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().gravityScale = 0;
 
-            CatAni.SetFloat("TurnRight", 0.5f);
+            CatAni.SetFloat("TurnRight", 0.333f);
 
             transform.rotation = Quaternion.Euler(0, 0, 90);
 
@@ -1346,7 +1396,7 @@ public class CatContrl : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().gravityScale = 0;
 
-            CatAni.SetFloat("TurnRight", 0.5f);
+            CatAni.SetFloat("TurnRight", 0.333f);
 
             transform.rotation = Quaternion.Euler(0, 0, 180);
 
@@ -1372,7 +1422,7 @@ public class CatContrl : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().gravityScale = 0;
 
-            CatAni.SetFloat("TurnRight", 0.5f);
+            CatAni.SetFloat("TurnRight", 0.333f);
 
             transform.rotation = Quaternion.Euler(0, 0, -90);
 
@@ -1434,13 +1484,13 @@ public class CatContrl : MonoBehaviour
                 //GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
                 GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, -MoveSpeed * 0.1f);
 
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.W) && WaterJumpReady == false)
                 {
                     TurnRight = true;
                     CatAni.SetBool("Move", true);
                     GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, MoveSpeed * 0.7f);
                 }
-                else if (Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.S) && WaterJumpReady == false)
                 {
                     TurnRight = false;
                     CatAni.SetBool("Move", true);
@@ -1468,7 +1518,7 @@ public class CatContrl : MonoBehaviour
                 GetComponent<Rigidbody2D>().gravityScale = 0;
                 GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed);
 
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.A) && WaterJumpReady == false)
                 {
                     if (NowCatMorph == CatMorph.Climb)
                     {
@@ -1482,7 +1532,7 @@ public class CatContrl : MonoBehaviour
                         TurnRight = true;
                     }
                 }
-                else if (Input.GetKey(KeyCode.D))
+                else if (Input.GetKey(KeyCode.D) && WaterJumpReady == false)
                 {
                     if (NowCatMorph == CatMorph.Climb)
                     {
@@ -1532,7 +1582,48 @@ public class CatContrl : MonoBehaviour
 
         }
     }
-    
+
+    public void WaterJumpPictrue()
+    {
+        Vector3 MousePos;
+
+        MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+
+        //
+        Vector3 direction = MousePos - transform.position;
+        direction.z = 0f;
+        direction.Normalize();
+        //float targetAngle = Mathf.Atan2(direction.y, direction.x);
+
+        Vector3 RemoveMax = transform.position + direction * LongRemoveMax;
+
+        float ButtRemove = Vector2.Distance(transform.position, MousePos);
+
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        WaterJumpPos_1.transform.rotation = Quaternion.Euler(0, 0, targetAngle - 90);
+        WaterJumpPos_2.transform.rotation = Quaternion.Euler(0, 0, targetAngle - 90);
+
+        WaterJumpPos_1.transform.position = RemoveMax;
+        WaterJumpPos_2.transform.position = RemoveMax;
+        //if (ButtRemove <= LongRemoveMax)
+        //{
+        //    WaterJumpPos_1.transform.position = MousePos;
+        //    WaterJumpPos_2.transform.position = MousePos;
+           
+        //}
+        //else
+        //{
+        //    WaterJumpPos_1.transform.position = RemoveMax;
+        //    WaterJumpPos_2.transform.position = RemoveMax;       
+        //}
+
+        WaterJumpPos_1.GetComponent<LineRenderer>().SetPosition(0, transform.position);
+        WaterJumpPos_1.GetComponent<LineRenderer>().SetPosition(1, WaterJumpPos_1.transform.position);
+        WaterJumpPos_2.GetComponent<LineRenderer>().SetPosition(0, transform.position);
+        Vector2 P_2 = Vector2.Lerp(transform.position, WaterJumpPos_2.transform.position, WaterJumpPower);
+        WaterJumpPos_2.GetComponent<LineRenderer>().SetPosition(1, P_2);
+
+    }
 
     public void WaterJump(Vector2 RayVect)
     {
@@ -1544,16 +1635,19 @@ public class CatContrl : MonoBehaviour
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                 GetComponent<Rigidbody2D>().gravityScale = 0.01f;
                 GetComponent<Animator>().SetBool("WaterJumpReady", true);
-                WaterJumpPower = 0.5f;
+                WaterJumpPower = 0.1f;
                 WaterJumpReady = true;
             }
         }
         if (WaterJumpReady == true)
         {
-            WaterJumpPower += Time.deltaTime * 0.6f;
-            if (WaterJumpPower >= 2)
+            WaterJumpPictrue();
+            WaterJumpPos_1.SetActive(true);
+            WaterJumpPos_2.SetActive(true);
+            WaterJumpPower += Time.deltaTime * 0.5f;
+            if (WaterJumpPower >= 1)
             {
-                WaterJumpPower = 2;
+                WaterJumpPower = 1;
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -1592,13 +1686,29 @@ public class CatContrl : MonoBehaviour
                     CatMusic.PlayMusic(0);
                     NowCatAct = CatAct.Jump;
                     CanJump = false;
-                    StartCoroutine(JumpDebug(0.5f));
+                    StartCoroutine(JumpDebug(0.2f));
 
                     //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                     GetComponent<Rigidbody2D>().gravityScale = CatWeight;
-                    GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * WaterJumpPower);
+                    GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 2 * WaterJumpPower);
                     GetComponent<Animator>().SetBool("WaterJumpReady", false);
-                    WaterJumpReady = false;
+                    WaterJumpPos_1.SetActive(false);
+                    WaterJumpPos_2.SetActive(false);
+                    if(PowerPath.x * 2 >= 0.2f)
+                    {
+                        CatAni.SetFloat("TurnRight", 1);
+                        TurnRight = true;
+                    }
+                    else if(PowerPath.x * 2 <= -0.2f)
+                    {
+                        CatAni.SetFloat("TurnRight", 0);
+                        TurnRight = false;
+                    }
+                    else
+                    {
+                        CatAni.SetFloat("TurnRight", 0.5f);
+                    }
+                    WaterJumpReady = false;                
                 }
             }
         }
