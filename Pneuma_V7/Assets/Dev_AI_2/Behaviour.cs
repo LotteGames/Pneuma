@@ -25,7 +25,7 @@ public class Behaviour : MonoBehaviour
 
     private Rigidbody2D rb2D;
 
-    public void SetTarget(Transform transform) 
+    public void SetTarget(Transform transform)
     {
         target = transform;
     }
@@ -494,11 +494,19 @@ public class Behaviour : MonoBehaviour
         }
         else
         {
-            if (target.position.x > transform.position.x)
+            //if (target.position.x > transform.position.x)
+            //{
+            //    spriteRenderer.flipX = false;
+            //}
+            //else if (target.position.x < transform.position.x)
+            //{
+            //    spriteRenderer.flipX = true;
+            //}
+            if (catContrl.transform.position.x > transform.position.x)
             {
                 spriteRenderer.flipX = false;
             }
-            else if (target.position.x < transform.position.x)
+            else if (catContrl.transform.position.x < transform.position.x)
             {
                 spriteRenderer.flipX = true;
             }
@@ -508,6 +516,7 @@ public class Behaviour : MonoBehaviour
         }
     }
 
+    public CatContrl catContrl;
     public void SetJumpVelocity()
     {
         jumpMoment = Time.time;
