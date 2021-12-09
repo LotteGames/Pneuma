@@ -224,6 +224,7 @@ public class DialogueManager : MonoBehaviour
     }
     Coroutine coroutine;
 
+    public float oneCharduration = 0.04f;
     IEnumerator ieum_StartDialogue(int puzzleNum)
     {
         PlaceSpeaks placeSpeaks = Find_PlaceSpeak(puzzleNum);
@@ -299,7 +300,7 @@ public class DialogueManager : MonoBehaviour
                                 roleBubble.text.text = speak.txt.Substring(0, j + 1) +
                                     "<color=#00000000>" + speak.txt.Substring(j + 1) + "</color>";
 
-                                float timepass = 0, duration = 0.08f;
+                                float timepass = 0, duration = oneCharduration;
                                 while (timepass < duration)
                                 {
                                     if (Input.GetKeyDown(KeyCode.C))

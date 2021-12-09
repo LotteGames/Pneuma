@@ -480,7 +480,7 @@ public class Behaviour : MonoBehaviour
                             }
                         }
 
-                        rb2D.velocity = new Vector2(((spriteRenderer.flipX) ? -1 : 1) * physicSetting.speed / 4f, rb2D.velocity.y);
+                        rb2D.velocity = new Vector2(((spriteRenderer.flipX) ? -1 : 1) * physicSetting.speed, rb2D.velocity.y);
                         animator.SetBool("IsWalk", true);
                     }
                     else

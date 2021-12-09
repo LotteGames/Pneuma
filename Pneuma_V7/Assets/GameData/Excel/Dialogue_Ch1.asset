@@ -49,7 +49,7 @@ MonoBehaviour:
     sequence: 0
     ch_charactername: "\u5976\u5976"
     ch_sentence: "\u53C8\u9047\u898B\u4F60\u4E86\u4F60\u5728\u8DDF\u8E64\u6211\u55CE?
-      \u5C0F\u53EF\u611B"
+      \u5C0F\u53EF\u611B\u3002"
     eng_charactername: granny
     eng_sentence: Great
   - charactertype: 1
@@ -58,7 +58,7 @@ MonoBehaviour:
     puzzle: 0
     sequence: 0
     ch_charactername: "\u5976\u5976"
-    ch_sentence: "\u9019\u908A\u6709\u500B\u5C0F\u8D70\u9053\uFF0C\u6211\u90FD\u947D\u4E0D\u904E\u53BB\u770B\u4F86\uFF0C\u4E5F\u8A31\u4F60\u53EF\u4EE5\u3002"
+    ch_sentence: "\u9019\u908A\u6709\u500B\u5C0F\u8D70\u9053\uFF0C\u6211\u90FD\u947D\u4E0D\u904E\u53BB...\u4E5F\u8A31\u4F60\u53EF\u4EE5?"
     eng_charactername: granny
     eng_sentence: Hi
   - charactertype: 1
@@ -150,7 +150,7 @@ MonoBehaviour:
     sequence: 0
     ch_charactername: "\u5976\u5976"
     ch_sentence: "\u53C8\u9047\u898B\u4F60\u4E86\u4F60\u5728\u8DDF\u8E64\u6211\u55CE?
-      \u5C0F\u53EF\u611B"
+      \u5C0F\u53EF\u611B\u3002"
     eng_charactername: granny
     eng_sentence: Great
   - charactertype: 1
@@ -159,7 +159,7 @@ MonoBehaviour:
     puzzle: 0
     sequence: 0
     ch_charactername: "\u5976\u5976"
-    ch_sentence: "\u9019\u908A\u6709\u500B\u5C0F\u8D70\u9053\uFF0C\u6211\u90FD\u947D\u4E0D\u904E\u53BB\u770B\u4F86\uFF0C\u4E5F\u8A31\u4F60\u53EF\u4EE5\u3002"
+    ch_sentence: "\u9019\u908A\u6709\u500B\u5C0F\u8D70\u9053\uFF0C\u6211\u90FD\u947D\u4E0D\u904E\u53BB...\u4E5F\u8A31\u4F60\u53EF\u4EE5?"
     eng_charactername: granny
     eng_sentence: Hi
   - charactertype: 1
