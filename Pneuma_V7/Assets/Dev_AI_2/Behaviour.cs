@@ -71,6 +71,8 @@ public class Behaviour : MonoBehaviour
                             {
                                 if (pointNum == pathPoints[pathPoints.Count - 1].num)
                                 {
+
+                                    //Debug.LogError(123);
                                     decision.Add(AI_State.idle);
                                 }
                                 else
@@ -101,6 +103,7 @@ public class Behaviour : MonoBehaviour
                                         {
                                             if (angle <= physicSetting.maxSlopeAngle)
                                             {
+                                                //Debug.LogError(456);
                                                 decision.Add(AI_State.walk);
                                             }
                                             else
@@ -153,6 +156,7 @@ public class Behaviour : MonoBehaviour
                                         {
                                             if (angle <= physicSetting.maxSlopeAngle)
                                             {
+                                                //Debug.LogError(789);
                                                 decision.Add(AI_State.walk);
                                             }
                                         }
@@ -163,6 +167,7 @@ public class Behaviour : MonoBehaviour
 
                                             if (Mathf.Abs(neighbor.vector.x) <= time_OtoG_y * physicSetting.speed)
                                             {
+                                                //Debug.LogError(101112);
                                                 decision.Add(AI_State.walk);
                                             }
                                             else
@@ -267,8 +272,16 @@ public class Behaviour : MonoBehaviour
             }
             else if (isFollow)
             {
+                Debug.LogError(159);
                 ai_State = AI_State.idle;
             }
+
+
+            //Debug.LogError("index : " + stateIndex + " , " + decision.Count);
+
+
+
+
 
             Point point = null;
             Neighbor neighbor = null;
@@ -301,6 +314,9 @@ public class Behaviour : MonoBehaviour
                         if (Math.Abs(neighbor.point.position_World.x - transform.position.x) < 0.2f
                               && transform.position.y + 1.5f >= neighbor.point.position_World.y)
                         {
+
+                            Debug.LogError("abc");
+
                             stateIndex++;
 
                             rb2D.velocity = Vector2.zero;
@@ -311,7 +327,7 @@ public class Behaviour : MonoBehaviour
                             && Math.Abs(neighbor.point.position_World.y - transform.position.y + 1.5f) > 0.2f)
                         {
                             transform.position = neighbor.point.position_World;
-
+                            Debug.LogError("cde");
                             stateIndex++;
 
                             rb2D.velocity = Vector2.zero;

@@ -192,10 +192,10 @@ public class DialogueManager : MonoBehaviour
     {
         int cam_AreaNum = cameraActivate.CurrentCam_AreaNum;
 
-        Debug.LogError("camAreaNum : " + cam_AreaNum);
+        //Debug.LogError("camAreaNum : " + cam_AreaNum);
 
         PlaceSpeaks struct_PlaceSpeak = new PlaceSpeaks();
-        Debug.LogError("puzzleNum : " + puzzleNum);
+        //Debug.LogError("puzzleNum : " + puzzleNum);
         for (int i = 0; i < struct_PlaceSpeaks.Count; i++)
         {
             if (struct_PlaceSpeaks[i].areaNum == cam_AreaNum)
@@ -277,7 +277,7 @@ public class DialogueManager : MonoBehaviour
                             roleBubble.text.ForceMeshUpdate();
                             Vector2 textSize = roleBubble.text.GetRenderedValues(false);
 
-                            Debug.LogError(textSize.ToString());
+                            //Debug.LogError(textSize.ToString());
 
                             Vector2 padding = new Vector2(2, 2);
 

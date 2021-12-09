@@ -10,6 +10,8 @@ public class PointCheck : MonoBehaviour
 
     private Point lastPoint;
 
+    public bool isActive = true;
+
     void Start()
     {
         pathManager = FindObjectOfType<PathManager>();
@@ -19,10 +21,15 @@ public class PointCheck : MonoBehaviour
     {
         Point point = pathManager.GetPoint(transform.position);
 
-        if (point != lastPoint)
+        if (point != lastPoint && isActive)
         {
             lastPoint = point;
             PointChanged.Invoke();
         }
+    }
+
+    public void SetActive(bool value)
+    {
+        isActive = value;
     }
 }
