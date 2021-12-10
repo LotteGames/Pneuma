@@ -1163,9 +1163,9 @@ public class CatContrl : MonoBehaviour
                         {
                             CatAni.SetBool("Move", false);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                            WaterJump(Rot);
                         }
 
-                        WaterJump(Rot);
                     }
                 }
                 else if (hit_LeftDown.collider != null)
@@ -1194,9 +1194,9 @@ public class CatContrl : MonoBehaviour
                         {
                             CatAni.SetBool("Move", false);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                            WaterJump(Rot);
                         }
 
-                        WaterJump(Rot);
                     }
                 }
                 else if (hit_RightUp.collider != null)
@@ -1225,9 +1225,9 @@ public class CatContrl : MonoBehaviour
                         {
                             CatAni.SetBool("Move", false);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                            WaterJump(Rot);
                         }
 
-                        WaterJump(Rot);
                     }
                 }
                 else if (hit_RightDown.collider != null)
@@ -1256,9 +1256,9 @@ public class CatContrl : MonoBehaviour
                         {
                             CatAni.SetBool("Move", false);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                            WaterJump(Rot);
                         }
 
-                        WaterJump(Rot);
                     }
                 }
                 else

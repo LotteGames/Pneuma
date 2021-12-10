@@ -122,17 +122,17 @@ public class DialogueManager : MonoBehaviour
 
                 if (last_PuzzleNum == current_PuzzleNum)
                 {
-                    //¼W¥[Speak
+                    //ï¿½Wï¿½[Speak
                     struct_Speaks.Add(new Speak(dialogueDatas[excelIndexs[j]].CHARACTERTYPE, dialogueDatas[excelIndexs[j]].Ch_Sentence));
                 }
                 else
                 {
-                    //¼W¥[PlaceSpeak
+                    //ï¿½Wï¿½[PlaceSpeak
                     struct_PlaceSpeaks.Add(new PlaceSpeaks(areaNum, last_PuzzleNum, struct_Speaks));
 
                     //Debug.Log(last_PuzzleNum + " , " + current_PuzzleNum);
 
-                    //¼W¥[·sAreaªºSpeak
+                    //ï¿½Wï¿½[ï¿½sAreaï¿½ï¿½Speak
                     struct_Speaks = new List<Speak>();
                     struct_Speaks.Add(new Speak(dialogueDatas[excelIndexs[j]].CHARACTERTYPE, dialogueDatas[excelIndexs[j]].Ch_Sentence));
                 }
@@ -141,7 +141,7 @@ public class DialogueManager : MonoBehaviour
             }
 
             struct_PlaceSpeaks.Add(new PlaceSpeaks(areaNum, last_PuzzleNum, struct_Speaks));
-            //¼W¥[¸ÓArea³Ì«á¤@­Óªº¸ê®Æ
+            //ï¿½Wï¿½[ï¿½ï¿½Areaï¿½Ì«ï¿½@ï¿½Óªï¿½ï¿½ï¿½ï¿½
         }
     }
 
@@ -246,7 +246,7 @@ public class DialogueManager : MonoBehaviour
 
         if (placeSpeaks.speaks == null)
         {
-            Debug.LogError("¸ê®Æ¸Ì¨S¦³¦b³o­ÓArea¡BPuzzleNumªº¹ï¸Ü");
+            Debug.LogError("ï¿½ï¿½Æ¸Ì¨Sï¿½ï¿½ï¿½bï¿½oï¿½ï¿½Areaï¿½BPuzzleNumï¿½ï¿½ï¿½ï¿½ï¿½");
         }
         else
         {
@@ -262,7 +262,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         if (roleBubble == null)
                         {
-                            Debug.LogError("Dialogue Manager ¨S¦³¹ïÀ³»¡¸Ü¹ï¶Hªº¸ê®Æ»Pª«¥ó°Ñ¦Ò");
+                            Debug.LogError("Dialogue Manager ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¹ï¿½Hï¿½ï¿½ï¿½ï¿½Æ»Pï¿½ï¿½ï¿½ï¿½Ñ¦ï¿½");
                         }
                         else
                         {
@@ -362,7 +362,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     public RoleBubble FindText(Role role)
-    //°O±oÀË¬dpuzzleState¡A¦pªG¤w¸g§¹¦¨´NÁ¿¶¢¸Ü
+    //ï¿½Oï¿½oï¿½Ë¬dpuzzleStateï¿½Aï¿½pï¿½Gï¿½wï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         for (int i = 0; i < RoleBubbles.Count; i++)
         {
