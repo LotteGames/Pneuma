@@ -1677,12 +1677,12 @@ public class CatContrl : MonoBehaviour
 
             if (CatAni.GetFloat("TurnRight") != 0.666f)
             {
-                if (PowerPath.x * 2 >= 0.6f)
+                if (PowerPath.x * 2 >= 0.8f)
                 {
                     CatAni.SetFloat("TurnRight", 1);
                     TurnRight = true;
                 }
-                else if (PowerPath.x * 2 <= -0.2f)
+                else if (PowerPath.x * 2 <= -0.8f)
                 {
                     CatAni.SetFloat("TurnRight", 0);
                     TurnRight = false;
