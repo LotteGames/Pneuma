@@ -74,6 +74,8 @@ public class CatContrl : MonoBehaviour
 
     [Header("貓咪目前持有的道具")]
     public GameObject GetObject;
+    [Header("快樂的彩蛋帽帽")]
+    public GameObject HappyHat;
     [Header("貓咪伸長的最長點")]
     public GameObject LongPos;
 
@@ -103,24 +105,28 @@ public class CatContrl : MonoBehaviour
             MorphUpdate_NoMorph();
             GetComponent<Collider2D>().sharedMaterial = CatM_1;
             LongPos.SetActive(false);
+            HappyHat.SetActive(true);
         }
         else if(NowCatMorph == CatMorph.Long)
         {
             MorphUpdate_Long();
             GetComponent<Collider2D>().sharedMaterial = CatM_0;
             LongPos.SetActive(true);
+            HappyHat.SetActive(false);
         }
         else if (NowCatMorph == CatMorph.Climb)
         {
             MorphUpdate_Climb();
             GetComponent<Collider2D>().sharedMaterial = CatM_1;
             LongPos.SetActive(false);
+            HappyHat.SetActive(false);
         }
         else if (NowCatMorph == CatMorph.Cloud)
         {
             MorphUpdate_Cloud();
             GetComponent<Collider2D>().sharedMaterial = CatM_0;
             LongPos.SetActive(false);
+            HappyHat.SetActive(false);
         }
 
         //撿到的道具跟隨
@@ -1157,7 +1163,9 @@ public class CatContrl : MonoBehaviour
                         {
                             CatAni.SetBool("Move", false);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                            WaterJump(Rot);
                         }
+
                     }
                 }
                 else if (hit_LeftDown.collider != null)
@@ -1186,7 +1194,9 @@ public class CatContrl : MonoBehaviour
                         {
                             CatAni.SetBool("Move", false);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                            WaterJump(Rot);
                         }
+
                     }
                 }
                 else if (hit_RightUp.collider != null)
@@ -1215,7 +1225,9 @@ public class CatContrl : MonoBehaviour
                         {
                             CatAni.SetBool("Move", false);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                            WaterJump(Rot);
                         }
+
                     }
                 }
                 else if (hit_RightDown.collider != null)
@@ -1244,7 +1256,9 @@ public class CatContrl : MonoBehaviour
                         {
                             CatAni.SetBool("Move", false);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                            WaterJump(Rot);
                         }
+
                     }
                 }
                 else
@@ -1650,6 +1664,36 @@ public class CatContrl : MonoBehaviour
                 WaterJumpPower = 1;
             }
 
+
+            Vector3 MousePos;
+            MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+
+            Vector3 direction = MousePos - transform.position;
+
+            direction.z = 0f;
+            direction.Normalize();
+            Vector3 PowerPath = direction;
+            Debug.Log(PowerPath);
+
+            if (CatAni.GetFloat("TurnRight") != 0.666f)
+            {
+                if (PowerPath.x * 2 >= 0.8f)
+                {
+                    CatAni.SetFloat("TurnRight", 1);
+                    TurnRight = true;
+                }
+                else if (PowerPath.x * 2 <= -0.8f)
+                {
+                    CatAni.SetFloat("TurnRight", 0);
+                    TurnRight = false;
+                }
+                else
+                {
+                    CatAni.SetFloat("TurnRight", 0.333f);
+                    TurnRight = true;
+                }
+            }
+
             if (Input.GetMouseButtonUp(0))
             {
                 Debug.Log(RayVect);
@@ -1673,15 +1717,7 @@ public class CatContrl : MonoBehaviour
                 //CloudTime = 5;
                 if (CanJump == true)
                 {
-                    Vector3 MousePos;
-                    MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-
-                    Vector3 direction = MousePos - transform.position;
-
-                    direction.z = 0f;
-                    direction.Normalize();
-                    Vector3 PowerPath = direction;
-                    Debug.Log(PowerPath);
+                   
 
                     CatMusic.PlayMusic(0);
                     NowCatAct = CatAct.Jump;
@@ -1707,6 +1743,7 @@ public class CatContrl : MonoBehaviour
                     else
                     {
                         CatAni.SetFloat("TurnRight", 0.5f);
+                        TurnRight = true;
                     }
                     WaterJumpReady = false;                
                 }
