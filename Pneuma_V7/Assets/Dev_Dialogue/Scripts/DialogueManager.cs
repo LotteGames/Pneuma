@@ -246,7 +246,7 @@ public class DialogueManager : MonoBehaviour
 
         if (placeSpeaks.speaks == null)
         {
-            Debug.LogError("��Ƹ̨S���b�o��Area�BPuzzleNum�����");
+            Debug.LogError("can't get the speak data");
         }
         else
         {
@@ -279,7 +279,7 @@ public class DialogueManager : MonoBehaviour
 
                             //Debug.LogError(textSize.ToString());
 
-                            Vector2 padding = new Vector2(2, 2);
+                            Vector2 padding = new Vector2(2, 3.5f);
 
                             if (textSize.x < textSize.y)
                             {
@@ -316,11 +316,15 @@ public class DialogueManager : MonoBehaviour
                         }
 
                         finSentence = false;
+                        roleBubble.SetContinueActive(true);
+
+
                     }
                     else
                     {
                         if (Input.GetKeyDown(KeyCode.C) && i != placeSpeaks.speaks.Count - 1)
                         {
+                            roleBubble.SetContinueActive(false);
                             //roleBubble.SetBubbleActive(false);
                             i++;
                             finSentence = true;
@@ -331,6 +335,7 @@ public class DialogueManager : MonoBehaviour
                         }
                         else if (Input.GetKeyDown(KeyCode.C) && i == placeSpeaks.speaks.Count - 1)
                         {
+                            roleBubble.SetContinueActive(false);
                             finDialogue = true;
                             roleBubble.text.text = "";
                             roleBubble.dialogueBubble.DOScale(Vector3.zero, scaleDown);

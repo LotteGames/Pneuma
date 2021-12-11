@@ -11,7 +11,7 @@ public class RoleBubble
 
     public RectTransform dialogueBubble;
 
-
+    public GameObject continueBtn;
     //public void SetCanvasOrder(int order) 
     //{
     //    canvas.sortingOrder = order;
@@ -19,5 +19,9 @@ public class RoleBubble
     public void SetBubbleActive(bool value)
     {
         dialogueBubble.gameObject.SetActive(value);
+    }
+    public void SetContinueActive(bool value)
+    {
+        continueBtn.SetActive(value);
     }
 }

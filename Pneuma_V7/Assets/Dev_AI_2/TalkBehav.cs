@@ -16,21 +16,21 @@ public class TalkBehav : MonoBehaviour
         }
     }
 
-    public GameObject talkBtn;
+    public GameObject startTalkBtn ;
 
     private void Update()
     {
         if (IsTalkable && IsFin)
         {
-            talkBtn.SetActive(true);
+            startTalkBtn.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.C))
             {
-                talkBtn.SetActive(false);
+                startTalkBtn.SetActive(false);
                 FindObjectOfType<DialogueManager>().InvokeEvent_Talk();
             }
         }
-        else { talkBtn.SetActive(false); }
+        else { startTalkBtn.SetActive(false); }
     }
 
     public bool IsFin = true;
@@ -40,4 +40,6 @@ public class TalkBehav : MonoBehaviour
         Debug.LogError("IsFin");
         IsFin = value;
     }
+
+
 }
