@@ -309,6 +309,7 @@ public class CatContrl : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
             {
+                CatMusic.PlayMusic(2);
                 CanLong = false;
                 NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
                 GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
@@ -316,6 +317,7 @@ public class CatContrl : MonoBehaviour
                 GetComponent<Collider2D>().isTrigger = true;
 
                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+
 
                 StartCoroutine(LongBack(1f));
             }
@@ -326,6 +328,7 @@ public class CatContrl : MonoBehaviour
         //
         if (Input.GetMouseButtonUp(0) && NowCatAct == CatAct.LongLongCat)
         {
+            CatMusic.PlayMusic(3);
             //縮回去
             StartCoroutine(LongDebug());
             CanLong = false;
@@ -660,6 +663,7 @@ public class CatContrl : MonoBehaviour
         yield return new WaitForSeconds(DelayTime);
         if(NowCatAct == CatAct.LongLongCat)
         {
+            CatMusic.PlayMusic(3);
             //縮回去
             StartCoroutine(LongDebug());
             CanLong = false;
