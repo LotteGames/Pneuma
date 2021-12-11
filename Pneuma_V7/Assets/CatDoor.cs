@@ -32,36 +32,36 @@ public class CatDoor : MonoBehaviour
 
         if (LeftToRight == CatContrl.CatMorph.NoMorph)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[0];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[0];
         }
         if (LeftToRight == CatContrl.CatMorph.Long)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[1];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[1];
         }
         if (LeftToRight == CatContrl.CatMorph.Climb)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[2];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[2];
         }
         if (LeftToRight == CatContrl.CatMorph.Cloud)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[3];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[3];
         }
 
         if (RightToLeft == CatContrl.CatMorph.NoMorph)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[0];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[0];
         }
         if (RightToLeft == CatContrl.CatMorph.Long)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[1];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[1];
         }
         if (RightToLeft == CatContrl.CatMorph.Climb)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[2];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[2];
         }
         if (RightToLeft == CatContrl.CatMorph.Cloud)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[3];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[3];
         }
     }
 
@@ -69,74 +69,74 @@ public class CatDoor : MonoBehaviour
     {
         if (LeftToRight == CatContrl.CatMorph.NoMorph)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = CloseHints[0];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = CloseHints[0];
         }
         if (LeftToRight == CatContrl.CatMorph.Long)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = CloseHints[1];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = CloseHints[1];
         }
         if (LeftToRight == CatContrl.CatMorph.Climb)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = CloseHints[2];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = CloseHints[2];
         }
         if (LeftToRight == CatContrl.CatMorph.Cloud)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = CloseHints[3];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = CloseHints[3];
         }
 
 
         if (RightToLeft == CatContrl.CatMorph.NoMorph)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[0];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[0];
         }
         if (RightToLeft == CatContrl.CatMorph.Long)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[1];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[1];
         }
         if (RightToLeft == CatContrl.CatMorph.Climb)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[2];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[2];
         }
         if (RightToLeft == CatContrl.CatMorph.Cloud)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[3];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[3];
         }
     }
     void CloseChange_Right()
     {
         if (LeftToRight == CatContrl.CatMorph.NoMorph)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[0];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[0];
         }
         if (LeftToRight == CatContrl.CatMorph.Long)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[1];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[1];
         }
         if (LeftToRight == CatContrl.CatMorph.Climb)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[2];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[2];
         }
         if (LeftToRight == CatContrl.CatMorph.Cloud)
         {
-            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = Hints[3];
+            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = Hints[3];
         }
 
 
         if (RightToLeft == CatContrl.CatMorph.NoMorph)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = CloseHints[0];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = CloseHints[0];
         }
         if (RightToLeft == CatContrl.CatMorph.Long)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = CloseHints[1];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = CloseHints[1];
         }
         if (RightToLeft == CatContrl.CatMorph.Climb)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = CloseHints[2];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = CloseHints[2];
         }
         if (RightToLeft == CatContrl.CatMorph.Cloud)
         {
-            RightToLeftHint.GetComponent<SpriteRenderer>().sprite = CloseHints[3];
+            LeftToRightHint.GetComponent<SpriteRenderer>().sprite = CloseHints[3];
         }
     }
 
