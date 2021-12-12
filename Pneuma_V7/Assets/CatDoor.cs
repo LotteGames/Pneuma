@@ -147,13 +147,13 @@ public class CatDoor : MonoBehaviour
         {
             if(Cat.transform.position.x < transform.position.x)
             {
-                CloseChange_Left();
+                CloseChange_Right();
                 CloseOpen_Left.SetActive(true);
                 CloseOpen_Right.SetActive(false);
             }
             else if (Cat.transform.position.x >= transform.position.x)
             {
-                CloseChange_Right();
+                CloseChange_Left();
                 CloseOpen_Left.SetActive(false);
                 CloseOpen_Right.SetActive(true);
             }

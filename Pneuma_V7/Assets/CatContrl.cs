@@ -472,6 +472,8 @@ public class CatContrl : MonoBehaviour
 
     }
 
+    [Header("噴氣特效")]
+    public GameObject CloudAni;
     float WaterJumpPower;
     bool WaterJumpReady;
     void MorphUpdate_Cloud()
@@ -544,10 +546,15 @@ public class CatContrl : MonoBehaviour
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                     GetComponent<Rigidbody2D>().gravityScale = 0.01f;
                     GetComponent<Animator>().SetBool("Cloud", true);
+                    WaterJumpPos_1.SetActive(true);
+                    WaterJumpPos_2.SetActive(true);
                 }
             }
             else
             {
+
+                CloudPictrue();
+
                 if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
                 {
                     CatAni.SetFloat("TurnRight", 1);
@@ -598,6 +605,8 @@ public class CatContrl : MonoBehaviour
 
                 if (Input.GetMouseButtonUp(1))
                 {
+                    WaterJumpPos_1.SetActive(false);
+                    WaterJumpPos_2.SetActive(false);
                     GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                     GetComponent<Rigidbody2D>().gravityScale = CatWeight;
                     GetComponent<Animator>().SetBool("Cloud", false);
@@ -615,10 +624,55 @@ public class CatContrl : MonoBehaviour
         direction.z = 0f;
         direction.Normalize();
         //float targetAngle = Mathf.Atan2(direction.y, direction.x);
-
+        Instantiate(CloudAni, transform.position, Quaternion.Euler(0, 0, 0));
         GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 100);
 
-        
+        CatMusic.PlayMusic(4);
+    }
+
+    public void CloudPictrue()
+    {
+        Vector3 MousePos;
+
+        MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+
+        //
+        Vector3 direction = MousePos - transform.position;
+        direction.z = 0f;
+        direction.Normalize();
+        //float targetAngle = Mathf.Atan2(direction.y, direction.x);
+
+        Vector3 RemoveMax = transform.position + direction * 2.3f;
+
+        //float ButtRemove = Vector2.Distance(transform.position, MousePos);
+
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        WaterJumpPos_1.transform.rotation = Quaternion.Euler(0, 0, targetAngle - 90);
+        WaterJumpPos_2.transform.rotation = Quaternion.Euler(0, 0, targetAngle - 90);
+
+        WaterJumpPos_1.transform.position = RemoveMax;
+        WaterJumpPos_2.transform.position = RemoveMax;
+        //if (ButtRemove <= LongRemoveMax)
+        //{
+        //    WaterJumpPos_1.transform.position = MousePos;
+        //    WaterJumpPos_2.transform.position = MousePos;
+
+        //}
+        //else
+        //{
+        //    WaterJumpPos_1.transform.position = RemoveMax;
+        //    WaterJumpPos_2.transform.position = RemoveMax;       
+        //}
+
+        float OverPos = (CloudTime + 1) / 4;
+        Debug.Log(OverPos);
+
+        WaterJumpPos_1.GetComponent<LineRenderer>().SetPosition(0, transform.position - direction * 0.2f);
+        WaterJumpPos_1.GetComponent<LineRenderer>().SetPosition(1, WaterJumpPos_1.transform.position);
+        WaterJumpPos_2.GetComponent<LineRenderer>().SetPosition(0, transform.position - direction * 0.2f);
+        Vector2 P_2 = Vector2.Lerp(transform.position, WaterJumpPos_2.transform.position, OverPos);
+        WaterJumpPos_2.GetComponent<LineRenderer>().SetPosition(1, P_2);
+
     }
 
     public IEnumerator JumpDebug(float DelayTime)
