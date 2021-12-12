@@ -95,17 +95,37 @@ public class CatContrl : MonoBehaviour
         PlayerPrefs.SetFloat("CatPos_Y", transform.position.y);
         Debug.Log(PlayerPrefs.GetFloat("CatPos_X") + "," + PlayerPrefs.GetFloat("CatPos_Y"));
         CatAni = GetComponent<Animator>();
+        HH = true;
     }
-
+    bool HH;
     // Update is called once per frame
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(HH == true)
+            {
+                HH = false;
+            }
+            else
+            {
+                HH = true;
+            }
+        }
+
         if(NowCatMorph == CatMorph.NoMorph)
         {
             MorphUpdate_NoMorph();
             GetComponent<Collider2D>().sharedMaterial = CatM_1;
             LongPos.SetActive(false);
-            HappyHat.SetActive(true);
+            if(HH == true)
+            {
+                HappyHat.SetActive(true);
+            }
+            else
+            {
+                HappyHat.SetActive(false);
+            }
         }
         else if(NowCatMorph == CatMorph.Long)
         {
@@ -2176,6 +2196,8 @@ public class CatContrl : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         GetComponent<Rigidbody2D>().gravityScale = 2.5f;
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 18000));
+        WaterJumpPos_1.SetActive(false);
+        WaterJumpPos_2.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         transform.position = new Vector2(PlayerPrefs.GetFloat("CatPos_X"), PlayerPrefs.GetFloat("CatPos_Y")) + new Vector2(0, 0.2f);
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
