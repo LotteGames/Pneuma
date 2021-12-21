@@ -486,6 +486,16 @@ public class CatContrl : MonoBehaviour
                         GetComponent<Animator>().SetBool("WaterJumpReady", false);
                     }
                 }
+                if (Input.GetMouseButtonUp(1))
+                {
+                    GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                    WaterJumpReady = false;
+                    WaterJumpPos_1.SetActive(false);
+                    WaterJumpPos_2.SetActive(false);
+                    GetComponent<Animator>().SetBool("WaterJumpReady", false);
+                    GetComponent<Animator>().SetBool("Jump", false);
+
+                }
             }
 
         }
@@ -1687,27 +1697,32 @@ public class CatContrl : MonoBehaviour
         direction.Normalize();
         //float targetAngle = Mathf.Atan2(direction.y, direction.x);
 
-        Vector3 RemoveMax = transform.position + direction * LongRemoveMax;
+        float Remove = Vector2.Distance(MousePos, transform.position);
 
-        float ButtRemove = Vector2.Distance(transform.position, MousePos);
+        Vector3 RemoveMax = transform.position + direction * LongRemoveMax;
+        Vector3 RemoveMin = transform.position + direction * 2.3f;
 
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         WaterJumpPos_1.transform.rotation = Quaternion.Euler(0, 0, targetAngle - 90);
         WaterJumpPos_2.transform.rotation = Quaternion.Euler(0, 0, targetAngle - 90);
 
+
         WaterJumpPos_1.transform.position = RemoveMax;
         WaterJumpPos_2.transform.position = RemoveMax;
-        //if (ButtRemove <= LongRemoveMax)
+
+        //if (Remove <= 2f)
         //{
-        //    WaterJumpPos_1.transform.position = MousePos;
-        //    WaterJumpPos_2.transform.position = MousePos;
-           
+        //    WaterJumpPos_1.transform.position = RemoveMin;
+        //    WaterJumpPos_2.transform.position = RemoveMin;
+        //    WaterJumpPos_2.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
         //}
         //else
         //{
         //    WaterJumpPos_1.transform.position = RemoveMax;
-        //    WaterJumpPos_2.transform.position = RemoveMax;       
+        //    WaterJumpPos_2.transform.position = RemoveMax;
+        //    WaterJumpPos_2.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1, 1);
         //}
+
 
         WaterJumpPos_1.GetComponent<LineRenderer>().SetPosition(0, transform.position);
         WaterJumpPos_1.GetComponent<LineRenderer>().SetPosition(1, WaterJumpPos_1.transform.position);
@@ -1774,8 +1789,9 @@ public class CatContrl : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
+
                 Debug.Log(RayVect);
-                if(RayVect.x == -1)
+                if (RayVect.x == -1)
                 {
                     Ray_Left = false;
                     StartCoroutine(RayL_Check());
@@ -1790,13 +1806,11 @@ public class CatContrl : MonoBehaviour
                     Ray_Up = false;
                     StartCoroutine(RayU_Check());
                 }
-  
+
 
                 //CloudTime = 5;
                 if (CanJump == true)
                 {
-                   
-
                     CatMusic.PlayMusic(0);
                     NowCatAct = CatAct.Jump;
                     CanJump = false;
@@ -1808,12 +1822,12 @@ public class CatContrl : MonoBehaviour
                     GetComponent<Animator>().SetBool("WaterJumpReady", false);
                     WaterJumpPos_1.SetActive(false);
                     WaterJumpPos_2.SetActive(false);
-                    if(PowerPath.x * 2 >= 0.2f)
+                    if (PowerPath.x * 2 >= 0.2f)
                     {
                         CatAni.SetFloat("TurnRight", 1);
                         TurnRight = true;
                     }
-                    else if(PowerPath.x * 2 <= -0.2f)
+                    else if (PowerPath.x * 2 <= -0.2f)
                     {
                         CatAni.SetFloat("TurnRight", 0);
                         TurnRight = false;
@@ -1823,8 +1837,17 @@ public class CatContrl : MonoBehaviour
                         CatAni.SetFloat("TurnRight", 0.5f);
                         TurnRight = true;
                     }
-                    WaterJumpReady = false;                
+                    WaterJumpReady = false;
                 }
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                WaterJumpReady = false;
+                WaterJumpPos_1.SetActive(false);
+                WaterJumpPos_2.SetActive(false);
+                GetComponent<Animator>().SetBool("WaterJumpReady", false);
+                GetComponent<Animator>().SetBool("Jump", false);
             }
         }
     }
