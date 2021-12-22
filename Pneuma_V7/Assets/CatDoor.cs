@@ -179,7 +179,7 @@ public class CatDoor : MonoBehaviour
                     {
                         collision.GetComponent<Animator>().SetBool("Climb", true);
                         collision.GetComponent<SpriteRenderer>().sortingOrder = 0;
-                        collision.GetComponent<CircleCollider2D>().radius = 0.67f;
+                        collision.GetComponent<CircleCollider2D>().radius = 0.7f;
                     }
                     else
                     {
@@ -196,7 +196,7 @@ public class CatDoor : MonoBehaviour
                     {
                         collision.GetComponent<Animator>().SetBool("Climb", true);
                         collision.GetComponent<SpriteRenderer>().sortingOrder = 0;
-                        collision.GetComponent<CircleCollider2D>().radius = 0.67f;
+                        collision.GetComponent<CircleCollider2D>().radius = 0.7f;
                     }
                     else
                     {

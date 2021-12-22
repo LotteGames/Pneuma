@@ -483,6 +483,7 @@ public class CatContrl : MonoBehaviour
                         //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                         GetComponent<Rigidbody2D>().gravityScale = CatWeight;
                         GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 2 * WaterJumpPower);
+                        GetComponent<Animator>().SetBool("Jump", true);
                         GetComponent<Animator>().SetBool("WaterJumpReady", false);
                     }
                 }
@@ -494,7 +495,15 @@ public class CatContrl : MonoBehaviour
                     WaterJumpPos_2.SetActive(false);
                     GetComponent<Animator>().SetBool("WaterJumpReady", false);
                     GetComponent<Animator>().SetBool("Jump", false);
-
+                    if (TurnRight == true)
+                    {
+                        CatAni.SetFloat("TurnRight", 1);
+                    }
+                    else
+                    {
+                        CatAni.SetFloat("TurnRight", 0);
+                    }
+                    
                 }
             }
 
@@ -863,6 +872,25 @@ public class CatContrl : MonoBehaviour
         bool IsClimb = false;
         if (NowCatAct == CatAct.Jump || NowCatAct == CatAct.Run || NowCatAct == CatAct.CatClimb || NowCatAct == CatAct.Idle)
         {
+            //if (hit_U_1.collider != null && hit_U_1.collider.GetComponent<MoveGround>() != null)
+            //{
+            //    if (hit_U_1.collider.GetComponent<MoveGround>().IsPike == false)
+            //    {
+            //        transform.parent = hit_U_1.collider.transform;
+            //        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+            //        hit_U_1.collider.GetComponent<MoveGround>().CatOn = true;
+            //    }
+            //}
+            //else if (hit_U_2.collider != null && hit_U_2.collider.GetComponent<MoveGround>() != null)
+            //{
+            //    if (hit_U_2.collider.GetComponent<MoveGround>().IsPike == false)
+            //    {
+            //        transform.parent = hit_U_2.collider.transform;
+            //        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+            //        hit_U_2.collider.GetComponent<MoveGround>().CatOn = true;
+            //    }
+            //}
+
 
             if (hit_D_1.collider != null)
             {
@@ -1225,6 +1253,37 @@ public class CatContrl : MonoBehaviour
         {
             if (CanJumpTrue == true)
             {
+           
+                if (hit_LeftUp.collider != null && hit_LeftUp.collider.GetComponent<MoveGround>() != null)
+                {
+                    if (hit_LeftUp.collider.GetComponent<MoveGround>().IsPike == false)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(-1f, 1f) * MoveSpeed * 0.6f;
+                    }
+                }
+                if (hit_LeftDown.collider != null && hit_LeftDown.collider.GetComponent<MoveGround>() != null)
+                {
+                    if (hit_LeftDown.collider.GetComponent<MoveGround>().IsPike == false)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(-1f, -1f) * MoveSpeed * 0.3f;
+                    }
+                }
+                if (hit_RightUp.collider != null && hit_RightUp.collider.GetComponent<MoveGround>() != null)
+                {
+                    if (hit_RightUp.collider.GetComponent<MoveGround>().IsPike == false)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(1f, 1f) * MoveSpeed * 0.6f;
+                    }
+                }
+                if (hit_RightDown.collider != null && hit_RightDown.collider.GetComponent<MoveGround>() != null)
+                {
+                    if (hit_RightDown.collider.GetComponent<MoveGround>().IsPike == false)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(1f, -1f) * MoveSpeed * 0.5f;
+                    }
+                }
+
+
                 if (hit_LeftUp.collider != null)
                 {
                     if (hit_LeftUp.collider.gameObject.tag == "Ground" || hit_LeftUp.collider.gameObject.tag == "Wall")
@@ -1249,14 +1308,30 @@ public class CatContrl : MonoBehaviour
                         }
                         else
                         {
-                            CatAni.SetBool("Move", false);
-                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                            WaterJump(Rot);
+                            if (hit_LeftUp.collider != null && hit_LeftUp.collider.GetComponent<MoveGround>() != null)
+                            {
+                                if (hit_LeftUp.collider.GetComponent<MoveGround>().IsPike == false)
+                                {
+                                    GetComponent<Rigidbody2D>().velocity = new Vector2(-1f, 1f) * MoveSpeed;
+                                }
+                            }
+                            else
+                            {
+                                CatAni.SetBool("Move", false);
+                                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                                WaterJump(Rot);
+                            }
+                        
+                        }
+
+                        if (CanJumpTrue == true)
+                        {
+                            CanJump = true;
                         }
 
                     }
                 }
-                else if (hit_LeftDown.collider != null)
+                if (hit_LeftDown.collider != null)
                 {
                     if (hit_LeftDown.collider.gameObject.tag == "Ground" || hit_LeftDown.collider.gameObject.tag == "Wall")
                     {
@@ -1280,14 +1355,30 @@ public class CatContrl : MonoBehaviour
                         }
                         else
                         {
-                            CatAni.SetBool("Move", false);
-                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                            WaterJump(Rot);
+                            if (hit_LeftDown.collider != null && hit_LeftDown.collider.GetComponent<MoveGround>() != null)
+                            {
+                                if (hit_LeftDown.collider.GetComponent<MoveGround>().IsPike == false)
+                                {
+                                    GetComponent<Rigidbody2D>().velocity = new Vector2(-1f, -1f) * MoveSpeed;
+                                }
+                            }
+                            else
+                            {
+                                CatAni.SetBool("Move", false);
+                                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                                WaterJump(Rot);
+                            }
+                   
+                        }
+
+                        if (CanJumpTrue == true)
+                        {
+                            CanJump = true;
                         }
 
                     }
                 }
-                else if (hit_RightUp.collider != null)
+                if (hit_RightUp.collider != null)
                 {
                     if (hit_RightUp.collider.gameObject.tag == "Ground" || hit_RightUp.collider.gameObject.tag == "Wall")
                     {
@@ -1311,14 +1402,28 @@ public class CatContrl : MonoBehaviour
                         }
                         else
                         {
-                            CatAni.SetBool("Move", false);
-                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                            WaterJump(Rot);
+                            if (hit_RightUp.collider != null && hit_RightUp.collider.GetComponent<MoveGround>() != null)
+                            {
+                                if (hit_RightUp.collider.GetComponent<MoveGround>().IsPike == false)
+                                {
+                                    GetComponent<Rigidbody2D>().velocity = new Vector2(1f, 1f) * MoveSpeed;
+                                }
+                            }
+                            else
+                            {
+                                CatAni.SetBool("Move", false);
+                                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                                WaterJump(Rot);
+                            }
+                           
                         }
-
+                        if (CanJumpTrue == true)
+                        {
+                            CanJump = true;
+                        }
                     }
                 }
-                else if (hit_RightDown.collider != null)
+                if (hit_RightDown.collider != null)
                 {
                     if (hit_RightDown.collider.gameObject.tag == "Ground" || hit_RightDown.collider.gameObject.tag == "Wall")
                     {
@@ -1342,12 +1447,45 @@ public class CatContrl : MonoBehaviour
                         }
                         else
                         {
-                            CatAni.SetBool("Move", false);
-                            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                            WaterJump(Rot);
+                          
+                            if (hit_RightDown.collider != null && hit_RightDown.collider.GetComponent<MoveGround>() != null)
+                            {
+                                if (hit_RightDown.collider.GetComponent<MoveGround>().IsPike == false)
+                                {
+                                    GetComponent<Rigidbody2D>().velocity = new Vector2(1f, -1f) * MoveSpeed;
+                                }
+                            }
+                            else
+                            {
+                                CatAni.SetBool("Move", false);
+                                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                                WaterJump(Rot);
+                            }
+                          
                         }
-
+                        if (CanJumpTrue == true)
+                        {
+                            CanJump = true;
+                        }
                     }
+                }
+
+
+                if (hit_LeftUp.collider != null)
+                {
+                    
+                }
+                else if (hit_LeftDown.collider != null)
+                {
+                  
+                }
+                else if (hit_RightUp.collider != null)
+                {
+                  
+                }
+                else if (hit_RightDown.collider != null)
+                {
+                   
                 }
                 else
                 {
@@ -1411,6 +1549,12 @@ public class CatContrl : MonoBehaviour
             {
                 CatAni.SetFloat("TurnRight", 1);
             }
+            if (CatAni.GetFloat("TurnRight") == 0.666f)
+            {
+                CatAni.SetFloat("TurnRight", 1);
+            }
+
+
             if (Input.GetKey(KeyCode.D) && WaterJumpReady == false)
             {
                 TurnRight = true;
@@ -1819,6 +1963,7 @@ public class CatContrl : MonoBehaviour
                     //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                     GetComponent<Rigidbody2D>().gravityScale = CatWeight;
                     GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 2 * WaterJumpPower);
+                    GetComponent<Animator>().SetBool("Jump", true);
                     GetComponent<Animator>().SetBool("WaterJumpReady", false);
                     WaterJumpPos_1.SetActive(false);
                     WaterJumpPos_2.SetActive(false);
@@ -1848,6 +1993,21 @@ public class CatContrl : MonoBehaviour
                 WaterJumpPos_2.SetActive(false);
                 GetComponent<Animator>().SetBool("WaterJumpReady", false);
                 GetComponent<Animator>().SetBool("Jump", false);
+                if (PowerPath.x * 2 >= 0.2f)
+                {
+                    CatAni.SetFloat("TurnRight", 1);
+                    TurnRight = true;
+                }
+                else if (PowerPath.x * 2 <= -0.2f)
+                {
+                    CatAni.SetFloat("TurnRight", 0);
+                    TurnRight = false;
+                }
+                else
+                {
+                    CatAni.SetFloat("TurnRight", 1f);
+                    TurnRight = true;
+                }
             }
         }
     }

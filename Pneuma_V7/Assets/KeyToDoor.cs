@@ -88,4 +88,53 @@ public class KeyToDoor : MonoBehaviour
             IsTouch = false;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "CatBody")
+        {
+            if (IsNeedProps == false)
+            {
+                IsTouch = true;
+            }
+            else
+            {
+                CatContrl Cat = GameObject.FindObjectOfType<CatContrl>();
+
+                if (Cat.GetObject != null)
+                {
+                    if (NeedPropsName == Cat.GetObject.GetComponent<CanGetObject>().ObjectName)
+                    {
+                        IsTouch = true;
+                        GameObject MyNeed = Cat.GetObject;
+                        Cat.GetObject = null;
+                        MyNeed.transform.position = transform.position;
+                        MyNeed.GetComponent<Rigidbody2D>().gravityScale = 0;
+                        IsOver = true;
+                        if (GetComponent<Animator>() != null)
+                        {
+                            GetComponent<Animator>().Play("KeyTouch");
+                        }
+                    }
+                    else
+                    {
+                        //給需要的物件的提示(之後做成動畫)
+                        if (IsOver == false)
+                        {
+                            StartCoroutine(DelayPictrue());
+                        }
+                    }
+                }
+                else
+                {
+                    //給需要的物件的提示(之後做成動畫)
+                    if (IsOver == false)
+                    {
+                        StartCoroutine(DelayPictrue());
+                    }
+                }
+
+            }
+        }
+    }
 }
