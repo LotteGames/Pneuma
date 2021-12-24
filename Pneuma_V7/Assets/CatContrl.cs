@@ -30,6 +30,7 @@ public class CatContrl : MonoBehaviour
         LongDownCat,//伸長往下狀態
         CatGetHold,//頭部抓到東西了
         CatDie,//貓咪死亡ㄌ
+        CatStop//貓咪暫停
     }
     [Header("貓咪狀態機")]
     public CatAct NowCatAct = CatAct.Idle;
@@ -167,7 +168,7 @@ public class CatContrl : MonoBehaviour
 
     void MorphUpdate_NoMorph()
     {
-        if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || Black.active == true)
+        if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || NowCatAct == CatAct.CatStop || Black.active == true)
         {
 
         }
@@ -254,7 +255,7 @@ public class CatContrl : MonoBehaviour
     }
     void MorphUpdate_Long()
     {
-        if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || Black.active == true)
+        if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || NowCatAct == CatAct.CatStop || Black.active == true)
         {
 
         }
@@ -397,7 +398,7 @@ public class CatContrl : MonoBehaviour
 
     void MorphUpdate_Climb()
     {
-        if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || Black.active == true)
+        if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || NowCatAct == CatAct.CatStop || Black.active == true)
         {
 
         }
@@ -517,7 +518,7 @@ public class CatContrl : MonoBehaviour
     bool WaterJumpReady;
     void MorphUpdate_Cloud()
     {
-        if (Black.active == true)
+        if (Black.active == true || NowCatAct == CatAct.CatStop)
         {
 
         }
