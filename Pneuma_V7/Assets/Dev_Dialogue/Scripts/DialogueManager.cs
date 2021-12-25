@@ -385,12 +385,15 @@ public class DialogueManager : MonoBehaviour
 
     public void InvokeEvent_Talk()
     {
+        FindObjectOfType<CatContrl>().NowCatAct = CatContrl.CatAct.CatStop;
+        Debug.Log("Set");
         event_Talk.Invoke();
     }
 
     public void InvokeEvent_TalkFin()
     {
         event_Fin.Invoke();
+        FindObjectOfType<CatContrl>().NowCatAct = CatContrl.CatAct.Idle;
     }
 
 

@@ -10,15 +10,8 @@ public class CameraArea : MonoBehaviour
 
     public bool isActivate = false;
 
-    private CinemachineVirtualCamera virtualCamera;
+    public CinemachineVirtualCamera VirtualCamera;
 
-    public CinemachineVirtualCamera VirtualCamera
-    {
-        get
-        {
-            return virtualCamera;
-        }
-    }
 
     public E_CameraType cameraType;
 
@@ -26,46 +19,45 @@ public class CameraArea : MonoBehaviour
 
     public int areaNum = 0;
 
-    private void Start()
-    {
-        #region--GetComponent--
 
-        if (virtualCamera == null)
-        {
-            virtualCamera = GetComponentInChildren<CinemachineVirtualCamera>();
-        }
-
-        #endregion
-    }
-    private void OnValidate()
+    private void Update()
     {
         if (cameraType == E_CameraType.ConstantCamera)
         {
-            if (virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>() != null)
+            if (VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>() != null)
             {
-                virtualCamera.DestroyCinemachineComponent<CinemachineFramingTransposer>();
+                StartCoroutine(ie_Destory());
             }
-            virtualCamera.transform.localPosition = new Vector3(0, 0, -10);
+            VirtualCamera.transform.localPosition = new Vector3(0, 0, -10);
 
         }
         else
         {
-            virtualCamera.AddCinemachineComponent<CinemachineFramingTransposer>();
+            StartCoroutine(ie_Add());
 
-            virtualCamera.Follow = FindObjectOfType<CatContrl>().transform;
+            VirtualCamera.Follow = FindObjectOfType<CatContrl>().transform;
         }
     }
 
-
+    IEnumerator ie_Destory()
+    {
+        yield return new WaitForEndOfFrame();
+        VirtualCamera.DestroyCinemachineComponent<CinemachineFramingTransposer>();
+    }
+    IEnumerator ie_Add()
+    {
+        yield return new WaitForEndOfFrame();
+        VirtualCamera.AddCinemachineComponent<CinemachineFramingTransposer>();
+    }
     public void SetCameraActivate(bool value)
     {
         isActivate = value;
 
-        if (virtualCamera == null)
+        if (VirtualCamera == null)
         {
-            virtualCamera = GetComponentInChildren<CinemachineVirtualCamera>();
+            VirtualCamera = GetComponentInChildren<CinemachineVirtualCamera>();
         }
-        virtualCamera.enabled = value;
+        VirtualCamera.enabled = value;
     }
 }
 public enum E_CameraType
