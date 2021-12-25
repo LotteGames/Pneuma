@@ -393,4 +393,10 @@ public class DialogueManager : MonoBehaviour
         event_Fin.Invoke();
     }
 
+
+    public GameObject dialogueCam;
+    public void SetCamActive(bool value) 
+    {
+        dialogueCam.SetActive(value);
+    }
 }
