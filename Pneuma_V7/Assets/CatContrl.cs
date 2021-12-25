@@ -208,7 +208,10 @@ public class CatContrl : MonoBehaviour
             {
                 if (NowCatAct != CatAct.Jump)
                 {
-                    NowCatAct = CatAct.Idle;
+                    if (NowCatAct != CatAct.CatStop)
+                    {
+                        NowCatAct = CatAct.Idle;
+                    }
                 }
 
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
@@ -308,7 +311,10 @@ public class CatContrl : MonoBehaviour
             {
                 if (NowCatAct != CatAct.Jump)
                 {
-                    NowCatAct = CatAct.Idle;
+                    if (NowCatAct != CatAct.CatStop)
+                    {
+                        NowCatAct = CatAct.Idle;
+                    }
                 }
 
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
@@ -561,7 +567,10 @@ public class CatContrl : MonoBehaviour
                 {
                     if (NowCatAct != CatAct.Jump)
                     {
-                        NowCatAct = CatAct.Idle;
+                        if (NowCatAct != CatAct.CatStop)
+                        {
+                            NowCatAct = CatAct.Idle;
+                        }
                     }
 
                     GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
@@ -773,7 +782,7 @@ public class CatContrl : MonoBehaviour
         {
             CatAni.SetBool("Move", true);
         }
-        else if (NowCatAct == CatAct.Idle)
+        else if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.CatStop)
         {
             CatAni.SetBool("Move", false);
         }
@@ -2412,7 +2421,10 @@ public class CatContrl : MonoBehaviour
                 {
                     if (CanJumpTrue == true)
                     {
-                        NowCatAct = CatAct.Idle;
+                        if (NowCatAct != CatAct.CatStop)
+                        {
+                            NowCatAct = CatAct.Idle;
+                        }
                     }
                 }
 
@@ -2465,7 +2477,7 @@ public class CatContrl : MonoBehaviour
         {
             if (NowCatMorph == CatMorph.Climb)
             {
-                if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.LongDownCat || NowCatAct == CatAct.Back)
+                if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.LongDownCat || NowCatAct == CatAct.CatStop || NowCatAct == CatAct.Back)
                 {
 
                 }
@@ -2479,7 +2491,10 @@ public class CatContrl : MonoBehaviour
                     {
                         if (CanJumpTrue == true)
                         {
-                            NowCatAct = CatAct.Idle;
+                            if (NowCatAct != CatAct.CatStop)
+                            {
+                                NowCatAct = CatAct.Idle;
+                            }
                         }
                     }
                 }
