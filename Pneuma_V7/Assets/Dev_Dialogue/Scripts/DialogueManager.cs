@@ -385,8 +385,13 @@ public class DialogueManager : MonoBehaviour
 
     public void InvokeEvent_Talk()
     {
-        FindObjectOfType<CatContrl>().NowCatAct = CatContrl.CatAct.CatStop;
-        Debug.Log("Set");
+        CatContrl catContrl = FindObjectOfType<CatContrl>();
+        catContrl.NowCatAct = CatContrl.CatAct.CatStop;
+
+        Rigidbody2D rb2d = catContrl.GetComponent<Rigidbody2D>();
+        rb2d.velocity = new Vector2(0,rb2d.velocity.y);
+
+        Debug.LogError("Set");
         event_Talk.Invoke();
     }
 
@@ -398,7 +403,7 @@ public class DialogueManager : MonoBehaviour
 
 
     public GameObject dialogueCam;
-    public void SetCamActive(bool value) 
+    public void SetCamActive(bool value)
     {
         dialogueCam.SetActive(value);
     }
