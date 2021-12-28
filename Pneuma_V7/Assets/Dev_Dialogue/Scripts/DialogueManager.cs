@@ -81,24 +81,6 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void LogAreaIndex()
-    {
-        for (int i = 0; i < areaNums.Count; i++)
-        {
-            int num = areaNums[i];
-
-            List<int> indexs = Area_To_ExcelIndex[num];
-
-            string logIndexs = string.Empty;
-
-            for (int j = 0; j < indexs.Count; j++)
-            {
-                logIndexs += indexs[j] + ",";
-            }
-
-            Debug.Log(num + " : " + logIndexs);
-        }
-    }
 
     //=========================================
     public List<PlaceSpeaks> struct_PlaceSpeaks = new List<PlaceSpeaks>();

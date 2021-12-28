@@ -12,26 +12,37 @@ public class TalkBehav : MonoBehaviour
         {
             float dist = (playerPos.position - transform.position).magnitude;
 
-            return dist < 1.5f ? true : false;
+            return dist < 8.5f ? true : false;
         }
     }
 
-    public GameObject startTalkBtn ;
+    public GameObject startTalkBtn;
 
     private void Update()
     {
-        if (IsTalkable && IsFin)
-        {
-            startTalkBtn.SetActive(true);
+        //if (IsTalkable && IsFin)
+        //{
+        //    startTalkBtn.SetActive(true);
 
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                startTalkBtn.SetActive(false);
-                FindObjectOfType<DialogueManager>().InvokeEvent_Talk();
-            }
+        //    if (Input.GetKeyDown(KeyCode.C))
+        //    {
+        //        startTalkBtn.SetActive(false);
+        //        FindObjectOfType<DialogueManager>().InvokeEvent_Talk();
+        //    }
+        //}
+        //else { startTalkBtn.SetActive(false); }
+
+
+        if (dialoguesManager == null)
+        {
+            dialoguesManager = FindObjectOfType<DialoguesManager>();
         }
-        else { startTalkBtn.SetActive(false); }
+        if (IsTalkable && dialoguesManager != null)
+        {
+            dialoguesManager.StartDialogue();
+        }
     }
+    public DialoguesManager dialoguesManager;
 
     public bool IsFin = true;
 
