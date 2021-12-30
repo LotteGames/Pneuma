@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class Dialogue
@@ -13,5 +14,7 @@ public class Dialogue
 
     [Space(15)]
     public List<Sentence> sentences;
+
+    public UnityEvent finishEvent;
 
 }

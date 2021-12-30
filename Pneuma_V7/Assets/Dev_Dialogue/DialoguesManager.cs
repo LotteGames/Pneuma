@@ -32,6 +32,7 @@ public class DialoguesManager : MonoBehaviour
 
     public PlayerProgress playerProgress;
 
+
     public bool IsConditionsCompelete(List<int> conditions)
     {
         for (int i = 0; i < conditions.Count; i++)
@@ -44,7 +45,11 @@ public class DialoguesManager : MonoBehaviour
         return true;
     }
 
-
+    /// <summary>
+    /// Find all speaker in dialogue 
+    /// </summary>
+    /// <param name="dialogue"></param>
+    /// <returns></returns>
     public List<Role> GetRoles(Dialogue dialogue)
     {
         List<Role> roles = new List<Role>();
@@ -60,6 +65,9 @@ public class DialoguesManager : MonoBehaviour
         return roles;
     }
 
+    /// <summary>
+    /// Speaker and relatedObj Database
+    /// </summary>
     public List<RoleObjs> roleObjs;
 
     public RoleObjs GetRoleObjs(Role role)
@@ -112,6 +120,8 @@ public class DialoguesManager : MonoBehaviour
         return true;
     }
 
+
+    bool isCompelete = true;
     public void StartDialogue()
     {
         if (isCompelete)
@@ -126,7 +136,6 @@ public class DialoguesManager : MonoBehaviour
                 {
                     if (IsConditionsCompelete(dialogue.taskConditions) && RoleInSameArea(dialogue) && dialogue.isCompelete == false)
                     {
-
                         StartCoroutine(TextWriter(dialogue));
                         return;
                     }
@@ -141,12 +150,12 @@ public class DialoguesManager : MonoBehaviour
             }
         }
     }
-    bool isCompelete = true;
+
+
     IEnumerator TextWriter(Dialogue dialogue)
     {
-        Debug.LogError(132);
-
         isCompelete = false;
+
 
         bool sentenceFin = true;
 
@@ -154,16 +163,15 @@ public class DialoguesManager : MonoBehaviour
         SetCamActive(true);
         SetCamGroup(GetRoles(dialogue));
 
-        RoleObjs roleObjs = GetRoleObjs(dialogue.sentences[i].speaker);
-
-
 
         while (i < dialogue.sentences.Count)
         {
+            RoleObjs roleObjs = GetRoleObjs(dialogue.sentences[i].speaker);
+
             if (sentenceFin)
             {
                 roleObjs.SetBubble(true);
-                roleObjs.BubbleScaleUp("<color=#00000000>"+dialogue.sentences[i].text + "</color>");
+                roleObjs.BubbleScaleUp("<color=#00000000>" + dialogue.sentences[i].text + "</color>");
 
                 yield return new WaitForSeconds(0.2f);
 
@@ -193,7 +201,7 @@ public class DialoguesManager : MonoBehaviour
             else
             {
 
-                if (Input.GetKeyDown(KeyCode.C) && i< dialogue.sentences.Count-1 )
+                if (Input.GetKeyDown(KeyCode.C) && i < dialogue.sentences.Count - 1)
                 {
                     sentenceFin = true;
 
@@ -203,7 +211,7 @@ public class DialoguesManager : MonoBehaviour
                     roleObjs.BubbleScaleDown();
                     yield return new WaitForSeconds(0.2f);
                 }
-                else if (Input.GetKeyDown(KeyCode.C) && i >= dialogue.sentences.Count-1 )
+                else if (Input.GetKeyDown(KeyCode.C) && i >= dialogue.sentences.Count - 1)
                 {
                     roleObjs.SetContinueBtn(false);
 
@@ -229,8 +237,6 @@ public class DialoguesManager : MonoBehaviour
 
         Rigidbody2D rb2d = catContrl.GetComponent<Rigidbody2D>();
         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-
-
     }
 
     public GameObject dialogueCam, targetGroup;
@@ -241,16 +247,20 @@ public class DialoguesManager : MonoBehaviour
     }
     public void SetCamGroup(List<Role> roles)
     {
+        if (!roles.Contains(Role.Pneuma)) 
+        {
+            roles.Add(Role.Pneuma);
+        }
+
+
         CinemachineTargetGroup cinemachineTargetGroup = targetGroup.GetComponent<CinemachineTargetGroup>();
-        cinemachineTargetGroup.m_Targets = new CinemachineTargetGroup.Target[roles.Count + 1];
+        cinemachineTargetGroup.m_Targets = new CinemachineTargetGroup.Target[roles.Count];
 
         for (int i = 0; i < roles.Count; i++)
         {
             cinemachineTargetGroup.m_Targets.SetValue(GetRoleObjs(roles[i]).target, i);
         }
-        cinemachineTargetGroup.m_Targets.SetValue(target, roles.Count);
     }
-    public Cinemachine.CinemachineTargetGroup.Target target;
 
 }
 [System.Serializable]
