@@ -10,11 +10,16 @@ public class Dialogue
 
     public bool directTrigger = false;
 
-    public List<int> taskConditions;
+    public List<Condition> taskConditions;
 
     [Space(15)]
     public List<Sentence> sentences;
 
     public UnityEvent finishEvent;
+
+    public void InvokeFinishEvent() 
+    {
+        finishEvent.Invoke();
+    }
 
 }

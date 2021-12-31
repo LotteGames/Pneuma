@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
-//TODO:�ڧƱ�i�H��F�Y�ӥ��x�S���n�~��ʫ�A����i�H�b�ӥ��x�W�Ӧ^�樫�ΰ��y�C
 public class AiBehaviour : MonoBehaviour
 {
     public NodeManager nodeManager;
@@ -30,8 +29,6 @@ public class AiBehaviour : MonoBehaviour
     public Ai_Decision ai_Decision;
 
     public Transform playerPos;
-
-    public GameObject obj_Btn;
 
     public Animator animator;
 
@@ -134,33 +131,7 @@ public class AiBehaviour : MonoBehaviour
             event_TargetNodeChanged.Invoke();
         }
     }
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            //event_TargetNodeChanged.Invoke();
-        }
 
-
-        //Debug.Log("IsTalkable : " + IsTalkable);
-        if (IsTalkable && IsFin)
-        {
-            obj_Btn.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                obj_Btn.SetActive(false);
-                FindObjectOfType<DialogueManager>().InvokeEvent_Talk();
-            }
-        }
-        else { obj_Btn.SetActive(false); }
-    }
-    public bool IsFin = true;
-
-    public void SetIsFin(bool value)
-    {
-        IsFin = value;
-    }
 
     private void FixedUpdate()
     {
@@ -170,15 +141,6 @@ public class AiBehaviour : MonoBehaviour
     [HideInInspector]
     public float jumpVelocity = 0f;
 
-    public bool IsTalkable
-    {
-        get
-        {
-            float dist = (playerPos.position - transform.position).magnitude;
-
-            return dist < 1.5f ? true : false;
-        }
-    }
     public void ChangeImgDir(Vector3 vector)
     {
         if (vector.x < 0)

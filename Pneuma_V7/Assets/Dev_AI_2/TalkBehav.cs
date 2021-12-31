@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// For NPC
+/// </summary>
 public class TalkBehav : MonoBehaviour
 {
     public Transform playerPos;
@@ -12,45 +15,70 @@ public class TalkBehav : MonoBehaviour
         {
             float dist = (playerPos.position - transform.position).magnitude;
 
+            return dist < 4.5f ? true : false;
+        }
+    }
+    public bool IsDirectTalkable
+    {
+        get
+        {
+            float dist = (playerPos.position - transform.position).magnitude;
+
             return dist < 8.5f ? true : false;
         }
     }
 
     public GameObject startTalkBtn;
-
-    private void Update()
+    public DialoguesManager dialoguesManager;
+    public SpriteRenderer spR;
+    private void Start()
     {
-        //if (IsTalkable && IsFin)
-        //{
-        //    startTalkBtn.SetActive(true);
-
-        //    if (Input.GetKeyDown(KeyCode.C))
-        //    {
-        //        startTalkBtn.SetActive(false);
-        //        FindObjectOfType<DialogueManager>().InvokeEvent_Talk();
-        //    }
-        //}
-        //else { startTalkBtn.SetActive(false); }
-
-
         if (dialoguesManager == null)
         {
             dialoguesManager = FindObjectOfType<DialoguesManager>();
         }
-        if (IsTalkable && dialoguesManager != null)
+
+        if (playerPos == null)
         {
-            dialoguesManager.StartDialogue();
+            playerPos = FindObjectOfType<CatContrl>().transform;
         }
     }
-    public DialoguesManager dialoguesManager;
-
-    public bool IsFin = true;
-
-    public void SetIsFin(bool value)
+    private void Update()
     {
-        Debug.LogError("IsFin");
-        IsFin = value;
+        if (IsDirectTalkable && !IsTalkable)
+        {
+            startTalkBtn.SetActive(false);
+            dialoguesManager.StartDialogue();
+        }
+        else if (IsTalkable)
+        {
+            startTalkBtn.SetActive(dialoguesManager.isCompelete);
+            dialoguesManager.StartDialogue();
+        }
+        else
+        {
+            startTalkBtn.SetActive(false);
+        }
+
+
+        if (dialoguesManager.SpeakingOne != null)
+        {
+            if (dialoguesManager.SpeakingOne.transform.position.x > transform.position.x)
+            {
+                spR.flipX = false;
+            }
+            else if (dialoguesManager.SpeakingOne.transform.position.x < transform.position.x)
+            {
+                spR.flipX = true;
+            }
+        }
     }
 
 
+    public bool IsFin { get { return dialoguesManager.isCompelete; } }
+
+    //public void SetIsFin(bool value)
+    //{
+    //    IsFin = value;
+    //}
 }

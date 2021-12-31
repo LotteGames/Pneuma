@@ -21,6 +21,8 @@ public class DialoguesManager : MonoBehaviour
     {
         for (int i = 0; i < areaDialogues.Count; i++)
         {
+            //Debug.LogError(areaDialogues[i].areaNum + " , " + CurrentAreaNum);
+
             if (areaDialogues[i].areaNum == CurrentAreaNum)
             {
                 return areaDialogues[i];
@@ -32,18 +34,6 @@ public class DialoguesManager : MonoBehaviour
 
     public PlayerProgress playerProgress;
 
-
-    public bool IsConditionsCompelete(List<int> conditions)
-    {
-        for (int i = 0; i < conditions.Count; i++)
-        {
-            if (playerProgress.GetIsCompelete(conditions[i]) == false)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
 
     /// <summary>
     /// Find all speaker in dialogue 
@@ -120,33 +110,38 @@ public class DialoguesManager : MonoBehaviour
         return true;
     }
 
+    public RoleObjs SpeakingOne;
 
-    bool isCompelete = true;
+    public bool isCompelete = true;
     public void StartDialogue()
     {
         if (isCompelete)
         {
+            Debug.LogError(123);
             AreaDialogues areaDialogues = GetAreaDialogues();
 
             if (areaDialogues != null)
             {
-                Dialogue dialogue = areaDialogues.GetDirectTriggerOne();
+                Dialogue dialogue = areaDialogues.GetDialogue(playerProgress);
 
                 if (dialogue != null)//有要直接觸發的
                 {
-                    if (IsConditionsCompelete(dialogue.taskConditions) && RoleInSameArea(dialogue) && dialogue.isCompelete == false)
+                    if (RoleInSameArea(dialogue))
                     {
-                        StartCoroutine(TextWriter(dialogue));
-                        return;
+                        if (dialogue.directTrigger)
+                        {
+                            StartCoroutine(TextWriter(dialogue));
+                            return;
+                        }
+                        else
+                        {
+                            if (Input.GetKeyDown(KeyCode.C))
+                            {
+                                StartCoroutine(TextWriter(dialogue));
+                            }
+                        }
                     }
                 }
-
-                if (Input.GetKeyDown(KeyCode.C) && IsConditionsCompelete(dialogue.taskConditions) && RoleInSameArea(dialogue) && dialogue.isCompelete == false)
-                {
-                    StartCoroutine(TextWriter(dialogue));
-                    return;
-                }
-
             }
         }
     }
@@ -167,6 +162,7 @@ public class DialoguesManager : MonoBehaviour
         while (i < dialogue.sentences.Count)
         {
             RoleObjs roleObjs = GetRoleObjs(dialogue.sentences[i].speaker);
+            SpeakingOne = roleObjs;
 
             if (sentenceFin)
             {
@@ -219,8 +215,15 @@ public class DialoguesManager : MonoBehaviour
                     SetCamActive(false);
                     FindObjectOfType<CatContrl>().NowCatAct = CatContrl.CatAct.Idle;
                     yield return new WaitForSeconds(0.2f);
+
                     i++;
-                    dialogue.isCompelete = true; isCompelete = true;
+                    dialogue.isCompelete = true;
+                    isCompelete = true;
+                    dialogue.InvokeFinishEvent();
+
+                    SpeakingOne = null;
+
+                    FindObjectOfType<CatTalkBehav>().SetCatState();
                 }
 
             }
@@ -247,7 +250,7 @@ public class DialoguesManager : MonoBehaviour
     }
     public void SetCamGroup(List<Role> roles)
     {
-        if (!roles.Contains(Role.Pneuma)) 
+        if (!roles.Contains(Role.Pneuma))
         {
             roles.Add(Role.Pneuma);
         }
@@ -266,6 +269,8 @@ public class DialoguesManager : MonoBehaviour
 [System.Serializable]
 public class AreaDialogues
 {
+
+
     public int areaNum;
 
     public List<Dialogue> dialogues;
@@ -281,4 +286,38 @@ public class AreaDialogues
         }
         return null;
     }
+
+    public bool IsConditionsCompelete(PlayerProgress playerProgress, List<Condition> conditions)
+    {
+        for (int i = 0; i < conditions.Count; i++)
+        {
+            if (playerProgress.GetIsCompelete(conditions[i].taskIndex)
+                != conditions[i].isCompelete)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Dialogue GetDialogue(PlayerProgress playerProgress)
+    {
+        for (int i = 0; i < dialogues.Count; i++)
+        {
+            if (IsConditionsCompelete(playerProgress, dialogues[i].taskConditions) && dialogues[i].isCompelete == false)
+            {
+                return dialogues[i];
+            }
+        }
+        return null;
+    }
+
+
+}
+
+[System.Serializable]
+public class Condition
+{
+    public int taskIndex;
+    public bool isCompelete;
 }

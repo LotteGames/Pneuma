@@ -12,10 +12,7 @@ public class RoleBubble
     public RectTransform dialogueBubble;
 
     public GameObject continueBtn;
-    //public void SetCanvasOrder(int order) 
-    //{
-    //    canvas.sortingOrder = order;
-    //}
+
     public void SetBubbleActive(bool value)
     {
         dialogueBubble.gameObject.SetActive(value);
