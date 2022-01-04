@@ -15,9 +15,6 @@ public class CameraActivate : MonoBehaviour
         for (int i = 0; i < cameraAreas.Length; i++)
         {
 
-#if (UNITY_EDITOR != true)
-    cameraAreas[i].SetDisplayClear();
-#endif
             cameraAreas[i].SetCameraActivate(false);
             //cameraAreas[i].index = i;
 
@@ -63,10 +60,10 @@ public class CameraActivate : MonoBehaviour
                 if (cameraAreas[i].isActivate)
                 {
                     activateOne = i;
-                    break;
+                    return cameraAreas[activateOne].areaNum;
                 }
             }
-            return cameraAreas[activateOne].areaNum;
+            return -1;
         }
     }
     public IEnumerator DelaySave()

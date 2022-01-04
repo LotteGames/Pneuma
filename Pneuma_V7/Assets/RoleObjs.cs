@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+/// <summary>
+/// For every character that need to speak, include cat
+/// </summary>
 public class RoleObjs : MonoBehaviour
 {
     public Cinemachine.CinemachineTargetGroup.Target target;

@@ -4,6 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using Cinemachine;
 
+/// <summary>
+/// Diffent area got different dialogues, every dialogue need to compelete differnet condition to trigger.
+/// some condition require specific task is compeleted, some may not.
+/// If dialogue's Direct Trigger is toggled, and the condition is compeleted, then the dialogue will trigger directely, without press talking button.
+/// After finish the Dialogue, the compelete checkbox will be toggled.
+/// 
+/// If there are more talkable NPC, remember to add them in to the RoleObjs list(but first, add them RoleObjs component).
+/// </summary>
 public class DialoguesManager : MonoBehaviour
 {
     public List<AreaDialogues> areaDialogues;
@@ -87,7 +95,11 @@ public class DialoguesManager : MonoBehaviour
                 currentAea.GetCurrentArea(
                     GetRoleObjs(roles[i]).Position)
                 );
+
+            Debug.LogError(areaNums[i] + " , " + roles[i]);
         }
+
+
 
 
         int value = -1;
@@ -119,15 +131,17 @@ public class DialoguesManager : MonoBehaviour
         {
             Debug.LogError(123);
             AreaDialogues areaDialogues = GetAreaDialogues();
-
+            Debug.LogError(0);
             if (areaDialogues != null)
             {
                 Dialogue dialogue = areaDialogues.GetDialogue(playerProgress);
-
+                Debug.LogError(1);
                 if (dialogue != null)//有要直接觸發的
                 {
+                    Debug.LogError(2);
                     if (RoleInSameArea(dialogue))
                     {
+                        Debug.LogError(3);
                         if (dialogue.directTrigger)
                         {
                             StartCoroutine(TextWriter(dialogue));

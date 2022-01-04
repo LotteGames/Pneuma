@@ -6,7 +6,7 @@ public class CurrentAea : MonoBehaviour
 {
     CameraArea[] cameraAreas;
 
-    private void Start()
+    private void Awake()
     {
         cameraAreas = FindObjectsOfType<CameraArea>();
     }
@@ -22,6 +22,7 @@ public class CurrentAea : MonoBehaviour
 
             if (dis < distance)
             {
+                distance = dis;
                 areaNum = cameraAreas[i].areaNum;
             }
         }

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The TalkBehav for cat
+/// </summary>
 public class CatTalkBehav : MonoBehaviour
 {
     public CatContrl catContrl;
