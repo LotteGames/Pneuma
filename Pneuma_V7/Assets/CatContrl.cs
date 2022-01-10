@@ -231,30 +231,36 @@ public class CatContrl : MonoBehaviour
             }
 
 
-            //if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
-            //{
-            //    CanLong = false;
-            //    NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
-            //    GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
-            //    GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-            //    GetComponent<Collider2D>().isTrigger = true;
+            if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+            {
+                CatMusic.PlayMusic(2);
+                CanLong = false;
+                NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
+                GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
+                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
+                GetComponent<Collider2D>().isTrigger = true;
 
-            //    nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+                nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
 
-            //    StartCoroutine(LongBack(0.5f));
-            //}
+
+                StartCoroutine(LongBack(1f));
+            }
 
         }
 
+        //
+        if (Input.GetMouseButtonUp(0) && NowCatAct == CatAct.LongLongCat)
+        {
+            CatMusic.PlayMusic(3);
+            //縮回去
+            StartCoroutine(LongDebug());
+            CanLong = false;
+            GetComponent<Collider2D>().isTrigger = false;
+            transform.parent = null;
+            NowCatAct = CatAct.Back;
+        }
 
-        ////
-        //if (Input.GetMouseButtonUp(0) && NowCatAct == CatAct.LongLongCat)
-        //{
-        //    //縮回去
-        //    GetComponent<Collider2D>().isTrigger = false;
-        //    transform.parent = null;
-        //    NowCatAct = CatAct.Back;
-        //}
+        LongPictrue();
     }
     void MorphUpdate_Long()
     {
