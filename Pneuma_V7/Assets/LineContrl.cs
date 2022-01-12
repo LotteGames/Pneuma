@@ -29,6 +29,9 @@ public class LineContrl : MonoBehaviour
     [Header("碰撞點")]
     public PolygonCollider2D LineCollider;
 
+    [Header("中央點的所在(0~1)")]
+    public float ConectWhere;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,7 +72,7 @@ public class LineContrl : MonoBehaviour
         //    myLine.SetPosition(i, ColliderPos[i] + new Vector2(0, B));
         //}
         myLine.SetPosition(0, new Vector3(Hand.transform.position.x, Hand.transform.position.y, 0));
-        myLine.SetPosition(1, Vector3.Lerp(Hand.transform.position, Butt.transform.position, 0.5f));
+        myLine.SetPosition(1, Vector3.Lerp(Hand.transform.position, Butt.transform.position, ConectWhere));
         myLine.SetPosition(2, new Vector3(Butt.transform.position.x, Butt.transform.position.y, 0));
 
         ColliderPos = findPoint();

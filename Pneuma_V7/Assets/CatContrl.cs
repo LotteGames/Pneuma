@@ -73,6 +73,10 @@ public class CatContrl : MonoBehaviour
     public GameObject LongBody;
     public GameObject nowLongBody;
 
+    [Header("液態伸長貓咪的物件")]
+    public GameObject WaterLongBody;
+    public GameObject nowWaterLongBody;
+
     [Header("貓咪目前持有的道具")]
     public GameObject GetObject;
     [Header("快樂的彩蛋帽帽")]
@@ -118,7 +122,7 @@ public class CatContrl : MonoBehaviour
         {
             MorphUpdate_NoMorph();
             GetComponent<Collider2D>().sharedMaterial = CatM_1;
-            LongPos.SetActive(false);
+            LongPos.SetActive(true);
             if(HH == true)
             {
                 HappyHat.SetActive(true);
@@ -820,8 +824,15 @@ public class CatContrl : MonoBehaviour
         }
         else if (NowCatAct == CatAct.LongLongCat)
         {
-            CatAni.SetBool("Long", true);
-            LongLongCat();
+            if(NowCatMorph == CatMorph.Climb)
+            {
+
+            }
+            else
+            {
+                CatAni.SetBool("Long", true);
+                LongLongCat();
+            }
         }
         else if (NowCatAct == CatAct.Back)
         {
@@ -1983,21 +1994,24 @@ public class CatContrl : MonoBehaviour
                     GetComponent<Animator>().SetBool("WaterJumpReady", false);
                     WaterJumpPos_1.SetActive(false);
                     WaterJumpPos_2.SetActive(false);
-                    if (PowerPath.x * 2 >= 0.2f)
-                    {
-                        CatAni.SetFloat("TurnRight", 1);
-                        TurnRight = true;
-                    }
-                    else if (PowerPath.x * 2 <= -0.2f)
-                    {
-                        CatAni.SetFloat("TurnRight", 0);
-                        TurnRight = false;
-                    }
-                    else
-                    {
-                        CatAni.SetFloat("TurnRight", 0.5f);
-                        TurnRight = true;
-                    }
+                    //if (PowerPath.x * 2 >= 0.2f)
+                    //{
+                    //    CatAni.SetFloat("TurnRight", 1);
+                    //    TurnRight = true;
+                    //}
+                    //else if (PowerPath.x * 2 <= -0.2f)
+                    //{
+                    //    CatAni.SetFloat("TurnRight", 0);
+                    //    TurnRight = false;
+                    //}
+                    //else
+                    //{
+                    //    CatAni.SetFloat("TurnRight", 0.5f);
+                    //    TurnRight = true;
+                    //}
+                    CatAni.SetFloat("TurnRight", 0.5f);
+                    TurnRight = true;
+
                     WaterJumpReady = false;
                 }
             }
@@ -2359,7 +2373,7 @@ public class CatContrl : MonoBehaviour
 
     }
 
-    public void FallowHand()//頭部縮回去
+    public void FallowHand()//屁股縮回去
     {
         HandPos = nowLongBody.transform.GetChild(0).transform.position;
         float ButtRemove = Vector2.Distance(transform.position, HandPos);

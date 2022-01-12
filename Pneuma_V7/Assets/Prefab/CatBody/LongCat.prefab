@@ -368,6 +368,7 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   LineCollider: {fileID: 0}
+  ConectWhere: 0.5
 --- !u!60 &5778456386121704739
 PolygonCollider2D:
   m_ObjectHideFlags: 0
