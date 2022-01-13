@@ -13,12 +13,15 @@ public class CatContrl : MonoBehaviour
     public enum CatMorph
     {
         NoMorph,
-        Long,
+        //Long,
         Climb,
         Cloud
     }
     [Header("貓咪狀態機")]
     public CatMorph NowCatMorph = CatMorph.NoMorph;
+
+    [Header("貓咪變形時間")]
+    public float MorphTime = 0;
     public enum CatAct
     {
         Idle,
@@ -132,19 +135,34 @@ public class CatContrl : MonoBehaviour
                 HappyHat.SetActive(false);
             }
         }
-        else if(NowCatMorph == CatMorph.Long)
-        {
-            MorphUpdate_Long();
-            GetComponent<Collider2D>().sharedMaterial = CatM_0;
-            LongPos.SetActive(true);
-            HappyHat.SetActive(false);
-        }
+        //else if(NowCatMorph == CatMorph.Long)
+        //{
+        //    MorphUpdate_Long();
+        //    GetComponent<Collider2D>().sharedMaterial = CatM_0;
+        //    LongPos.SetActive(true);
+        //    HappyHat.SetActive(false);
+        //}
         else if (NowCatMorph == CatMorph.Climb)
         {
             MorphUpdate_Climb();
             GetComponent<Collider2D>().sharedMaterial = CatM_1;
             LongPos.SetActive(false);
             HappyHat.SetActive(false);
+
+            GetComponent<Animator>().SetBool("Climb", true);
+            GetComponent<SpriteRenderer>().sortingOrder = 0;
+            GetComponent<CircleCollider2D>().radius = 0.7f;
+
+            MorphTime -= Time.deltaTime;
+            if(MorphTime <= 0)
+            {
+                CloseWaterJump();
+
+                GetComponent<Animator>().SetBool("Climb", false);
+                GetComponent<SpriteRenderer>().sortingOrder = 500;
+                GetComponent<CircleCollider2D>().radius = 0.81f;
+                NowCatMorph = CatMorph.NoMorph;
+            }
         }
         else if (NowCatMorph == CatMorph.Cloud)
         {
@@ -152,6 +170,12 @@ public class CatContrl : MonoBehaviour
             GetComponent<Collider2D>().sharedMaterial = CatM_0;
             LongPos.SetActive(false);
             HappyHat.SetActive(false);
+
+            MorphTime -= Time.deltaTime;
+            if (MorphTime <= 0)
+            {
+                NowCatMorph = CatMorph.NoMorph;
+            }
         }
 
         //撿到的道具跟隨
@@ -2015,30 +2039,46 @@ public class CatContrl : MonoBehaviour
                     WaterJumpReady = false;
                 }
             }
+
             if (Input.GetMouseButtonUp(1))
             {
-                GetComponent<Rigidbody2D>().gravityScale = CatWeight;
-                WaterJumpReady = false;
-                WaterJumpPos_1.SetActive(false);
-                WaterJumpPos_2.SetActive(false);
-                GetComponent<Animator>().SetBool("WaterJumpReady", false);
-                GetComponent<Animator>().SetBool("Jump", false);
-                if (PowerPath.x * 2 >= 0.2f)
-                {
-                    CatAni.SetFloat("TurnRight", 1);
-                    TurnRight = true;
-                }
-                else if (PowerPath.x * 2 <= -0.2f)
-                {
-                    CatAni.SetFloat("TurnRight", 0);
-                    TurnRight = false;
-                }
-                else
-                {
-                    CatAni.SetFloat("TurnRight", 1f);
-                    TurnRight = true;
-                }
+                CloseWaterJump();
             }
+        }
+    }
+
+    public void CloseWaterJump()
+    {
+        Vector3 MousePos;
+        MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+
+        Vector3 direction = MousePos - transform.position;
+
+        direction.z = 0f;
+        direction.Normalize();
+        Vector3 PowerPath = direction;
+
+
+        GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+        WaterJumpReady = false;
+        WaterJumpPos_1.SetActive(false);
+        WaterJumpPos_2.SetActive(false);
+        GetComponent<Animator>().SetBool("WaterJumpReady", false);
+        GetComponent<Animator>().SetBool("Jump", false);
+        if (PowerPath.x * 2 >= 0.2f)
+        {
+            CatAni.SetFloat("TurnRight", 1);
+            TurnRight = true;
+        }
+        else if (PowerPath.x * 2 <= -0.2f)
+        {
+            CatAni.SetFloat("TurnRight", 0);
+            TurnRight = false;
+        }
+        else
+        {
+            CatAni.SetFloat("TurnRight", 1f);
+            TurnRight = true;
         }
     }
     public void RayGround()
@@ -2583,6 +2623,11 @@ public class CatContrl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Pike")
+        {
+            //碰到陷阱，到儲存點復活
+            StartCoroutine(CatDeath());
+        }
         if (collision.gameObject.tag == "CanHold")
         {
             if (collision.GetComponent<SpriteRenderer>().sprite != collision.transform.parent.GetComponent<RedBall>().TouchPictrue)
