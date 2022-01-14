@@ -175,6 +175,12 @@ public class CatContrl : MonoBehaviour
             if (MorphTime <= 0)
             {
                 NowCatMorph = CatMorph.NoMorph;
+
+                WaterJumpPos_1.SetActive(false);
+                WaterJumpPos_2.SetActive(false);
+                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                GetComponent<Animator>().SetBool("Cloud", false);
             }
         }
 
@@ -571,90 +577,47 @@ public class CatContrl : MonoBehaviour
         //}
         else
         {
-            if (GetComponent<Rigidbody2D>().gravityScale != 0.01f)
+            //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            GetComponent<Rigidbody2D>().gravityScale = 0.01f;
+            GetComponent<Animator>().SetBool("Cloud", true);
+            WaterJumpPos_1.SetActive(true);
+            WaterJumpPos_2.SetActive(true);
+
+            //
+
+            CloudPictrue();
+
+            if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
             {
-                if (Input.GetKey(KeyCode.D))
-                {
-                    TurnRight = true;
-                    CatAni.SetFloat("TurnRight", 1);
-                    CatAni.SetBool("Move", true);
-                    if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
-                    {
-                        transform.rotation = Quaternion.Euler(0, 0, 0);
-                        NowCatAct = CatAct.Run;
-                    }
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-                }
-                else if (Input.GetKey(KeyCode.A))
-                {
-                    TurnRight = false;
-                    CatAni.SetFloat("TurnRight", 0);
-                    CatAni.SetBool("Move", true);
-                    if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
-                    {
-                        transform.rotation = Quaternion.Euler(0, 180, 0);
-                        NowCatAct = CatAct.Run;
-                    }
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-                }
-                else if (NowCatAct != CatAct.LongLongCat)
-                {
-                    if (NowCatAct != CatAct.Jump)
-                    {
-                        if (NowCatAct != CatAct.CatStop)
-                        {
-                            NowCatAct = CatAct.Idle;
-                        }
-                    }
-
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
-                }
-
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    if (CanJump == true)
-                    {
-                        CatMusic.PlayMusic(0);
-                        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-                        GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
-                        NowCatAct = CatAct.Jump;
-                        CanJump = false;
-                        StartCoroutine(JumpDebug(0.05f));
-                    }
-                }
-                if (Input.GetMouseButtonDown(1))
-                {
-                    //CloudTime = 5;
-                    GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
-                    GetComponent<Rigidbody2D>().gravityScale = 0.01f;
-                    GetComponent<Animator>().SetBool("Cloud", true);
-                    WaterJumpPos_1.SetActive(true);
-                    WaterJumpPos_2.SetActive(true);
-                }
+                CatAni.SetFloat("TurnRight", 1);
+                TurnRight = true;
+                CatAni.SetBool("Move", true);
+            }
+            else if (GetComponent<Rigidbody2D>().velocity.x < -0.5f)
+            {
+                CatAni.SetFloat("TurnRight", 0);
+                TurnRight = false;
+                CatAni.SetBool("Move", true);
             }
             else
             {
+                CatAni.SetBool("Move", false);
+            }
 
-                CloudPictrue();
+            //
 
-                if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
-                {
-                    CatAni.SetFloat("TurnRight", 1);
-                    TurnRight = true;
-                    CatAni.SetBool("Move", true);
-                }
-                else if (GetComponent<Rigidbody2D>().velocity.x < -0.5f)
-                {
-                    CatAni.SetFloat("TurnRight", 0);
-                    TurnRight = false;
-                    CatAni.SetBool("Move", true);
-                }
-                else
-                {
-                    CatAni.SetBool("Move", false);
-                }
+            if (TurnRight == true)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
+            }
 
+            if (Input.GetMouseButton(0))
+            {
                 if (TurnRight == true)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
@@ -663,38 +626,169 @@ public class CatContrl : MonoBehaviour
                 {
                     transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
                 }
-
-                //if (Input.GetMouseButton(0))
-                //{
-                //    if (TurnRight == true)
-                //    {
-                //        transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
-                //    }
-                //    else
-                //    {
-                //        transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
-                //    }
-                //    CloudMove();
-                //}
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    if (CloudTime > 0)
-                    {
-                        CloudTime--;
-                        CloudMove();
-                    }
-                }
-
-                if (Input.GetMouseButtonUp(1))
-                {
-                    WaterJumpPos_1.SetActive(false);
-                    WaterJumpPos_2.SetActive(false);
-                    GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-                    GetComponent<Rigidbody2D>().gravityScale = CatWeight;
-                    GetComponent<Animator>().SetBool("Cloud", false);
-                }
+                CloudMove();
             }
+
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    if (CloudTime > 0)
+            //    {
+            //        CloudTime--;
+            //        CloudMove();
+            //    }
+            //}
+
+            if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
+            {
+                CatAni.SetFloat("TurnRight", 1);
+                TurnRight = true;
+                CatAni.SetBool("Move", true);
+            }
+            else if (GetComponent<Rigidbody2D>().velocity.x < -0.5f)
+            {
+                CatAni.SetFloat("TurnRight", 0);
+                TurnRight = false;
+                CatAni.SetBool("Move", true);
+            }
+            else
+            {
+                CatAni.SetBool("Move", false);
+            }
+
+            if (TurnRight == true)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
+            }
+            //
+
+            /*if (GetComponent<Rigidbody2D>().gravityScale != 0.01f)
+              {
+                  if (Input.GetKey(KeyCode.D))
+                  {
+                      TurnRight = true;
+                      CatAni.SetFloat("TurnRight", 1);
+                      CatAni.SetBool("Move", true);
+                      if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
+                      {
+                          transform.rotation = Quaternion.Euler(0, 0, 0);
+                          NowCatAct = CatAct.Run;
+                      }
+                      GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                  }
+                  else if (Input.GetKey(KeyCode.A))
+                  {
+                      TurnRight = false;
+                      CatAni.SetFloat("TurnRight", 0);
+                      CatAni.SetBool("Move", true);
+                      if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
+                      {
+                          transform.rotation = Quaternion.Euler(0, 180, 0);
+                          NowCatAct = CatAct.Run;
+                      }
+                      GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                  }
+                  else if (NowCatAct != CatAct.LongLongCat)
+                  {
+                      if (NowCatAct != CatAct.Jump)
+                      {
+                          if (NowCatAct != CatAct.CatStop)
+                          {
+                              NowCatAct = CatAct.Idle;
+                          }
+                      }
+
+                      GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+                  }
+
+                  if (Input.GetKeyDown(KeyCode.Space))
+                  {
+                      if (CanJump == true)
+                      {
+                          CatMusic.PlayMusic(0);
+                          GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                          GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
+                          NowCatAct = CatAct.Jump;
+                          CanJump = false;
+                          StartCoroutine(JumpDebug(0.05f));
+                      }
+                  }
+                  if (Input.GetMouseButtonDown(1))
+                  {
+                      //CloudTime = 5;
+                      GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                      transform.rotation = Quaternion.Euler(0, 0, 0);
+                      GetComponent<Rigidbody2D>().gravityScale = 0.01f;
+                      GetComponent<Animator>().SetBool("Cloud", true);
+                      WaterJumpPos_1.SetActive(true);
+                      WaterJumpPos_2.SetActive(true);
+                  }
+              }
+              else
+              {
+
+                  CloudPictrue();
+
+                  if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
+                  {
+                      CatAni.SetFloat("TurnRight", 1);
+                      TurnRight = true;
+                      CatAni.SetBool("Move", true);
+                  }
+                  else if (GetComponent<Rigidbody2D>().velocity.x < -0.5f)
+                  {
+                      CatAni.SetFloat("TurnRight", 0);
+                      TurnRight = false;
+                      CatAni.SetBool("Move", true);
+                  }
+                  else
+                  {
+                      CatAni.SetBool("Move", false);
+                  }
+
+                  if (TurnRight == true)
+                  {
+                      transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
+                  }
+                  else
+                  {
+                      transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
+                  }
+
+                  //if (Input.GetMouseButton(0))
+                  //{
+                  //    if (TurnRight == true)
+                  //    {
+                  //        transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
+                  //    }
+                  //    else
+                  //    {
+                  //        transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
+                  //    }
+                  //    CloudMove();
+                  //}
+
+                  if (Input.GetMouseButtonDown(0))
+                  {
+                      if (CloudTime > 0)
+                      {
+                          CloudTime--;
+                          CloudMove();
+                      }
+                  }
+
+                  if (Input.GetMouseButtonUp(1))
+                  {
+                      WaterJumpPos_1.SetActive(false);
+                      WaterJumpPos_2.SetActive(false);
+                      GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                      GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                      GetComponent<Animator>().SetBool("Cloud", false);
+                  }
+              }*/
         }
     }
 
@@ -707,10 +801,15 @@ public class CatContrl : MonoBehaviour
         direction.z = 0f;
         direction.Normalize();
         //float targetAngle = Mathf.Atan2(direction.y, direction.x);
-        Instantiate(CloudAni, transform.position, Quaternion.Euler(0, 0, 0));
-        GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 100);
+        GameObject C = Instantiate(CloudAni, transform.position, Quaternion.Euler(0, 0, 0));
+        Destroy(C, 2);
 
-        CatMusic.PlayMusic(4);
+        //GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 8); // 第一種版本
+
+        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 120); // 第二種版本
+
+        //CatMusic.PlayMusic(4);
     }
 
     public void CloudPictrue()

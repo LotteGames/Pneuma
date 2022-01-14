@@ -36,6 +36,13 @@ public class CatMorphObject : MonoBehaviour
                     collision.GetComponent<SpriteRenderer>().sortingOrder = 0;
                     collision.GetComponent<CircleCollider2D>().radius = 0.7f;
                 }
+                else if (collision.GetComponent<CatContrl>().NowCatMorph == CatContrl.CatMorph.Cloud)
+                {
+                    collision.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                    collision.GetComponent<Animator>().SetBool("Climb", false);
+                    collision.GetComponent<SpriteRenderer>().sortingOrder = 500;
+                    collision.GetComponent<CircleCollider2D>().radius = 0.81f;
+                }
                 else
                 {
                     collision.GetComponent<Animator>().SetBool("Climb", false);

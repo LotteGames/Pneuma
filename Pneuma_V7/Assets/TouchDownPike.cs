@@ -40,4 +40,23 @@ public class TouchDownPike : MonoBehaviour
         NowPike = Instantiate(DownPike, StartPos, Quaternion.Euler(0, 0, 0));
         NowPike.GetComponent<Rigidbody2D>().gravityScale = 0;
     }
+
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "CatBody")
+    //    {
+    //        if (CanDown == true)
+    //        {
+    //            StartCoroutine(DelayDown(DownDelay));
+    //            CanDown = false;
+    //            MoveGround.GetComponent<Collider2D>().enabled = false;
+    //            MoveGround.GetComponent<Collider2D>().isTrigger = true;
+    //            MoveGround.GetComponent<Rigidbody2D>().gravityScale = 4f;
+    //            //for (int i = 0; i < Grounds.Length; i++)
+    //            //{
+    //            //    Grounds[i].GetComponent<Rigidbody2D>().gravityScale = 5;
+    //            //}
+    //        }
+    //    }
+    //}
 }
