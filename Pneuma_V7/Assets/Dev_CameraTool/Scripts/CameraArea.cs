@@ -57,8 +57,25 @@ public class CameraArea : MonoBehaviour
         {
             VirtualCamera = GetComponentInChildren<CinemachineVirtualCamera>();
         }
-        VirtualCamera.enabled = value;
+
+        if (value)
+        {
+            InEvent.Invoke();
+        }
+        else 
+        {
+            outEvent.Invoke();
+        }
+        
+        //VirtualCamera.enabled = value;
+        //VirtualCamera.PreviousStateIsValid = true;
+        VirtualCamera.gameObject.SetActive(value);
+     
     }
+
+    public UnityEvent InEvent;
+
+    public UnityEvent outEvent;
 }
 public enum E_CameraType
 {

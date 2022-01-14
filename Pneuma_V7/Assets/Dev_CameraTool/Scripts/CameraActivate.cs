@@ -14,7 +14,7 @@ public class CameraActivate : MonoBehaviour
 
         for (int i = 0; i < cameraAreas.Length; i++)
         {
-
+         
             cameraAreas[i].SetCameraActivate(false);
             //cameraAreas[i].index = i;
 
@@ -28,6 +28,8 @@ public class CameraActivate : MonoBehaviour
 
         if (cameraArea != null)
         {
+
+            Debug.LogError(cameraArea.gameObject.name);
 
             //if (lastOne == -1)
             //{
@@ -44,6 +46,7 @@ public class CameraActivate : MonoBehaviour
 
         if (cameraArea != null)
         {
+            Debug.LogError(cameraArea.gameObject.name);
             //lastOne = cameraArea.index;
 
             cameraArea.SetCameraActivate(false);
