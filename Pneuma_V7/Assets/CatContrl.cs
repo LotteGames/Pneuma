@@ -72,6 +72,9 @@ public class CatContrl : MonoBehaviour
     [Header("Idle後儲存")]
     public bool ReadySave;
 
+
+    [Header("伸長貓咪的光暈")]
+    public GameObject LongLight;
     [Header("伸長貓咪的物件")]
     public GameObject LongBody;
     public GameObject nowLongBody;
@@ -275,7 +278,7 @@ public class CatContrl : MonoBehaviour
                 GetComponent<Collider2D>().isTrigger = true;
 
                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
-
+                LongLight.SetActive(false);
 
                 StartCoroutine(LongBack(1f));
             }
@@ -600,10 +603,10 @@ public class CatContrl : MonoBehaviour
                 TurnRight = false;
                 CatAni.SetBool("Move", true);
             }
-            else
-            {
-                CatAni.SetBool("Move", false);
-            }
+            //else
+            //{
+            //    CatAni.SetBool("Move", false);
+            //}
 
             //
 
@@ -628,6 +631,11 @@ public class CatContrl : MonoBehaviour
                 }
                 CloudMove();
             }
+            if (Input.GetMouseButtonUp(0))
+            {
+                CloudMove();
+                CatAni.SetBool("Move", false);
+            }
 
             //if (Input.GetMouseButtonDown(0))
             //{
@@ -638,22 +646,22 @@ public class CatContrl : MonoBehaviour
             //    }
             //}
 
-            if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
-            {
-                CatAni.SetFloat("TurnRight", 1);
-                TurnRight = true;
-                CatAni.SetBool("Move", true);
-            }
-            else if (GetComponent<Rigidbody2D>().velocity.x < -0.5f)
-            {
-                CatAni.SetFloat("TurnRight", 0);
-                TurnRight = false;
-                CatAni.SetBool("Move", true);
-            }
-            else
-            {
-                CatAni.SetBool("Move", false);
-            }
+            //if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
+            //{
+            //    //CatAni.SetFloat("TurnRight", 1);
+            //    //TurnRight = true;
+            //    //CatAni.SetBool("Move", true);
+            //}
+            //else if (GetComponent<Rigidbody2D>().velocity.x < -0.5f)
+            //{
+            //    //CatAni.SetFloat("TurnRight", 0);
+            //    //TurnRight = false;
+            //    //CatAni.SetBool("Move", true);
+            //}
+            //else
+            //{
+            //    CatAni.SetBool("Move", false);
+            //}
 
             if (TurnRight == true)
             {
@@ -808,6 +816,29 @@ public class CatContrl : MonoBehaviour
 
         GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
         GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 120); // 第二種版本
+
+        if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
+        {
+            CatAni.SetFloat("TurnRight", 1);
+            TurnRight = true;
+            CatAni.SetBool("Move", true);
+        }
+        else if (GetComponent<Rigidbody2D>().velocity.x < -0.5f)
+        {
+            CatAni.SetFloat("TurnRight", 0);
+            TurnRight = false;
+            CatAni.SetBool("Move", true);
+        }
+
+
+        if (TurnRight == true)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
+        }
 
         //CatMusic.PlayMusic(4);
     }
@@ -1100,6 +1131,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
+                            LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -1139,6 +1171,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
+                            LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -1186,6 +1219,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
+                            LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -1232,6 +1266,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
+                            LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -1280,6 +1315,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
+                            LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -1313,6 +1349,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
+                            LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -2599,6 +2636,7 @@ public class CatContrl : MonoBehaviour
 
             if (CanLongTrue == true)
             {
+                LongLight.SetActive(true);
                 CanLong = true;
             }
             if (CanJumpTrue == true)
@@ -2659,6 +2697,7 @@ public class CatContrl : MonoBehaviour
                 }
                 if (CanLongTrue == true)
                 {
+                    LongLight.SetActive(true);
                     CanLong = true;
                 }
                 if (CanJumpTrue == true)
