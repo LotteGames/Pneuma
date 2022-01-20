@@ -14,6 +14,9 @@ public class Teaching_System : MonoBehaviour
     public GameObject[] AllEyes;
 
 
+    [Header("每個階段的教學")]
+    public GameObject[] AllTeachUI;
+
     [Header("每個階段的眼睛顏色")]
     public Color[] Eyes_Colors;
 
@@ -29,14 +32,36 @@ public class Teaching_System : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Level < Eyes_Colors.Length)
+        if (Level < Eyes_Colors.Length)
         {
             for (int i = 0; i < eyes.Length; i++)
             {
                 eyes[i].GetComponent<SpriteRenderer>().color = Color.Lerp(eyes[i].GetComponent<SpriteRenderer>().color, Eyes_Colors[Level], 0.06f);
             }
         }
-   
+
+        if (Level < AllTeachUI.Length)
+        {
+            for (int i = 0; i < eyes.Length; i++)
+            {
+                if(Level == i)
+                {
+                    AllTeachUI[i].SetActive(true);
+                }
+                else
+                {
+                    AllTeachUI[i].SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < eyes.Length; i++)
+            {
+                AllTeachUI[i].SetActive(false);
+            }
+        }
+
     }
 
     public void NextLevel()

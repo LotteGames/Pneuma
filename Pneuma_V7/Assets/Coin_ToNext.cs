@@ -36,6 +36,15 @@ public class Coin_ToNext : MonoBehaviour
             if(NextPos != null)
             {
                 Cat.transform.position = NextPos.transform.position;
+
+                if (Cat.GetComponent<CatContrl>().nowLongBody != null)
+                {
+                    Cat.GetComponent<Collider2D>().isTrigger = false;
+                    Cat.GetComponent<Animator>().SetBool("Long", false);
+                    Cat.GetComponent<Rigidbody2D>().gravityScale = 6.5f;//貓咪屁股的重力恢復
+                    Destroy(Cat.GetComponent<CatContrl>().nowLongBody);
+                }
+
             }
             else
             {

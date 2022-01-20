@@ -22,7 +22,7 @@ public class TeachUI_Box : MonoBehaviour
         if(Count <= 0)
         {
             CoinDoor.SetActive(true);
-            Destroy(gameObject,2);
+            //Destroy(gameObject,2);
         }
     }
 }
