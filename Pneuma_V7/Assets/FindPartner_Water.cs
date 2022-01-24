@@ -37,9 +37,9 @@ public class FindPartner_Water : MonoBehaviour
         //Turn();
         //PartnerPos();
 
-        if (catContrl.NowCatAct == CatContrl.CatAct.LongLongCat)
+        if (NextAct == false)
         {
-            LongLongCat();
+            WaterCheckBack();
         }
         else
         {
@@ -83,86 +83,7 @@ public class FindPartner_Water : MonoBehaviour
 
     //}
 
-    //void PartnerPos()
-    //{
-    //    Vector3 worldPos = Partner.transform.position;
-    //    if (catContrl.ButtRemove <= catContrl.ButtRemoveMin && catContrl.NowCatAct != OldCatContrl.CatAct.Jump)
-    //    {
-    //        if (worldPos.x <= transform.position.x)
-    //        {
-    //            if (Pictrue_Idle1 != null)
-    //            {
-    //                GetComponent<SpriteRenderer>().sprite = Pictrue_Idle1;
-    //            }
-    //            else
-    //            {
-    //                GetComponent<SpriteRenderer>().sprite = null;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (Pictrue_Idle1 != null)
-    //            {
-    //                GetComponent<SpriteRenderer>().sprite = Pictrue_Idle2;
-    //            }
-    //            else
-    //            {
-    //                GetComponent<SpriteRenderer>().sprite = null;
-    //            }
-    //        }
-    //    }
-    //    else if (catContrl.NowCatAct != OldCatContrl.CatAct.Idle)
-    //    {
-    //        if (worldPos.x <= transform.position.x)
-    //        {
-    //            GetComponent<SpriteRenderer>().sprite = Pictrue_1;
-    //        }
-    //        else
-    //        {
-    //            GetComponent<SpriteRenderer>().sprite = Pictrue_2;
-    //        }
-    //    }
-
-    //}
-
-   /* void PartnerPos()
-    {
-        Vector3 worldPos = Partner.transform.position;
-
-        //if (worldPos.x <= transform.position.x)
-        //{
-        //    if (Pictrue_Idle1 != null)
-        //    {
-        //        GetComponent<SpriteRenderer>().sprite = Pictrue_Idle1;
-        //    }
-        //    else
-        //    {
-        //        GetComponent<SpriteRenderer>().sprite = null;
-        //    }
-        //}
-        //else
-        //{
-        //    if (Pictrue_Idle1 != null)
-        //    {
-        //        GetComponent<SpriteRenderer>().sprite = Pictrue_Idle2;
-        //    }
-        //    else
-        //    {
-        //        GetComponent<SpriteRenderer>().sprite = null;
-        //    }
-        //}
-
-        //if (worldPos.x <= transform.position.x)
-        //{
-        //    GetComponent<SpriteRenderer>().sprite = Pictrue_1;
-        //}
-        //else
-        //{
-        //    GetComponent<SpriteRenderer>().sprite = Pictrue_2;
-        //}
-
-
-    }*/
+    public bool NextAct;
 
     public void LongLongCat()//很長很長的貓
     {
@@ -205,20 +126,32 @@ public class FindPartner_Water : MonoBehaviour
 
 
     }
+    public void WaterCheckBack()
+    {
+        float Remove = Vector2.Distance(transform.position, Partner.transform.position);
+        if (Remove >= catContrl.LongRemoveMax * 2.5f)
+        {
+            //IsGo = false;
+            NextAct = true;
+            //
+        }
 
+    }
     public void FallowHand()//頭部縮回去
     {
         float ButtRemove = Vector2.Distance(transform.position, Partner.transform.position);
-        //GetComponent<Animator>().SetBool("Back", true);
-        //if (DebugBack == true)
-        //{
-        //    GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, Partner.transform.position, 0.2f));
-        //}
 
-        GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, Partner.transform.position, 0.2f));
+        if(catContrl.WaterFly == false)
+        {
+            GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, Partner.transform.position, 0.2f));
+        }
+        else
+        {
+            catContrl.WaterBack(transform.position);
+        }
 
-
-        if (ButtRemove <= catContrl.LongRemoveMin && DebugBack == true)
+    
+        if (ButtRemove <= catContrl.LongRemoveMin)//     && DebugBack == true
         {
             catContrl.GetComponent<Rigidbody2D>().gravityScale = 6.5f;//貓咪屁股的重力恢復
             catContrl.GetComponent<Animator>().SetBool("Long", false);

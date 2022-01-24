@@ -61,6 +61,9 @@ public class CatContrl : MonoBehaviour
 
     [Header("抓住東西了")]
     public bool GetHold;
+    [Header("可以進行操作")]
+    public bool CanContrl = true;
+    public bool CanContrlTrue = true;
     [Header("可以進行伸長")]
     public bool CanLong;
     public bool CanLongTrue;
@@ -102,6 +105,8 @@ public class CatContrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CanContrl = true;
+        CanContrlTrue = true;
         PlayerPrefs.SetFloat("CatPos_X", transform.position.x);
         PlayerPrefs.SetFloat("CatPos_Y", transform.position.y);
         Debug.Log(PlayerPrefs.GetFloat("CatPos_X") + "," + PlayerPrefs.GetFloat("CatPos_Y"));
@@ -227,7 +232,14 @@ public class CatContrl : MonoBehaviour
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                     NowCatAct = CatAct.Run;
                 }
-                GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                if(CanContrlTrue == true)
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                }
+                else
+                {
+                    GetComponent<Rigidbody2D>().AddForce(new Vector2(MoveSpeed * 0.1f, 0));
+                }
             }
             else if (Input.GetKey(KeyCode.A))
             {
@@ -239,7 +251,14 @@ public class CatContrl : MonoBehaviour
                     transform.rotation = Quaternion.Euler(0, 180, 0);
                     NowCatAct = CatAct.Run;
                 }
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                if (CanContrlTrue == true)
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                }
+                else
+                {
+                    GetComponent<Rigidbody2D>().AddForce(new Vector2(-MoveSpeed * 0.1f, 0));
+                }
             }
             else if (NowCatAct != CatAct.LongLongCat)
             {
@@ -250,8 +269,10 @@ public class CatContrl : MonoBehaviour
                         NowCatAct = CatAct.Idle;
                     }
                 }
-
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+                if (CanContrlTrue == true)
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -459,7 +480,7 @@ public class CatContrl : MonoBehaviour
         }
         else
         {
-            if (GetComponent<Rigidbody2D>().gravityScale != 0.01f)
+            if (WaterJumpReady == false)
             {
                 if (Input.GetKey(KeyCode.D))
                 {
@@ -498,17 +519,18 @@ public class CatContrl : MonoBehaviour
                         GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                         GetComponent<Rigidbody2D>().gravityScale = 0.01f;
                         GetComponent<Animator>().SetBool("WaterJumpReady", true);
-                        WaterJumpPower = 0.1f;
+                        //WaterJumpPower = 0.1f;
+                        WaterJumpPower = 1f;
                     }
                 }
             }
             else
             {
-                WaterJumpPower += Time.deltaTime * 0.5f;
-                if(WaterJumpPower >= 1f)
-                {
-                    WaterJumpPower = 1f;
-                }
+                //WaterJumpPower += Time.deltaTime * 0.5f;
+                //if(WaterJumpPower >= 1f)
+                //{
+                //    WaterJumpPower = 1f;
+                //}
 
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -528,11 +550,18 @@ public class CatContrl : MonoBehaviour
                         CatMusic.PlayMusic(0);
                         NowCatAct = CatAct.Jump;
                         CanJump = false;
-                        StartCoroutine(JumpDebug(0.3f));
+                        StartCoroutine(JumpDebug(0.1f));
 
                         //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-                        GetComponent<Rigidbody2D>().gravityScale = CatWeight;
-                        GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 2 * WaterJumpPower);
+                        //
+                        //GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                        //GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 2 * WaterJumpPower);
+                        //GetComponent<Animator>().SetBool("Jump", true);
+                        //GetComponent<Animator>().SetBool("WaterJumpReady", false);
+                        //
+                        GetComponent<Rigidbody2D>().gravityScale = 0f;
+                        //GetComponent<Collider2D>().isTrigger = true;
+                        GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 3 * WaterJumpPower);
                         GetComponent<Animator>().SetBool("Jump", true);
                         GetComponent<Animator>().SetBool("WaterJumpReady", false);
                     }
@@ -560,6 +589,8 @@ public class CatContrl : MonoBehaviour
         }
 
     }
+
+    //bool WaterJump;
 
     [Header("噴氣特效")]
     public GameObject CloudAni;
@@ -888,6 +919,17 @@ public class CatContrl : MonoBehaviour
 
     }
 
+    public void JumpBox()
+    {
+        StartCoroutine(ContrlDebug(0.5f));
+    }
+
+    public IEnumerator ContrlDebug(float DelayTime)
+    {
+        CanContrlTrue = false;
+        yield return new WaitForSeconds(DelayTime);
+        CanContrlTrue = true;
+    }
     public IEnumerator JumpDebug(float DelayTime)
     {
         CanJumpTrue = false;
@@ -1145,7 +1187,10 @@ public class CatContrl : MonoBehaviour
                         if (NowCatMorph != CatMorph.Climb)
                         {
                             RotY = 0;
-                            GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                            if (WaterFly == false)
+                            {
+                                GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                            }
                         }
                         else
                         {
@@ -1185,7 +1230,10 @@ public class CatContrl : MonoBehaviour
                         if (NowCatMorph != CatMorph.Climb)
                         {
                             RotY = 0;
-                            GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                            if (WaterFly == false)
+                            {
+                                GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                            }
                         }
                         else
                         {
@@ -1203,7 +1251,10 @@ public class CatContrl : MonoBehaviour
             {
                 RotY = 0;
 
-                GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                if (WaterFly == false)
+                {
+                    GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                }
             }
 
 
@@ -1676,8 +1727,10 @@ public class CatContrl : MonoBehaviour
                 }
                 else
                 {
-                    GetComponent<Rigidbody2D>().gravityScale = CatWeight;
-
+                    if (WaterFly == false)
+                    {
+                        GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                    }
 
                     if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
                     {
@@ -1730,9 +1783,12 @@ public class CatContrl : MonoBehaviour
         }
         else if (Rot == new Vector2(0, -1))
         {
-            GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+            if (WaterFly == false)
+            {
+                GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+            }
 
-            if(CatAni.GetFloat("TurnRight") == 0.5f)
+            if (CatAni.GetFloat("TurnRight") == 0.5f)
             {
                 CatAni.SetFloat("TurnRight", 1);
             }
@@ -2063,6 +2119,20 @@ public class CatContrl : MonoBehaviour
 
     }
 
+    public void WaterBack(Vector3 partner)
+    {
+        //Vector3 partner;
+        //partner = nowWaterLongBody.transform.GetChild(0).transform.position;
+        //
+        Vector3 direction = partner - transform.position;
+        direction.z = 0f;
+        direction.Normalize();
+
+        GetComponent<Rigidbody2D>().AddForce(direction * 1000); // 第二種版本
+    }
+
+    public bool WaterFly;
+
     public void WaterJump(Vector2 RayVect)
     {
         if (Input.GetMouseButtonDown(0))
@@ -2073,7 +2143,8 @@ public class CatContrl : MonoBehaviour
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                 GetComponent<Rigidbody2D>().gravityScale = 0.01f;
                 GetComponent<Animator>().SetBool("WaterJumpReady", true);
-                WaterJumpPower = 0.1f;
+                //WaterJumpPower = 0.1f;
+                WaterJumpPower = 1f;
                 WaterJumpReady = true;
             }
         }
@@ -2082,11 +2153,11 @@ public class CatContrl : MonoBehaviour
             WaterJumpPictrue();
             WaterJumpPos_1.SetActive(true);
             WaterJumpPos_2.SetActive(true);
-            WaterJumpPower += Time.deltaTime * 0.5f;
-            if (WaterJumpPower >= 1)
-            {
-                WaterJumpPower = 1;
-            }
+            //WaterJumpPower += Time.deltaTime * 0.5f;
+            //if (WaterJumpPower >= 1)
+            //{
+            //    WaterJumpPower = 1;
+            //}
 
 
             Vector3 MousePos;
@@ -2142,18 +2213,33 @@ public class CatContrl : MonoBehaviour
                 //CloudTime = 5;
                 if (CanJump == true)
                 {
+                    nowWaterLongBody = Instantiate(WaterLongBody, transform.position, Quaternion.Euler(0, 0, 0));
+                    WaterFly = true;
+
+                    //
+
                     CatMusic.PlayMusic(0);
                     NowCatAct = CatAct.Jump;
                     CanJump = false;
                     StartCoroutine(JumpDebug(0.2f));
 
                     //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-                    GetComponent<Rigidbody2D>().gravityScale = CatWeight;
-                    GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 2 * WaterJumpPower);
-                    GetComponent<Animator>().SetBool("Jump", true);
-                    GetComponent<Animator>().SetBool("WaterJumpReady", false);
+
+                    //
+                    //GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                    //GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 2 * WaterJumpPower);
+                    //GetComponent<Animator>().SetBool("Jump", true);
+                    //GetComponent<Animator>().SetBool("WaterJumpReady", false);
                     WaterJumpPos_1.SetActive(false);
                     WaterJumpPos_2.SetActive(false);
+                    //
+
+                    GetComponent<Rigidbody2D>().gravityScale = 0f;
+                    //GetComponent<Collider2D>().isTrigger = true;
+                    GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 3 * WaterJumpPower);
+                    GetComponent<Animator>().SetBool("Jump", true);
+                    GetComponent<Animator>().SetBool("WaterJumpReady", false);
+
                     //if (PowerPath.x * 2 >= 0.2f)
                     //{
                     //    CatAni.SetFloat("TurnRight", 1);
@@ -2216,6 +2302,8 @@ public class CatContrl : MonoBehaviour
             CatAni.SetFloat("TurnRight", 1f);
             TurnRight = true;
         }
+        WaterFly = false;
+        Destroy(nowWaterLongBody);
     }
     public void RayGround()
     {
@@ -2669,6 +2757,12 @@ public class CatContrl : MonoBehaviour
             {
                 CloudTime = 3;
             }
+
+            if (WaterFly == true && CanJumpTrue == true)
+            {
+                nowWaterLongBody.transform.GetChild(0).GetComponent<FindPartner_Water>().NextAct = true;
+                WaterFly = false;
+            }
         }
         if (collision.gameObject.tag == "Wall")
         {
@@ -2704,6 +2798,12 @@ public class CatContrl : MonoBehaviour
                 {
                     CanJump = true;
                     CatAni.SetBool("Jump", false);
+                }
+
+                if (WaterFly == true && CanJumpTrue == true)
+                {
+                    nowWaterLongBody.transform.GetChild(0).GetComponent<FindPartner_Water>().NextAct = true;
+                    WaterFly = false;
                 }
             }
         }

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class JumpBox : MonoBehaviour
 {
-    [Header("彈跳力道乘以多少")]
-    public float PowerAdd;
-
+    [Header("彈跳力道Y軸乘以多少")]
+    public float PowerY_Add;
+    [Header("彈跳力道X軸乘以多少")]
+    public float PowerX_Add;
     public GameObject Cat;
 
     private void Start()
@@ -22,9 +23,13 @@ public class JumpBox : MonoBehaviour
 
             //GetComponent<Collider2D>().enabled
             //
+            if(PowerX_Add != 0)
+            {
+                Cat.GetComponent<CatContrl>().JumpBox();
+            }
             Cat.GetComponent<CatContrl>().CatMusic.PlayMusic(0);
             Cat.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-            Cat.GetComponent<Rigidbody2D>().AddForce(new Vector3(0, collision.GetComponent<CatContrl>().JumpPower * PowerAdd, 0));
+            Cat.GetComponent<Rigidbody2D>().AddForce(new Vector3(collision.GetComponent<CatContrl>().JumpPower * PowerX_Add, collision.GetComponent<CatContrl>().JumpPower * PowerY_Add, 0));
             Cat.GetComponent<CatContrl>().NowCatAct = CatContrl.CatAct.Jump;
             Cat.GetComponent<CatContrl>().CanJump = false;//不能繼續跳
             Cat.GetComponent<CatContrl>().CanLong = true;//可以延長
