@@ -99,11 +99,12 @@ public class DownPike : MonoBehaviour
         {
             if (CanDown == true)
             {
-                StartCoroutine(DelayDown(DownDelay));
                 CanDown = false;
+                //MoveGround.transform.position = PosA.transform.position;
                 MoveGround.GetComponent<Collider2D>().enabled = false;
                 MoveGround.GetComponent<Collider2D>().isTrigger = true;
-                MoveGround.GetComponent<Rigidbody2D>().gravityScale = 4f;
+                //MoveGround.GetComponent<Rigidbody2D>().gravityScale = 4f;
+                StartCoroutine(DelayDown(DownDelay));
                 //for (int i = 0; i < Grounds.Length; i++)
                 //{
                 //    Grounds[i].GetComponent<Rigidbody2D>().gravityScale = 5;
@@ -120,7 +121,9 @@ public class DownPike : MonoBehaviour
     public IEnumerator DelayDown(float DelayTime)
     {
         yield return new WaitForSeconds(DelayTime);
+        MoveGround.transform.position = PosA.transform.position;
         IsDown = true;
+        MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         MoveGround.GetComponent<Rigidbody2D>().gravityScale = 4;
         CanDown = false;
     }
