@@ -272,7 +272,7 @@ public class Behaviour : MonoBehaviour
             }
             else if (isFollow)
             {
-                Debug.LogError(159);
+                //Debug.LogError(159);
                 ai_State = AI_State.idle;
             }
 
