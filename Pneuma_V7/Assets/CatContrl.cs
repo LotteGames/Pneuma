@@ -63,7 +63,7 @@ public class CatContrl : MonoBehaviour
     public bool GetHold;
     [Header("可以進行操作")]
     public bool CanContrl = true;
-    public bool CanContrlTrue = true;
+    public float CanContrlTrue = 0;
     [Header("可以進行伸長")]
     public bool CanLong;
     public bool CanLongTrue;
@@ -105,8 +105,7 @@ public class CatContrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CanContrl = true;
-        CanContrlTrue = true;
+        CanContrlTrue = 0;
         PlayerPrefs.SetFloat("CatPos_X", transform.position.x);
         PlayerPrefs.SetFloat("CatPos_Y", transform.position.y);
         Debug.Log(PlayerPrefs.GetFloat("CatPos_X") + "," + PlayerPrefs.GetFloat("CatPos_Y"));
@@ -232,13 +231,15 @@ public class CatContrl : MonoBehaviour
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                     NowCatAct = CatAct.Run;
                 }
-                if(CanContrlTrue == true)
+                if(CanContrlTrue > 0)
                 {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                    CanContrlTrue -= Time.deltaTime;
+                    GetComponent<Rigidbody2D>().AddForce(new Vector2(MoveSpeed * 0.2f, 0));
                 }
                 else
                 {
-                    GetComponent<Rigidbody2D>().AddForce(new Vector2(MoveSpeed * 0.1f, 0));
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.1f);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y); 
                 }
             }
             else if (Input.GetKey(KeyCode.A))
@@ -251,13 +252,15 @@ public class CatContrl : MonoBehaviour
                     transform.rotation = Quaternion.Euler(0, 180, 0);
                     NowCatAct = CatAct.Run;
                 }
-                if (CanContrlTrue == true)
+                if (CanContrlTrue > 0)
                 {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                    CanContrlTrue -= Time.deltaTime;
+                    GetComponent<Rigidbody2D>().AddForce(new Vector2(-MoveSpeed * 0.2f, 0));
                 }
                 else
                 {
-                    GetComponent<Rigidbody2D>().AddForce(new Vector2(-MoveSpeed * 0.1f, 0));
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.1f);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
             }
             else if (NowCatAct != CatAct.LongLongCat)
@@ -269,9 +272,14 @@ public class CatContrl : MonoBehaviour
                         NowCatAct = CatAct.Idle;
                     }
                 }
-                if (CanContrlTrue == true)
+                if (CanContrlTrue > 0)
                 {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+                    CanContrlTrue -= Time.deltaTime;
+                }
+                else
+                {
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, 0, 0.2f);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
             }
 
@@ -550,7 +558,7 @@ public class CatContrl : MonoBehaviour
                         CatMusic.PlayMusic(0);
                         NowCatAct = CatAct.Jump;
                         CanJump = false;
-                        StartCoroutine(JumpDebug(0.1f));
+                        StartCoroutine(JumpDebug(0.3f));
 
                         //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                         //
@@ -921,15 +929,22 @@ public class CatContrl : MonoBehaviour
 
     public void JumpBox()
     {
-        StartCoroutine(ContrlDebug(0.5f));
+        CanContrlTrue = 0.5f;
+        //StartCoroutine(ContrlDebug(0.5f));
     }
 
-    public IEnumerator ContrlDebug(float DelayTime)
-    {
-        CanContrlTrue = false;
-        yield return new WaitForSeconds(DelayTime);
-        CanContrlTrue = true;
-    }
+    //public IEnumerator ContrlDebug(float DelayTime)
+    //{
+    //    CanContrlTrue = false;
+    //    yield return new WaitForSeconds(DelayTime);
+    //    CanContrlTrue = true;
+    //}
+    //public IEnumerator JumpDebug(float DelayTime)
+    //{
+    //    CanJumpTrue = false;
+    //    yield return new WaitForSeconds(DelayTime);
+    //    CanJumpTrue = true;
+    //}
     public IEnumerator JumpDebug(float DelayTime)
     {
         CanJumpTrue = false;
@@ -2221,7 +2236,7 @@ public class CatContrl : MonoBehaviour
                     CatMusic.PlayMusic(0);
                     NowCatAct = CatAct.Jump;
                     CanJump = false;
-                    StartCoroutine(JumpDebug(0.2f));
+                    StartCoroutine(JumpDebug(0.3f));
 
                     //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
 
@@ -2644,7 +2659,7 @@ public class CatContrl : MonoBehaviour
         Vector2 RemovePos = HandPos - new Vector2(transform.position.x, transform.position.y);
         if (ButtRemove >= LongRemoveMin)
         {
-            GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, HandPos, 0.2f));
+            GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, HandPos, 0.15f));
 
 
             //GetComponent<Rigidbody2D>().AddForce(RemovePos * ButtRemove * 30);

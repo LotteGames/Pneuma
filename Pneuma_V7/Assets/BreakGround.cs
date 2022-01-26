@@ -59,6 +59,7 @@ public class BreakGround : MonoBehaviour
         {
             if (Down == true)
             {
+                Down = false;
                 Box.InsNew();
                 GameObject Ani = Instantiate(RockAni, transform.position, Quaternion.Euler(-90, 0, 0));
                 Destroy(Ani, 3);

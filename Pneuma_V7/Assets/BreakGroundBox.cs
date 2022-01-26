@@ -8,6 +8,8 @@ public class BreakGroundBox : MonoBehaviour
     public GameObject BreakRock;
     [Header("生成時間")]
     public float CreateTime;
+
+    Quaternion Rot;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,7 @@ public class BreakGroundBox : MonoBehaviour
     public IEnumerator Delay(float DelayTime)
     {
         yield return new WaitForSeconds(DelayTime);
-        GameObject Ins = Instantiate(BreakRock, transform.position, Quaternion.Euler(0, 0, 0), transform);
+        GameObject Ins = Instantiate(BreakRock, transform.position, transform.rotation, transform);
         Ins.GetComponent<BreakGround>().Box = GetComponent<BreakGroundBox>();
     }
 }
