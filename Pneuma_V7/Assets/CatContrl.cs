@@ -288,7 +288,7 @@ public class CatContrl : MonoBehaviour
                 if (CanJump == true)
                 {
                     CatMusic.PlayMusic(0);
-                    GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                    GetComponent<Rigidbody2D>().velocity = new Vector3(GetComponent<Rigidbody2D>().velocity.x, 0, 0);
                     GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
                     NowCatAct = CatAct.Jump;
                     CanJump = false;
@@ -397,7 +397,7 @@ public class CatContrl : MonoBehaviour
                 if (CanJump == true)
                 {
                     CatMusic.PlayMusic(0);
-                    GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                    GetComponent<Rigidbody2D>().velocity = new Vector3(GetComponent<Rigidbody2D>().velocity.x, 0, 0);
                     GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
                     NowCatAct = CatAct.Jump;
                     CanJump = false;
@@ -2342,7 +2342,7 @@ public class CatContrl : MonoBehaviour
                             NowCatAct = CatAct.Jump;
 
                             CatMusic.PlayMusic(0);
-                            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                            GetComponent<Rigidbody2D>().velocity = new Vector3(GetComponent<Rigidbody2D>().velocity.x, 0, 0);
                             GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
                             CanJumpTrue = false;
                             StartCoroutine(JumpDebug(0.3f));
@@ -2398,7 +2398,7 @@ public class CatContrl : MonoBehaviour
                             NowCatAct = CatAct.Jump;
 
                             CatMusic.PlayMusic(0);
-                            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                            GetComponent<Rigidbody2D>().velocity = new Vector3(GetComponent<Rigidbody2D>().velocity.x, 0, 0);
                             GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
                             CanJumpTrue = false;
                             StartCoroutine(JumpDebug(0.3f));
@@ -2668,7 +2668,17 @@ public class CatContrl : MonoBehaviour
             //Butt.transform.position = Vector2.Lerp(Butt.transform.position, transform.position, 0.1f);
         }
     }
+    public void StopCat(float DelayTime)
+    {
+        StartCoroutine(CatStopDelay(DelayTime));
+    }
 
+    public IEnumerator CatStopDelay(float DelayTime)
+    {
+        NowCatAct = CatAct.CatStop;
+        yield return new WaitForSeconds(DelayTime);
+        NowCatAct = CatAct.Idle;
+    }
     public IEnumerator CatDeath()
     {
         NowCatAct = CatAct.CatDie;

@@ -42,11 +42,25 @@ public class DownPike : MonoBehaviour
     {
         if (IsDown == false)
         {
-            if (Grounds[0].transform.position.y <= PosA.transform.position.y)
+            if (pos.y < PosA.transform.position.y)
             {
                 MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                //pos += new Vector3(0, UpSpeed, 0);
                 pos += new Vector3(0, UpSpeed * Time.deltaTime, 0);
+                Vector3 A = pos; 
+                float B = PosA.transform.position.y - pos.y;
                 MoveGround.GetComponent<Rigidbody2D>().MovePosition(pos);
+                //MoveGround.GetComponent<Rigidbody2D>().velocity = pos;
+
+
+                if (B <= 0.6f)
+                {
+                    MoveGround.tag = "Pike";
+                }
+                else
+                {
+                    MoveGround.tag = "Ground";
+                }
                 //for (int i = 0; i < Grounds.Length; i++)
                 //{
                 //    Grounds[i].transform.position += new Vector3(0, UpSpeed * Time.deltaTime, 0);
@@ -54,12 +68,16 @@ public class DownPike : MonoBehaviour
             }
             else
             {
+                MoveGround.transform.position = PosA.transform.position;
                 MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 CanDown = true;
+                MoveGround.tag = "Pike";
             }
         }
         else
         {
+            MoveGround.tag = "Ground";
+
             if (Grounds[0].transform.position.y <= PosB.transform.position.y)
             {
                 MoveGround.GetComponent<Collider2D>().enabled = true;
@@ -100,6 +118,7 @@ public class DownPike : MonoBehaviour
             if (CanDown == true)
             {
                 CanDown = false;
+                MoveGround.tag = "Ground";
                 //MoveGround.transform.position = PosA.transform.position;
                 MoveGround.GetComponent<Collider2D>().enabled = false;
                 MoveGround.GetComponent<Collider2D>().isTrigger = true;

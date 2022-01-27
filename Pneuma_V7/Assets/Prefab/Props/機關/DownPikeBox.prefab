@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 193cef214b6f56d4b989b34974acc2ae, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5287,8 +5287,8 @@ MonoBehaviour:
   IsDown: 0
   CanDown: 0
   UpSpeed: 4
-  UpDelay: 1.25
-  DownDelay: 1
+  UpDelay: 1
+  DownDelay: 0.3
 --- !u!61 &6683974547071561609
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -37,6 +37,8 @@ public class CameraActivate : MonoBehaviour
             //    lastOne = cameraArea.index;
             //}
             StartCoroutine(DelaySave());
+            GetComponent<CatContrl>().StopCat(1f);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 
             cameraArea.SetCameraActivate(true);
         }
