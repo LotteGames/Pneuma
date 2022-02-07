@@ -36,11 +36,10 @@ public class CameraActivate : MonoBehaviour
             //{
             //    lastOne = cameraArea.index;
             //}
-            StartCoroutine(DelaySave());
-            GetComponent<CatContrl>().StopCat(1f);
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-
             cameraArea.SetCameraActivate(true);
+
+            StartCoroutine(DelaySave());
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -76,6 +75,8 @@ public class CameraActivate : MonoBehaviour
         yield return new WaitForSeconds(0.13f);
         PlayerPrefs.SetFloat("CatPos_X", transform.position.x);
         PlayerPrefs.SetFloat("CatPos_Y", transform.position.y);
+        GetComponent<CatContrl>().StopCat(1f);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         // Debug.Log(PlayerPrefs.GetFloat("CatPos_X") + "," + PlayerPrefs.GetFloat("CatPos_Y"));
     }
 }

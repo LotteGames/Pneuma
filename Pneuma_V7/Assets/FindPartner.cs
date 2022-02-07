@@ -23,12 +23,15 @@ public class FindPartner : MonoBehaviour
     [Header("回去的BUG")]
     public bool DebugBack;
 
+    float T;
+
     // Start is called before the first frame update
     void Start()
     {
         catContrl = GameObject.FindObjectOfType<CatContrl>();
         Partner = GameObject.FindObjectOfType<CatContrl>().gameObject;
         StartCoroutine(DebugLong(1.1f));
+        T = 0;
     }
 
     // Update is called once per frame
@@ -82,6 +85,8 @@ public class FindPartner : MonoBehaviour
             Destroy(transform.parent.gameObject);
         }
 
+        T += Time.deltaTime;
+      
     }
 
     void Turn()
@@ -278,10 +283,13 @@ public class FindPartner : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "DoorGround" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Pike")
         {
-            catContrl.CanJump = true;
-            catContrl.NowCatAct = CatContrl.CatAct.Back;
-            catContrl.GetComponent<Collider2D>().isTrigger = false;
-            StartCoroutine(DebugLong(0.2f));
+            if (T >= 0.1f)
+            {
+                catContrl.CanJump = true;
+                catContrl.NowCatAct = CatContrl.CatAct.Back;
+                catContrl.GetComponent<Collider2D>().isTrigger = false;
+                StartCoroutine(DebugLong(0.2f));
+            }
         }
     }
 

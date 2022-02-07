@@ -218,6 +218,20 @@ public class CatContrl : MonoBehaviour
             Debug.Log("Is Climb");
 
             RayGround();
+            if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+            {
+                CatMusic.PlayMusic(2);
+                CanLong = false;
+                NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
+                GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
+                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
+                GetComponent<Collider2D>().isTrigger = true;
+
+                nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+
+
+                StartCoroutine(LongBack(1f));
+            }
         }
         else
         {
