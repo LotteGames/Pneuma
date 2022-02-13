@@ -2719,6 +2719,7 @@ public class CatContrl : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         GetComponent<Rigidbody2D>().gravityScale = CatWeight;
         GetComponent<Collider2D>().enabled = true;
+        GetComponent<Collider2D>().isTrigger = false;
         GetComponent<Animator>().SetBool("Cloud", false);
         CatAni.SetBool("Die", false);
         yield return new WaitForSeconds(1);
