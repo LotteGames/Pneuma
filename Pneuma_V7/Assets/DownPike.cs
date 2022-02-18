@@ -114,7 +114,7 @@ public class DownPike : MonoBehaviour
             }
             else
             {
-                DownSpeed += Time.deltaTime * 100f;
+                DownSpeed += Time.deltaTime * 500f;
                 MoveGround.GetComponent<MoveGround>().MoveSpeed = DownSpeed;
             }
         }
@@ -170,12 +170,12 @@ public class DownPike : MonoBehaviour
     }
     public IEnumerator DelayDown(float DelayTime)
     {
-        DownSpeed = 0;
+        DownSpeed = 5;
         MoveGround.GetComponent<MoveGround>().MoveSpeed = 0;
         yield return new WaitForSeconds(DelayTime);
         IsDown = true;
         CanDown = false;
-        DownSpeed = 60;
+        DownSpeed = 20;
         MoveGround.GetComponent<MoveGround>().MoveSpeed = DownSpeed;
         //MoveGround.transform.position = PosA.transform.position;
         //MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);

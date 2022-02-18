@@ -1380,8 +1380,7 @@ public class CatContrl : MonoBehaviour
 
             if (hit_D_1.collider != null)
             {
-                Debug.Log(hit_D_1.collider.gameObject.tag);
-                Debug.Log(hit_D_1.collider.gameObject.name);
+
                 if (hit_D_1.collider.gameObject.tag == "Ground" || hit_D_1.collider.gameObject.tag == "Wall" || hit_D_1.collider.gameObject.tag == "DoorGround")
                 {
                     RotY = -1;
@@ -2617,9 +2616,9 @@ public class CatContrl : MonoBehaviour
             if(Rot.x == -1)
             {
                 //GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, -MoveSpeed * 0.1f);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, -MoveSpeed * 0.06f);//貼著牆壁的下墜速度
 
-                if(NowCatMorph != CatMorph.Climb)
+                if (NowCatMorph != CatMorph.Climb)
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
@@ -2673,7 +2672,7 @@ public class CatContrl : MonoBehaviour
             if (Rot.x == 1)
             {
                 //GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-                GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, -MoveSpeed * 0.1f);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, -MoveSpeed * 0.06f);//貼著牆壁的下墜速度
 
                 if (NowCatMorph != CatMorph.Climb)
                 {

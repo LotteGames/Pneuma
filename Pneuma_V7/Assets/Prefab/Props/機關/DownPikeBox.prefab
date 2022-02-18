@@ -392,7 +392,7 @@ MonoBehaviour:
   CanDown: 0
   DownSpeed: 0
   UpSpeed: 60
-  UpDelay: 1
+  UpDelay: 0.2
   DownDelay: 0.3
 --- !u!61 &6683974547071561609
 BoxCollider2D:
