@@ -99,6 +99,14 @@ public class CatContrl : MonoBehaviour
 
     [Header("死亡的黑暗畫面")]
     public GameObject Black;
+    [Header("手機UI畫面")]
+    public GameObject Phone_UI;
+    [Header("左搖桿")]
+    public GameObject Touch_Left;
+    public GameObject Handler_Left;
+    [Header("右搖桿")]
+    public GameObject Touch_Right;
+    public GameObject Handler_Right;
 
     [Header("貓貓音效器")]
     public MusicContrl CatMusic;
@@ -111,6 +119,12 @@ public class CatContrl : MonoBehaviour
         Debug.Log(PlayerPrefs.GetFloat("CatPos_X") + "," + PlayerPrefs.GetFloat("CatPos_Y"));
         CatAni = GetComponent<Animator>();
         HH = true;
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+        Phone_UI.SetActive(false);   // 滑鼠偵測
+#elif UNITY_ANDROID
+		Phone_UI.SetActive(true);  // 觸碰偵測
+#endif
     }
     bool HH;
     // Update is called once per frame
@@ -194,7 +208,18 @@ public class CatContrl : MonoBehaviour
         //撿到的道具跟隨
         if (GetObject != null)
         {
-            GetObject.transform.position = Vector2.Lerp(GetObject.transform.position, transform.position + new Vector3(0, 3f, 0), 0.03f);
+            float ObjectX = transform.position.x;
+            if(GetObject.transform.position.x - transform.position.x <= -2 || GetObject.transform.position.x - transform.position.x >= 2)
+            {
+                ObjectX = transform.position.x;
+            }
+            else
+            {
+                ObjectX = GetObject.transform.position.x;
+            }
+            float ObjectY = transform.position.y + 3;
+
+            GetObject.transform.position = Vector2.Lerp(GetObject.transform.position, new Vector3(ObjectX, ObjectY, 0), 0.03f);
         }
         //if(CanJumpTrue == false)
         //{
@@ -206,12 +231,146 @@ public class CatContrl : MonoBehaviour
         }
     }
 
-
     void MorphUpdate_NoMorph()
     {
         if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || NowCatAct == CatAct.CatStop || Black.active == true)
         {
+            RayWall();
+        }
+        else if (RayWall() == true)
+        {
+            Debug.Log("Is Climb");
 
+            RayGround();
+            if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+            {
+                CatMusic.PlayMusic(2);
+                CanLong = false;
+                NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
+                GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
+                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
+                GetComponent<Collider2D>().isTrigger = true;
+
+                nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+
+
+                StartCoroutine(LongBack(1f));
+            }
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.D))
+            {
+                TurnRight = true;
+                CatAni.SetFloat("TurnRight", 1);
+                CatAni.SetBool("Move", true);
+                if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    NowCatAct = CatAct.Run;
+                }
+                if (CanContrlTrue > 0)
+                {
+                    CanContrlTrue -= Time.deltaTime;
+                    GetComponent<Rigidbody2D>().AddForce(new Vector2(MoveSpeed * 0.2f, 0));
+                }
+                else
+                {
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.1f);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
+                }
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                TurnRight = false;
+                CatAni.SetFloat("TurnRight", 0);
+                CatAni.SetBool("Move", true);
+                if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    NowCatAct = CatAct.Run;
+                }
+                if (CanContrlTrue > 0)
+                {
+                    CanContrlTrue -= Time.deltaTime;
+                    GetComponent<Rigidbody2D>().AddForce(new Vector2(-MoveSpeed * 0.2f, 0));
+                }
+                else
+                {
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.1f);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
+                }
+            }
+            else if (NowCatAct != CatAct.LongLongCat)
+            {
+                if (NowCatAct != CatAct.Jump)
+                {
+                    if (NowCatAct != CatAct.CatStop)
+                    {
+                        NowCatAct = CatAct.Idle;
+                    }
+                }
+                if (CanContrlTrue > 0)
+                {
+                    CanContrlTrue -= Time.deltaTime;
+                }
+                else
+                {
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, 0, 0.2f);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (CanJump == true)
+                {
+                    CatMusic.PlayMusic(0);
+                    GetComponent<Rigidbody2D>().velocity = new Vector3(GetComponent<Rigidbody2D>().velocity.x, 0, 0);
+                    GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
+                    NowCatAct = CatAct.Jump;
+                    CanJump = false;
+                    StartCoroutine(JumpDebug(0.3f));
+                }
+            }
+
+
+            if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+            {
+                CatMusic.PlayMusic(2);
+                CanLong = false;
+                NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
+                GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
+                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
+                GetComponent<Collider2D>().isTrigger = true;
+
+                nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+                LongLight.SetActive(false);
+
+                StartCoroutine(LongBack(1f));
+            }
+
+        }
+
+        //
+        if (Input.GetMouseButtonUp(0) && NowCatAct == CatAct.LongLongCat)
+        {
+            CatMusic.PlayMusic(3);
+            //縮回去
+            StartCoroutine(LongDebug());
+            CanLong = false;
+            GetComponent<Collider2D>().isTrigger = false;
+            transform.parent = null;
+            NowCatAct = CatAct.Back;
+        }
+
+        LongPictrue();
+    }
+    void MorphUpdate_NoMorph_Phone()
+    {
+        if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || NowCatAct == CatAct.CatStop || Black.active == true)
+        {
+            RayWall();
         }
         else if (RayWall() == true)
         {
@@ -346,12 +505,12 @@ public class CatContrl : MonoBehaviour
     {
         if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || NowCatAct == CatAct.CatStop || Black.active == true)
         {
-
+            RayWall();
         }
         //else if (RayWall() == true)
         //{
         //    Debug.Log("Is Climb");
-            
+
         //    RayGround();
 
         //    if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
@@ -492,7 +651,7 @@ public class CatContrl : MonoBehaviour
     {
         if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || NowCatAct == CatAct.CatStop || Black.active == true)
         {
-
+            RayWall();
         }
         else if (RayWall() == true)
         {
@@ -1122,27 +1281,102 @@ public class CatContrl : MonoBehaviour
         float RotY = 0;
 
         bool IsClimb = false;
+
+        if (NowCatAct == CatAct.LongLongCat)
+        {
+
+            if (hit_D_1.collider != null)
+            {
+
+                if (hit_D_1.collider.gameObject.tag == "Ground" || hit_D_1.collider.gameObject.tag == "Wall" || hit_D_1.collider.gameObject.tag == "DoorGround")
+                {
+                    if (hit_D_1.collider.GetComponent<MoveGround>() != null)
+                    {
+                        hit_D_1.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    }
+                }
+        
+            }
+            else if (hit_D_2.collider != null)
+            {
+                if (hit_D_2.collider.gameObject.tag == "Ground" || hit_D_2.collider.gameObject.tag == "Wall" || hit_D_2.collider.gameObject.tag == "DoorGround")
+                {
+                    if (hit_D_2.collider.GetComponent<MoveGround>() != null)
+                    {
+                        hit_D_2.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    }
+                }
+            }
+
+
+            if (hit_U_1.collider != null)
+            {
+                if (hit_U_1.collider.gameObject.tag == "Ground" || hit_U_1.collider.gameObject.tag == "Wall")
+                {
+                    if (hit_U_1.collider.GetComponent<MoveGround>() != null)
+                    {
+                        hit_U_1.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    }
+                }
+            }
+            else if (hit_U_2.collider != null)
+            {
+                if (hit_U_2.collider.gameObject.tag == "Ground" || hit_U_2.collider.gameObject.tag == "Wall")
+                {
+                    if (hit_U_2.collider.GetComponent<MoveGround>() != null)
+                    {
+                        hit_U_2.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    }
+                }
+            }
+
+            if (hit_L_1.collider != null)
+            {
+                if (hit_L_1.collider.gameObject.tag == "Ground" || hit_L_1.collider.gameObject.tag == "Wall")
+                {
+                    if (hit_L_1.collider.GetComponent<MoveGround>() != null)
+                    {
+                        hit_L_1.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    }
+                }
+            }
+            else if (hit_L_2.collider != null)
+            {
+                if (hit_L_2.collider.gameObject.tag == "Ground" || hit_L_2.collider.gameObject.tag == "Wall")
+                {
+                    if (hit_L_2.collider.GetComponent<MoveGround>() != null)
+                    {
+                        hit_L_2.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    }
+                }
+            }
+
+            if (hit_R_1.collider != null)
+            {
+                if (hit_R_1.collider.gameObject.tag == "Ground" || hit_R_1.collider.gameObject.tag == "Wall")
+                {
+                    if (hit_R_1.collider.GetComponent<MoveGround>() != null)
+                    {
+                        hit_R_1.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    }
+                }
+            }
+            else if (hit_R_2.collider != null)
+            {
+                if (hit_R_2.collider.gameObject.tag == "Ground" || hit_R_2.collider.gameObject.tag == "Wall")
+                {
+                    if (hit_R_2.collider.GetComponent<MoveGround>() != null)
+                    {
+                        hit_R_2.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    }
+                }
+
+            }
+        }
+
+
         if (NowCatAct == CatAct.Jump || NowCatAct == CatAct.Run || NowCatAct == CatAct.CatClimb || NowCatAct == CatAct.Idle)
         {
-            //if (hit_U_1.collider != null && hit_U_1.collider.GetComponent<MoveGround>() != null)
-            //{
-            //    if (hit_U_1.collider.GetComponent<MoveGround>().IsPike == false)
-            //    {
-            //        transform.parent = hit_U_1.collider.transform;
-            //        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-            //        hit_U_1.collider.GetComponent<MoveGround>().CatOn = true;
-            //    }
-            //}
-            //else if (hit_U_2.collider != null && hit_U_2.collider.GetComponent<MoveGround>() != null)
-            //{
-            //    if (hit_U_2.collider.GetComponent<MoveGround>().IsPike == false)
-            //    {
-            //        transform.parent = hit_U_2.collider.transform;
-            //        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-            //        hit_U_2.collider.GetComponent<MoveGround>().CatOn = true;
-            //    }
-            //}
-
 
             if (hit_D_1.collider != null)
             {
@@ -1152,6 +1386,11 @@ public class CatContrl : MonoBehaviour
                 {
                     RotY = -1;
 
+
+                    if (hit_D_1.collider.GetComponent<MoveGround>() != null)
+                    {
+                        hit_D_1.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    }
                     //if (Input.GetKey(KeyCode.S))
                     //{
                     //    RotY = -1;
@@ -1173,6 +1412,10 @@ public class CatContrl : MonoBehaviour
                 {
                     RotY = -1;
 
+                    if (hit_D_2.collider.GetComponent<MoveGround>() != null)
+                    {
+                        hit_D_2.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    }
                     //if (Input.GetKey(KeyCode.S))
                     //{
                     //    RotY = -1;
@@ -1191,7 +1434,7 @@ public class CatContrl : MonoBehaviour
 
             if (hit_U_1.collider != null)
             {
-                if (hit_U_1.collider.gameObject.tag == "Wall")
+                if (hit_U_1.collider.gameObject.tag == "Ground" || hit_U_1.collider.gameObject.tag == "Wall")
                 {
 
                     if (Input.GetKey(KeyCode.W))
@@ -1199,6 +1442,11 @@ public class CatContrl : MonoBehaviour
                         RotY = 1;
                         GetComponent<Rigidbody2D>().gravityScale = 0;
                         IsClimb = true;
+
+                        if (hit_U_1.collider.GetComponent<MoveGround>() != null)
+                        {
+                            hit_U_1.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                        }
 
                         if (CanLongTrue == true)
                         {
@@ -1234,14 +1482,19 @@ public class CatContrl : MonoBehaviour
             }
             else if (hit_U_2.collider != null)
             {
-                if (hit_U_2.collider.gameObject.tag == "Wall")
+                if (hit_U_2.collider.gameObject.tag == "Ground" || hit_U_2.collider.gameObject.tag == "Wall")
                 {
-
                     if (Input.GetKey(KeyCode.W))
                     {
                         RotY = 1;
                         GetComponent<Rigidbody2D>().gravityScale = 0;
                         IsClimb = true;
+
+                        if (hit_U_2.collider.GetComponent<MoveGround>() != null)
+                        {
+                            hit_U_2.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                        }
+
 
                         if (CanLongTrue == true)
                         {
@@ -1297,6 +1550,11 @@ public class CatContrl : MonoBehaviour
                         RotX = -1;
                         IsClimb = true;
 
+                        if (hit_L_1.collider.GetComponent<MoveGround>() != null)
+                        {
+                            hit_L_1.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                        }
+
                         if (CanLongTrue == true)
                         {
                             LongLight.SetActive(true);
@@ -1343,6 +1601,11 @@ public class CatContrl : MonoBehaviour
                     {
                         RotX = -1;
                         IsClimb = true;
+
+                        if (hit_L_2.collider.GetComponent<MoveGround>() != null)
+                        {
+                            hit_L_2.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                        }
 
                         if (CanLongTrue == true)
                         {
@@ -1392,6 +1655,10 @@ public class CatContrl : MonoBehaviour
                         RotX = 1;
                         IsClimb = true;
 
+                        if (hit_R_1.collider.GetComponent<MoveGround>() != null)
+                        {
+                            hit_R_1.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                        }
 
                         if (CanLongTrue == true)
                         {
@@ -1425,6 +1692,11 @@ public class CatContrl : MonoBehaviour
                     {
                         RotX = 1;
                         IsClimb = true;
+
+                        if (hit_R_2.collider.GetComponent<MoveGround>() != null)
+                        {
+                            hit_R_2.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                        }
 
 
                         if (CanLongTrue == true)
@@ -2853,8 +3125,14 @@ public class CatContrl : MonoBehaviour
         //    if (NowCatMorph == CatMorph.Climb || NowCatMorph == CatMorph.NoMorph)
         //    {
 
-            //    }
-            //}
+        //    }
+        //}
+
+        if (collision.gameObject.tag == "Pike")
+        {
+            //碰到陷阱，到儲存點復活
+            StartCoroutine(CatDeath());
+        }
     }
 
 

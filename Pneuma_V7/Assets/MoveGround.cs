@@ -13,7 +13,7 @@ public class MoveGround : MonoBehaviour
 
 
     private GameObject OldPos;
-    private GameObject NewPos;
+    public GameObject NewPos;
     private int MovePosNumber = 0;//跟隨哪個座標
     private float MovePosTime = 0;//(0~1)
     private CatContrl Cat;
@@ -37,14 +37,55 @@ public class MoveGround : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MoveObject(gameObject);
+   
+        float Remove = Vector2.Distance(NewPos.transform.position, transform.position);
+
+        if (Remove <= 0.1f)
+        {
+            OldPos = MovePos[MovePosNumber];
+
+            MovePosNumber++;//下一個目標
+            if (MovePosNumber >= MovePos.Length)
+            {
+                MovePosNumber = 0;
+            }
+            NewPos = MovePos[MovePosNumber];//下一個目標
+        }
+
+
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
+        //if (Cat.gameObject.transform.parent == null)
+        //{
+        //    GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        //    CatOn = false;
+        //}
+    }
+
+    /// <summary>
+    /// 跟隨移動平台移動
+    /// </summary>
+    /// <param name="MoveO">移動物件</param>
+    public void MoveObject(GameObject MoveO)
+    {
+        Vector3 dir = NewPos.transform.position - transform.position;
+        dir.z = 0f;
+        dir.Normalize();
+
+        MoveO.transform.position += dir * Time.deltaTime * 0.1f * MoveSpeed;
+    }
+
+    public void OldMove()
+    {
         MovePosTime += Time.deltaTime * 0.1f * MoveSpeed;
 
-        if(MovePosTime >= 1f)
+        if (MovePosTime >= 1f)
         {
             OldPos = MovePos[MovePosNumber];
 
             MovePosNumber++;
-            if(MovePosNumber >= MovePos.Length)
+            if (MovePosNumber >= MovePos.Length)
             {
                 MovePosNumber = 0;
             }
@@ -53,64 +94,43 @@ public class MoveGround : MonoBehaviour
             MovePosTime = 0;
         }
 
-
-        //GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(OldPos.transform.position, NewPos.transform.position, MovePosTime));
-        //GetComponent<Rigidbody2D>().MovePosition(FollowPos.transform.position);
-        //if (CatOn == true)
-        //{
-        //    GetComponent<Rigidbody2D>().MovePosition(FollowPos.transform.position);
-        //}
-        //else
-        //{
-        //    transform.position = Vector2.Lerp(transform.position, FollowPos.transform.position, 0.2f);
-        //}
         transform.position = Vector2.Lerp(OldPos.transform.position, NewPos.transform.position, MovePosTime);
-
-        //if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) + Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) >= 20)
-        //{
-        //    GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        //}
-        if (Cat.gameObject.transform.parent == null)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            CatOn = false;
-        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.GetComponent<CatContrl>() != null)
-        {
-            if(IsPike == false)
-            {
-                collision.transform.parent = transform;
-                collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-                CatOn = true;
-            }
-        }
-    }
-
-    //private void OnCollisionStay2D(Collision2D collision)
+    //private void OnCollisionEnter2D(Collision2D collision)
     //{
-    //    if (collision.gameObject.GetComponent<CatContrl>() != null)
+    //    if(collision.gameObject.GetComponent<CatContrl>() != null)
     //    {
-    //        collision.transform.parent = transform.parent;
-    //        collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-    //        CatOn = true;
+    //        if(IsPike == false)
+    //        {
+    //            collision.transform.parent = transform;
+    //            collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+    //            CatOn = true;
+    //        }
     //    }
     //}
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<CatContrl>() != null)
-        {
-            if (IsPike == false)
-            {
-                collision.transform.parent = null;
-                collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = collision.gameObject.GetComponent<CatContrl>().CatWeight;
-                //GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                CatOn = false;
-            }
-        }
-    }
+    ////private void OnCollisionStay2D(Collision2D collision)
+    ////{
+    ////    if (collision.gameObject.GetComponent<CatContrl>() != null)
+    ////    {
+    ////        collision.transform.parent = transform.parent;
+    ////        collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+    ////        CatOn = true;
+    ////    }
+    ////}
+
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.GetComponent<CatContrl>() != null)
+    //    {
+    //        if (IsPike == false)
+    //        {
+    //            collision.transform.parent = null;
+    //            collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = collision.gameObject.GetComponent<CatContrl>().CatWeight;
+    //            //GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+    //            CatOn = false;
+    //        }
+    //    }
+    //}
 }

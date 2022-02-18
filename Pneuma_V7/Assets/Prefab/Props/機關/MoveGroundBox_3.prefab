@@ -4843,7 +4843,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1390344050358676761}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6915722082677134506
 SpriteRenderer:
@@ -4908,8 +4908,7 @@ GameObject:
   - component: {fileID: 1390344050358676760}
   - component: {fileID: 1390344050358676762}
   - component: {fileID: 1390344050358676740}
-  - component: {fileID: 2778723807206709857}
-  - component: {fileID: 3210314483900384902}
+  - component: {fileID: 6294637483199471755}
   m_Layer: 9
   m_Name: MoveGround
   m_TagString: Ground
@@ -4928,7 +4927,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3886715233447515146}
   - {fileID: 1390344051231215718}
   - {fileID: 8828359122511601369}
   - {fileID: 248843669140554726}
@@ -5005,7 +5003,7 @@ MonoBehaviour:
   - {fileID: 1390344050510408527}
   - {fileID: 1390344050943192842}
   - {fileID: 5294385485218980034}
-  MoveSpeed: 3
+  MoveSpeed: 30
   CatOn: 0
   IsPike: 0
 --- !u!50 &1390344050358676740
@@ -5029,27 +5027,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!251 &2778723807206709857
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1390344050358676767}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
---- !u!68 &3210314483900384902
-EdgeCollider2D:
+--- !u!61 &6294637483199471755
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5059,26 +5038,21 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6, y: 2}
+    newSize: {x: 9, y: 3.05}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.46, y: 1.5}
   m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.278656, y: 0.043798804}
-  - {x: -2.3886566, y: 0.033230543}
-  - {x: -2.778061, y: 0.031184435}
-  - {x: -2.780487, y: 0.72272396}
-  - {x: -2.7549438, y: 0.7483573}
-  - {x: 2.744522, y: 0.74649835}
-  - {x: 2.7799072, y: 0.7127564}
-  - {x: 2.77919, y: 0.005121708}
-  - {x: 2.4317017, y: -0.019129634}
-  - {x: -1.966629, y: 0.04486394}
-  - {x: -2.2799835, y: 0.04733002}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &1390344050510408527
 GameObject:
   m_ObjectHideFlags: 0
@@ -5319,7 +5293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1390344050358676761}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -270, y: 0, z: 0}
 --- !u!198 &1390344051231215712
 ParticleSystem:
@@ -10123,7 +10097,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1390344050358676761}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7070528456025335221
 SpriteRenderer:
@@ -10205,7 +10179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1390344050358676761}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6911291718831848197
 SpriteRenderer:
@@ -10288,68 +10262,6 @@ Transform:
   m_Father: {fileID: 1390344051087570456}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5774828501733908645
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3886715233447515146}
-  - component: {fileID: 3351402366959297403}
-  m_Layer: 9
-  m_Name: GameObject
-  m_TagString: Wall
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3886715233447515146
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5774828501733908645}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1390344050358676761}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &3351402366959297403
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5774828501733908645}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.5409546, y: -0.74869764}
-  - {x: -2.6971436, y: -0.7486241}
-  - {x: -2.779068, y: -0.66534936}
-  - {x: -2.7793427, y: 0.48907614}
-  - {x: -2.5275726, y: 0.47847056}
-  - {x: 2.6308746, y: 0.4847498}
-  - {x: 2.7763367, y: 0.49707508}
-  - {x: 2.77919, y: -0.6603129}
-  - {x: 2.6921844, y: -0.7479999}
-  - {x: -2.5319366, y: -0.7484046}
-  - {x: -2.5479736, y: -0.74840593}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &5850587489291673800
 GameObject:
   m_ObjectHideFlags: 0
@@ -10379,7 +10291,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1390344050358676761}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4582010661265079865
 SpriteRenderer:
@@ -10461,7 +10373,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1390344050358676761}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1584839725104167886
 SpriteRenderer:

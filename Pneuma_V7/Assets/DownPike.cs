@@ -6,8 +6,8 @@ public class DownPike : MonoBehaviour
 {
     [Header("平台")]
     public GameObject MoveGround;
-    [Header("要移動的平台")]
-    public GameObject[] Grounds;
+    //[Header("要移動的平台")]
+    //public GameObject[] Grounds;
 
     [Header("繩索兩端")]
     public GameObject PosA;
@@ -19,7 +19,8 @@ public class DownPike : MonoBehaviour
     public bool CanDown;
     //[Header("所在位置")]
     //public float Pos;
-
+    [Header("下降速度")]
+    public float DownSpeed;
     [Header("上升速度")]
     public float UpSpeed;
 
@@ -32,9 +33,13 @@ public class DownPike : MonoBehaviour
     public void Start()
     {
         CanDown = true;
-        MoveGround.GetComponent<Collider2D>().enabled = false;
-        MoveGround.GetComponent<Rigidbody2D>().gravityScale = 0;
-        MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        MoveGround.GetComponent<MoveGround>().MoveSpeed = 0;
+        MoveGround.GetComponent<MoveGround>().NewPos = MoveGround.GetComponent<MoveGround>().MovePos[0];
+        MoveGround.transform.position = PosA.transform.position;
+        //MoveGround.GetComponent<Collider2D>().enabled = false;
+        //MoveGround.GetComponent<Rigidbody2D>().gravityScale = 0;
+        //MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        //MoveGround.GetComponent<TouchGround>().CanIn = false;
         IsDown = false;
     }
     // Update is called once per frame
@@ -42,18 +47,11 @@ public class DownPike : MonoBehaviour
     {
         if (IsDown == false)
         {
-            if (pos.y < PosA.transform.position.y)
+            if (MoveGround.GetComponent<MoveGround>().NewPos == MoveGround.GetComponent<MoveGround>().MovePos[0])//往上升
             {
-                MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                //pos += new Vector3(0, UpSpeed, 0);
-                pos += new Vector3(0, UpSpeed * Time.deltaTime, 0);
-                Vector3 A = pos; 
-                float B = PosA.transform.position.y - pos.y;
-                MoveGround.GetComponent<Rigidbody2D>().MovePosition(pos);
-                //MoveGround.GetComponent<Rigidbody2D>().velocity = pos;
+                MoveGround.GetComponent<MoveGround>().MoveSpeed = UpSpeed;
 
-
-                if (B <= 0.6f)
+                if(MoveGround.transform.position.y >= PosA.transform.position.y - 0.5f)
                 {
                     MoveGround.tag = "Pike";
                 }
@@ -61,31 +59,63 @@ public class DownPike : MonoBehaviour
                 {
                     MoveGround.tag = "Ground";
                 }
-                //for (int i = 0; i < Grounds.Length; i++)
+
+                //
+                //MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                //pos += new Vector3(0, UpSpeed * Time.deltaTime, 0);
+                //Vector3 A = pos; 
+                //float B = PosA.transform.position.y - pos.y;
+                //MoveGround.GetComponent<Rigidbody2D>().MovePosition(pos);
+
+
+                //if (B <= 0.6f)
                 //{
-                //    Grounds[i].transform.position += new Vector3(0, UpSpeed * Time.deltaTime, 0);
+                //    MoveGround.tag = "Pike";
                 //}
+                //else
+                //{
+                //    MoveGround.tag = "Ground";
+                //}
+                //
+
+            }
+            else//固定了
+            {
+                //MoveGround.transform.position = PosA.transform.position;
+                MoveGround.GetComponent<MoveGround>().MoveSpeed = 0;
+                //MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                if(CanDown == false)
+                {
+                    MoveGround.tag = "Pike";
+                    CanDown = true;
+                }
+            }
+        }
+        else//往下掉
+        {
+          
+
+            MoveGround.tag = "Ground";
+            ////MoveGround.GetComponent<TouchGround>().CanIn = false;
+
+            if (MoveGround.GetComponent<MoveGround>().NewPos == MoveGround.GetComponent<MoveGround>().MovePos[0])
+            {
+                if (MoveGround.GetComponent<MoveGround>().MoveSpeed != 0)
+                {
+                    StartCoroutine(DelayUp(UpDelay));
+                }
+                MoveGround.GetComponent<MoveGround>().MoveSpeed = 0;
+
+                //MoveGround.GetComponent<Collider2D>().enabled = true;
+                //MoveGround.GetComponent<Collider2D>().isTrigger = false;
+                //MoveGround.GetComponent<Rigidbody2D>().gravityScale = 0;
+                //MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                //pos = PosB.transform.position;
             }
             else
             {
-                MoveGround.transform.position = PosA.transform.position;
-                MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                CanDown = true;
-                MoveGround.tag = "Pike";
-            }
-        }
-        else
-        {
-            MoveGround.tag = "Ground";
-
-            if (Grounds[0].transform.position.y <= PosB.transform.position.y)
-            {
-                MoveGround.GetComponent<Collider2D>().enabled = true;
-                MoveGround.GetComponent<Collider2D>().isTrigger = false;
-                MoveGround.GetComponent<Rigidbody2D>().gravityScale = 0;
-                MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                pos = PosB.transform.position;
-                StartCoroutine(DelayUp(UpDelay));
+                DownSpeed += Time.deltaTime * 100f;
+                MoveGround.GetComponent<MoveGround>().MoveSpeed = DownSpeed;
             }
         }
     }
@@ -119,10 +149,10 @@ public class DownPike : MonoBehaviour
             {
                 CanDown = false;
                 MoveGround.tag = "Ground";
-                //MoveGround.transform.position = PosA.transform.position;
-                MoveGround.GetComponent<Collider2D>().enabled = false;
-                MoveGround.GetComponent<Collider2D>().isTrigger = true;
-                //MoveGround.GetComponent<Rigidbody2D>().gravityScale = 4f;
+                ////MoveGround.transform.position = PosA.transform.position;
+                //MoveGround.GetComponent<Collider2D>().enabled = false;
+                //MoveGround.GetComponent<Collider2D>().isTrigger = true;
+                ////MoveGround.GetComponent<Rigidbody2D>().gravityScale = 4f;
                 StartCoroutine(DelayDown(DownDelay));
                 //for (int i = 0; i < Grounds.Length; i++)
                 //{
@@ -134,16 +164,21 @@ public class DownPike : MonoBehaviour
 
     public IEnumerator DelayUp(float DelayTime)
     {
+        MoveGround.GetComponent<MoveGround>().MoveSpeed = 0;
         yield return new WaitForSeconds(DelayTime);
         IsDown = false;
     }
     public IEnumerator DelayDown(float DelayTime)
     {
+        DownSpeed = 0;
+        MoveGround.GetComponent<MoveGround>().MoveSpeed = 0;
         yield return new WaitForSeconds(DelayTime);
-        MoveGround.transform.position = PosA.transform.position;
         IsDown = true;
-        MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        MoveGround.GetComponent<Rigidbody2D>().gravityScale = 4;
         CanDown = false;
+        DownSpeed = 60;
+        MoveGround.GetComponent<MoveGround>().MoveSpeed = DownSpeed;
+        //MoveGround.transform.position = PosA.transform.position;
+        //MoveGround.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        //MoveGround.GetComponent<Rigidbody2D>().gravityScale = 4;
     }
 }
