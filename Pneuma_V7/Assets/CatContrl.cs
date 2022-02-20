@@ -250,11 +250,10 @@ public class CatContrl : MonoBehaviour
             Debug.Log("Is Climb");
 
             RayGround();
-            if ((Input.GetMouseButtonDown(0) || Key_0 == true) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
-            {
-          
 
 #if UNITY_EDITOR || UNITY_STANDALONE
+            if ((Input.GetMouseButtonDown(0) || Key_0 == true) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+            {
                 // 滑鼠偵測
                 CatMusic.PlayMusic(2);
                 CanLong = false;
@@ -266,7 +265,11 @@ public class CatContrl : MonoBehaviour
                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
 
                 StartCoroutine(LongBack(1f));
+            }
 #elif UNITY_ANDROID
+
+            if (Key_0 == true && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+            {
                 // 觸碰偵測
                 if(Key_0_Drag == false)
                 {
@@ -283,8 +286,8 @@ public class CatContrl : MonoBehaviour
 
                     Key_0_Drag = true;//只偵測一次
                 }
-#endif
             }
+#endif
 
         }
         else
@@ -364,12 +367,10 @@ public class CatContrl : MonoBehaviour
                 }
             }
 
+#if UNITY_EDITOR || UNITY_STANDALONE
 
             if ((Input.GetMouseButtonDown(0) || Key_0 == true) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
             {
-
-
-#if UNITY_EDITOR || UNITY_STANDALONE
                 // 滑鼠偵測
                 CatMusic.PlayMusic(2);
                 CanLong = false;
@@ -382,8 +383,11 @@ public class CatContrl : MonoBehaviour
                 LongLight.SetActive(false);
 
                 StartCoroutine(LongBack(1f));
+            }
 
 #elif UNITY_ANDROID
+            if (Key_0 == true && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+            {
 		        // 觸碰偵測
                 if(Key_0_Drag == false)
                 {
@@ -402,15 +406,14 @@ public class CatContrl : MonoBehaviour
                     Key_0_Drag = true;//只偵測一次
                 }
           
-#endif
             }
+#endif
 
         }
 
-
+#if UNITY_EDITOR || UNITY_STANDALONE
         if ((Input.GetMouseButtonUp(0) || (Key_0 == false && Key_0_Drag == true)) && NowCatAct == CatAct.LongLongCat)
         {
-#if UNITY_EDITOR || UNITY_STANDALONE
             // 滑鼠偵測
             CatMusic.PlayMusic(3);
             //縮回去
@@ -419,9 +422,11 @@ public class CatContrl : MonoBehaviour
             GetComponent<Collider2D>().isTrigger = false;
             transform.parent = null;
             NowCatAct = CatAct.Back;
+        }
 
 #elif UNITY_ANDROID
-
+        if ((Key_0 == false && Key_0_Drag == true) && NowCatAct == CatAct.LongLongCat)
+        {
 		    // 觸碰偵測
             CatMusic.PlayMusic(3);
             //縮回去
@@ -431,8 +436,8 @@ public class CatContrl : MonoBehaviour
             transform.parent = null;
             NowCatAct = CatAct.Back;
             Key_0_Drag = false;//只偵測一次
-#endif
         }
+#endif
 
         LongPictrue();
     }
@@ -628,12 +633,10 @@ public class CatContrl : MonoBehaviour
                     GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
                 }
 
+#if UNITY_EDITOR || UNITY_STANDALONE
                 if ((Input.GetMouseButtonDown(0) || Key_0 == true))
                 {
                     //CloudTime = 5;
-
-
-#if UNITY_EDITOR || UNITY_STANDALONE
                     // 滑鼠偵測
                     if (CanJump == true)
                     {
@@ -643,22 +646,26 @@ public class CatContrl : MonoBehaviour
                         //WaterJumpPower = 0.1f;
                         WaterJumpPower = 1f;
                     }
+                }
 #elif UNITY_ANDROID
-                // 觸碰偵測
-                if(Key_0_Drag == false)
-                {
-                    if (CanJump == true)
+                if (Key_0 == true)
+                {   
+                    // 觸碰偵測
+                    if(Key_0_Drag == false)
                     {
-                        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-                        GetComponent<Rigidbody2D>().gravityScale = 0.01f;
-                        GetComponent<Animator>().SetBool("WaterJumpReady", true);
-                        //WaterJumpPower = 0.1f;
-                        WaterJumpPower = 1f;
+                        if (CanJump == true)
+                        {
+                            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                            GetComponent<Rigidbody2D>().gravityScale = 0.01f;
+                            GetComponent<Animator>().SetBool("WaterJumpReady", true);
+                            //WaterJumpPower = 0.1f;
+                            WaterJumpPower = 1f;
+                        }
+                        Key_0_Drag = true;//只偵測一次
                     }
-                    Key_0_Drag = true;//只偵測一次
                 }
 #endif
-                }
+
             }
             else
             {
@@ -667,13 +674,11 @@ public class CatContrl : MonoBehaviour
                 //{
                 //    WaterJumpPower = 1f;
                 //}
+#if UNITY_EDITOR || UNITY_STANDALONE
 
                 if (Input.GetMouseButtonUp(0) || (Key_0 == false && Key_0_Drag == true))
                 {
                     //CloudTime = 5;
-
-
-#if UNITY_EDITOR || UNITY_STANDALONE
                     // 滑鼠偵測
                     if (CanJump == true)
                     {
@@ -705,40 +710,35 @@ public class CatContrl : MonoBehaviour
                         GetComponent<Animator>().SetBool("Jump", true);
                         GetComponent<Animator>().SetBool("WaterJumpReady", false);
                     }
+                }
 
 #elif UNITY_ANDROID
+                if (Key_0 == false && Key_0_Drag == true)
+                {
+		            // 觸碰偵測
+                    if (CanJump == true)
+                        {
+                            Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
 
-		    // 觸碰偵測
-            if (CanJump == true)
-                    {
-                        Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+                            direction.z = 0f;
+                            direction.Normalize();
+                            Vector3 PowerPath = direction;
+                            Debug.Log(PowerPath);
 
-                        direction.z = 0f;
-                        direction.Normalize();
-                        Vector3 PowerPath = direction;
-                        Debug.Log(PowerPath);
+                            CatMusic.PlayMusic(0);
+                            NowCatAct = CatAct.Jump;
+                            CanJump = false;
+                            StartCoroutine(JumpDebug(0.3f));
 
-                        CatMusic.PlayMusic(0);
-                        NowCatAct = CatAct.Jump;
-                        CanJump = false;
-                        StartCoroutine(JumpDebug(0.3f));
-
-                        //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-                        //
-                        //GetComponent<Rigidbody2D>().gravityScale = CatWeight;
-                        //GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 2 * WaterJumpPower);
-                        //GetComponent<Animator>().SetBool("Jump", true);
-                        //GetComponent<Animator>().SetBool("WaterJumpReady", false);
-                        //
-                        GetComponent<Rigidbody2D>().gravityScale = 0f;
-                        //GetComponent<Collider2D>().isTrigger = true;
-                        GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 3 * WaterJumpPower);
-                        GetComponent<Animator>().SetBool("Jump", true);
-                        GetComponent<Animator>().SetBool("WaterJumpReady", false);
-                    }
-            Key_0_Drag = false;//只偵測一次
-#endif
+                   
+                            GetComponent<Rigidbody2D>().gravityScale = 0f;
+                            GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 3 * WaterJumpPower);
+                            GetComponent<Animator>().SetBool("Jump", true);
+                            GetComponent<Animator>().SetBool("WaterJumpReady", false);
+                        }
+                    Key_0_Drag = false;//只偵測一次
                 }
+#endif
 
 
                 if (Input.GetMouseButtonUp(1))
@@ -824,6 +824,7 @@ public class CatContrl : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
             }
+#if UNITY_EDITOR || UNITY_STANDALONE
 
             if (Input.GetMouseButton(0) || Key_0 == true)
             {
@@ -836,32 +837,48 @@ public class CatContrl : MonoBehaviour
                 {
                     transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
                 }
-#if UNITY_EDITOR || UNITY_STANDALONE
                 // 滑鼠偵測
                 CloudMove();
+            }
 #elif UNITY_ANDROID
-		        // 觸碰偵測
+		    if (Key_0 == true)
+            {
+                Key_0_Drag = true;
+                if (TurnRight == true)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
+                }      
+                // 觸碰偵測
                 CloudMove_Phone(Touch_Right.GetComponent<FixedJoystickHandler>().direction);
                 Key_0_Drag = false;//只偵測一次
-#endif
             }
+#endif
 
+#if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetMouseButtonUp(0) || (Key_0 == false && Key_0_Drag == true))
             {
                 //CloudMove();
                 //CatAni.SetBool("Move", false);
 
-#if UNITY_EDITOR || UNITY_STANDALONE
                 // 滑鼠偵測
                 CloudMove();
                 CatAni.SetBool("Move", false);
+            }
 #elif UNITY_ANDROID
-		        // 觸碰偵測
+		    if (Input.GetMouseButtonUp(0) || (Key_0 == false && Key_0_Drag == true))
+            {
+                //CloudMove();
+                //CatAni.SetBool("Move", false);
+                // 觸碰偵測
                 CloudMove_Phone(Touch_Right.GetComponent<FixedJoystickHandler>().direction);
                 CatAni.SetBool("Move", false);
                 Key_0_Drag = false;//只偵測一次
-#endif
             }
+#endif
 
             //if (Input.GetMouseButtonDown(0))
             //{
@@ -2491,9 +2508,9 @@ public class CatContrl : MonoBehaviour
 
     public void WaterJump(Vector2 RayVect)
     {
+#if UNITY_EDITOR || UNITY_STANDALONE
         if (Input.GetMouseButtonDown(0) || Key_0 == true)
         {
-#if UNITY_EDITOR || UNITY_STANDALONE
             // 滑鼠偵測
             if (CanJump == true)
             {
@@ -2503,8 +2520,11 @@ public class CatContrl : MonoBehaviour
                 //WaterJumpPower = 0.1f;
                 WaterJumpPower = 1f;
                 WaterJumpReady = true;
-            }
+            } 
+        }
 #elif UNITY_ANDROID
+        if (Key_0 == true)
+        {
                 // 觸碰偵測
                 if(Key_0_Drag == false)
                 {
@@ -2519,8 +2539,8 @@ public class CatContrl : MonoBehaviour
                     }
                     Key_0_Drag = true;//只偵測一次
                 }
-#endif
         }
+#endif
         if (WaterJumpReady == true)
         {
             WaterJumpPictrue();

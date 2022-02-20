@@ -16915,7 +16915,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1551837348}
         m_TargetAssemblyTypeName: CatContrl, Assembly-CSharp
         m_MethodName: GetJump
         m_Mode: 1
@@ -18727,13 +18727,37 @@ MonoBehaviour:
   content: {fileID: 2074959699}
   beginControl:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1551837348}
+        m_TargetAssemblyTypeName: CatContrl, Assembly-CSharp
+        m_MethodName: GetStartRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   controlling:
     m_PersistentCalls:
       m_Calls: []
   endControl:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1551837348}
+        m_TargetAssemblyTypeName: CatContrl, Assembly-CSharp
+        m_MethodName: GetEnd_Right
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   jsContainer: {fileID: 0}
   joystick: {fileID: 0}
   InputDirection: {x: 0, y: 0, z: 0}
@@ -47431,7 +47455,7 @@ MonoBehaviour:
   endControl:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1551837348}
         m_TargetAssemblyTypeName: CatContrl, Assembly-CSharp
         m_MethodName: GetEnd_Left
         m_Mode: 1
@@ -66837,7 +66861,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4386825958919088841}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -87.879684, y: 6.474347, z: -10}
+  m_LocalPosition: {x: -85.25282, y: 6.474347, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4386825959233607048}
