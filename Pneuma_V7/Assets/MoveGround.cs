@@ -34,6 +34,12 @@ public class MoveGround : MonoBehaviour
         MovePosNumber = 1;
     }
 
+    public void SetStart()
+    {
+        transform.position = MovePos[0].transform.position;
+        MovePosNumber = 1;
+    }
+
     // Update is called once per frame
     void Update()
     {

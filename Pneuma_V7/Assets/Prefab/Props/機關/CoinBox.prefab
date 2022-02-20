@@ -4824,6 +4824,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3490067458132845660}
   - component: {fileID: 3490067458132845651}
+  - component: {fileID: 6543836350338932063}
   m_Layer: 0
   m_Name: CoinBox
   m_TagString: Untagged
@@ -4865,6 +4866,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6543836350338932063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3490067458132845661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2229b32776d074e819606ef6a8a668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Coin: {fileID: 831399362593478363, guid: 4787df3708c31ed47983b20b83cf48bd, type: 3}
 --- !u!1 &4316291827526663408
 GameObject:
   m_ObjectHideFlags: 0

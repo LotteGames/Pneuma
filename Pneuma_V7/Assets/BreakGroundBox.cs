@@ -15,6 +15,14 @@ public class BreakGroundBox : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
     }
+    public void SetStart()
+    {
+        if(transform.childCount == 0)
+        {
+            GameObject Ins = Instantiate(BreakRock, transform.position, transform.rotation, transform);
+            Ins.GetComponent<BreakGround>().Box = GetComponent<BreakGroundBox>();
+        }
+    }
 
     // Update is called once per frame
     public void InsNew()

@@ -13,7 +13,7 @@ public class CoinContrl : MonoBehaviour
         {
             GameObject Ani = Instantiate(CoinAni, transform.position, Quaternion.Euler(0, 0, 0));
             Destroy(Ani, 5);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

@@ -120,16 +120,17 @@ public class CatContrl : MonoBehaviour
         CatAni = GetComponent<Animator>();
         HH = true;
 
-#if UNITY_EDITOR || UNITY_STANDALONE
-        Phone_UI.SetActive(false);   // 滑鼠偵測
-#elif UNITY_ANDROID
-		Phone_UI.SetActive(true);  // 觸碰偵測
-#endif
+//#if UNITY_EDITOR || UNITY_STANDALONE
+//        Phone_UI.SetActive(false);   // 滑鼠偵測
+//#elif UNITY_ANDROID
+//		Phone_UI.SetActive(true);  // 觸碰偵測
+//#endif
     }
     bool HH;
     // Update is called once per frame
     private void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(HH == true)
@@ -256,10 +257,11 @@ public class CatContrl : MonoBehaviour
 
                 StartCoroutine(LongBack(1f));
             }
+
         }
         else
         {
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
             {
                 TurnRight = true;
                 CatAni.SetFloat("TurnRight", 1);
@@ -280,7 +282,7 @@ public class CatContrl : MonoBehaviour
                     GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
             }
-            else if (Input.GetKey(KeyCode.A))
+            else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
             {
                 TurnRight = false;
                 CatAni.SetFloat("TurnRight", 0);
@@ -335,34 +337,34 @@ public class CatContrl : MonoBehaviour
             }
 
 
-            if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
-            {
-                CatMusic.PlayMusic(2);
-                CanLong = false;
-                NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
-                GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
-                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                GetComponent<Collider2D>().isTrigger = true;
+            //if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+            //{
+            //    CatMusic.PlayMusic(2);
+            //    CanLong = false;
+            //    NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
+            //    GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
+            //    GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
+            //    GetComponent<Collider2D>().isTrigger = true;
 
-                nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
-                LongLight.SetActive(false);
+            //    nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+            //    LongLight.SetActive(false);
 
-                StartCoroutine(LongBack(1f));
-            }
+            //    StartCoroutine(LongBack(1f));
+            //}
 
         }
 
         //
-        if (Input.GetMouseButtonUp(0) && NowCatAct == CatAct.LongLongCat)
-        {
-            CatMusic.PlayMusic(3);
-            //縮回去
-            StartCoroutine(LongDebug());
-            CanLong = false;
-            GetComponent<Collider2D>().isTrigger = false;
-            transform.parent = null;
-            NowCatAct = CatAct.Back;
-        }
+        //if (Input.GetMouseButtonUp(0) && NowCatAct == CatAct.LongLongCat)
+        //{
+        //    CatMusic.PlayMusic(3);
+        //    //縮回去
+        //    StartCoroutine(LongDebug());
+        //    CanLong = false;
+        //    GetComponent<Collider2D>().isTrigger = false;
+        //    transform.parent = null;
+        //    NowCatAct = CatAct.Back;
+        //}
 
         LongPictrue();
     }
@@ -394,7 +396,7 @@ public class CatContrl : MonoBehaviour
         }
         else
         {
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
             {
                 TurnRight = true;
                 CatAni.SetFloat("TurnRight", 1);
@@ -415,7 +417,7 @@ public class CatContrl : MonoBehaviour
                     GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y); 
                 }
             }
-            else if (Input.GetKey(KeyCode.A))
+            else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
             {
                 TurnRight = false;
                 CatAni.SetFloat("TurnRight", 0);
@@ -528,7 +530,7 @@ public class CatContrl : MonoBehaviour
         //}
         else
         {
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
             {
                 TurnRight = true;
                 CatAni.SetFloat("TurnRight", 1);
@@ -540,7 +542,7 @@ public class CatContrl : MonoBehaviour
                 }
                 GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
-            else if (Input.GetKey(KeyCode.A))
+            else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
             {
                 TurnRight = false;
                 CatAni.SetFloat("TurnRight", 0);
@@ -663,7 +665,7 @@ public class CatContrl : MonoBehaviour
         {
             if (WaterJumpReady == false)
             {
-                if (Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
                 {
                     TurnRight = true;
                     CatAni.SetFloat("TurnRight", 1);
@@ -675,7 +677,7 @@ public class CatContrl : MonoBehaviour
                     }
                     GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
                 }
-                else if (Input.GetKey(KeyCode.A))
+                else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
                 {
                     TurnRight = false;
                     CatAni.SetFloat("TurnRight", 0);
@@ -1436,7 +1438,7 @@ public class CatContrl : MonoBehaviour
                 if (hit_U_1.collider.gameObject.tag == "Ground" || hit_U_1.collider.gameObject.tag == "Wall")
                 {
 
-                    if (Input.GetKey(KeyCode.W))
+                    if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
                     {
                         RotY = 1;
                         GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -1483,7 +1485,7 @@ public class CatContrl : MonoBehaviour
             {
                 if (hit_U_2.collider.gameObject.tag == "Ground" || hit_U_2.collider.gameObject.tag == "Wall")
                 {
-                    if (Input.GetKey(KeyCode.W))
+                    if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
                     {
                         RotY = 1;
                         GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -1544,7 +1546,7 @@ public class CatContrl : MonoBehaviour
             {
                 if (hit_L_1.collider.gameObject.tag == "Ground" || hit_L_1.collider.gameObject.tag == "Wall")
                 {
-                    if (Input.GetKey(KeyCode.A))
+                    if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
                     {
                         RotX = -1;
                         IsClimb = true;
@@ -1596,7 +1598,7 @@ public class CatContrl : MonoBehaviour
             {
                 if (hit_L_2.collider.gameObject.tag == "Ground" || hit_L_2.collider.gameObject.tag == "Wall")
                 {
-                    if (Input.GetKey(KeyCode.A))
+                    if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
                     {
                         RotX = -1;
                         IsClimb = true;
@@ -1649,7 +1651,7 @@ public class CatContrl : MonoBehaviour
             {
                 if (hit_R_1.collider.gameObject.tag == "Ground" || hit_R_1.collider.gameObject.tag == "Wall")
                 {
-                    if (Input.GetKey(KeyCode.D))
+                    if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
                     {
                         RotX = 1;
                         IsClimb = true;
@@ -1687,7 +1689,7 @@ public class CatContrl : MonoBehaviour
             {
                 if (hit_R_2.collider.gameObject.tag == "Ground" || hit_R_2.collider.gameObject.tag == "Wall")
                 {
-                    if (Input.GetKey(KeyCode.D))
+                    if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
                     {
                         RotX = 1;
                         IsClimb = true;
@@ -1832,13 +1834,13 @@ public class CatContrl : MonoBehaviour
                         CatAni.SetFloat("TurnRight", 0.666f);
                         transform.rotation = Quaternion.Euler(0, 0, -90);
 
-                        if (Input.GetKey(KeyCode.W))
+                        if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
                         {
                             TurnRight = false;
                             CatAni.SetBool("Move", true);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, MoveSpeed * 0.7f);
                         }
-                        else if (Input.GetKey(KeyCode.A))
+                        else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
                         {
                             TurnRight = true;
                             CatAni.SetBool("Move", true);
@@ -1879,13 +1881,13 @@ public class CatContrl : MonoBehaviour
                         CatAni.SetFloat("TurnRight", 0.666f);
                         transform.rotation = Quaternion.Euler(0, 0, 0);
 
-                        if (Input.GetKey(KeyCode.S))
+                        if (Input.GetKey(KeyCode.S) || WhatKey_ == "S")
                         {
                             TurnRight = true;
                             CatAni.SetBool("Move", true);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, -MoveSpeed * 0.7f);
                         }
-                        else if (Input.GetKey(KeyCode.A))
+                        else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
                         {
                             TurnRight = false;
                             CatAni.SetBool("Move", true);
@@ -1926,13 +1928,13 @@ public class CatContrl : MonoBehaviour
                         CatAni.SetFloat("TurnRight", 0.666f);
                         transform.rotation = Quaternion.Euler(0, 0, 180);
 
-                        if (Input.GetKey(KeyCode.W))
+                        if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
                         {
                             TurnRight = true;
                             CatAni.SetBool("Move", true);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, MoveSpeed * 0.7f);
                         }
-                        else if (Input.GetKey(KeyCode.D))
+                        else if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
                         {
                             TurnRight = false;
                             CatAni.SetBool("Move", true);
@@ -1971,13 +1973,13 @@ public class CatContrl : MonoBehaviour
                         CatAni.SetFloat("TurnRight", 0.666f);
                         transform.rotation = Quaternion.Euler(0, 0, 90);
 
-                        if (Input.GetKey(KeyCode.S))
+                        if (Input.GetKey(KeyCode.S) || WhatKey_ == "S")
                         {
                             TurnRight = false;
                             CatAni.SetBool("Move", true);
                             GetComponent<Rigidbody2D>().velocity = new Vector2(0, -MoveSpeed * 0.7f);
                         }
-                        else if (Input.GetKey(KeyCode.D))
+                        else if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
                         {
                             TurnRight = true;
                             CatAni.SetBool("Move", true);
@@ -2048,7 +2050,7 @@ public class CatContrl : MonoBehaviour
                     }
 
 
-                    if (Input.GetKey(KeyCode.D))
+                    if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
                     {
                         TurnRight = true;
                         CatAni.SetFloat("TurnRight", 1);
@@ -2060,7 +2062,7 @@ public class CatContrl : MonoBehaviour
                         }
                         GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
                     }
-                    else if (Input.GetKey(KeyCode.A))
+                    else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
                     {
                         TurnRight = false;
                         CatAni.SetFloat("TurnRight", 0);
@@ -2098,7 +2100,7 @@ public class CatContrl : MonoBehaviour
             }
 
 
-            if (Input.GetKey(KeyCode.D) && WaterJumpReady == false)
+            if ((Input.GetKey(KeyCode.D) || WhatKey_ == "D") && WaterJumpReady == false)
             {
                 TurnRight = true;
                 CatAni.SetFloat("TurnRight", 1);
@@ -2110,7 +2112,7 @@ public class CatContrl : MonoBehaviour
                 }
                 GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
-            else if (Input.GetKey(KeyCode.A) && WaterJumpReady == false)
+            else if ((Input.GetKey(KeyCode.A) || WhatKey_ == "A") && WaterJumpReady == false)
             {
                 TurnRight = false;
                 CatAni.SetFloat("TurnRight", 0);
@@ -2137,13 +2139,13 @@ public class CatContrl : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
             {
                 TurnRight = true;
                 CatAni.SetBool("Move", true);
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed / 2, MoveSpeed * 0.7f);
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
             {
                 TurnRight = false;
                 CatAni.SetBool("Move", true);
@@ -2163,13 +2165,13 @@ public class CatContrl : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0, 0, 90);
 
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
             {
                 TurnRight = false;
                 CatAni.SetBool("Move", true);
                 GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed / 2, MoveSpeed * 0.7f);
             }
-            else if (Input.GetKey(KeyCode.A))
+            else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
             {
                 TurnRight = true;
                 CatAni.SetBool("Move", true);
@@ -2189,13 +2191,13 @@ public class CatContrl : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0, 0, 180);
 
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) || WhatKey_ == "S")
             {
                 TurnRight = false;
                 CatAni.SetBool("Move", true);
                 GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed / 2, -MoveSpeed * 0.7f);
             }
-            else if (Input.GetKey(KeyCode.A))
+            else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
             {
                 TurnRight = true;
                 CatAni.SetBool("Move", true);
@@ -2215,13 +2217,13 @@ public class CatContrl : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0, 0, -90);
 
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) || WhatKey_ == "S")
             {
                 TurnRight = false;
                 CatAni.SetBool("Move", true);
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed / 2, -MoveSpeed * 0.7f);
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
             {
                 TurnRight = true;
                 CatAni.SetBool("Move", true);
@@ -2238,13 +2240,13 @@ public class CatContrl : MonoBehaviour
             if (Rot.x == -1 && Ray_Left == true)
             {
                 GetComponent<Rigidbody2D>().gravityScale = 0;
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
                 {
                     TurnRight = true;
                     CatAni.SetBool("Move", true);
                     GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, MoveSpeed * 0.7f);
                 }
-                else if (Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.S) || WhatKey_ == "S")
                 {
                     TurnRight = false;
                     CatAni.SetBool("Move", true);
@@ -2273,13 +2275,13 @@ public class CatContrl : MonoBehaviour
                 //GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
                 GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, -MoveSpeed * 0.1f);
 
-                if (Input.GetKey(KeyCode.W) && WaterJumpReady == false)
+                if ((Input.GetKey(KeyCode.W) || WhatKey_ == "W") && WaterJumpReady == false)
                 {
                     TurnRight = true;
                     CatAni.SetBool("Move", true);
                     GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, MoveSpeed * 0.7f);
                 }
-                else if (Input.GetKey(KeyCode.S) && WaterJumpReady == false)
+                else if ((Input.GetKey(KeyCode.S) || WhatKey_ == "S") && WaterJumpReady == false)
                 {
                     TurnRight = false;
                     CatAni.SetBool("Move", true);
@@ -2307,7 +2309,7 @@ public class CatContrl : MonoBehaviour
                 GetComponent<Rigidbody2D>().gravityScale = 0;
                 GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed);
 
-                if (Input.GetKey(KeyCode.A) && WaterJumpReady == false)
+                if ((Input.GetKey(KeyCode.A) || WhatKey_ == "A") && WaterJumpReady == false)
                 {
                     if (NowCatMorph == CatMorph.Climb)
                     {
@@ -2321,7 +2323,7 @@ public class CatContrl : MonoBehaviour
                         TurnRight = true;
                     }
                 }
-                else if (Input.GetKey(KeyCode.D) && WaterJumpReady == false)
+                else if ((Input.GetKey(KeyCode.D) || WhatKey_ == "D") && WaterJumpReady == false)
                 {
                     if (NowCatMorph == CatMorph.Climb)
                     {
@@ -2611,7 +2613,7 @@ public class CatContrl : MonoBehaviour
 
         //float RotForWall_Y = 0;
 
-        if (Input.GetKey(KeyCode.A) && CanJumpTrue == true)
+        if ((Input.GetKey(KeyCode.A) || WhatKey_ == "A") && CanJumpTrue == true)
         {
             if(Rot.x == -1)
             {
@@ -2639,13 +2641,13 @@ public class CatContrl : MonoBehaviour
 
                 if (NowCatMorph == CatMorph.Climb)
                 {
-                    if (Input.GetKey(KeyCode.W))
+                    if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
                     {
                         TurnRight = true;
                         CatAni.SetBool("Move", true);
                         GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, MoveSpeed * 1.2f);
                     }
-                    else if (Input.GetKey(KeyCode.S))
+                    else if (Input.GetKey(KeyCode.S) || WhatKey_ == "S")
                     {
                         TurnRight = false;
                         CatAni.SetBool("Move", true);
@@ -2667,7 +2669,7 @@ public class CatContrl : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKey(KeyCode.D) && CanJumpTrue == true)
+        if ((Input.GetKey(KeyCode.D) || WhatKey_ == "D") && CanJumpTrue == true)
         {
             if (Rot.x == 1)
             {
@@ -2694,13 +2696,13 @@ public class CatContrl : MonoBehaviour
 
                 if (NowCatMorph == CatMorph.Climb)
                 {
-                    if (Input.GetKey(KeyCode.W))
+                    if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
                     {
                         TurnRight = true;
                         CatAni.SetBool("Move", true);
                         GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, MoveSpeed * 1.2f);
                     }
-                    else if (Input.GetKey(KeyCode.S))
+                    else if (Input.GetKey(KeyCode.S) || WhatKey_ == "S")
                     {
                         TurnRight = false;
                         CatAni.SetBool("Move", true);
@@ -2723,13 +2725,13 @@ public class CatContrl : MonoBehaviour
 
             }
         }
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
         {
             if (Rot.y == 1)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed);
 
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
                 {
                     if(NowCatMorph == CatMorph.Climb)
                     {
@@ -2743,7 +2745,7 @@ public class CatContrl : MonoBehaviour
                         TurnRight = true;
                     }
                 }
-                else if (Input.GetKey(KeyCode.D))
+                else if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
                 {
                     if (NowCatMorph == CatMorph.Climb)
                     {
@@ -2998,6 +3000,38 @@ public class CatContrl : MonoBehaviour
         NowCatAct = CatAct.Idle;
     }
 
+
+
+
+    [Header("按了甚麼鍵")]
+    public string WhatKey_;
+
+    [Header("是否按了滑鼠左鍵")]
+    public bool Key_0;//滑鼠左鍵
+    //private bool Key_1;//滑鼠右鍵
+
+    public void GetStart(string Key_)
+    {
+        WhatKey_ = Key_;
+    }
+
+    public void GetStartRight()
+    {
+        Key_0 = true;
+    }
+
+    public void GetEnd_Left()
+    {
+        WhatKey_ = "";
+    }
+
+    public void GetEnd_Right()
+    {
+        Key_0 = false;
+    }
+
+
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Bar" || collision.gameObject.tag == "DoorGround")
@@ -3008,7 +3042,7 @@ public class CatContrl : MonoBehaviour
             }
             else
             {
-                if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W))
+                if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || WhatKey_ == "A" || WhatKey_ == "D" || WhatKey_ == "W")
                 {
 
                 }
@@ -3085,7 +3119,7 @@ public class CatContrl : MonoBehaviour
                 }
                 else
                 {
-                    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+                    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || WhatKey_ != "")
                     {
 
                     }

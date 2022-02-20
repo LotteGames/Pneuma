@@ -136,7 +136,7 @@ public class DialoguesManager : MonoBehaviour
             {
                 Dialogue dialogue = areaDialogues.GetDialogue(playerProgress);
                 Debug.LogError(1);
-                if (dialogue != null)//¦³­nª½±µÄ²µoªº
+                if (dialogue != null)//ï¿½ï¿½ï¿½nï¿½ï¿½ï¿½ï¿½Ä²ï¿½oï¿½ï¿½
                 {
                     Debug.LogError(2);
                     if (RoleInSameArea(dialogue))

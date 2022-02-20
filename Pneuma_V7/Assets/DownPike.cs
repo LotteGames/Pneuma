@@ -42,9 +42,26 @@ public class DownPike : MonoBehaviour
         //MoveGround.GetComponent<TouchGround>().CanIn = false;
         IsDown = false;
     }
+
+    public void SetStart()
+    {
+        MoveGround.GetComponent<MoveGround>().SetStart();
+        CanDown = true;
+        MoveGround.GetComponent<MoveGround>().MoveSpeed = 0;
+        MoveGround.GetComponent<MoveGround>().NewPos = MoveGround.GetComponent<MoveGround>().MovePos[0];
+        MoveGround.transform.position = PosA.transform.position;
+        IsDown = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SetStart();
+        }
+
+
         if (IsDown == false)
         {
             if (MoveGround.GetComponent<MoveGround>().NewPos == MoveGround.GetComponent<MoveGround>().MovePos[0])//往上升
