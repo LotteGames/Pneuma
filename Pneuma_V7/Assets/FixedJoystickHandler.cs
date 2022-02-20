@@ -49,7 +49,8 @@ public class FixedJoystickHandler : MonoBehaviour, IDragHandler, IEndDragHandler
         Left_Touch(direction);
         Debug.Log("direction : " + direction);
     }
-    Vector2 direction;
+
+    public Vector2 direction;
     public void Getcontect(PointerEventData eventData)
     {
         Vector2 position = Vector2.zero;

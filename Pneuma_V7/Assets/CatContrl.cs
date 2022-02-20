@@ -101,6 +101,8 @@ public class CatContrl : MonoBehaviour
     public GameObject Black;
     [Header("手機UI畫面")]
     public GameObject Phone_UI;
+    [Header("手機的跳躍鍵")]
+    public GameObject JumpButton;
     [Header("左搖桿")]
     public GameObject Touch_Left;
     public GameObject Handler_Left;
@@ -120,11 +122,11 @@ public class CatContrl : MonoBehaviour
         CatAni = GetComponent<Animator>();
         HH = true;
 
-//#if UNITY_EDITOR || UNITY_STANDALONE
-//        Phone_UI.SetActive(false);   // 滑鼠偵測
-//#elif UNITY_ANDROID
-//		Phone_UI.SetActive(true);  // 觸碰偵測
-//#endif
+#if UNITY_EDITOR || UNITY_STANDALONE
+        Phone_UI.SetActive(false);   // 滑鼠偵測
+#elif UNITY_ANDROID
+		Phone_UI.SetActive(true);  // 觸碰偵測
+#endif
     }
     bool HH;
     // Update is called once per frame
@@ -156,6 +158,7 @@ public class CatContrl : MonoBehaviour
             {
                 HappyHat.SetActive(false);
             }
+            JumpButton.SetActive(true);
         }
         //else if(NowCatMorph == CatMorph.Long)
         //{
@@ -185,6 +188,8 @@ public class CatContrl : MonoBehaviour
                 GetComponent<CircleCollider2D>().radius = 0.81f;
                 NowCatMorph = CatMorph.NoMorph;
             }
+            JumpButton.SetActive(false);
+
         }
         else if (NowCatMorph == CatMorph.Cloud)
         {
@@ -204,6 +209,8 @@ public class CatContrl : MonoBehaviour
                 GetComponent<Rigidbody2D>().gravityScale = CatWeight;
                 GetComponent<Animator>().SetBool("Cloud", false);
             }
+            JumpButton.SetActive(false);
+
         }
 
         //撿到的道具跟隨
@@ -243,8 +250,12 @@ public class CatContrl : MonoBehaviour
             Debug.Log("Is Climb");
 
             RayGround();
-            if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+            if ((Input.GetMouseButtonDown(0) || Key_0 == true) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
             {
+          
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+                // 滑鼠偵測
                 CatMusic.PlayMusic(2);
                 CanLong = false;
                 NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
@@ -254,8 +265,25 @@ public class CatContrl : MonoBehaviour
 
                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
 
-
                 StartCoroutine(LongBack(1f));
+#elif UNITY_ANDROID
+                // 觸碰偵測
+                if(Key_0_Drag == false)
+                {
+                    CatMusic.PlayMusic(2);
+                    CanLong = false;
+                    NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
+                    GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
+                    GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
+                    GetComponent<Collider2D>().isTrigger = true;
+
+                    nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+
+                    StartCoroutine(LongBack(1f));
+
+                    Key_0_Drag = true;//只偵測一次
+                }
+#endif
             }
 
         }
@@ -337,143 +365,12 @@ public class CatContrl : MonoBehaviour
             }
 
 
-            //if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
-            //{
-            //    CatMusic.PlayMusic(2);
-            //    CanLong = false;
-            //    NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
-            //    GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
-            //    GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-            //    GetComponent<Collider2D>().isTrigger = true;
-
-            //    nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
-            //    LongLight.SetActive(false);
-
-            //    StartCoroutine(LongBack(1f));
-            //}
-
-        }
-
-        //
-        //if (Input.GetMouseButtonUp(0) && NowCatAct == CatAct.LongLongCat)
-        //{
-        //    CatMusic.PlayMusic(3);
-        //    //縮回去
-        //    StartCoroutine(LongDebug());
-        //    CanLong = false;
-        //    GetComponent<Collider2D>().isTrigger = false;
-        //    transform.parent = null;
-        //    NowCatAct = CatAct.Back;
-        //}
-
-        LongPictrue();
-    }
-    void MorphUpdate_NoMorph_Phone()
-    {
-        if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || NowCatAct == CatAct.CatStop || Black.active == true)
-        {
-            RayWall();
-        }
-        else if (RayWall() == true)
-        {
-            Debug.Log("Is Climb");
-
-            RayGround();
-            if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+            if ((Input.GetMouseButtonDown(0) || Key_0 == true) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
             {
-                CatMusic.PlayMusic(2);
-                CanLong = false;
-                NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
-                GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
-                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                GetComponent<Collider2D>().isTrigger = true;
-
-                nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
 
 
-                StartCoroutine(LongBack(1f));
-            }
-        }
-        else
-        {
-            if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
-            {
-                TurnRight = true;
-                CatAni.SetFloat("TurnRight", 1);
-                CatAni.SetBool("Move", true);
-                if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
-                    NowCatAct = CatAct.Run;
-                }
-                if(CanContrlTrue > 0)
-                {
-                    CanContrlTrue -= Time.deltaTime;
-                    GetComponent<Rigidbody2D>().AddForce(new Vector2(MoveSpeed * 0.2f, 0));
-                }
-                else
-                {
-                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.1f);
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y); 
-                }
-            }
-            else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
-            {
-                TurnRight = false;
-                CatAni.SetFloat("TurnRight", 0);
-                CatAni.SetBool("Move", true);
-                if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
-                {
-                    transform.rotation = Quaternion.Euler(0, 180, 0);
-                    NowCatAct = CatAct.Run;
-                }
-                if (CanContrlTrue > 0)
-                {
-                    CanContrlTrue -= Time.deltaTime;
-                    GetComponent<Rigidbody2D>().AddForce(new Vector2(-MoveSpeed * 0.2f, 0));
-                }
-                else
-                {
-                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.1f);
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
-                }
-            }
-            else if (NowCatAct != CatAct.LongLongCat)
-            {
-                if (NowCatAct != CatAct.Jump)
-                {
-                    if (NowCatAct != CatAct.CatStop)
-                    {
-                        NowCatAct = CatAct.Idle;
-                    }
-                }
-                if (CanContrlTrue > 0)
-                {
-                    CanContrlTrue -= Time.deltaTime;
-                }
-                else
-                {
-                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, 0, 0.2f);
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (CanJump == true)
-                {
-                    CatMusic.PlayMusic(0);
-                    GetComponent<Rigidbody2D>().velocity = new Vector3(GetComponent<Rigidbody2D>().velocity.x, 0, 0);
-                    GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
-                    NowCatAct = CatAct.Jump;
-                    CanJump = false;
-                    StartCoroutine(JumpDebug(0.3f));
-                }
-            }
-
-
-            if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
-            {
+#if UNITY_EDITOR || UNITY_STANDALONE
+                // 滑鼠偵測
                 CatMusic.PlayMusic(2);
                 CanLong = false;
                 NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
@@ -485,13 +382,36 @@ public class CatContrl : MonoBehaviour
                 LongLight.SetActive(false);
 
                 StartCoroutine(LongBack(1f));
+
+#elif UNITY_ANDROID
+		        // 觸碰偵測
+                if(Key_0_Drag == false)
+                {
+                   CatMusic.PlayMusic(2);
+                   CanLong = false;
+                   NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
+                   GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
+                   GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
+                   GetComponent<Collider2D>().isTrigger = true;
+
+                   nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+                   LongLight.SetActive(false);
+   
+                   StartCoroutine(LongBack(1f));
+
+                    Key_0_Drag = true;//只偵測一次
+                }
+          
+#endif
             }
 
         }
 
-        //
-        if (Input.GetMouseButtonUp(0) && NowCatAct == CatAct.LongLongCat)
+
+        if ((Input.GetMouseButtonUp(0) || (Key_0 == false && Key_0_Drag == true)) && NowCatAct == CatAct.LongLongCat)
         {
+#if UNITY_EDITOR || UNITY_STANDALONE
+            // 滑鼠偵測
             CatMusic.PlayMusic(3);
             //縮回去
             StartCoroutine(LongDebug());
@@ -499,121 +419,135 @@ public class CatContrl : MonoBehaviour
             GetComponent<Collider2D>().isTrigger = false;
             transform.parent = null;
             NowCatAct = CatAct.Back;
+
+#elif UNITY_ANDROID
+
+		    // 觸碰偵測
+            CatMusic.PlayMusic(3);
+            //縮回去
+            StartCoroutine(LongDebug());
+            CanLong = false;
+            GetComponent<Collider2D>().isTrigger = false;
+            transform.parent = null;
+            NowCatAct = CatAct.Back;
+            Key_0_Drag = false;//只偵測一次
+#endif
         }
 
         LongPictrue();
     }
-    void MorphUpdate_Long()
-    {
-        if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || NowCatAct == CatAct.CatStop || Black.active == true)
-        {
-            RayWall();
-        }
-        //else if (RayWall() == true)
-        //{
-        //    Debug.Log("Is Climb");
+  
+    //void MorphUpdate_Long()
+    //{
+    //    if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || NowCatAct == CatAct.CatStop || Black.active == true)
+    //    {
+    //        RayWall();
+    //    }
+    //    //else if (RayWall() == true)
+    //    //{
+    //    //    Debug.Log("Is Climb");
 
-        //    RayGround();
+    //    //    RayGround();
 
-        //    if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
-        //    {
-        //        CanLong = false;
-        //        NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
-        //        GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
-        //        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-        //        GetComponent<Collider2D>().isTrigger = true;
+    //    //    if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+    //    //    {
+    //    //        CanLong = false;
+    //    //        NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
+    //    //        GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
+    //    //        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
+    //    //        GetComponent<Collider2D>().isTrigger = true;
 
-        //        nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+    //    //        nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
 
-        //        StartCoroutine(LongBack(1f));
-        //    }
-        //}
-        else
-        {
-            if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
-            {
-                TurnRight = true;
-                CatAni.SetFloat("TurnRight", 1);
-                CatAni.SetBool("Move", true);
-                if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
-                    NowCatAct = CatAct.Run;
-                }
-                GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-            }
-            else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
-            {
-                TurnRight = false;
-                CatAni.SetFloat("TurnRight", 0);
-                CatAni.SetBool("Move", true);
-                if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
-                {
-                    transform.rotation = Quaternion.Euler(0, 180, 0);
-                    NowCatAct = CatAct.Run;
-                }
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-            }
-            else if (NowCatAct != CatAct.LongLongCat)
-            {
-                if (NowCatAct != CatAct.Jump)
-                {
-                    if (NowCatAct != CatAct.CatStop)
-                    {
-                        NowCatAct = CatAct.Idle;
-                    }
-                }
+    //    //        StartCoroutine(LongBack(1f));
+    //    //    }
+    //    //}
+    //    else
+    //    {
+    //        if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
+    //        {
+    //            TurnRight = true;
+    //            CatAni.SetFloat("TurnRight", 1);
+    //            CatAni.SetBool("Move", true);
+    //            if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
+    //            {
+    //                transform.rotation = Quaternion.Euler(0, 0, 0);
+    //                NowCatAct = CatAct.Run;
+    //            }
+    //            GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+    //        }
+    //        else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
+    //        {
+    //            TurnRight = false;
+    //            CatAni.SetFloat("TurnRight", 0);
+    //            CatAni.SetBool("Move", true);
+    //            if (NowCatAct == CatAct.Idle || NowCatAct == CatAct.Run)
+    //            {
+    //                transform.rotation = Quaternion.Euler(0, 180, 0);
+    //                NowCatAct = CatAct.Run;
+    //            }
+    //            GetComponent<Rigidbody2D>().velocity = new Vector2(-MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+    //        }
+    //        else if (NowCatAct != CatAct.LongLongCat)
+    //        {
+    //            if (NowCatAct != CatAct.Jump)
+    //            {
+    //                if (NowCatAct != CatAct.CatStop)
+    //                {
+    //                    NowCatAct = CatAct.Idle;
+    //                }
+    //            }
 
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
-            }
+    //            GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+    //        }
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (CanJump == true)
-                {
-                    CatMusic.PlayMusic(0);
-                    GetComponent<Rigidbody2D>().velocity = new Vector3(GetComponent<Rigidbody2D>().velocity.x, 0, 0);
-                    GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
-                    NowCatAct = CatAct.Jump;
-                    CanJump = false;
-                    StartCoroutine(JumpDebug(0.05f));
-                }
-            }
-
-
-            if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
-            {
-                CatMusic.PlayMusic(2);
-                CanLong = false;
-                NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
-                GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
-                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                GetComponent<Collider2D>().isTrigger = true;
-
-                nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+    //        if (Input.GetKeyDown(KeyCode.Space))
+    //        {
+    //            if (CanJump == true)
+    //            {
+    //                CatMusic.PlayMusic(0);
+    //                GetComponent<Rigidbody2D>().velocity = new Vector3(GetComponent<Rigidbody2D>().velocity.x, 0, 0);
+    //                GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
+    //                NowCatAct = CatAct.Jump;
+    //                CanJump = false;
+    //                StartCoroutine(JumpDebug(0.05f));
+    //            }
+    //        }
 
 
-                StartCoroutine(LongBack(1f));
-            }
+    //        if (Input.GetMouseButtonDown(0) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+    //        {
+    //            CatMusic.PlayMusic(2);
+    //            CanLong = false;
+    //            NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
+    //            GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
+    //            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
+    //            GetComponent<Collider2D>().isTrigger = true;
+
+    //            nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+
+
+    //            StartCoroutine(LongBack(1f));
+    //        }
         
-        }
+    //    }
 
 
-        //
-        if (Input.GetMouseButtonUp(0) && NowCatAct == CatAct.LongLongCat)
-        {
-            CatMusic.PlayMusic(3);
-            //縮回去
-            StartCoroutine(LongDebug());
-            CanLong = false;
-            GetComponent<Collider2D>().isTrigger = false;
-            transform.parent = null;
-            NowCatAct = CatAct.Back;
-        }
+    //    //
+    //    if (Input.GetMouseButtonUp(0) && NowCatAct == CatAct.LongLongCat)
+    //    {
+    //        CatMusic.PlayMusic(3);
+    //        //縮回去
+    //        StartCoroutine(LongDebug());
+    //        CanLong = false;
+    //        GetComponent<Collider2D>().isTrigger = false;
+    //        transform.parent = null;
+    //        NowCatAct = CatAct.Back;
+    //    }
 
-        LongPictrue();
+    //    LongPictrue();
 
-    }
+    //}
 
     public void LongPictrue()
     {
@@ -694,9 +628,13 @@ public class CatContrl : MonoBehaviour
                     GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
                 }
 
-                if (Input.GetMouseButtonDown(0))
+                if ((Input.GetMouseButtonDown(0) || Key_0 == true))
                 {
                     //CloudTime = 5;
+
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+                    // 滑鼠偵測
                     if (CanJump == true)
                     {
                         GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
@@ -705,6 +643,21 @@ public class CatContrl : MonoBehaviour
                         //WaterJumpPower = 0.1f;
                         WaterJumpPower = 1f;
                     }
+#elif UNITY_ANDROID
+                // 觸碰偵測
+                if(Key_0_Drag == false)
+                {
+                    if (CanJump == true)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                        GetComponent<Rigidbody2D>().gravityScale = 0.01f;
+                        GetComponent<Animator>().SetBool("WaterJumpReady", true);
+                        //WaterJumpPower = 0.1f;
+                        WaterJumpPower = 1f;
+                    }
+                    Key_0_Drag = true;//只偵測一次
+                }
+#endif
                 }
             }
             else
@@ -715,9 +668,13 @@ public class CatContrl : MonoBehaviour
                 //    WaterJumpPower = 1f;
                 //}
 
-                if (Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonUp(0) || (Key_0 == false && Key_0_Drag == true))
                 {
                     //CloudTime = 5;
+
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+                    // 滑鼠偵測
                     if (CanJump == true)
                     {
                         Vector3 MousePos;
@@ -748,7 +705,42 @@ public class CatContrl : MonoBehaviour
                         GetComponent<Animator>().SetBool("Jump", true);
                         GetComponent<Animator>().SetBool("WaterJumpReady", false);
                     }
+
+#elif UNITY_ANDROID
+
+		    // 觸碰偵測
+            if (CanJump == true)
+                    {
+                        Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+
+                        direction.z = 0f;
+                        direction.Normalize();
+                        Vector3 PowerPath = direction;
+                        Debug.Log(PowerPath);
+
+                        CatMusic.PlayMusic(0);
+                        NowCatAct = CatAct.Jump;
+                        CanJump = false;
+                        StartCoroutine(JumpDebug(0.3f));
+
+                        //GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                        //
+                        //GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                        //GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 2 * WaterJumpPower);
+                        //GetComponent<Animator>().SetBool("Jump", true);
+                        //GetComponent<Animator>().SetBool("WaterJumpReady", false);
+                        //
+                        GetComponent<Rigidbody2D>().gravityScale = 0f;
+                        //GetComponent<Collider2D>().isTrigger = true;
+                        GetComponent<Rigidbody2D>().AddForce(PowerPath * JumpPower * 3 * WaterJumpPower);
+                        GetComponent<Animator>().SetBool("Jump", true);
+                        GetComponent<Animator>().SetBool("WaterJumpReady", false);
+                    }
+            Key_0_Drag = false;//只偵測一次
+#endif
                 }
+
+
                 if (Input.GetMouseButtonUp(1))
                 {
                     GetComponent<Rigidbody2D>().gravityScale = CatWeight;
@@ -833,8 +825,9 @@ public class CatContrl : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
             }
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) || Key_0 == true)
             {
+                Key_0_Drag = true;
                 if (TurnRight == true)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
@@ -843,12 +836,31 @@ public class CatContrl : MonoBehaviour
                 {
                     transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
                 }
+#if UNITY_EDITOR || UNITY_STANDALONE
+                // 滑鼠偵測
                 CloudMove();
+#elif UNITY_ANDROID
+		        // 觸碰偵測
+                CloudMove_Phone(Touch_Right.GetComponent<FixedJoystickHandler>().direction);
+                Key_0_Drag = false;//只偵測一次
+#endif
             }
-            if (Input.GetMouseButtonUp(0))
+
+            if (Input.GetMouseButtonUp(0) || (Key_0 == false && Key_0_Drag == true))
             {
+                //CloudMove();
+                //CatAni.SetBool("Move", false);
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+                // 滑鼠偵測
                 CloudMove();
                 CatAni.SetBool("Move", false);
+#elif UNITY_ANDROID
+		        // 觸碰偵測
+                CloudMove_Phone(Touch_Right.GetComponent<FixedJoystickHandler>().direction);
+                CatAni.SetBool("Move", false);
+                Key_0_Drag = false;//只偵測一次
+#endif
             }
 
             //if (Input.GetMouseButtonDown(0))
@@ -1020,6 +1032,48 @@ public class CatContrl : MonoBehaviour
         MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         //
         Vector3 direction = MousePos - transform.position;
+        direction.z = 0f;
+        direction.Normalize();
+        //float targetAngle = Mathf.Atan2(direction.y, direction.x);
+        GameObject C = Instantiate(CloudAni, transform.position, Quaternion.Euler(0, 0, 0));
+        Destroy(C, 2);
+
+        //GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 8); // 第一種版本
+
+        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 120); // 第二種版本
+
+        if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
+        {
+            CatAni.SetFloat("TurnRight", 1);
+            TurnRight = true;
+            CatAni.SetBool("Move", true);
+        }
+        else if (GetComponent<Rigidbody2D>().velocity.x < -0.5f)
+        {
+            CatAni.SetFloat("TurnRight", 0);
+            TurnRight = false;
+            CatAni.SetBool("Move", true);
+        }
+
+
+        if (TurnRight == true)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
+        }
+
+        //CatMusic.PlayMusic(4);
+    }
+
+    public void CloudMove_Phone(Vector2 ScrollPos)
+    {
+       
+        //
+        Vector3 direction = ScrollPos;
         direction.z = 0f;
         direction.Normalize();
         //float targetAngle = Mathf.Atan2(direction.y, direction.x);
@@ -2437,9 +2491,10 @@ public class CatContrl : MonoBehaviour
 
     public void WaterJump(Vector2 RayVect)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Key_0 == true)
         {
-            //CloudTime = 5;
+#if UNITY_EDITOR || UNITY_STANDALONE
+            // 滑鼠偵測
             if (CanJump == true)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
@@ -2449,6 +2504,22 @@ public class CatContrl : MonoBehaviour
                 WaterJumpPower = 1f;
                 WaterJumpReady = true;
             }
+#elif UNITY_ANDROID
+                // 觸碰偵測
+                if(Key_0_Drag == false)
+                {
+                    if (CanJump == true)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                        GetComponent<Rigidbody2D>().gravityScale = 0.01f;
+                        GetComponent<Animator>().SetBool("WaterJumpReady", true);
+                        //WaterJumpPower = 0.1f;
+                        WaterJumpPower = 1f;
+                        WaterJumpReady = true;
+                    }
+                    Key_0_Drag = true;//只偵測一次
+                }
+#endif
         }
         if (WaterJumpReady == true)
         {
@@ -3006,8 +3077,12 @@ public class CatContrl : MonoBehaviour
     [Header("按了甚麼鍵")]
     public string WhatKey_;
 
+    //[Header("跳躍鍵")]
+    //public bool JumpKey;
+
     [Header("是否按了滑鼠左鍵")]
     public bool Key_0;//滑鼠左鍵
+    public bool Key_0_Drag;//滑鼠左鍵按住
     //private bool Key_1;//滑鼠右鍵
 
     public void GetStart(string Key_)
@@ -3030,9 +3105,35 @@ public class CatContrl : MonoBehaviour
         Key_0 = false;
     }
 
+    public void GetJump()
+    {
+        if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.Back || NowCatAct == CatAct.CatStop || Black.active == true)
+        {
 
+        }
+        else if (RayWall() == true)
+        {
 
-    private void OnCollisionStay2D(Collision2D collision)
+        }
+        else
+        {
+            if (CanJump == true)
+            {
+                NowCatAct = CatAct.Jump;
+
+                CatMusic.PlayMusic(0);
+                GetComponent<Rigidbody2D>().velocity = new Vector3(GetComponent<Rigidbody2D>().velocity.x, 0, 0);
+                GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
+                CanJumpTrue = false;
+                StartCoroutine(JumpDebug(0.3f));
+                CanJump = false;
+            }
+        }
+    }
+
+        
+
+        private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Bar" || collision.gameObject.tag == "DoorGround")
         {

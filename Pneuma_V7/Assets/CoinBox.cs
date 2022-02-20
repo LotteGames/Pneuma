@@ -12,7 +12,7 @@ public class CoinBox : MonoBehaviour
 
     public void SetStart()
     {
-        if (transform.GetChild(0).gameObject.active == false)
+        if (transform.GetChild(0).gameObject.active == false && CoinSave == false)
         {
             transform.GetChild(0).gameObject.SetActive(true);
         }
