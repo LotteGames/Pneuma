@@ -11,7 +11,7 @@ public class ScrollCircle : ScrollRect
     protected override void Start()
     {
 
-        this.radius = ((RectTransform)transform).sizeDelta.x * 0.5f;
+        this.radius = ((RectTransform)transform).sizeDelta.x * 0.3f;
     }
 
     public override void OnDrag(PointerEventData eventData)

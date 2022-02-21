@@ -22,7 +22,7 @@ public class eyes_Follow : MonoBehaviour
     void Update()
     {
         float Remove = Vector2.Distance(Cat.transform.position, transform.position);
-        Debug.Log(Remove);
+        //Debug.Log(Remove);
         if (Remove <= radius * 1.5f)
         {
             eye.transform.position = Vector3.Lerp(eye.transform.position, Cat.transform.position, 0.15f);

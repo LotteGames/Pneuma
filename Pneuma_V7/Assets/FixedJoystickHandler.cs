@@ -59,6 +59,7 @@ public class FixedJoystickHandler : MonoBehaviour, IDragHandler, IEndDragHandler
     public void Getcontect(PointerEventData eventData)
     {
         Vector2 position = Vector2.zero;
+        Vector2 position_2 = content.GetComponent<RectTransform>().anchoredPosition;
 
         // Get InputDirection
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -80,12 +81,14 @@ public class FixedJoystickHandler : MonoBehaviour, IDragHandler, IEndDragHandler
             InputDirection.y * jsContainer.rectTransform.sizeDelta.y / 3
         );
 
-        direction = InputDirection;
+        direction = position_2;
     }
 
     public void Left_Touch(PointerEventData eventData)
     {
         Vector2 position = Vector2.zero;
+        Vector2 position_2 = content.GetComponent<RectTransform>().anchoredPosition;
+
 
         // Get InputDirection
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -107,7 +110,7 @@ public class FixedJoystickHandler : MonoBehaviour, IDragHandler, IEndDragHandler
             InputDirection.y * jsContainer.rectTransform.sizeDelta.y / 3
         );
 
-        direction = InputDirection;
+        direction = position_2;
 
         //
 
@@ -117,22 +120,22 @@ public class FixedJoystickHandler : MonoBehaviour, IDragHandler, IEndDragHandler
 
         Debug.Log(angle);
 
-        if (angle >= 45 && angle <= 135)
+        if (angle > 30 && angle < 120)
         {
             Cat.GetStart("W");
             Debug.Log("W");
         }
-        if (angle > 135 && angle < 225)
+        if (angle >= 120 && angle <= 240)
         {
             Cat.GetStart("A");
             Debug.Log("A");
         }
-        if (angle >= 225 && angle <= 315)
+        if (angle > 240 && angle < 300)
         {
             Cat.GetStart("S");
             Debug.Log("S");
         }
-        if (angle > 315 || angle < 45)
+        if (angle >= 300 || angle <= 30)
         {
             Cat.GetStart("D");
             Debug.Log("D");

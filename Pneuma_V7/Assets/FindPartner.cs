@@ -40,7 +40,7 @@ public class FindPartner : MonoBehaviour
         Turn();
         PartnerPos();
 
-        if (catContrl.NowCatAct == CatContrl.CatAct.LongLongCat)
+        if (catContrl.NowCatAct == CatContrl.CatAct.LongLongCat && DebugBack == false)
         {
             LongLongCat();
         }

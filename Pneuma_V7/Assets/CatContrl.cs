@@ -123,11 +123,11 @@ public class CatContrl : MonoBehaviour
         CatAni = GetComponent<Animator>();
         HH = true;
 
-#if UNITY_EDITOR || UNITY_STANDALONE
-        Phone_UI.SetActive(false);   // 滑鼠偵測
-#elif UNITY_ANDROID
-		Phone_UI.SetActive(true);  // 觸碰偵測
-#endif
+//#if UNITY_EDITOR || UNITY_STANDALONE
+//        Phone_UI.SetActive(false);   // 滑鼠偵測
+//#elif UNITY_ANDROID
+//		Phone_UI.SetActive(true);  // 觸碰偵測
+//#endif
     }
     bool HH;
     // Update is called once per frame
@@ -3190,7 +3190,17 @@ public class CatContrl : MonoBehaviour
         }
         else if (RayWall() == true)
         {
+            if (CanJump == true)
+            {
+                NowCatAct = CatAct.Jump;
 
+                CatMusic.PlayMusic(0);
+                GetComponent<Rigidbody2D>().velocity = new Vector3(GetComponent<Rigidbody2D>().velocity.x, 0, 0);
+                GetComponent<Rigidbody2D>().AddForce(new Vector3(0, JumpPower, 0));
+                CanJumpTrue = false;
+                StartCoroutine(JumpDebug(0.3f));
+                CanJump = false;
+            }
         }
         else
         {
