@@ -87,19 +87,27 @@ public class FindPartner_Water : MonoBehaviour
 
     public void LongLongCat()//很長很長的貓
     {
+        Vector3 direction;
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // 滑鼠偵測
         Vector3 MousePos;
-
         MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 
-        //
-        Vector3 direction = MousePos - Partner.transform.position;
+        direction = MousePos - transform.position;
+
+#elif UNITY_ANDROID
+        // 觸碰偵測
+        direction = catContrl.Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+
+#endif
+
         direction.z = 0f;
         direction.Normalize();
         //float targetAngle = Mathf.Atan2(direction.y, direction.x);
 
         Vector3 RemoveMax = Partner.transform.position + direction * catContrl.LongRemoveMax;
 
-        float ButtRemove = Vector2.Distance(Partner.transform.position, MousePos);
+        //float ButtRemove = Vector2.Distance(Partner.transform.position, MousePos);
 
 
 

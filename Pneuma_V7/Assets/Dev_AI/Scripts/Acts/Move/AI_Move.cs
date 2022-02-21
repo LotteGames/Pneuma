@@ -5,7 +5,7 @@ using DG.Tweening;
 using System;
 public class AI_Move : MonoBehaviour
 {
-    #region--·Pª¾--
+    #region--ï¿½Pï¿½ï¿½--
 
     private Node node_Start, node_End;
 
@@ -95,7 +95,7 @@ public class AI_Move : MonoBehaviour
 
     #endregion
 
-    #region--¨Mµ¦--
+    #region--ï¿½Mï¿½ï¿½--
 
     [SerializeField]
     private float maxSlopeAngle = 60;
@@ -109,7 +109,7 @@ public class AI_Move : MonoBehaviour
 
 
     /// <summary>
-    /// À³¬°¤@­Ó©T©w±`¼Æ¡A­«¤O¤£ÅÜ¡A¸õÅD¤O¹D§ïÅÜ¡A¨Ó¸õ¨ì¤£¦P°ª«×
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½Ó©Tï¿½wï¿½`ï¿½Æ¡Aï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Ü¡Aï¿½ï¿½ï¿½Dï¿½Oï¿½Dï¿½ï¿½ï¿½Ü¡Aï¿½Ó¸ï¿½ï¿½ì¤£ï¿½Pï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public void CalculateMaxValues()
     {
@@ -121,7 +121,7 @@ public class AI_Move : MonoBehaviour
     }
 
     /// <summary>
-    /// ¸õÅDªº³Ì°ª¦ì¸m¡A¦]¬°¤£¥i¯à§â¥Ø¼Ð¦ì¸m³]¬°³Ì°ª¦ì¸m¡A·|¼²¨ì¥­¥x¸õ¤£¤W¥h
+    /// ï¿½ï¿½ï¿½Dï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½mï¿½Aï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½Ø¼Ð¦ï¿½mï¿½]ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½mï¿½Aï¿½|ï¿½ï¿½ï¿½ì¥­ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½h
     /// </summary>
     [HideInInspector]
     public Vector3 jumpHeightestPos;
@@ -143,8 +143,8 @@ public class AI_Move : MonoBehaviour
     [HideInInspector]
     public float timeToH = 0;
     /// <summary>
-    /// ¥Ø«eªº¤è¦¡¥i¯à¾A¦X©¹¤ñ¦Û¤v°ªªº¦ì¸m²¾°Ê¡A¤ñ¦Û¤v¦ì¸m§CªºÁÙ¨S¦³
-    /// ¥i¯àÁÙ­n¤ñ¸û¤ô¥­²¾°Ê­nªá¦h¤Ö®É¶¡¡A¥Î®É¶¡©Ò»Ý¸ûªøªº¨Ó°µ³o­Ó°Ê§@ªº®É¶¡
+    /// ï¿½Ø«eï¿½ï¿½ï¿½è¦¡ï¿½iï¿½ï¿½Aï¿½Xï¿½ï¿½ï¿½ï¿½Û¤vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½mï¿½ï¿½ï¿½Ê¡Aï¿½ï¿½Û¤vï¿½ï¿½mï¿½Cï¿½ï¿½ï¿½Ù¨Sï¿½ï¿½
+    /// ï¿½iï¿½ï¿½ï¿½Ù­nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê­nï¿½ï¿½hï¿½Ö®É¶ï¿½ï¿½Aï¿½Î®É¶ï¿½ï¿½Ò»Ý¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½oï¿½Ó°Ê§@ï¿½ï¿½ï¿½É¶ï¿½
     /// </summary>
     /// <param name="jumpHeightestPos"></param>
     public void Calculate_TimeOfJump(Vector3 jumpHeightestPos)
@@ -259,7 +259,7 @@ public class AI_Move : MonoBehaviour
 
     public void SetDicisions()
     {
-        #region--³]©w¬O§_­«³]--
+        #region--ï¿½]ï¿½wï¿½Oï¿½_ï¿½ï¿½ï¿½]--
 
         if (temp.Count != 0)
         {
@@ -272,12 +272,12 @@ public class AI_Move : MonoBehaviour
         dicisionAndTimes.Clear();
 
         AddTeleporation(pathNodes[0].node.Position - transform.position, pathNodes[0].node.Position);
-        //Àþ²¾¨ì²Ä¤@­ÓNodeªº¦ì¸m
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¤@ï¿½ï¿½Nodeï¿½ï¿½ï¿½ï¿½m
 
-        //¤@¶}©l¤]³\¤£¯àÀþ²¾
-        //¦Ó¬O±o¥X¸ô®|«á
-        //¥Î·í«e¦ì¸m¸ò¸ô®|ªº²Ä¤G­ÓÂI¥h°µ­pºâ
-        //³o¼Ë¤~¯à±q¨º­Ó¦ì¸m¶}©l²¾°Ê
+        //ï¿½@ï¿½}ï¿½lï¿½]ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½Ó¬Oï¿½oï¿½Xï¿½ï¿½|ï¿½ï¿½
+        //ï¿½Î·ï¿½eï¿½ï¿½mï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½Ä¤Gï¿½ï¿½ï¿½Iï¿½hï¿½ï¿½ï¿½pï¿½ï¿½
+        //ï¿½oï¿½Ë¤~ï¿½ï¿½qï¿½ï¿½ï¿½Ó¦ï¿½mï¿½}ï¿½lï¿½ï¿½ï¿½ï¿½
 
 
         for (int i = 0; i < pathNodes.Count - 1; i++)
@@ -297,15 +297,15 @@ public class AI_Move : MonoBehaviour
                 {
                     if (angle <= maxSlopeAngle)
                     {
-                        //­n¬Ý©Y«×¬O§_«D0«×
-                        //¦pªG¬Oªº¸Ü¡A­n«ç»ò­pºâ¸Ó¨¤«×¤U¡A·í«e³t«×ªº¤ô¥­¤À¶q¸ò««ª½¤À¶q
+                        //ï¿½nï¿½Ý©Yï¿½×¬Oï¿½_ï¿½D0ï¿½ï¿½
+                        //ï¿½pï¿½Gï¿½Oï¿½ï¿½ï¿½Ü¡Aï¿½nï¿½ï¿½ï¿½pï¿½ï¿½Ó¨ï¿½ï¿½×¤Uï¿½Aï¿½ï¿½eï¿½tï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½qï¿½ò««ªï¿½ï¿½ï¿½ï¿½q
 
                         AddWalk(Mathf.Abs(vectorToNext.x) / speed, vectorToNext, ((vectorToNext.x > 0) ? 1 : (vectorToNext.x < 0) ? -1 : 0) * speed, pathNodes[i + 1].node.Position);
                     }
-                    else//©Y«×¤j©ó¥i¨«©Y«×
+                    else//ï¿½Yï¿½×¤jï¿½ï¿½iï¿½ï¿½ï¿½Yï¿½ï¿½
                     {
-                        //O=origin­ìÂI,H=highest³Ì°ªÂI,G=Goal²×ÂI
-                        float verticleDistance_OtoH = vectorToNext.y + 1;//1¥u¬OÀH·N­qªº©Î¨¤¦â¹Ï¤ù¨­°ª
+                        //O=originï¿½ï¿½ï¿½I,H=highestï¿½Ì°ï¿½ï¿½I,G=Goalï¿½ï¿½ï¿½I
+                        float verticleDistance_OtoH = vectorToNext.y + 1;//1ï¿½uï¿½Oï¿½Hï¿½Nï¿½qï¿½ï¿½ï¿½Î¨ï¿½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½ï¿½ï¿½
 
                         float time_OtoH = Mathf.Sqrt(verticleDistance_OtoH / (gravity / 2));
 
@@ -316,7 +316,7 @@ public class AI_Move : MonoBehaviour
                         float jumpVelocity = (time_OtoH * gravity);
 
 
-                        if (vectorToNext.y - 1 <= maxJumpHeight &&//-1¬O¦]¬°¤W­±³]©w³Ì°ªÂI·|¬OGoal+1¡A½T«OGoal·|¬O³Ì°ªÂI
+                        if (vectorToNext.y - 1 <= maxJumpHeight &&//-1ï¿½Oï¿½]ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½]ï¿½wï¿½Ì°ï¿½ï¿½Iï¿½|ï¿½OGoal+1ï¿½Aï¿½Tï¿½OGoalï¿½|ï¿½Oï¿½Ì°ï¿½ï¿½I
                             Math.Abs(vectorToNext.x) <= speed * duration)
                         {
                             AddJump(duration, vectorToNext, jumpVelocity, Math.Abs(vectorToNext.x) / duration, pathNodes[i + 1].node.Position);
@@ -372,7 +372,7 @@ public class AI_Move : MonoBehaviour
                     float time_WalktoEdge = 1f / speed;
 
                     float time_OtoG_y = Mathf.Sqrt(Mathf.Abs(vectorToNext.y) / (gravity / 2));
-                    //¤ô¥­²¾°Ê¸¨¤U©Ò»Ý®É¶¡
+                    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¸ï¿½ï¿½Uï¿½Ò»Ý®É¶ï¿½
 
                     Vector3 fallPos = pathNodes[i].node.Position + new Vector3(time_OtoG_y * ((vectorToNext.x > 0) ? 1 : (vectorToNext.x < 0) ? -1 : 0) * speed, vectorToNext.y);
 
@@ -406,16 +406,16 @@ public class AI_Move : MonoBehaviour
                         //AddWalk(time_OtoG_y + time_WalktoEdge, vectorToNext, (Math.Abs( speed_OtoG) >= Math.Abs(speed_withDir)) ? speed_withDir : speed_OtoG);
                         AddWalk(time_OtoG_y + time_WalktoEdge, vectorToNext, speed_OtoG, pathNodes[i + 1].node.Position);
                         //AddWalk(time_OtoG_x, vectorToNext, speed_withDir);
-                        //¦³¨Ç¸¨¤Uªº®É¶¡¦³ÂI©Ç©Çªº
-                        //§Ú·Q¬O¨S¦³ºâ¨ì¨«¨ì¥­¥xÃä½tªº®É¶¡¶Ü
+                        //ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½Uï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½Iï¿½Ç©Çªï¿½
+                        //ï¿½Ú·Qï¿½Oï¿½Sï¿½ï¿½ï¿½ï¿½ì¨«ï¿½ì¥­ï¿½xï¿½ï¿½tï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½
                     }
-                    //¸õÅDªº±ø¥óÁÙ­n·Q·Q
+                    //ï¿½ï¿½ï¿½Dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù­nï¿½Qï¿½Q
                     //else if (Mathf.Abs(vectorToNext.x) > time_OtoG_y * speed
                     //    && Mathf.Abs(vectorToNext.x) <= duration * speed)
                     //{
 
                     //    float jumpVelocity = (Mathf.Abs(vectorToNext.y) / time_OtoG_x) + gravity * time_OtoG_x;
-                    //¤]ÁÙ¨S¦³­­¨î³Ì¤j¸õÅD³t«×
+                    //ï¿½]ï¿½Ù¨Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¤jï¿½ï¿½ï¿½Dï¿½tï¿½ï¿½
                     //    Debug.Log("jumpVelocity : " + jumpVelocity+" maxJumpVelocity : "+maxJumpVelocity);
 
                     //    AddJump(time_OtoG_x, vectorToNext, jumpVelocity, speed);
@@ -434,7 +434,7 @@ public class AI_Move : MonoBehaviour
 
     #endregion
 
-    #region--¹B°Ê--
+    #region--ï¿½Bï¿½ï¿½--
 
     Rigidbody2D rb2D;
 

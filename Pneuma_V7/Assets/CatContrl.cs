@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CatContrl : MonoBehaviour
 {
@@ -132,7 +133,8 @@ public class CatContrl : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
+        Debug_Phone();
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(HH == true)
@@ -268,25 +270,25 @@ public class CatContrl : MonoBehaviour
             }
 #elif UNITY_ANDROID
 
-            if (Key_0 == true && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
-            {
-                // 觸碰偵測
-                if(Key_0_Drag == false)
-                {
-                    CatMusic.PlayMusic(2);
-                    CanLong = false;
-                    NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
-                    GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
-                    GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                    GetComponent<Collider2D>().isTrigger = true;
+                        if (Key_0 == true && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+                        {
+                            // 觸碰偵測
+                            if(Key_0_Drag == false)
+                            {
+                                CatMusic.PlayMusic(2);
+                                CanLong = false;
+                                NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
+                                GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
+                                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
+                                GetComponent<Collider2D>().isTrigger = true;
 
-                    nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+                                nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
 
-                    StartCoroutine(LongBack(1f));
+                                StartCoroutine(LongBack(1f));
 
-                    Key_0_Drag = true;//只偵測一次
-                }
-            }
+                                Key_0_Drag = true;//只偵測一次
+                            }
+                        }
 #endif
 
         }
@@ -367,6 +369,8 @@ public class CatContrl : MonoBehaviour
                 }
             }
 
+
+
 #if UNITY_EDITOR || UNITY_STANDALONE
 
             if ((Input.GetMouseButtonDown(0) || Key_0 == true) && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
@@ -386,31 +390,32 @@ public class CatContrl : MonoBehaviour
             }
 
 #elif UNITY_ANDROID
-            if (Key_0 == true && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
-            {
-		        // 觸碰偵測
-                if(Key_0_Drag == false)
-                {
-                   CatMusic.PlayMusic(2);
-                   CanLong = false;
-                   NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
-                   GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
-                   GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                   GetComponent<Collider2D>().isTrigger = true;
+                        if (Key_0 == true && CanLong == true && NowCatAct != CatAct.Back && NowCatAct != CatAct.LongDownCat)//進行伸長
+                        {
+            		        // 觸碰偵測
+                            if(Key_0_Drag == false)
+                            {
+                               CatMusic.PlayMusic(2);
+                               CanLong = false;
+                               NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
+                               GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
+                               GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
+                               GetComponent<Collider2D>().isTrigger = true;
 
-                   nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
-                   LongLight.SetActive(false);
-   
-                   StartCoroutine(LongBack(1f));
+                               nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
+                               LongLight.SetActive(false);
 
-                    Key_0_Drag = true;//只偵測一次
-                }
-          
-            }
+                               StartCoroutine(LongBack(1f));
+
+                                Key_0_Drag = true;//只偵測一次
+                            }
+
+                        }
 #endif
 
         }
 
+   
 #if UNITY_EDITOR || UNITY_STANDALONE
         if ((Input.GetMouseButtonUp(0) || (Key_0 == false && Key_0_Drag == true)) && NowCatAct == CatAct.LongLongCat)
         {
@@ -425,18 +430,18 @@ public class CatContrl : MonoBehaviour
         }
 
 #elif UNITY_ANDROID
-        if ((Key_0 == false && Key_0_Drag == true) && NowCatAct == CatAct.LongLongCat)
-        {
-		    // 觸碰偵測
-            CatMusic.PlayMusic(3);
-            //縮回去
-            StartCoroutine(LongDebug());
-            CanLong = false;
-            GetComponent<Collider2D>().isTrigger = false;
-            transform.parent = null;
-            NowCatAct = CatAct.Back;
-            Key_0_Drag = false;//只偵測一次
-        }
+                if ((Key_0 == false && Key_0_Drag == true) && NowCatAct == CatAct.LongLongCat)
+                {
+        		    // 觸碰偵測
+                    CatMusic.PlayMusic(3);
+                    //縮回去
+                    StartCoroutine(LongDebug());
+                    CanLong = false;
+                    GetComponent<Collider2D>().isTrigger = false;
+                    transform.parent = null;
+                    NowCatAct = CatAct.Back;
+                    Key_0_Drag = false;//只偵測一次
+                }
 #endif
 
         LongPictrue();
@@ -556,36 +561,41 @@ public class CatContrl : MonoBehaviour
 
     public void LongPictrue()
     {
-        Vector3 MousePos;
 
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // 滑鼠偵測
+        Vector3 MousePos;
         MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 
-        //
         Vector3 direction = MousePos - transform.position;
+
         direction.z = 0f;
         direction.Normalize();
-        //float targetAngle = Mathf.Atan2(direction.y, direction.x);
 
         Vector3 RemoveMax = transform.position + direction * LongRemoveMax;
 
         float ButtRemove = Vector2.Distance(transform.position, MousePos);
 
-
-
         if (ButtRemove <= LongRemoveMax)
         {
             LongPos.transform.position = MousePos;
-            //GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, MousePos, HandSpeed));
-            //GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, MousePos, 0.2f));
-            //transform.position = Vector2.Lerp(transform.position, MousePos, 0.2f);
         }
         else
         {
             LongPos.transform.position = RemoveMax;
-            //GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, HandSpeed));
-            //GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, 0.2f));
-            //transform.position = Vector2.Lerp(transform.position, RemoveMax, 0.2f);
         }
+#elif UNITY_ANDROID
+                // 觸碰偵測
+                Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+
+                 direction.z = 0f;
+                direction.Normalize();
+
+                Vector3 RemoveMax = transform.position + direction * LongRemoveMax;
+
+                LongPos.transform.position = RemoveMax;
+
+#endif
     }
 
     void MorphUpdate_Climb()
@@ -1045,10 +1055,17 @@ public class CatContrl : MonoBehaviour
 
     public void CloudMove()
     {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // 滑鼠偵測
         Vector3 MousePos;
         MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-        //
+
         Vector3 direction = MousePos - transform.position;
+#elif UNITY_ANDROID
+        // 觸碰偵測
+        Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+#endif
+
         direction.z = 0f;
         direction.Normalize();
         //float targetAngle = Mathf.Atan2(direction.y, direction.x);
@@ -1130,12 +1147,17 @@ public class CatContrl : MonoBehaviour
 
     public void CloudPictrue()
     {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // 滑鼠偵測
         Vector3 MousePos;
-
         MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 
-        //
         Vector3 direction = MousePos - transform.position;
+#elif UNITY_ANDROID
+        // 觸碰偵測
+        Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+#endif
+
         direction.z = 0f;
         direction.Normalize();
         //float targetAngle = Mathf.Atan2(direction.y, direction.x);
@@ -2447,17 +2469,24 @@ public class CatContrl : MonoBehaviour
 
     public void WaterJumpPictrue()
     {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // 滑鼠偵測
         Vector3 MousePos;
-
         MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 
-        //
         Vector3 direction = MousePos - transform.position;
+#elif UNITY_ANDROID
+        // 觸碰偵測
+        Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+#endif
+
+
+
         direction.z = 0f;
         direction.Normalize();
         //float targetAngle = Mathf.Atan2(direction.y, direction.x);
 
-        float Remove = Vector2.Distance(MousePos, transform.position);
+        //float Remove = Vector2.Distance(MousePos, transform.position);
 
         Vector3 RemoveMax = transform.position + direction * LongRemoveMax;
         Vector3 RemoveMin = transform.position + direction * 2.3f;
@@ -2553,10 +2582,17 @@ public class CatContrl : MonoBehaviour
             //}
 
 
+#if UNITY_EDITOR || UNITY_STANDALONE
+            // 滑鼠偵測
             Vector3 MousePos;
             MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 
             Vector3 direction = MousePos - transform.position;
+#elif UNITY_ANDROID
+        // 觸碰偵測
+        Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+#endif
+
 
             direction.z = 0f;
             direction.Normalize();
@@ -2664,10 +2700,17 @@ public class CatContrl : MonoBehaviour
 
     public void CloseWaterJump()
     {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // 滑鼠偵測
         Vector3 MousePos;
         MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 
         Vector3 direction = MousePos - transform.position;
+#elif UNITY_ANDROID
+        // 觸碰偵測
+        Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+#endif
+
 
         direction.z = 0f;
         direction.Normalize();
@@ -3000,10 +3043,17 @@ public class CatContrl : MonoBehaviour
 
     public void LongLongCat()//很長很長的貓
     {
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // 滑鼠偵測
         Vector3 MousePos;
         MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 
         Vector3 direction = MousePos - transform.position;
+#elif UNITY_ANDROID
+        // 觸碰偵測
+        Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+#endif
 
         direction.z = 0f;
         direction.Normalize();
@@ -3123,6 +3173,13 @@ public class CatContrl : MonoBehaviour
     public void GetEnd_Right()
     {
         Key_0 = false;
+        StartCoroutine(RightTouch_Debug(0.03f));
+    }
+
+    public IEnumerator RightTouch_Debug(float T)
+    {
+        yield return new WaitForSeconds(T);
+        Key_0_Drag = false;
     }
 
     public void GetJump()
@@ -3393,4 +3450,31 @@ public class CatContrl : MonoBehaviour
     //        }
     //    }
     //}
+
+    public Text Key_0_Text;
+    public Text Key_0_Drag_Text;
+    public Text Key_Text;
+
+    public void Debug_Phone()
+    {
+        if(Key_0 == true)
+        {
+            Key_0_Text.color = Color.white;
+        }
+        else
+        {
+            Key_0_Text.color = Color.gray;
+        }
+
+        if (Key_0_Drag == true)
+        {
+            Key_0_Drag_Text.color = Color.white;
+        }
+        else
+        {
+            Key_0_Drag_Text.color = Color.gray;
+        }
+
+        Key_Text.text = "Key_" + WhatKey_;
+    }
 }

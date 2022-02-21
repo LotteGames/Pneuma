@@ -20,6 +20,8 @@ public class FixedJoystickHandler : MonoBehaviour, IDragHandler, IEndDragHandler
     public Image jsContainer;
     public Image joystick;
     public Vector3 InputDirection = Vector3.zero;
+
+    public bool Right;
     public void Start()
     {
         // Get the Component we attach this script (JoystickContainer)
@@ -46,7 +48,10 @@ public class FixedJoystickHandler : MonoBehaviour, IDragHandler, IEndDragHandler
         }
 
         Getcontect(eventData);
-        Left_Touch(direction);
+        if(Right == false)
+        {
+            Left_Touch(eventData);
+        }
         Debug.Log("direction : " + direction);
     }
 
@@ -78,9 +83,35 @@ public class FixedJoystickHandler : MonoBehaviour, IDragHandler, IEndDragHandler
         direction = InputDirection;
     }
 
-    public void Left_Touch(Vector2 Rot)
+    public void Left_Touch(PointerEventData eventData)
     {
-        float angle = Mathf.Atan2(Rot.y, Rot.x) * Mathf.Rad2Deg;
+        Vector2 position = Vector2.zero;
+
+        // Get InputDirection
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            jsContainer.rectTransform,
+            eventData.position,
+            eventData.pressEventCamera,
+            out position
+        );
+
+        float x = (position.x / jsContainer.rectTransform.sizeDelta.x);
+        float y = (position.y / jsContainer.rectTransform.sizeDelta.y);
+
+        InputDirection = new Vector3(x, y, 0);
+        InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
+
+        // Define the area in which joystick can move around
+        joystick.rectTransform.anchoredPosition = new Vector3(
+            InputDirection.x * jsContainer.rectTransform.sizeDelta.x / 3,
+            InputDirection.y * jsContainer.rectTransform.sizeDelta.y / 3
+        );
+
+        direction = InputDirection;
+
+        //
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0)
             angle = 360 + angle;
 
