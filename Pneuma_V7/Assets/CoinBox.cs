@@ -17,15 +17,12 @@ public class CoinBox : MonoBehaviour
             transform.GetChild(0).gameObject.SetActive(true);
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayerSave()
     {
-        
+        if(transform.GetChild(0).gameObject.active == false)
+        {
+            CoinSave = true;
+        }
     }
 }

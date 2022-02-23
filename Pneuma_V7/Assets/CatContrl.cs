@@ -123,11 +123,11 @@ public class CatContrl : MonoBehaviour
         CatAni = GetComponent<Animator>();
         HH = true;
 
-//#if UNITY_EDITOR || UNITY_STANDALONE
-//        Phone_UI.SetActive(false);   // 滑鼠偵測
-//#elif UNITY_ANDROID
-//		Phone_UI.SetActive(true);  // 觸碰偵測
-//#endif
+#if UNITY_EDITOR || UNITY_STANDALONE
+        Phone_UI.SetActive(false);   // 滑鼠偵測
+#elif UNITY_ANDROID
+		Phone_UI.SetActive(true);  // 觸碰偵測
+#endif
     }
     bool HH;
     // Update is called once per frame
@@ -266,7 +266,7 @@ public class CatContrl : MonoBehaviour
 
                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
 
-                StartCoroutine(LongBack(1f));
+                StartCoroutine(LongBack(2f));
             }
 #elif UNITY_ANDROID
 
@@ -311,7 +311,7 @@ public class CatContrl : MonoBehaviour
                 }
                 else
                 {
-                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.1f);
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.5f);
                     GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
             }
@@ -332,7 +332,7 @@ public class CatContrl : MonoBehaviour
                 }
                 else
                 {
-                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.1f);
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.5f);
                     GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
             }
@@ -351,7 +351,7 @@ public class CatContrl : MonoBehaviour
                 }
                 else
                 {
-                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, 0, 0.2f);
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, 0, 0.5f);
                     GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
             }
@@ -386,7 +386,7 @@ public class CatContrl : MonoBehaviour
                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
                 LongLight.SetActive(false);
 
-                StartCoroutine(LongBack(1f));
+                StartCoroutine(LongBack(2f));
             }
 
 #elif UNITY_ANDROID
@@ -3098,6 +3098,7 @@ public class CatContrl : MonoBehaviour
     }
     public void StopCat(float DelayTime)
     {
+        AllCoinSave();
         StartCoroutine(CatStopDelay(DelayTime));
     }
 
@@ -3135,14 +3136,39 @@ public class CatContrl : MonoBehaviour
         GetComponent<Collider2D>().enabled = true;
         GetComponent<Collider2D>().isTrigger = false;
         GetComponent<Animator>().SetBool("Cloud", false);
+        AllStart();
         CatAni.SetBool("Die", false);
         yield return new WaitForSeconds(1);
         Black.SetActive(false);
         NowCatAct = CatAct.Idle;
     }
 
-
-
+    public void AllStart()
+    {
+        CoinBox[] coinBox = GameObject.FindObjectsOfType<CoinBox>();
+        for (int i = 0; i < coinBox.Length; i++)
+        {
+            coinBox[i].SetStart();
+        }
+        DownPike[] downPike = GameObject.FindObjectsOfType<DownPike>();
+        for (int i = 0; i < downPike.Length; i++)
+        {
+            downPike[i].SetStart();
+        }
+        MoveGround[] moveGround = GameObject.FindObjectsOfType<MoveGround>();
+        for (int i = 0; i < moveGround.Length; i++)
+        {
+            moveGround[i].SetStart();
+        }
+    }
+    public void AllCoinSave()
+    {
+        CoinBox[] coinBox = GameObject.FindObjectsOfType<CoinBox>();
+        for (int i = 0; i < coinBox.Length; i++)
+        {
+            coinBox[i].PlayerSave();
+        }
+    }
 
     [Header("按了甚麼鍵")]
     public string WhatKey_;
@@ -3173,7 +3199,7 @@ public class CatContrl : MonoBehaviour
     public void GetEnd_Right()
     {
         Key_0 = false;
-        StartCoroutine(RightTouch_Debug(0.03f));
+        StartCoroutine(RightTouch_Debug(0.1f));
     }
 
     public IEnumerator RightTouch_Debug(float T)

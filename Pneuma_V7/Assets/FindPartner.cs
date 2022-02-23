@@ -30,7 +30,7 @@ public class FindPartner : MonoBehaviour
     {
         catContrl = GameObject.FindObjectOfType<CatContrl>();
         Partner = GameObject.FindObjectOfType<CatContrl>().gameObject;
-        StartCoroutine(DebugLong(1.1f));
+        StartCoroutine(DebugLong(2.2f));
         T = 0;
     }
 
