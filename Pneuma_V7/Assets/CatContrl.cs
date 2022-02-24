@@ -838,7 +838,6 @@ public class CatContrl : MonoBehaviour
 
             if (Input.GetMouseButton(0) || Key_0 == true)
             {
-                Key_0_Drag = true;
                 if (TurnRight == true)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
@@ -853,7 +852,7 @@ public class CatContrl : MonoBehaviour
 #elif UNITY_ANDROID
 		    if (Key_0 == true)
             {
-                Key_0_Drag = true;
+                
                 if (TurnRight == true)
                 {
                     transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
@@ -864,7 +863,6 @@ public class CatContrl : MonoBehaviour
                 }      
                 // 觸碰偵測
                 CloudMove_Phone(Touch_Right.GetComponent<FixedJoystickHandler>().direction);
-                Key_0_Drag = false;//只偵測一次
             }
 #endif
 
