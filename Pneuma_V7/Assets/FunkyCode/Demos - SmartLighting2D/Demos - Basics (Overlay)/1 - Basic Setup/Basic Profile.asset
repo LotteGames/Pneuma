@@ -27,6 +27,70 @@ MonoBehaviour:
         - id: 0
           type: 0
           sorting: 0
+    - name: 'Preset (Id: 2)'
+      type: 0
+      hdr: 1
+      darknessColor: {r: 0, g: 0, b: 0, a: 1}
+      depth: -100
+      resolution: 1
+      dayLayers:
+        list:
+        - id: 0
+          type: 0
+          sorting: 0
+      lightLayers:
+        list:
+        - id: 1
+          type: 0
+          sorting: 0
+    - name: 'Preset (Id: 3)'
+      type: 0
+      hdr: 1
+      darknessColor: {r: 0, g: 0, b: 0, a: 1}
+      depth: -100
+      resolution: 1
+      dayLayers:
+        list:
+        - id: 0
+          type: 0
+          sorting: 0
+      lightLayers:
+        list:
+        - id: 2
+          type: 0
+          sorting: 0
+    - name: 'Preset (Id: 4)'
+      type: 0
+      hdr: 1
+      darknessColor: {r: 0, g: 0, b: 0, a: 1}
+      depth: -100
+      resolution: 1
+      dayLayers:
+        list:
+        - id: 0
+          type: 0
+          sorting: 0
+      lightLayers:
+        list:
+        - id: 3
+          type: 0
+          sorting: 0
+    - name: 'Preset (Id: 5)'
+      type: 0
+      hdr: 1
+      darknessColor: {r: 0, g: 0, b: 0, a: 1}
+      depth: -100
+      resolution: 1
+      dayLayers:
+        list:
+        - id: 0
+          type: 0
+          sorting: 0
+      lightLayers:
+        list:
+        - id: 4
+          type: 0
+          sorting: 0
   lightPresets:
     list:
     - name: Default
@@ -37,6 +101,50 @@ MonoBehaviour:
           sorting: 0
           sortingIgnore: 0
           shadowEffect: 0
+          shadowEffectLayer: 0
+          maskLit: 0
+          maskLitDistance: 1
+    - name: 'Preset (Id: 2)'
+      layerSetting:
+        list:
+        - layerID: 1
+          type: 0
+          sorting: 0
+          sortingIgnore: 0
+          shadowEffect: 2
+          shadowEffectLayer: 0
+          maskLit: 0
+          maskLitDistance: 1
+    - name: 'Preset (Id: 3)'
+      layerSetting:
+        list:
+        - layerID: 2
+          type: 0
+          sorting: 0
+          sortingIgnore: 0
+          shadowEffect: 2
+          shadowEffectLayer: 0
+          maskLit: 0
+          maskLitDistance: 1
+    - name: 'Preset (Id: 4)'
+      layerSetting:
+        list:
+        - layerID: 3
+          type: 0
+          sorting: 0
+          sortingIgnore: 0
+          shadowEffect: 2
+          shadowEffectLayer: 0
+          maskLit: 0
+          maskLitDistance: 1
+    - name: 'Preset (Id: 5)'
+      layerSetting:
+        list:
+        - layerID: 4
+          type: 0
+          sorting: 0
+          sortingIgnore: 0
+          shadowEffect: 2
           shadowEffectLayer: 0
           maskLit: 0
           maskLitDistance: 1
@@ -51,7 +159,7 @@ MonoBehaviour:
         list:
         - layerID: 0
   qualitySettings:
-    lightTextureSize: 3
+    lightTextureSize: 2
     lightEffectTextureSize: 2
     lightFilterMode: 1
     lightmapFilterMode: 1
@@ -69,9 +177,17 @@ MonoBehaviour:
     colliderLayers:
       names:
       - Default
+      - Collider Layer 1
+      - Collider Layer 2
+      - Collider Layer 3
+      - Collider Layer 4
     lightLayers:
       names:
       - Default
+      - Light Layer 1
+      - Light Layer 2
+      - Light Layer 3
+      - Light Layer 4
     dayLayers:
       names:
       - Default
