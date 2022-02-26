@@ -17,7 +17,7 @@ MonoBehaviour:
     - name: Default
       type: 0
       hdr: 1
-      darknessColor: {r: 0, g: 0, b: 0, a: 1}
+      darknessColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
@@ -27,10 +27,10 @@ MonoBehaviour:
         - id: 0
           type: 0
           sorting: 0
-    - name: 'Preset (Id: 2)'
+    - name: Use On Before Background
       type: 0
       hdr: 1
-      darknessColor: {r: 0, g: 0, b: 0, a: 1}
+      darknessColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
@@ -43,10 +43,10 @@ MonoBehaviour:
         - id: 1
           type: 0
           sorting: 0
-    - name: 'Preset (Id: 3)'
+    - name: Use On Before Ground
       type: 0
       hdr: 1
-      darknessColor: {r: 0, g: 0, b: 0, a: 1}
+      darknessColor: {r: 1, g: 1, b: 1, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
@@ -59,10 +59,10 @@ MonoBehaviour:
         - id: 2
           type: 0
           sorting: 0
-    - name: 'Preset (Id: 4)'
+    - name: Use On Before Player
       type: 0
       hdr: 1
-      darknessColor: {r: 0, g: 0, b: 0, a: 1}
+      darknessColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
@@ -75,10 +75,10 @@ MonoBehaviour:
         - id: 3
           type: 0
           sorting: 0
-    - name: 'Preset (Id: 5)'
+    - name: Use On Before foreground
       type: 0
       hdr: 1
-      darknessColor: {r: 0, g: 0, b: 0, a: 1}
+      darknessColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
