@@ -30,7 +30,7 @@ MonoBehaviour:
     - name: Use On Before Background
       type: 0
       hdr: 1
-      darknessColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+      darknessColor: {r: 1, g: 1, b: 1, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
@@ -46,7 +46,7 @@ MonoBehaviour:
     - name: Use On Before Ground
       type: 0
       hdr: 1
-      darknessColor: {r: 1, g: 1, b: 1, a: 1}
+      darknessColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
