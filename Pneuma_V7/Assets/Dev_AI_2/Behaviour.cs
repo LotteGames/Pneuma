@@ -89,7 +89,7 @@ public class Behaviour : MonoBehaviour
                                     bool isGround;
 
                                     {
-                                        Debug.Log(point.num + " , " + pathPoints.Count + " , " + (i + 1));
+                                        ////Debug.Log(point.num + " , " + pathPoints.Count + " , " + (i + 1));
                                         angle = GetAngle(neighbor.vector);
 
                                         checkPos = (neighbor.point.position_World + point.position_World) / 2f;
@@ -251,13 +251,13 @@ public class Behaviour : MonoBehaviour
 
             animator.SetBool("IsGround", IsGround);
 
-            Debug.Log(ai_State.ToString());
+            ////Debug.Log(ai_State.ToString());
 
             if (!isFollow && IsGround)
             {
                 if (decision.Count != 1)
                 {
-                    Debug.Log(275);
+                    ////Debug.Log(275);
                     decision.Clear();
                     decision.Add(AI_State.rest);
                 }
@@ -315,7 +315,7 @@ public class Behaviour : MonoBehaviour
                               && transform.position.y + 1.5f >= neighbor.point.position_World.y)
                         {
 
-                            Debug.LogError("abc");
+                            ////Debug.LogError("abc");
 
                             stateIndex++;
 
@@ -327,7 +327,7 @@ public class Behaviour : MonoBehaviour
                             && Math.Abs(neighbor.point.position_World.y - transform.position.y + 1.5f) > 0.2f)
                         {
                             transform.position = neighbor.point.position_World;
-                            Debug.LogError("cde");
+                            ////Debug.LogError("cde");
                             stateIndex++;
 
                             rb2D.velocity = Vector2.zero;
@@ -361,9 +361,9 @@ public class Behaviour : MonoBehaviour
                     {
                         moveWay = 0;
                     }
-                    Debug.DrawLine(transform.position, transform.position + new Vector3(1, 0) * 1.2f, Color.red);
-                    Debug.DrawLine(transform.position, transform.position + new Vector3(1, 0) * 1.2f, Color.red);
-                    Debug.DrawLine(transform.position + new Vector3(0, 1.5f), transform.position + new Vector3(0, 1.5f) + new Vector3(1, 0) * 1.2f, Color.red);
+                    ////Debug.DrawLine(transform.position, transform.position + new Vector3(1, 0) * 1.2f, Color.red);
+                    ////Debug.DrawLine(transform.position, transform.position + new Vector3(1, 0) * 1.2f, Color.red);
+                    ////Debug.DrawLine(transform.position + new Vector3(0, 1.5f), transform.position + new Vector3(0, 1.5f) + new Vector3(1, 0) * 1.2f, Color.red);
 
 
                     float distance_y = Mathf.Abs(neighbor.vector.y) + 1f;
@@ -437,7 +437,7 @@ public class Behaviour : MonoBehaviour
 
                     if (stateIndex + 1 < pathPoints.Count)
                     {
-                        Debug.LogError(1);
+                        ////Debug.LogError(1);
                         neighbor = point.GetNeighbor(pathPoints[stateIndex + 1]);
 
                         transform.position = neighbor.point.position_World;
@@ -446,7 +446,7 @@ public class Behaviour : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogError(2);
+                        ////Debug.LogError(2);
                         transform.position = point.position_World;
                         stateIndex++;
                     }
@@ -462,8 +462,8 @@ public class Behaviour : MonoBehaviour
                     {
                         if (spriteRenderer.flipX)
                         {
-                            Debug.DrawLine(restPoint_L.position, restPoint_L.position + new Vector3(0, -1) * 1.2f, Color.red);
-                            Debug.DrawLine(restPoint_L.position, restPoint_L.position + new Vector3(-1, 0) * 1.2f, Color.red);
+                            ////Debug.DrawLine(restPoint_L.position, restPoint_L.position + new Vector3(0, -1) * 1.2f, Color.red);
+                            ////Debug.DrawLine(restPoint_L.position, restPoint_L.position + new Vector3(-1, 0) * 1.2f, Color.red);
 
                             if (Physics2D.Raycast(restPoint_L.position, Vector2.down, 1.2f, layerMask))
                             {
@@ -479,8 +479,8 @@ public class Behaviour : MonoBehaviour
                         }
                         else
                         {
-                            Debug.DrawLine(restPoint_R.position, restPoint_R.position + new Vector3(0, -1) * 1.2f, Color.red);
-                            Debug.DrawLine(restPoint_R.position, restPoint_R.position + new Vector3(1, 0) * 1.2f, Color.red);
+                            ////Debug.DrawLine(restPoint_R.position, restPoint_R.position + new Vector3(0, -1) * 1.2f, Color.red);
+                            ////Debug.DrawLine(restPoint_R.position, restPoint_R.position + new Vector3(1, 0) * 1.2f, Color.red);
 
 
                             if (Physics2D.Raycast(restPoint_R.position, Vector2.down, 1.2f, layerMask))
