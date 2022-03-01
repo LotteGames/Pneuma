@@ -77,8 +77,8 @@ public class CatContrl : MonoBehaviour
     public bool ReadySave;
 
 
-    [Header("伸長貓咪的光暈")]
-    public GameObject LongLight;
+    //[Header("伸長貓咪的光暈")]
+    //public GameObject LongLight;
     [Header("伸長貓咪的物件")]
     public GameObject LongBody;
     public GameObject nowLongBody;
@@ -384,7 +384,7 @@ public class CatContrl : MonoBehaviour
                 GetComponent<Collider2D>().isTrigger = true;
 
                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
-                LongLight.SetActive(false);
+                //LongLight.SetActive(false);
 
                 StartCoroutine(LongBack(2f));
             }
@@ -403,7 +403,7 @@ public class CatContrl : MonoBehaviour
                                GetComponent<Collider2D>().isTrigger = true;
 
                                nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
-                               LongLight.SetActive(false);
+                               //LongLight.SetActive(false);
 
                                StartCoroutine(LongBack(1f));
 
@@ -1542,7 +1542,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
-                            LongLight.SetActive(true);
+                            //LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -1590,7 +1590,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
-                            LongLight.SetActive(true);
+                            //LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -1649,7 +1649,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
-                            LongLight.SetActive(true);
+                            //LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -1701,7 +1701,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
-                            LongLight.SetActive(true);
+                            //LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -1754,7 +1754,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
-                            LongLight.SetActive(true);
+                            //LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -1793,7 +1793,7 @@ public class CatContrl : MonoBehaviour
 
                         if (CanLongTrue == true)
                         {
-                            LongLight.SetActive(true);
+                            //LongLight.SetActive(true);
                             CanLong = true;
                         }
                         if (CanJumpTrue == true)
@@ -3281,7 +3281,7 @@ public class CatContrl : MonoBehaviour
 
             if (CanLongTrue == true)
             {
-                LongLight.SetActive(true);
+                //LongLight.SetActive(true);
                 CanLong = true;
             }
             if (CanJumpTrue == true)
@@ -3348,7 +3348,7 @@ public class CatContrl : MonoBehaviour
                 }
                 if (CanLongTrue == true)
                 {
-                    LongLight.SetActive(true);
+                    //LongLight.SetActive(true);
                     CanLong = true;
                 }
                 if (CanJumpTrue == true)

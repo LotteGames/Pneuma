@@ -47,7 +47,7 @@ public class MoveGround : MonoBehaviour
    
         float Remove = Vector2.Distance(NewPos.transform.position, transform.position);
 
-        if (Remove <= 0.1f)
+        if (Remove <= 0.15f)
         {
             OldPos = MovePos[MovePosNumber];
 
