@@ -54,18 +54,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
+  - name: Sky
+    uniqueID: 2971625757
+    locked: 0
+  - name: TreeAfter
+    uniqueID: 3893405001
+    locked: 0
+  - name: Tree
     uniqueID: 768200407
     locked: 0
-  - name: Ground
-    uniqueID: 727455721
-    locked: 0
-  - name: Player
+  - name: Character
     uniqueID: 2097972449
     locked: 0
   - name: Foreground
     uniqueID: 3774667545
     locked: 0
-  - name: New Layer
-    uniqueID: 2971625757
+  - name: Player
+    uniqueID: 1514505977
     locked: 0

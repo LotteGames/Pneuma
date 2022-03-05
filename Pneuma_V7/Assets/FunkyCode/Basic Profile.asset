@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightmapPresets:
     list:
-    - name: Default
+    - name: Sky Lightmap
       type: 0
       hdr: 1
       darknessColor: {r: 0, g: 0, b: 0, a: 1}
@@ -27,65 +27,53 @@ MonoBehaviour:
         - id: 0
           type: 0
           sorting: 0
-    - name: Use On Before Background
+    - name: TreeAfter Lightmap
       type: 0
       hdr: 1
       darknessColor: {r: 0, g: 0, b: 0, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
-        list:
-        - id: 0
-          type: 0
-          sorting: 0
+        list: []
       lightLayers:
         list:
         - id: 1
           type: 0
           sorting: 0
-    - name: Use On Before Ground
+    - name: Tree Lightmap
       type: 0
       hdr: 1
       darknessColor: {r: 0, g: 0, b: 0, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
-        list:
-        - id: 0
-          type: 0
-          sorting: 0
+        list: []
       lightLayers:
         list:
         - id: 2
           type: 0
           sorting: 0
-    - name: Use On Before Player
+    - name: Character Lightmap
       type: 0
       hdr: 1
       darknessColor: {r: 0, g: 0, b: 0, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
-        list:
-        - id: 0
-          type: 0
-          sorting: 0
+        list: []
       lightLayers:
         list:
         - id: 3
           type: 0
           sorting: 0
-    - name: Use On Before foreground
+    - name: Foreground Lightmap
       type: 0
       hdr: 1
       darknessColor: {r: 0, g: 0, b: 0, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
-        list:
-        - id: 0
-          type: 0
-          sorting: 0
+        list: []
       lightLayers:
         list:
         - id: 4
@@ -93,7 +81,7 @@ MonoBehaviour:
           sorting: 0
   lightPresets:
     list:
-    - name: Default
+    - name: Sky Preset
       layerSetting:
         list:
         - layerID: 0
@@ -104,7 +92,7 @@ MonoBehaviour:
           shadowEffectLayer: 0
           maskLit: 0
           maskLitDistance: 1
-    - name: 'Preset (Id: 2)'
+    - name: Tree After Preset
       layerSetting:
         list:
         - layerID: 1
@@ -115,7 +103,7 @@ MonoBehaviour:
           shadowEffectLayer: 0
           maskLit: 0
           maskLitDistance: 1
-    - name: 'Preset (Id: 3)'
+    - name: Tree Preset
       layerSetting:
         list:
         - layerID: 2
@@ -126,7 +114,7 @@ MonoBehaviour:
           shadowEffectLayer: 0
           maskLit: 0
           maskLitDistance: 1
-    - name: 'Preset (Id: 4)'
+    - name: Character Preset
       layerSetting:
         list:
         - layerID: 3
@@ -137,7 +125,7 @@ MonoBehaviour:
           shadowEffectLayer: 0
           maskLit: 0
           maskLitDistance: 1
-    - name: 'Preset (Id: 5)'
+    - name: Foreground Preset
       layerSetting:
         list:
         - layerID: 4
@@ -176,18 +164,18 @@ MonoBehaviour:
   layers:
     colliderLayers:
       names:
-      - Default
-      - Collider Layer 1
-      - Collider Layer 2
-      - Collider Layer 3
-      - Collider Layer 4
+      - Sky Collider
+      - TreeAfter Collider
+      - Tree Collider
+      - Character Collider
+      - Foreground Collider
     lightLayers:
       names:
-      - Default
-      - Light Layer 1
-      - Light Layer 2
-      - Light Layer 3
-      - Light Layer 4
+      - Sky Light
+      - TreeAfter Light
+      - Tree Light
+      - Character Light
+      - Foreground Light
     dayLayers:
       names:
       - Default
