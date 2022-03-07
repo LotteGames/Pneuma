@@ -57,6 +57,9 @@ TagManager:
   - name: Sky
     uniqueID: 2971625757
     locked: 0
+  - name: SkyFront
+    uniqueID: 2683531767
+    locked: 0
   - name: TreeAfter
     uniqueID: 3893405001
     locked: 0
