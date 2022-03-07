@@ -5065,7 +5065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &178194541407628777
 Transform:
   m_ObjectHideFlags: 0
@@ -5162,14 +5162,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightType: 1
-  lightPresetId: 0
+  lightPresetId: 4
   eventPresetId: 0
-  lightLayer: 0
+  lightLayer: 4
   occlusionLayer: 0
   translucentLayer: 0
   translucentPresetId: 0
-  color: {r: 5.656558, g: 5.6998825, b: 3.4629474, a: 0}
-  size: 3.363706
+  color: {r: 0.1882353, g: 0.18431373, b: 0.13333334, a: 1}
+  size: 12
   spotAngleInner: 360
   spotAngleOuter: 360
   coreSize: 0.5
