@@ -29,6 +29,9 @@ public class DownPike : MonoBehaviour
     [Header("掉落延遲")]
     public float DownDelay;
 
+    [Header("下降速度最大值")]
+    public float MoveSpeedMax;
+
     Vector3 pos;
     public void Start()
     {
@@ -132,7 +135,16 @@ public class DownPike : MonoBehaviour
             else
             {
                 DownSpeed += Time.deltaTime * 500f;
+                if(DownSpeed >= MoveSpeedMax)
+                {
+                    DownSpeed = MoveSpeedMax;
+                }
                 MoveGround.GetComponent<MoveGround>().MoveSpeed = DownSpeed;
+
+                if(MoveGround.transform.position.y <= PosB.transform.position.y)
+                {
+                    MoveGround.transform.position = PosB.transform.position;
+                }
             }
         }
     }
