@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7606870520319903402}
   - component: {fileID: 6048909465531112672}
   - component: {fileID: 8468756492983705177}
+  - component: {fileID: 8886657461906101942}
   m_Layer: 0
   m_Name: BreakGround
   m_TagString: Ground
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2097972449
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f76056da6e03a934c83c6007df3399e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -145,9 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8944f2bcaf3d4d24ca0b37365c93f0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartRockPos: {x: 0, y: 0}
-  NewRock: {fileID: 261519473549985779}
-  DownCreateTime: 4
+  Box: {fileID: 0}
   RockAni: {fileID: 4211902172854781842, guid: 0a3c0e9f58aa6c04aad823798276de1f, type: 3}
   Down: 0
   DownDelayTime: 0.5
@@ -170,3 +169,40 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8886657461906101942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261519473549985779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5783dbbad6a59184fa58aa75d79bcc02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowType: 3
+  shadowLayer: 4
+  shadowDistance: 0
+  shadowDistanceMin: 0.5
+  shadowDistanceMax: 1
+  shadowTranslucency: 0
+  maskType: 0
+  maskLit: 0
+  maskPivot: 0
+  maskLayer: 0
+  maskLitCustom: 1
+  bumpMapMode:
+    type: 0
+    textureType: 0
+    texture: {fileID: 0}
+    sprite: {fileID: 0}
+    invertX: 0
+    invertY: 0
+    depth: 1
+    spriteRenderer: {fileID: 261519473549985780}
+  mainShape:
+    shadowType: 3
+    maskType: 0
+    maskPivot: 0
+    transform: {fileID: 261519473549985781}
