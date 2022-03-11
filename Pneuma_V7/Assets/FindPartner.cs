@@ -30,7 +30,7 @@ public class FindPartner : MonoBehaviour
     {
         catContrl = GameObject.FindObjectOfType<CatContrl>();
         Partner = GameObject.FindObjectOfType<CatContrl>().gameObject;
-        StartCoroutine(DebugLong(2.2f));
+        //StartCoroutine(DebugLong(2.2f));
         T = 0;
     }
 
@@ -86,7 +86,11 @@ public class FindPartner : MonoBehaviour
         }
 
         T += Time.deltaTime;
-      
+        if(T >= 2.2)
+        {
+            GetComponent<Collider2D>().isTrigger = true;
+            DebugBack = true;
+        }
     }
 
     void Turn()
@@ -224,7 +228,7 @@ public class FindPartner : MonoBehaviour
         
         float ButtRemove = Vector2.Distance(Partner.transform.position, RemoveMax);
 
-        GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, 0.2f));
+        GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, 0.3f));
 #endif
 
         if (catContrl.TurnRight == true)
@@ -245,8 +249,23 @@ public class FindPartner : MonoBehaviour
         GetComponent<Animator>().SetBool("Back", true);
         if (DebugBack == true)
         {
+#if UNITY_EDITOR || UNITY_STANDALONE
             GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, Partner.transform.position, 0.2f));
+#elif UNITY_ANDROID
+            GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, Partner.transform.position, 0.3f));
+#endif
         }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        }
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if(DebugBack == false)
+        {
+            StartCoroutine(DebugLong(0.25f));
+        }
+#elif UNITY_ANDROID
+#endif
 
         if (catContrl.TurnRight == true)
         {
@@ -295,6 +314,20 @@ public class FindPartner : MonoBehaviour
         if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "DoorGround" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Pike")
         {
             if (T >= 0.1f)
+            {
+                catContrl.CanJump = true;
+                catContrl.NowCatAct = CatContrl.CatAct.Back;
+                catContrl.GetComponent<Collider2D>().isTrigger = false;
+                StartCoroutine(DebugLong(0.2f));
+            }
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "DoorGround" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Pike")
+        {
+            if (T >= 0.2f)
             {
                 catContrl.CanJump = true;
                 catContrl.NowCatAct = CatContrl.CatAct.Back;

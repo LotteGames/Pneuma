@@ -311,7 +311,11 @@ public class CatContrl : MonoBehaviour
                 }
                 else
                 {
+#if UNITY_EDITOR || UNITY_STANDALONE
                     float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.5f);
+#elif UNITY_ANDROID
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.8f);
+#endif
                     GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
             }
@@ -332,7 +336,11 @@ public class CatContrl : MonoBehaviour
                 }
                 else
                 {
+#if UNITY_EDITOR || UNITY_STANDALONE
                     float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.5f);
+#elif UNITY_ANDROID
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.8f);
+#endif
                     GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
             }
@@ -3109,6 +3117,7 @@ public class CatContrl : MonoBehaviour
     public IEnumerator CatDeath()
     {
         NowCatAct = CatAct.CatDie;
+        Phone_UI.SetActive(false);
         CatMusic.PlayMusic(1);
         GetComponent<Animator>().SetBool("Cloud", false);
         CatAni.SetBool("Die", true);
@@ -3139,6 +3148,11 @@ public class CatContrl : MonoBehaviour
         yield return new WaitForSeconds(1);
         Black.SetActive(false);
         NowCatAct = CatAct.Idle;
+#if UNITY_EDITOR || UNITY_STANDALONE
+        Phone_UI.SetActive(false);   // 滑鼠偵測
+#elif UNITY_ANDROID
+		Phone_UI.SetActive(true);  // 觸碰偵測
+#endif
     }
 
     public void AllStart()
@@ -3196,6 +3210,7 @@ public class CatContrl : MonoBehaviour
 
     public void GetEnd_Right()
     {
+        //WhatKey_ = "";
         Key_0 = false;
         StartCoroutine(RightTouch_Debug(0.1f));
     }
