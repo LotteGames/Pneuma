@@ -3433,6 +3433,11 @@ public class CatContrl : MonoBehaviour
             //碰到陷阱，到儲存點復活
             StartCoroutine(CatDeath());
         }
+        if (collision.gameObject.tag == "Key")
+        {
+            //碰到陷阱，到儲存點復活
+            collision.transform.parent.GetComponent<DoorRock>().WhatKey(collision.gameObject);
+        }
     }
 
 
