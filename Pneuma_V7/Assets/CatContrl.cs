@@ -1339,17 +1339,17 @@ public class CatContrl : MonoBehaviour
     public bool Ray_Up;
     public IEnumerator RayL_Check()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         Ray_Left = true;
     }
     public IEnumerator RayR_Check()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         Ray_Right = true;
     }
     public IEnumerator RayU_Check()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         Ray_Up = true;
     }
 
@@ -3259,7 +3259,7 @@ public class CatContrl : MonoBehaviour
 
         
 
-        private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Bar" || collision.gameObject.tag == "DoorGround")
         {
@@ -3309,21 +3309,21 @@ public class CatContrl : MonoBehaviour
                 StartCoroutine(JumpDebug(0.3f));
             }
 
-            if (NowCatMorph == CatMorph.Climb)
-            {
-                if (Ray_Left == false)
-                {
-                    StartCoroutine(RayL_Check());
-                }
-                if (Ray_Right == false)
-                {
-                    StartCoroutine(RayR_Check());
-                }
-                if (Ray_Up == false)
-                {
-                    StartCoroutine(RayU_Check());
-                }
-            }
+            //if (NowCatMorph == CatMorph.Climb)
+            //{
+            //    if (Ray_Left == false)
+            //    {
+            //        StartCoroutine(RayL_Check());
+            //    }
+            //    if (Ray_Right == false)
+            //    {
+            //        StartCoroutine(RayR_Check());
+            //    }
+            //    if (Ray_Up == false)
+            //    {
+            //        StartCoroutine(RayU_Check());
+            //    }
+            //}
 
             if (GetComponent<Rigidbody2D>().gravityScale != 0.01f)
             {
