@@ -34,7 +34,7 @@ public class BreakGround : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<CatContrl>() != null)
         {
-            if (Down == false)
+            if (Down == false && collision.transform.position.y >= transform.position.y)
             {
                 Down = true;
                 StartCoroutine(DownDelay());

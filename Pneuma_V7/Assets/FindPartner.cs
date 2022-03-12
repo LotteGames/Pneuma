@@ -54,17 +54,17 @@ public class FindPartner : MonoBehaviour
         //}
         if (catContrl.NowCatAct == CatContrl.CatAct.CatDie)
         {
-            catContrl.GetComponent<Rigidbody2D>().gravityScale = 6.5f;//貓咪屁股的重力恢復
-            catContrl.GetComponent<Animator>().SetBool("Long", false);
-            catContrl.NowCatAct = CatContrl.CatAct.Jump;
-            if (catContrl.TurnRight == true)
-            {
-                Partner.transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else
-            {
-                Partner.transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
+            //catContrl.GetComponent<Rigidbody2D>().gravityScale = 6.5f;//貓咪屁股的重力恢復
+            //catContrl.GetComponent<Animator>().SetBool("Long", false);
+            //catContrl.NowCatAct = CatContrl.CatAct.Jump;
+            //if (catContrl.TurnRight == true)
+            //{
+            //    Partner.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //}
+            //else
+            //{
+            //    Partner.transform.rotation = Quaternion.Euler(0, 180, 0);
+            //}
             Destroy(transform.parent.gameObject);
         }
 

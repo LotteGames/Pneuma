@@ -262,7 +262,7 @@ public class CatContrl : MonoBehaviour
                 NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
                 GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                GetComponent<Collider2D>().isTrigger = true;
+                //GetComponent<Collider2D>().isTrigger = true;
 
                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
 
@@ -280,7 +280,7 @@ public class CatContrl : MonoBehaviour
                                 NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
                                 GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
                                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                                GetComponent<Collider2D>().isTrigger = true;
+                                //GetComponent<Collider2D>().isTrigger = true;
 
                                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
 
@@ -389,7 +389,7 @@ public class CatContrl : MonoBehaviour
                 NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
                 GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                GetComponent<Collider2D>().isTrigger = true;
+                //GetComponent<Collider2D>().isTrigger = true;
 
                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
                 //LongLight.SetActive(false);
@@ -408,7 +408,7 @@ public class CatContrl : MonoBehaviour
                                NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
                                GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
                                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                               GetComponent<Collider2D>().isTrigger = true;
+                               //GetComponent<Collider2D>().isTrigger = true;
 
                                nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
                                //LongLight.SetActive(false);
@@ -3117,8 +3117,12 @@ public class CatContrl : MonoBehaviour
     public IEnumerator CatDeath()
     {
         NowCatAct = CatAct.CatDie;
+        NowCatMorph = CatMorph.NoMorph;
+        CanLongTrue = false;
+        CanLong = false;
         Phone_UI.SetActive(false);
         CatMusic.PlayMusic(1);
+        GetEnd_Left();
         GetComponent<Animator>().SetBool("Cloud", false);
         CatAni.SetBool("Die", true);
         if (TurnRight == true)
@@ -3136,22 +3140,36 @@ public class CatContrl : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 18000));
         WaterJumpPos_1.SetActive(false);
         WaterJumpPos_2.SetActive(false);
+        GetComponent<Collider2D>().isTrigger = false;
+
         yield return new WaitForSeconds(1.5f);
-        transform.position = new Vector2(PlayerPrefs.GetFloat("CatPos_X"), PlayerPrefs.GetFloat("CatPos_Y")) + new Vector2(0, 0.2f);
+        CanLongTrue = false;
+        CanLong = false;
+        GetComponent<Rigidbody2D>().gravityScale = 0f;
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        GetComponent<Rigidbody2D>().gravityScale = CatWeight;
         GetComponent<Collider2D>().enabled = true;
         GetComponent<Collider2D>().isTrigger = false;
         GetComponent<Animator>().SetBool("Cloud", false);
+        transform.position = new Vector2(PlayerPrefs.GetFloat("CatPos_X"), PlayerPrefs.GetFloat("CatPos_Y")) + new Vector2(0, 0.2f);
         AllStart();
         CatAni.SetBool("Die", false);
         yield return new WaitForSeconds(1);
+        GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+        GetComponent<Collider2D>().isTrigger = false;
         Black.SetActive(false);
-        NowCatAct = CatAct.Idle;
+        NowCatMorph = CatMorph.NoMorph;
+        if(NowCatAct != CatAct.LongLongCat)
+        {
+            NowCatAct = CatAct.Idle;
+        }
+        CanLongTrue = true;
+        GetComponent<Collider2D>().isTrigger = false;
+
 #if UNITY_EDITOR || UNITY_STANDALONE
         Phone_UI.SetActive(false);   // 滑鼠偵測
 #elif UNITY_ANDROID
 		Phone_UI.SetActive(true);  // 觸碰偵測
+        GetEnd_Left();
 #endif
     }
 
