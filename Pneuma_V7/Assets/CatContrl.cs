@@ -3141,6 +3141,7 @@ public class CatContrl : MonoBehaviour
         WaterJumpPos_1.SetActive(false);
         WaterJumpPos_2.SetActive(false);
         GetComponent<Collider2D>().isTrigger = false;
+        CatAni.SetBool("Long", false);
 
         yield return new WaitForSeconds(1.5f);
         CanLongTrue = false;
