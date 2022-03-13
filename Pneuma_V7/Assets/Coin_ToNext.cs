@@ -48,7 +48,7 @@ public class Coin_ToNext : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(3);
             }
             System.GetComponent<Teaching_System>().NextLevel();
 
