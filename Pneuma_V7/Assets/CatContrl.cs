@@ -3114,6 +3114,21 @@ public class CatContrl : MonoBehaviour
         yield return new WaitForSeconds(DelayTime);
         NowCatAct = CatAct.Idle;
     }
+
+    public void CatActStop()
+    {
+        NowCatAct = CatAct.CatStop;
+    }
+    public void CatActIdle()
+    {
+        NowCatAct = CatAct.Idle;
+    }
+
+    public void GetCatDie()
+    {
+        StartCoroutine(CatDeath());
+    }
+
     public IEnumerator CatDeath()
     {
         NowCatAct = CatAct.CatDie;
@@ -3144,6 +3159,9 @@ public class CatContrl : MonoBehaviour
         CatAni.SetBool("Long", false);
 
         yield return new WaitForSeconds(1.5f);
+
+        
+
         CanLongTrue = false;
         CanLong = false;
         GetComponent<Rigidbody2D>().gravityScale = 0f;
