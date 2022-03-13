@@ -7,14 +7,48 @@ public class DoorRock : MonoBehaviour
 {
     [Header("這個石像的碎片*2")]
     public GameObject[] myRock;
+    [Header("石像的初始位置")]
+    public Vector2[] myRockPos;
     [Header("是否獲得這些碎片了?")]
     public bool[] IsGet;
+    [Header("初始紀錄")]
+    public bool[] IsGetStart;
     [Header("這個石像門")]
     public GameObject myDoor;
+
+    [Header("金幣儲存了")]
+    public bool Save;
+
+ 
+
+    public void PlayerSave()
+    {
+        if (myDoor.active == false)
+        {
+            Save = true;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i = 0; i < IsGet.Length; i++)
+        {
+            myRockPos[i] = myRock[i].transform.position;
+            IsGetStart = IsGet;
+        }
+    }
+
+    public void SetStart()
+    {
+        if (Save == false)
+        {
+            for (int i = 0; i < IsGet.Length; i++)
+            {
+                IsGet[i] = IsGetStart[i];
+                myRock[i].transform.position = myRockPos[i];
+            }
+            myDoor.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -28,10 +62,16 @@ public class DoorRock : MonoBehaviour
             }
         }
 
-        if(IsGet[0] == true && IsGet[1] == true)
+        if(IsGet[0] == true && IsGet[1] == true && myDoor.active == true)
         {
-            myDoor.SetActive(false);
+            StartCoroutine(DelayOpen());
         }
+    }
+
+    public IEnumerator DelayOpen()
+    {
+        yield return new WaitForSeconds(0.8f);
+        myDoor.SetActive(false);
     }
 
     public void WhatKey(GameObject key)

@@ -3150,6 +3150,7 @@ public class CatContrl : MonoBehaviour
         GetComponent<Collider2D>().enabled = true;
         GetComponent<Collider2D>().isTrigger = false;
         GetComponent<Animator>().SetBool("Cloud", false);
+        GetComponent<Animator>().SetBool("Climb", false);
         transform.position = new Vector2(PlayerPrefs.GetFloat("CatPos_X"), PlayerPrefs.GetFloat("CatPos_Y")) + new Vector2(0, 0.2f);
         AllStart();
         CatAni.SetBool("Die", false);
@@ -3158,10 +3159,8 @@ public class CatContrl : MonoBehaviour
         GetComponent<Collider2D>().isTrigger = false;
         Black.SetActive(false);
         NowCatMorph = CatMorph.NoMorph;
-        if(NowCatAct != CatAct.LongLongCat)
-        {
-            NowCatAct = CatAct.Idle;
-        }
+        NowCatAct = CatAct.Idle;
+        CatAni.SetBool("Die", false);
         CanLongTrue = true;
         GetComponent<Collider2D>().isTrigger = false;
 
@@ -3190,6 +3189,11 @@ public class CatContrl : MonoBehaviour
         {
             moveGround[i].SetStart();
         }
+        DoorRock[] doorRock = GameObject.FindObjectsOfType<DoorRock>();
+        for (int i = 0; i < doorRock.Length; i++)
+        {
+            doorRock[i].SetStart();
+        }
     }
     public void AllCoinSave()
     {
@@ -3198,6 +3202,12 @@ public class CatContrl : MonoBehaviour
         {
             coinBox[i].PlayerSave();
         }
+        DoorRock[] doorRock = GameObject.FindObjectsOfType<DoorRock>();
+        for (int i = 0; i < doorRock.Length; i++)
+        {
+            doorRock[i].PlayerSave();
+        }
+       
     }
 
     [Header("按了甚麼鍵")]

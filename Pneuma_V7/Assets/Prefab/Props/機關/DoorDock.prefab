@@ -552,5 +552,10 @@ MonoBehaviour:
   myRock:
   - {fileID: 3755894075854258302}
   - {fileID: 3755894076651325519}
+  myRockPos:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
   IsGet: 0000
+  IsGetStart: 0000
   myDoor: {fileID: 3755894075151632010}
+  Save: 0
