@@ -314,7 +314,7 @@ public class CatContrl : MonoBehaviour
 #if UNITY_EDITOR || UNITY_STANDALONE
                     float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.5f);
 #elif UNITY_ANDROID
-                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.8f);
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.9f);
 #endif
                     GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
@@ -339,7 +339,7 @@ public class CatContrl : MonoBehaviour
 #if UNITY_EDITOR || UNITY_STANDALONE
                     float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.5f);
 #elif UNITY_ANDROID
-                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.8f);
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.9f);
 #endif
                     GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
