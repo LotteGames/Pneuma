@@ -10,7 +10,8 @@ public class OpenKey : MonoBehaviour
         if(collision.GetComponent<CatContrl>() != null)
         {
             transform.parent.gameObject.GetComponent<ElevatorContrl>().ChangeSpeed(10);
-            gameObject.SetActive(false);
+            transform.parent.gameObject.GetComponent<ElevatorContrl>().GetStart();
+           gameObject.SetActive(false);
         }
     }
 }
