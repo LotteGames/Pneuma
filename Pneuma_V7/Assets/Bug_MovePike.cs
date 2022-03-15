@@ -52,7 +52,7 @@ public class Bug_MovePike : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, UpPower));
-        Destroy(gameObject, 2.5f);
+        Destroy(gameObject, 3.5f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
