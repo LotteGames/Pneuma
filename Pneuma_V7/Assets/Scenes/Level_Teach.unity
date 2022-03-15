@@ -60229,8 +60229,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1710518449}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -37.20747, y: 13.044101, z: -88.1369}
-  m_LocalScale: {x: 16.077612, y: 12.927227, z: 1}
+  m_LocalPosition: {x: -113.32901, y: 8.917851, z: -111.0467}
+  m_LocalScale: {x: 29.77485, y: 23.940512, z: 1}
   m_Children: []
   m_Father: {fileID: 1578862313}
   m_RootOrder: 3
@@ -65704,9 +65704,9 @@ MonoBehaviour:
   - {fileID: 1271361796}
   - {fileID: 1651388218}
   Eyes_Colors:
-  - {r: 0.33333334, g: 0.8941177, b: 0.91372555, a: 1}
+  - {r: 0.098039225, g: 0.9058824, b: 0.52156866, a: 1}
   - {r: 0.9056604, g: 0.86873484, b: 0.09740115, a: 1}
-  - {r: 0.09740115, g: 0.9056604, b: 0.5222862, a: 1}
+  - {r: 0.33333334, g: 0.8941177, b: 0.91372555, a: 1}
   Level: 0
   Look: 0
 --- !u!1 &2082518788
