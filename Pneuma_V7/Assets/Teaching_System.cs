@@ -7,6 +7,11 @@ public class Teaching_System : MonoBehaviour
     [Header("貓咪")]
     public GameObject Cat;
 
+    [Header("大貓咪")]
+    public GameObject BigCat;
+    [Header("大貓咪的圖片")]
+    public Sprite[] BigCatPictrue;
+
     [Header("兩個眼睛")]
     public GameObject[] eyes;
 
@@ -32,6 +37,10 @@ public class Teaching_System : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        BigCat.GetComponent<SpriteRenderer>().sprite = BigCatPictrue[Level];
+
+
         if (Level < Eyes_Colors.Length)
         {
             for (int i = 0; i < eyes.Length; i++)

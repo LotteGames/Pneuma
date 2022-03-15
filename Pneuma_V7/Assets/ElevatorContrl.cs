@@ -42,6 +42,12 @@ public class ElevatorContrl : MonoBehaviour
 
     public void CatDie()
     {
+        Bug_MovePike[] Bug = GameObject.FindObjectsOfType<Bug_MovePike>();
+        for (int i = 0; i < Bug.Length; i++)
+        {
+            Destroy(Bug[i].gameObject);
+        }
+
         OpenKey.SetActive(true);
         ChangeSpeed(0);
         for (int i = 0; i < RedBox.transform.childCount; i++)

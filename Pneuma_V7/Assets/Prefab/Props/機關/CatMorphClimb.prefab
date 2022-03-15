@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WhatMorph: 1
-  CanGetTime: 7
+  CanGetTime: 9
   CreateAgain: 8
   Hints: []
 --- !u!58 &1424729928293081652

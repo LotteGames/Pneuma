@@ -104,12 +104,17 @@ public class CatContrl : MonoBehaviour
     public GameObject Phone_UI;
     [Header("手機的跳躍鍵")]
     public GameObject JumpButton;
+
     [Header("左搖桿")]
     public GameObject Touch_Left;
-    public GameObject Handler_Left;
-    [Header("右搖桿")]
-    public GameObject Touch_Right;
-    public GameObject Handler_Right;
+    [Header("爬牆用左搖桿")]
+    public GameObject ClimbTouch_Left;
+    //[Header("左搖桿")]
+    //public GameObject Touch_Left;
+    //public GameObject Handler_Left;
+    //[Header("右搖桿")]
+    //public GameObject Touch_Right;
+    //public GameObject Handler_Right;
 
     [Header("貓貓音效器")]
     public MusicContrl CatMusic;
@@ -160,7 +165,12 @@ public class CatContrl : MonoBehaviour
             {
                 HappyHat.SetActive(false);
             }
+#if UNITY_EDITOR || UNITY_STANDALONE
+#elif UNITY_ANDROID
+		    Touch_Left.SetActive(true);  // 觸碰偵測
+            ClimbTouch_Left.SetActive(false); 
             JumpButton.SetActive(true);
+#endif
         }
         //else if(NowCatMorph == CatMorph.Long)
         //{
@@ -190,7 +200,12 @@ public class CatContrl : MonoBehaviour
                 GetComponent<CircleCollider2D>().radius = 0.81f;
                 NowCatMorph = CatMorph.NoMorph;
             }
+#if UNITY_EDITOR || UNITY_STANDALONE
+#elif UNITY_ANDROID
+		    Touch_Left.SetActive(false);  // 觸碰偵測
+            ClimbTouch_Left.SetActive(true); 
             JumpButton.SetActive(false);
+#endif
 
         }
         else if (NowCatMorph == CatMorph.Cloud)
@@ -212,7 +227,12 @@ public class CatContrl : MonoBehaviour
                 GetComponent<Animator>().SetBool("Cloud", false);
             }
             JumpButton.SetActive(false);
-
+#if UNITY_EDITOR || UNITY_STANDALONE
+#elif UNITY_ANDROID
+		    Touch_Left.SetActive(true);  // 觸碰偵測
+            ClimbTouch_Left.SetActive(false); 
+            JumpButton.SetActive(false);
+#endif
         }
 
         //撿到的道具跟隨
