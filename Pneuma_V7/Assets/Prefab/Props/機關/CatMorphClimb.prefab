@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WhatMorph: 1
   CanGetTime: 7
-  CreateAgain: 8
+  CreateAgain: 6
   Hints: []
 --- !u!58 &1424729928293081652
 CircleCollider2D:

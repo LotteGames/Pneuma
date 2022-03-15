@@ -28,6 +28,7 @@ public class Bug_MovePikeBox : MonoBehaviour
     public void AllStart()
     {
         T = 0;
+        Bug_CreateAni.SetActive(false);
         CreateCount = SaveStartCount;
     }
 
