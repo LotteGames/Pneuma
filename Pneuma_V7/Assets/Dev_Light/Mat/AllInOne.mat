@@ -43,17 +43,17 @@ Material:
     - _EnableExternalAlpha: 0
     - _LightIntensity: 2
     - _LightMapLit: 1
-    - _Lit: 0
-    - _OcclusionDepth: 1
-    - _OcclusionLit: 1
-    - _OcclusionOffset: 1
-    - _ReceiveDepth: 0
+    - _Lit: 1
+    - _OcclusionDepth: 14.12
+    - _OcclusionLit: 0.429
+    - _OcclusionOffset: 1.341
+    - _ReceiveDepth: 38.9
     - _ReceiveHeightMap: 1
-    - _ReceiveStrength: 0.5
-    - _ShadowsOffset: 0
+    - _ReceiveStrength: 0.845
+    - _ShadowsOffset: 0.439
     - _Specular: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 0, b: 0.6381693, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
