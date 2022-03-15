@@ -34,7 +34,10 @@ MonoBehaviour:
       depth: -100
       resolution: 1
       dayLayers:
-        list: []
+        list:
+        - id: 0
+          type: 0
+          sorting: 0
       lightLayers:
         list:
         - id: 1
@@ -47,7 +50,10 @@ MonoBehaviour:
       depth: -100
       resolution: 1
       dayLayers:
-        list: []
+        list:
+        - id: 0
+          type: 0
+          sorting: 0
       lightLayers:
         list:
         - id: 2
@@ -60,7 +66,10 @@ MonoBehaviour:
       depth: -100
       resolution: 1
       dayLayers:
-        list: []
+        list:
+        - id: 0
+          type: 0
+          sorting: 0
       lightLayers:
         list:
         - id: 3
@@ -73,7 +82,10 @@ MonoBehaviour:
       depth: -100
       resolution: 1
       dayLayers:
-        list: []
+        list:
+        - id: 0
+          type: 0
+          sorting: 0
       lightLayers:
         list:
         - id: 4
@@ -86,7 +98,10 @@ MonoBehaviour:
       depth: -100
       resolution: 1
       dayLayers:
-        list: []
+        list:
+        - id: 0
+          type: 0
+          sorting: 0
       lightLayers:
         list:
         - id: 5
@@ -171,10 +186,10 @@ MonoBehaviour:
         list:
         - layerID: 0
   qualitySettings:
-    lightTextureSize: 2
-    lightEffectTextureSize: 2
-    lightFilterMode: 1
-    lightmapFilterMode: 1
+    lightTextureSize: 3
+    lightEffectTextureSize: 3
+    lightFilterMode: 0
+    lightmapFilterMode: 0
     updateMethod: 0
     coreAxis: 0
     projection: 0
