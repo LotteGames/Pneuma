@@ -36,7 +36,7 @@ public class CounterUpdater : MonoBehaviour
         timerCounter.UpdateText();
         yield return new WaitForSeconds(timerCounter.duration);
 
-        NumberCounter.UpdateText(0);
+        NumberCounter.UpdateText(12);
         yield return new WaitForSeconds(NumberCounter.duration);
 
         resultTitle.SetBtnActive(true);

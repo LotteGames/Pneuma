@@ -46,7 +46,6 @@ public class Behaviour : MonoBehaviour
     public List<AI_State> decision;
     public void DecideStates()
     {
-        Debug.Log("IsGround: " + IsGround);
         if (IsGround)
         {
             graph = pathManager.GetGraph(transform.position);

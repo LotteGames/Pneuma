@@ -6,6 +6,6 @@ public class ResultBtn : MonoBehaviour
 {
     public void LoadScene(int index) 
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        SceneManager.LoadScene(index);
     }
 }
