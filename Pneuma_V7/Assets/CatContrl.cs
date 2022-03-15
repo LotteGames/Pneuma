@@ -112,8 +112,8 @@ public class CatContrl : MonoBehaviour
     //[Header("左搖桿")]
     //public GameObject Touch_Left;
     //public GameObject Handler_Left;
-    //[Header("右搖桿")]
-    //public GameObject Touch_Right;
+    [Header("右搖桿")]
+    public GameObject Touch_Right;
     //public GameObject Handler_Right;
 
     [Header("貓貓音效器")]
