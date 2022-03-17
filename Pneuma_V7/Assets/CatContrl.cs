@@ -3233,6 +3233,11 @@ public class CatContrl : MonoBehaviour
         {
             doorRock[i].SetStart();
         }
+        CatMorphObject[] catMorph = GameObject.FindObjectsOfType<CatMorphObject>();
+        for (int i = 0; i < catMorph.Length; i++)
+        {
+            catMorph[i].SetStart();
+        }
     }
     public void AllCoinSave()
     {

@@ -66,7 +66,7 @@ public class Bug_MovePike : MonoBehaviour
 
             if (collision.gameObject.tag == "Pike")
             {
-                BugDie(500);
+                BugDie(600);
             }
         }
     }

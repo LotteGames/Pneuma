@@ -45,7 +45,7 @@ public class ElevatorContrl : MonoBehaviour
         Bug_MovePike[] Bug = GameObject.FindObjectsOfType<Bug_MovePike>();
         for (int i = 0; i < Bug.Length; i++)
         {
-            Destroy(Bug[i].gameObject);
+            Destroy(Bug[i].gameObject, 1.4f);
         }
 
         OpenKey.SetActive(true);
