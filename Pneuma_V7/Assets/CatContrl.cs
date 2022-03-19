@@ -3115,7 +3115,10 @@ public class CatContrl : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, HandPos, 0.15f));
 
-
+           
+            float Remove = Vector2.Distance(HandPos, transform.position);
+            RemovePos.Normalize();
+            GetComponent<Rigidbody2D>().velocity = RemovePos * Remove * 10;
             //GetComponent<Rigidbody2D>().AddForce(RemovePos * ButtRemove * 30);
 
             //Butt.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(MoveSpeed, 0, 0));
@@ -3238,6 +3241,12 @@ public class CatContrl : MonoBehaviour
         {
             catMorph[i].SetStart();
         }
+        SayBox[] say = GameObject.FindObjectsOfType<SayBox>();
+        if (say.Length > 0)
+        {
+            say[0].CatSayNew(false);
+        }
+      
     }
     public void AllCoinSave()
     {

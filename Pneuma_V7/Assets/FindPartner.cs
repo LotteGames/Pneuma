@@ -209,13 +209,21 @@ public class FindPartner : MonoBehaviour
         if (ButtRemove <= catContrl.LongRemoveMax)
         {
             //GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, MousePos, HandSpeed));
-            GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, MousePos, 0.2f));
+            // GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, MousePos, 0.2f));
+            Vector2 Pos_F = MousePos - transform.position;
+            float Remove = Vector2.Distance(MousePos, transform.position);
+            Pos_F.Normalize();
+            GetComponent<Rigidbody2D>().velocity = Pos_F * Remove * 12;
             //transform.position = Vector2.Lerp(transform.position, MousePos, 0.2f);
         }
         else
         {
             //GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, HandSpeed));
-            GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, 0.2f));
+            //GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, 0.2f));
+            Vector2 Pos_F = RemoveMax - transform.position;
+            float Remove = Vector2.Distance(RemoveMax, transform.position);
+            Pos_F.Normalize();
+            GetComponent<Rigidbody2D>().velocity = Pos_F * Remove * 12;
             //transform.position = Vector2.Lerp(transform.position, RemoveMax, 0.2f);
         }
 #elif UNITY_ANDROID

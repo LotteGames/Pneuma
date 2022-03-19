@@ -56,27 +56,27 @@ public class Teaching_System : MonoBehaviour
             }
         }
 
-        if (Level < AllTeachUI.Length)
-        {
-            for (int i = 0; i < eyes.Length; i++)
-            {
-                if(Level == i)
-                {
-                    AllTeachUI[i].SetActive(true);
-                }
-                else
-                {
-                    AllTeachUI[i].SetActive(false);
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < eyes.Length; i++)
-            {
-                AllTeachUI[i].SetActive(false);
-            }
-        }
+        //if (Level < AllTeachUI.Length)
+        //{
+        //    for (int i = 0; i < eyes.Length; i++)
+        //    {
+        //        if(Level == i)
+        //        {
+        //            AllTeachUI[i].SetActive(true);
+        //        }
+        //        else
+        //        {
+        //            AllTeachUI[i].SetActive(false);
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    for (int i = 0; i < eyes.Length; i++)
+        //    {
+        //        AllTeachUI[i].SetActive(false);
+        //    }
+        //}
 
     }
 
