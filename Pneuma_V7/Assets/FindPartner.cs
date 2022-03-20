@@ -86,11 +86,21 @@ public class FindPartner : MonoBehaviour
         }
 
         T += Time.deltaTime;
-        if(T >= 2.2)
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if (T >= 2.2f)
         {
             GetComponent<Collider2D>().isTrigger = true;
             DebugBack = true;
         }
+#elif UNITY_ANDROID
+        if(T >= 5.5f)
+        {
+            GetComponent<Collider2D>().isTrigger = true;
+            DebugBack = true;
+        }
+#endif
+
     }
 
     void Turn()
@@ -226,12 +236,19 @@ public class FindPartner : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Pos_F * Remove * 12;
             //transform.position = Vector2.Lerp(transform.position, RemoveMax, 0.2f);
         }
+
 #elif UNITY_ANDROID
         // 觸碰偵測
         Vector3 direction = catContrl.Touch_Right.GetComponent<FixedJoystickHandler>().direction;
-          direction.z = 0f;
+        direction.z = 0f;
         direction.Normalize();
-        Vector3 RemoveMax = Partner.transform.position + direction * catContrl.LongRemoveMax;
+        float HandlerRemove = catContrl.Touch_Right.GetComponent<FixedJoystickHandler>().OneOf_direction;
+        if(HandlerRemove >= 1)
+        {
+            HandlerRemove = 1;
+        }
+       
+        Vector3 RemoveMax = Partner.transform.position + direction * catContrl.LongRemoveMax * HandlerRemove;
 
         
         float ButtRemove = Vector2.Distance(Partner.transform.position, RemoveMax);
@@ -321,7 +338,7 @@ public class FindPartner : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "DoorGround" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Pike")
         {
-            if (T >= 0.1f)
+            if (T >= 0.02f)
             {
                 catContrl.CanJump = true;
                 catContrl.NowCatAct = CatContrl.CatAct.Back;
@@ -335,7 +352,7 @@ public class FindPartner : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "DoorGround" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Pike")
         {
-            if (T >= 0.2f)
+            if (T >= 0.04f)
             {
                 catContrl.CanJump = true;
                 catContrl.NowCatAct = CatContrl.CatAct.Back;

@@ -612,14 +612,23 @@ public class CatContrl : MonoBehaviour
         {
             LongPos.transform.position = RemoveMax;
         }
+
 #elif UNITY_ANDROID
                 // 觸碰偵測
                 Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+                
 
-                 direction.z = 0f;
+                direction.z = 0f;
                 direction.Normalize();
+       
+                float HandlerRemove = Touch_Right.GetComponent<FixedJoystickHandler>().OneOf_direction;
+     
+                if (HandlerRemove >= 1)
+                {
+                    HandlerRemove = 1;
+                }
 
-                Vector3 RemoveMax = transform.position + direction * LongRemoveMax;
+                Vector3 RemoveMax = transform.position + direction * LongRemoveMax * HandlerRemove;
 
                 LongPos.transform.position = RemoveMax;
 
