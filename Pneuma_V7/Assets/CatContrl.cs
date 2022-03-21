@@ -910,7 +910,8 @@ public class CatContrl : MonoBehaviour
                 //CatAni.SetBool("Move", false);
 
                 // 滑鼠偵測
-                CloudMove();
+                CloudMoveOver();
+
                 CatAni.SetBool("Move", false);
             }
 #elif UNITY_ANDROID
@@ -1111,6 +1112,55 @@ public class CatContrl : MonoBehaviour
 
         GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
         GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 120); // 第二種版本
+
+        if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
+        {
+            CatAni.SetFloat("TurnRight", 1);
+            TurnRight = true;
+            CatAni.SetBool("Move", true);
+        }
+        else if (GetComponent<Rigidbody2D>().velocity.x < -0.5f)
+        {
+            CatAni.SetFloat("TurnRight", 0);
+            TurnRight = false;
+            CatAni.SetBool("Move", true);
+        }
+
+
+        if (TurnRight == true)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
+        }
+
+        //CatMusic.PlayMusic(4);
+    }
+    public void CloudMoveOver()
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // 滑鼠偵測
+        Vector3 MousePos;
+        MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+
+        Vector3 direction = MousePos - transform.position;
+#elif UNITY_ANDROID
+        // 觸碰偵測
+        Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+#endif
+
+        direction.z = 0f;
+        direction.Normalize();
+        //float targetAngle = Mathf.Atan2(direction.y, direction.x);
+        GameObject C = Instantiate(CloudAni, transform.position, Quaternion.Euler(0, 0, 0));
+        Destroy(C, 2);
+
+        //GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 8); // 第一種版本
+
+        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 100); // 第二種版本
 
         if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
         {

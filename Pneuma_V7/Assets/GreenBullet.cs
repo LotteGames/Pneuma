@@ -30,18 +30,31 @@ public class GreenBullet : MonoBehaviour
     {
         if(collision.tag == "Ground" || collision.tag == "Wall")
         {
+            GetComponent<Animator>().enabled = true;
             GetComponent<Rigidbody2D>().gravityScale = 0;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            Destroy(gameObject, 3);
+        }
+        if (collision.GetComponent<MoveGround>() != null)
+        {
+            gameObject.transform.parent = collision.gameObject.transform;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
         {
+            GetComponent<Animator>().enabled = true;
             GetComponent<Rigidbody2D>().gravityScale = 0;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            Destroy(gameObject, 3);
         }
+        if (collision.gameObject.GetComponent<MoveGround>() != null)
+        {
+            gameObject.transform.parent = collision.gameObject.transform;
+        }
+    }
+
+    public void Des()
+    {
+        Destroy(gameObject);
     }
 }
