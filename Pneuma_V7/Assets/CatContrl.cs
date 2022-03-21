@@ -104,12 +104,17 @@ public class CatContrl : MonoBehaviour
     public GameObject Phone_UI;
     [Header("手機的跳躍鍵")]
     public GameObject JumpButton;
+
     [Header("左搖桿")]
     public GameObject Touch_Left;
-    public GameObject Handler_Left;
+    [Header("爬牆用左搖桿")]
+    public GameObject ClimbTouch_Left;
+    //[Header("左搖桿")]
+    //public GameObject Touch_Left;
+    //public GameObject Handler_Left;
     [Header("右搖桿")]
     public GameObject Touch_Right;
-    public GameObject Handler_Right;
+    //public GameObject Handler_Right;
 
     [Header("貓貓音效器")]
     public MusicContrl CatMusic;
@@ -160,7 +165,12 @@ public class CatContrl : MonoBehaviour
             {
                 HappyHat.SetActive(false);
             }
+#if UNITY_EDITOR || UNITY_STANDALONE
+#elif UNITY_ANDROID
+		    Touch_Left.SetActive(true);  // 觸碰偵測
+            ClimbTouch_Left.SetActive(false); 
             JumpButton.SetActive(true);
+#endif
         }
         //else if(NowCatMorph == CatMorph.Long)
         //{
@@ -190,7 +200,12 @@ public class CatContrl : MonoBehaviour
                 GetComponent<CircleCollider2D>().radius = 0.81f;
                 NowCatMorph = CatMorph.NoMorph;
             }
+#if UNITY_EDITOR || UNITY_STANDALONE
+#elif UNITY_ANDROID
+		    Touch_Left.SetActive(false);  // 觸碰偵測
+            ClimbTouch_Left.SetActive(true); 
             JumpButton.SetActive(false);
+#endif
 
         }
         else if (NowCatMorph == CatMorph.Cloud)
@@ -212,7 +227,12 @@ public class CatContrl : MonoBehaviour
                 GetComponent<Animator>().SetBool("Cloud", false);
             }
             JumpButton.SetActive(false);
-
+#if UNITY_EDITOR || UNITY_STANDALONE
+#elif UNITY_ANDROID
+		    Touch_Left.SetActive(true);  // 觸碰偵測
+            ClimbTouch_Left.SetActive(false); 
+            JumpButton.SetActive(false);
+#endif
         }
 
         //撿到的道具跟隨
@@ -262,7 +282,7 @@ public class CatContrl : MonoBehaviour
                 NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
                 GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                GetComponent<Collider2D>().isTrigger = true;
+                //GetComponent<Collider2D>().isTrigger = true;
 
                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
 
@@ -280,7 +300,7 @@ public class CatContrl : MonoBehaviour
                                 NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
                                 GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
                                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                                GetComponent<Collider2D>().isTrigger = true;
+                                //GetComponent<Collider2D>().isTrigger = true;
 
                                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
 
@@ -311,7 +331,11 @@ public class CatContrl : MonoBehaviour
                 }
                 else
                 {
+#if UNITY_EDITOR || UNITY_STANDALONE
                     float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.5f);
+#elif UNITY_ANDROID
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, MoveSpeed, 0.9f);
+#endif
                     GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
             }
@@ -332,7 +356,11 @@ public class CatContrl : MonoBehaviour
                 }
                 else
                 {
+#if UNITY_EDITOR || UNITY_STANDALONE
                     float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.5f);
+#elif UNITY_ANDROID
+                    float M = Mathf.Lerp(GetComponent<Rigidbody2D>().velocity.x, -MoveSpeed, 0.9f);
+#endif
                     GetComponent<Rigidbody2D>().velocity = new Vector2(M, GetComponent<Rigidbody2D>().velocity.y);
                 }
             }
@@ -381,7 +409,7 @@ public class CatContrl : MonoBehaviour
                 NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
                 GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                GetComponent<Collider2D>().isTrigger = true;
+                //GetComponent<Collider2D>().isTrigger = true;
 
                 nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
                 //LongLight.SetActive(false);
@@ -400,7 +428,7 @@ public class CatContrl : MonoBehaviour
                                NowCatAct = CatAct.LongLongCat;//切換到貓咪伸長的狀態
                                GetComponent<Rigidbody2D>().gravityScale = 0;//貓咪屁股的重力先歸零
                                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);//貓咪屁股的位移力道歸零
-                               GetComponent<Collider2D>().isTrigger = true;
+                               //GetComponent<Collider2D>().isTrigger = true;
 
                                nowLongBody = Instantiate(LongBody, transform.position, Quaternion.Euler(0, 0, 0));
                                //LongLight.SetActive(false);
@@ -584,14 +612,23 @@ public class CatContrl : MonoBehaviour
         {
             LongPos.transform.position = RemoveMax;
         }
+
 #elif UNITY_ANDROID
                 // 觸碰偵測
                 Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+                
 
-                 direction.z = 0f;
+                direction.z = 0f;
                 direction.Normalize();
+       
+                float HandlerRemove = Touch_Right.GetComponent<FixedJoystickHandler>().OneOf_direction;
+     
+                if (HandlerRemove >= 1)
+                {
+                    HandlerRemove = 1;
+                }
 
-                Vector3 RemoveMax = transform.position + direction * LongRemoveMax;
+                Vector3 RemoveMax = transform.position + direction * LongRemoveMax * HandlerRemove;
 
                 LongPos.transform.position = RemoveMax;
 
@@ -873,7 +910,8 @@ public class CatContrl : MonoBehaviour
                 //CatAni.SetBool("Move", false);
 
                 // 滑鼠偵測
-                CloudMove();
+                CloudMoveOver();
+
                 CatAni.SetBool("Move", false);
             }
 #elif UNITY_ANDROID
@@ -1074,6 +1112,55 @@ public class CatContrl : MonoBehaviour
 
         GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
         GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 120); // 第二種版本
+
+        if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
+        {
+            CatAni.SetFloat("TurnRight", 1);
+            TurnRight = true;
+            CatAni.SetBool("Move", true);
+        }
+        else if (GetComponent<Rigidbody2D>().velocity.x < -0.5f)
+        {
+            CatAni.SetFloat("TurnRight", 0);
+            TurnRight = false;
+            CatAni.SetBool("Move", true);
+        }
+
+
+        if (TurnRight == true)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * 3.5f);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody2D>().velocity.y * -3.5f);
+        }
+
+        //CatMusic.PlayMusic(4);
+    }
+    public void CloudMoveOver()
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // 滑鼠偵測
+        Vector3 MousePos;
+        MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+
+        Vector3 direction = MousePos - transform.position;
+#elif UNITY_ANDROID
+        // 觸碰偵測
+        Vector3 direction = Touch_Right.GetComponent<FixedJoystickHandler>().direction;
+#endif
+
+        direction.z = 0f;
+        direction.Normalize();
+        //float targetAngle = Mathf.Atan2(direction.y, direction.x);
+        GameObject C = Instantiate(CloudAni, transform.position, Quaternion.Euler(0, 0, 0));
+        Destroy(C, 2);
+
+        //GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 8); // 第一種版本
+
+        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        GetComponent<Rigidbody2D>().AddForce(direction * CloudPower * 100); // 第二種版本
 
         if (GetComponent<Rigidbody2D>().velocity.x > 0.5f)
         {
@@ -1331,17 +1418,17 @@ public class CatContrl : MonoBehaviour
     public bool Ray_Up;
     public IEnumerator RayL_Check()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         Ray_Left = true;
     }
     public IEnumerator RayR_Check()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         Ray_Right = true;
     }
     public IEnumerator RayU_Check()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         Ray_Up = true;
     }
 
@@ -3087,7 +3174,10 @@ public class CatContrl : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, HandPos, 0.15f));
 
-
+           
+            float Remove = Vector2.Distance(HandPos, transform.position);
+            RemovePos.Normalize();
+            GetComponent<Rigidbody2D>().velocity = RemovePos * Remove * 10;
             //GetComponent<Rigidbody2D>().AddForce(RemovePos * ButtRemove * 30);
 
             //Butt.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector3(MoveSpeed, 0, 0));
@@ -3106,10 +3196,30 @@ public class CatContrl : MonoBehaviour
         yield return new WaitForSeconds(DelayTime);
         NowCatAct = CatAct.Idle;
     }
+
+    public void CatActStop()
+    {
+        NowCatAct = CatAct.CatStop;
+    }
+    public void CatActIdle()
+    {
+        NowCatAct = CatAct.Idle;
+    }
+
+    public void GetCatDie()
+    {
+        StartCoroutine(CatDeath());
+    }
+
     public IEnumerator CatDeath()
     {
         NowCatAct = CatAct.CatDie;
+        NowCatMorph = CatMorph.NoMorph;
+        CanLongTrue = false;
+        CanLong = false;
+        Phone_UI.SetActive(false);
         CatMusic.PlayMusic(1);
+        GetEnd_Left();
         GetComponent<Animator>().SetBool("Cloud", false);
         CatAni.SetBool("Die", true);
         if (TurnRight == true)
@@ -3127,18 +3237,40 @@ public class CatContrl : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 18000));
         WaterJumpPos_1.SetActive(false);
         WaterJumpPos_2.SetActive(false);
+        GetComponent<Collider2D>().isTrigger = false;
+        CatAni.SetBool("Long", false);
+
         yield return new WaitForSeconds(1.5f);
-        transform.position = new Vector2(PlayerPrefs.GetFloat("CatPos_X"), PlayerPrefs.GetFloat("CatPos_Y")) + new Vector2(0, 0.2f);
+
+        
+
+        CanLongTrue = false;
+        CanLong = false;
+        GetComponent<Rigidbody2D>().gravityScale = 0f;
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        GetComponent<Rigidbody2D>().gravityScale = CatWeight;
         GetComponent<Collider2D>().enabled = true;
         GetComponent<Collider2D>().isTrigger = false;
         GetComponent<Animator>().SetBool("Cloud", false);
+        GetComponent<Animator>().SetBool("Climb", false);
+        transform.position = new Vector2(PlayerPrefs.GetFloat("CatPos_X"), PlayerPrefs.GetFloat("CatPos_Y")) + new Vector2(0, 0.2f);
         AllStart();
         CatAni.SetBool("Die", false);
         yield return new WaitForSeconds(1);
+        GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+        GetComponent<Collider2D>().isTrigger = false;
         Black.SetActive(false);
+        NowCatMorph = CatMorph.NoMorph;
         NowCatAct = CatAct.Idle;
+        CatAni.SetBool("Die", false);
+        CanLongTrue = true;
+        GetComponent<Collider2D>().isTrigger = false;
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+        Phone_UI.SetActive(false);   // 滑鼠偵測
+#elif UNITY_ANDROID
+		Phone_UI.SetActive(true);  // 觸碰偵測
+        GetEnd_Left();
+#endif
     }
 
     public void AllStart()
@@ -3158,6 +3290,22 @@ public class CatContrl : MonoBehaviour
         {
             moveGround[i].SetStart();
         }
+        DoorRock[] doorRock = GameObject.FindObjectsOfType<DoorRock>();
+        for (int i = 0; i < doorRock.Length; i++)
+        {
+            doorRock[i].SetStart();
+        }
+        CatMorphObject[] catMorph = GameObject.FindObjectsOfType<CatMorphObject>();
+        for (int i = 0; i < catMorph.Length; i++)
+        {
+            catMorph[i].SetStart();
+        }
+        SayBox[] say = GameObject.FindObjectsOfType<SayBox>();
+        if (say.Length > 0)
+        {
+            say[0].CatSayNew(false);
+        }
+      
     }
     public void AllCoinSave()
     {
@@ -3166,6 +3314,12 @@ public class CatContrl : MonoBehaviour
         {
             coinBox[i].PlayerSave();
         }
+        DoorRock[] doorRock = GameObject.FindObjectsOfType<DoorRock>();
+        for (int i = 0; i < doorRock.Length; i++)
+        {
+            doorRock[i].PlayerSave();
+        }
+       
     }
 
     [Header("按了甚麼鍵")]
@@ -3196,6 +3350,7 @@ public class CatContrl : MonoBehaviour
 
     public void GetEnd_Right()
     {
+        //WhatKey_ = "";
         Key_0 = false;
         StartCoroutine(RightTouch_Debug(0.1f));
     }
@@ -3244,7 +3399,7 @@ public class CatContrl : MonoBehaviour
 
         
 
-        private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Bar" || collision.gameObject.tag == "DoorGround")
         {
@@ -3294,21 +3449,21 @@ public class CatContrl : MonoBehaviour
                 StartCoroutine(JumpDebug(0.3f));
             }
 
-            if (NowCatMorph == CatMorph.Climb)
-            {
-                if (Ray_Left == false)
-                {
-                    StartCoroutine(RayL_Check());
-                }
-                if (Ray_Right == false)
-                {
-                    StartCoroutine(RayR_Check());
-                }
-                if (Ray_Up == false)
-                {
-                    StartCoroutine(RayU_Check());
-                }
-            }
+            //if (NowCatMorph == CatMorph.Climb)
+            //{
+            //    if (Ray_Left == false)
+            //    {
+            //        StartCoroutine(RayL_Check());
+            //    }
+            //    if (Ray_Right == false)
+            //    {
+            //        StartCoroutine(RayR_Check());
+            //    }
+            //    if (Ray_Up == false)
+            //    {
+            //        StartCoroutine(RayU_Check());
+            //    }
+            //}
 
             if (GetComponent<Rigidbody2D>().gravityScale != 0.01f)
             {
@@ -3417,6 +3572,11 @@ public class CatContrl : MonoBehaviour
         {
             //碰到陷阱，到儲存點復活
             StartCoroutine(CatDeath());
+        }
+        if (collision.gameObject.tag == "Key")
+        {
+            //碰到陷阱，到儲存點復活
+            collision.transform.parent.GetComponent<DoorRock>().WhatKey(collision.gameObject);
         }
     }
 

@@ -7,11 +7,16 @@ public class Teaching_System : MonoBehaviour
     [Header("貓咪")]
     public GameObject Cat;
 
+    [Header("大貓咪")]
+    public GameObject BigCat;
+    [Header("大貓咪的圖片")]
+    public Sprite[] BigCatPictrue;
+
     [Header("兩個眼睛")]
     public GameObject[] eyes;
 
-    [Header("全部眼睛")]
-    public GameObject[] AllEyes;
+    [Header("最後眼睛的顏色")]
+    public Color[] OverEyesColor;
 
 
     [Header("每個階段的教學")]
@@ -32,6 +37,10 @@ public class Teaching_System : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        BigCat.GetComponent<SpriteRenderer>().sprite = BigCatPictrue[Level];
+
+
         if (Level < Eyes_Colors.Length)
         {
             for (int i = 0; i < eyes.Length; i++)
@@ -39,45 +48,52 @@ public class Teaching_System : MonoBehaviour
                 eyes[i].GetComponent<SpriteRenderer>().color = Color.Lerp(eyes[i].GetComponent<SpriteRenderer>().color, Eyes_Colors[Level], 0.06f);
             }
         }
-
-        if (Level < AllTeachUI.Length)
-        {
-            for (int i = 0; i < eyes.Length; i++)
-            {
-                if(Level == i)
-                {
-                    AllTeachUI[i].SetActive(true);
-                }
-                else
-                {
-                    AllTeachUI[i].SetActive(false);
-                }
-            }
-        }
         else
         {
             for (int i = 0; i < eyes.Length; i++)
             {
-                AllTeachUI[i].SetActive(false);
+                eyes[i].GetComponent<SpriteRenderer>().color = Color.Lerp(eyes[i].GetComponent<SpriteRenderer>().color, OverEyesColor[i], 0.06f);
             }
         }
+
+        //if (Level < AllTeachUI.Length)
+        //{
+        //    for (int i = 0; i < eyes.Length; i++)
+        //    {
+        //        if(Level == i)
+        //        {
+        //            AllTeachUI[i].SetActive(true);
+        //        }
+        //        else
+        //        {
+        //            AllTeachUI[i].SetActive(false);
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    for (int i = 0; i < eyes.Length; i++)
+        //    {
+        //        AllTeachUI[i].SetActive(false);
+        //    }
+        //}
 
     }
 
     public void NextLevel()
     {
         Level++;
-        if (Level >= Eyes_Colors.Length)
-        {
-            for (int i = 0; i < eyes.Length; i++)
-            {
-                eyes[i].SetActive(false);
-            }
-            for (int i = 0; i < AllEyes.Length; i++)
-            {
-                AllEyes[i].SetActive(true);
-            }
-        }
+        //if (Level >= Eyes_Colors.Length)
+        //{
+        //    for (int i = 0; i < eyes.Length; i++)
+        //    {
+        //        eyes[i].SetActive(false);
+        //    }
+        //    for (int i = 0; i < AllEyes.Length; i++)
+        //    {
+        //        AllEyes[i].SetActive(true);
+        //    }
+        //}
         StartCoroutine(Delay());
         for (int i = 0; i < eyes.Length; i++)
         {

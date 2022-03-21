@@ -58,9 +58,27 @@ public class CatMorphObject : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
         GetComponent<Collider2D>().enabled = false;
+        if(transform.childCount > 0)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
 
         yield return new WaitForSeconds(CreateAgain);
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         GetComponent<Collider2D>().enabled = true;
+        if (transform.childCount > 0)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+    }
+
+    public void SetStart()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        GetComponent<Collider2D>().enabled = true;
+        if (transform.childCount > 0)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
 }

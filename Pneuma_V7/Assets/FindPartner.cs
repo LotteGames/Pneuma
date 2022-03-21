@@ -30,7 +30,7 @@ public class FindPartner : MonoBehaviour
     {
         catContrl = GameObject.FindObjectOfType<CatContrl>();
         Partner = GameObject.FindObjectOfType<CatContrl>().gameObject;
-        StartCoroutine(DebugLong(2.2f));
+        //StartCoroutine(DebugLong(2.2f));
         T = 0;
     }
 
@@ -54,17 +54,17 @@ public class FindPartner : MonoBehaviour
         //}
         if (catContrl.NowCatAct == CatContrl.CatAct.CatDie)
         {
-            catContrl.GetComponent<Rigidbody2D>().gravityScale = 6.5f;//貓咪屁股的重力恢復
-            catContrl.GetComponent<Animator>().SetBool("Long", false);
-            catContrl.NowCatAct = CatContrl.CatAct.Jump;
-            if (catContrl.TurnRight == true)
-            {
-                Partner.transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else
-            {
-                Partner.transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
+            //catContrl.GetComponent<Rigidbody2D>().gravityScale = 6.5f;//貓咪屁股的重力恢復
+            //catContrl.GetComponent<Animator>().SetBool("Long", false);
+            //catContrl.NowCatAct = CatContrl.CatAct.Jump;
+            //if (catContrl.TurnRight == true)
+            //{
+            //    Partner.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //}
+            //else
+            //{
+            //    Partner.transform.rotation = Quaternion.Euler(0, 180, 0);
+            //}
             Destroy(transform.parent.gameObject);
         }
 
@@ -86,7 +86,21 @@ public class FindPartner : MonoBehaviour
         }
 
         T += Time.deltaTime;
-      
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if (T >= 2.2f)
+        {
+            GetComponent<Collider2D>().isTrigger = true;
+            DebugBack = true;
+        }
+#elif UNITY_ANDROID
+        if(T >= 5.5f)
+        {
+            GetComponent<Collider2D>().isTrigger = true;
+            DebugBack = true;
+        }
+#endif
+
     }
 
     void Turn()
@@ -205,26 +219,41 @@ public class FindPartner : MonoBehaviour
         if (ButtRemove <= catContrl.LongRemoveMax)
         {
             //GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, MousePos, HandSpeed));
-            GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, MousePos, 0.2f));
+            // GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, MousePos, 0.2f));
+            Vector2 Pos_F = MousePos - transform.position;
+            float Remove = Vector2.Distance(MousePos, transform.position);
+            Pos_F.Normalize();
+            GetComponent<Rigidbody2D>().velocity = Pos_F * Remove * 12;
             //transform.position = Vector2.Lerp(transform.position, MousePos, 0.2f);
         }
         else
         {
             //GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, HandSpeed));
-            GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, 0.2f));
+            //GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, 0.2f));
+            Vector2 Pos_F = RemoveMax - transform.position;
+            float Remove = Vector2.Distance(RemoveMax, transform.position);
+            Pos_F.Normalize();
+            GetComponent<Rigidbody2D>().velocity = Pos_F * Remove * 12;
             //transform.position = Vector2.Lerp(transform.position, RemoveMax, 0.2f);
         }
+
 #elif UNITY_ANDROID
         // 觸碰偵測
         Vector3 direction = catContrl.Touch_Right.GetComponent<FixedJoystickHandler>().direction;
-          direction.z = 0f;
+        direction.z = 0f;
         direction.Normalize();
-        Vector3 RemoveMax = Partner.transform.position + direction * catContrl.LongRemoveMax;
+        float HandlerRemove = catContrl.Touch_Right.GetComponent<FixedJoystickHandler>().OneOf_direction;
+        if(HandlerRemove >= 1)
+        {
+            HandlerRemove = 1;
+        }
+       
+        Vector3 RemoveMax = Partner.transform.position + direction * catContrl.LongRemoveMax * HandlerRemove;
 
         
         float ButtRemove = Vector2.Distance(Partner.transform.position, RemoveMax);
 
-        GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, 0.2f));
+        GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, RemoveMax, 0.3f));
 #endif
 
         if (catContrl.TurnRight == true)
@@ -245,8 +274,23 @@ public class FindPartner : MonoBehaviour
         GetComponent<Animator>().SetBool("Back", true);
         if (DebugBack == true)
         {
+#if UNITY_EDITOR || UNITY_STANDALONE
             GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, Partner.transform.position, 0.2f));
+#elif UNITY_ANDROID
+            GetComponent<Rigidbody2D>().MovePosition(Vector2.Lerp(transform.position, Partner.transform.position, 0.3f));
+#endif
         }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        }
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if(DebugBack == false)
+        {
+            StartCoroutine(DebugLong(0.25f));
+        }
+#elif UNITY_ANDROID
+#endif
 
         if (catContrl.TurnRight == true)
         {
@@ -294,7 +338,21 @@ public class FindPartner : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "DoorGround" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Pike")
         {
-            if (T >= 0.1f)
+            if (T >= 0.02f)
+            {
+                catContrl.CanJump = true;
+                catContrl.NowCatAct = CatContrl.CatAct.Back;
+                catContrl.GetComponent<Collider2D>().isTrigger = false;
+                StartCoroutine(DebugLong(0.2f));
+            }
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "DoorGround" || collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Pike")
+        {
+            if (T >= 0.04f)
             {
                 catContrl.CanJump = true;
                 catContrl.NowCatAct = CatContrl.CatAct.Back;

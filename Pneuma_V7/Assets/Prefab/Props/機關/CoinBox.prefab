@@ -4787,7 +4787,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2097972449
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 500
   m_RenderMode: 0
   m_SortMode: 0
@@ -4844,7 +4844,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4316291827526663410}
-  - {fileID: 8541604108587007864}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4913,6 +4912,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1233567072484154775}
+  - {fileID: 8541604108587007864}
   m_Father: {fileID: 3490067458132845660}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4954,7 +4954,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2097972449
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 400
   m_Sprite: {fileID: 21300000, guid: b11904d857f8cbd4bb743a0e94271bd9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5046,7 +5046,7 @@ Transform:
   m_Children:
   - {fileID: 4397794310860837318}
   - {fileID: 178194541407628777}
-  m_Father: {fileID: 3490067458132845660}
+  m_Father: {fileID: 4316291827526663410}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5930634183026505200
@@ -5065,7 +5065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &178194541407628777
 Transform:
   m_ObjectHideFlags: 0
@@ -5142,7 +5142,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8551920946800546057}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.017452406, w: 0.9998477}
   m_LocalPosition: {x: -0.18, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5162,14 +5162,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightType: 1
-  lightPresetId: 0
+  lightPresetId: 4
   eventPresetId: 0
-  lightLayer: 0
-  occlusionLayer: 0
+  lightLayer: 4
+  occlusionLayer: 3
   translucentLayer: 0
   translucentPresetId: 0
-  color: {r: 5.656558, g: 5.6998825, b: 3.4629474, a: 0}
-  size: 3.363706
+  color: {r: 0.4392157, g: 0.45490196, b: 0.2509804, a: 0.4}
+  size: 7.4216995
   spotAngleInner: 360
   spotAngleOuter: 360
   coreSize: 0.5
