@@ -118,6 +118,9 @@ public class CatContrl : MonoBehaviour
 
     [Header("貓貓音效器")]
     public MusicContrl CatMusic;
+
+    [Header("貓咪變形時間限制圖")]
+    public GameObject CatMorphTime_UI;
     // Start is called before the first frame update
     void Start()
     {
