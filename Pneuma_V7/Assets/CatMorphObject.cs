@@ -29,6 +29,9 @@ public class CatMorphObject : MonoBehaviour
             {
                 collision.GetComponent<CatContrl>().NowCatMorph = WhatMorph;
                 collision.GetComponent<CatContrl>().MorphTime = CanGetTime;
+                collision.GetComponent<CatContrl>().CatMorphTime_UI.GetComponent<CatMorphTime_UI>().MorphTimeMax = CanGetTime;
+                collision.GetComponent<CatContrl>().CatMorphTime_UI.GetComponent<CatMorphTime_UI>().MorphTime = CanGetTime;
+                collision.GetComponent<CatContrl>().CatMorphTime_UI.SetActive(true);
                 collision.GetComponent<Animator>().SetBool("Cloud", false);
                 if (collision.GetComponent<CatContrl>().NowCatMorph == CatContrl.CatMorph.Climb)
                 {
