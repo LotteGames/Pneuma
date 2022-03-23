@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1295624990642474626
+--- !u!1 &4246179826689317263
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8790517005602566480}
+  - component: {fileID: 5974511692629583453}
   m_Layer: 6
   m_Name: CatLight
   m_TagString: Untagged
@@ -16,23 +16,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8790517005602566480
+--- !u!4 &5974511692629583453
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295624990642474626}
+  m_GameObject: {fileID: 4246179826689317263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 9022338984167295007}
-  - {fileID: 9022338982892642378}
+  - {fileID: 6206597584183713554}
+  - {fileID: 6206597583311976263}
+  - {fileID: 9221169371395214347}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &9022338982892642381
+--- !u!1 &6206597583311976256
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,36 +41,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9022338982892642378}
-  - component: {fileID: 9022338982892642379}
+  - component: {fileID: 6206597583311976263}
+  - component: {fileID: 6206597583311976262}
   m_Layer: 0
   m_Name: Light Sprite 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &9022338982892642378
+  m_IsActive: 1
+--- !u!4 &6206597583311976263
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9022338982892642381}
+  m_GameObject: {fileID: 6206597583311976256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.2, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8790517005602566480}
+  m_Father: {fileID: 5974511692629583453}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9022338982892642379
+--- !u!114 &6206597583311976262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9022338982892642381}
+  m_GameObject: {fileID: 6206597583311976256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d62ac029b1017974ead8b6ad01623c82, type: 3}
@@ -79,29 +80,29 @@ MonoBehaviour:
   type: 0
   spriteMode: 0
   sprite: {fileID: 21300000, guid: 8e6a726be8ce7fb47838d96fce8bcc02, type: 3}
-  color: {r: 0.05490196, g: 0.07058824, b: 0.09411765, a: 1}
+  color: {r: 3.1773329, g: 4.0938716, b: 5.8352942, a: 0.027}
   flipX: 0
   flipY: 0
   lightSpriteTransform:
     applyRotation: 1
-    scale: {x: 2.5, y: 2.5}
+    scale: {x: 0.5, y: 0.5}
     rotation: 0
     position: {x: 0, y: 0}
   lightSpriteShape:
     update: 0
   meshMode:
-    enable: 0
-    alpha: 0
+    enable: 1
+    alpha: 0.002
     shader: 0
     materials:
     - {fileID: 0}
     sortingLayer:
-      name: Player
+      name: Foreground
       Order: 0
   glowMode:
     enable: 0
     glowRadius: 1
---- !u!1 &9022338984167294993
+--- !u!1 &6206597584183713564
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,8 +110,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9022338984167295007}
-  - component: {fileID: 9022338984167295006}
+  - component: {fileID: 6206597584183713554}
+  - component: {fileID: 6206597584183713555}
   m_Layer: 0
   m_Name: Light 2D (1)
   m_TagString: Untagged
@@ -118,27 +119,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9022338984167295007
+--- !u!4 &6206597584183713554
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9022338984167294993}
+  m_GameObject: {fileID: 6206597584183713564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8790517005602566480}
+  m_Father: {fileID: 5974511692629583453}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9022338984167295006
+--- !u!114 &6206597584183713555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9022338984167294993}
+  m_GameObject: {fileID: 6206597584183713564}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85a34663ca705a54eac3205e225a6d45, type: 3}
@@ -148,11 +149,11 @@ MonoBehaviour:
   lightPresetId: 4
   eventPresetId: 0
   lightLayer: 4
-  occlusionLayer: 1
+  occlusionLayer: 5
   translucentLayer: 0
   translucentPresetId: 0
-  color: {r: 0.0882353, g: 0.18039216, b: 0.3647059, a: 1}
-  size: 26
+  color: {r: 1.4053588, g: 2.9023714, b: 5.8352942, a: 1}
+  size: 14.1
   spotAngleInner: 360
   spotAngleOuter: 360
   coreSize: 0.5
@@ -167,7 +168,99 @@ MonoBehaviour:
   applyRotation: 0
   textureSize: 1
   meshMode:
-    enable: 1
+    enable: 0
+    alpha: 0.05
+    shader: 0
+    materials:
+    - {fileID: 0}
+    sortingLayer:
+      name: Character
+      Order: 0
+  bumpMap:
+    intensity: 1
+    depth: 1
+  whenInsideCollider: 0
+  lightSprite: 1
+  sprite: {fileID: 21300000, guid: 6592d6be03fd808449716a11558d506f, type: 3}
+  spriteFlipX: 0
+  spriteFlipY: 0
+  freeFormFalloff: 1
+  freeFormPoint: 1
+  freeFormFalloffStrength: 1
+  freeFormPoints:
+    points:
+    - {x: 1, y: 0}
+    - {x: -0.50000006, y: 0.8660254}
+    - {x: -0.4999999, y: -0.86602545}
+  drawingEnabled: 1
+  drawingTranslucencyEnabled: 1
+--- !u!1 &9221169371395214344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9221169371395214347}
+  - component: {fileID: 9221169371395214346}
+  m_Layer: 0
+  m_Name: Light 2D (1)_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9221169371395214347
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221169371395214344}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5974511692629583453}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9221169371395214346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221169371395214344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a34663ca705a54eac3205e225a6d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightType: 1
+  lightPresetId: 2
+  eventPresetId: 0
+  lightLayer: 2
+  occlusionLayer: 3
+  translucentLayer: 0
+  translucentPresetId: 0
+  color: {r: 1.4053588, g: 2.9023714, b: 5.8352942, a: 1}
+  size: 14
+  spotAngleInner: 360
+  spotAngleOuter: 360
+  coreSize: 0.5
+  falloff: 0
+  lightStrength: 0
+  outerAngle: 0
+  lightRadius: 1
+  shadowDistanceClose: 0
+  shadowDistanceFar: 5
+  maskTranslucencyQuality: 1
+  maskTranslucencyStrength: 0.5
+  applyRotation: 0
+  textureSize: 1
+  meshMode:
+    enable: 0
     alpha: 0.05
     shader: 0
     materials:
