@@ -351,7 +351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7610162179569612841}
-  - component: {fileID: 3959611402530894963}
+  - component: {fileID: 1404862002886337671}
   m_Layer: 19
   m_Name: Pike
   m_TagString: Pike
@@ -368,13 +368,13 @@ Transform:
   m_GameObject: {fileID: 1647785293015819568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.15, y: -0.83, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_Children: []
   m_Father: {fileID: 5547237898964481936}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &3959611402530894963
-CapsuleCollider2D:
+--- !u!58 &1404862002886337671
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -383,12 +383,12 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2.0637298, y: 2.0637298}
-  m_Direction: 1
+  serializedVersion: 2
+  m_Radius: 20.835
 --- !u!1 &2097470149338413242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,6 +1084,7 @@ GameObject:
   - component: {fileID: 5547237898905727216}
   - component: {fileID: 5547237898905727219}
   - component: {fileID: 5213467718931404833}
+  - component: {fileID: 924560265896776672}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_28"
   m_TagString: Ground
@@ -1172,6 +1173,22 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.01}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
+--- !u!70 &924560265896776672
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237898905727217}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
 --- !u!1 &5547237898944916338
@@ -1270,7 +1287,8 @@ GameObject:
   - component: {fileID: 5547237898964481937}
   - component: {fileID: 1785416853395326993}
   - component: {fileID: 1916372485201285625}
-  - component: {fileID: 5036763352476804817}
+  - component: {fileID: 8785254545904490034}
+  - component: {fileID: 933566191326903514}
   m_Layer: 19
   m_Name: "\u8708\u86A3_\u982D\u90E8"
   m_TagString: Ground
@@ -1369,7 +1387,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5547237898964481943}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1382,7 +1400,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5036763352476804817
+--- !u!114 &8785254545904490034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1396,6 +1414,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BreakAni: {fileID: 4211902172854781842, guid: 0a3c0e9f58aa6c04aad823798276de1f, type: 3}
   PikeTooth: {fileID: 1647785293015819568}
+--- !u!114 &933566191326903514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237898964481943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450d5f76f02375f44a4914d996535c0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Circle: {fileID: 8288559573540761798}
 --- !u!1 &5547237898986893119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,6 +1438,7 @@ GameObject:
   - component: {fileID: 5547237898986893118}
   - component: {fileID: 5547237898986893113}
   - component: {fileID: 4657289395873842348}
+  - component: {fileID: 2660249006711900994}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_18"
   m_TagString: Ground
@@ -1497,6 +1529,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &2660249006711900994
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237898986893119}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237898988454326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1508,6 +1556,7 @@ GameObject:
   - component: {fileID: 5547237898988454321}
   - component: {fileID: 5547237898988454320}
   - component: {fileID: 2590781846777893971}
+  - component: {fileID: 5364068183335017962}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_30"
   m_TagString: Ground
@@ -1598,6 +1647,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &5364068183335017962
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237898988454326}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237899278199725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,6 +1674,7 @@ GameObject:
   - component: {fileID: 5547237899278199724}
   - component: {fileID: 5547237899278199727}
   - component: {fileID: 227963472725476305}
+  - component: {fileID: 3666131156363473754}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_19"
   m_TagString: Ground
@@ -1699,6 +1765,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &3666131156363473754
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237899278199725}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237899324704970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,6 +1792,7 @@ GameObject:
   - component: {fileID: 5547237899324704981}
   - component: {fileID: 5547237899324704980}
   - component: {fileID: 3528741690806424701}
+  - component: {fileID: 8874347476848024263}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_14"
   m_TagString: Ground
@@ -1800,6 +1883,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &8874347476848024263
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237899324704970}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237899345115795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,6 +1910,7 @@ GameObject:
   - component: {fileID: 5547237899345115794}
   - component: {fileID: 5547237899345115805}
   - component: {fileID: 5714468027755000781}
+  - component: {fileID: 4898697571508908120}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_11"
   m_TagString: Ground
@@ -1901,6 +2001,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &4898697571508908120
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237899345115795}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237899558929452
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,6 +2028,7 @@ GameObject:
   - component: {fileID: 5547237899558929455}
   - component: {fileID: 5547237899558929454}
   - component: {fileID: 6273190123615170703}
+  - component: {fileID: 2539384171424369774}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_27"
   m_TagString: Ground
@@ -2002,6 +2119,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &2539384171424369774
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237899558929452}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237899653926481
 GameObject:
   m_ObjectHideFlags: 0
@@ -2013,6 +2146,7 @@ GameObject:
   - component: {fileID: 5547237899653926480}
   - component: {fileID: 5547237899653926483}
   - component: {fileID: 8872316230694322926}
+  - component: {fileID: 4718900981865384782}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_23"
   m_TagString: Ground
@@ -2103,6 +2237,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &4718900981865384782
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237899653926481}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237899655717699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,6 +2264,7 @@ GameObject:
   - component: {fileID: 5547237899655717698}
   - component: {fileID: 5547237899655717709}
   - component: {fileID: 844745977393871949}
+  - component: {fileID: 65153182377461943}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_29"
   m_TagString: Ground
@@ -2204,6 +2355,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &65153182377461943
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237899655717699}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237899720528802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2214,8 +2381,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5547237899720528813}
   - component: {fileID: 5547237899720528812}
+  - component: {fileID: 4250839017731796354}
   - component: {fileID: 3823146105092232534}
-  - component: {fileID: 4032926701058260987}
+  - component: {fileID: 5539071861825667853}
+  - component: {fileID: 2356945824591604165}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_1"
   m_TagString: Ground
@@ -2290,23 +2459,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &3823146105092232534
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5547237899720528802}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.01}
-  m_Size: {x: 4.35, y: 3.12}
-  m_Direction: 1
---- !u!50 &4032926701058260987
+--- !u!50 &4250839017731796354
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -2327,6 +2480,51 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!70 &3823146105092232534
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237899720528802}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.01}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
+--- !u!70 &5539071861825667853
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237899720528802}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
+--- !u!114 &2356945824591604165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237899720528802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450d5f76f02375f44a4914d996535c0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Circle: {fileID: 8288559573540761798}
 --- !u!1 &5547237899841396766
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,6 +2536,7 @@ GameObject:
   - component: {fileID: 5547237899841396761}
   - component: {fileID: 5547237899841396760}
   - component: {fileID: 9005319912692638227}
+  - component: {fileID: 9097558992702345757}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_3"
   m_TagString: Ground
@@ -2428,6 +2627,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &9097558992702345757
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237899841396766}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900076185994
 GameObject:
   m_ObjectHideFlags: 0
@@ -2439,6 +2654,7 @@ GameObject:
   - component: {fileID: 5547237900076186005}
   - component: {fileID: 5547237900076186004}
   - component: {fileID: 398373445829128016}
+  - component: {fileID: 3362923109515514098}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_5"
   m_TagString: Ground
@@ -2529,6 +2745,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &3362923109515514098
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900076185994}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900119795410
 GameObject:
   m_ObjectHideFlags: 0
@@ -2540,6 +2772,7 @@ GameObject:
   - component: {fileID: 5547237900119795421}
   - component: {fileID: 5547237900119795420}
   - component: {fileID: 212389455711469185}
+  - component: {fileID: 2721332024895343072}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_8"
   m_TagString: Ground
@@ -2630,6 +2863,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &2721332024895343072
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900119795410}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900173519683
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,6 +2890,7 @@ GameObject:
   - component: {fileID: 5547237900173519682}
   - component: {fileID: 5547237900173519693}
   - component: {fileID: 2992538916224312235}
+  - component: {fileID: 2209802703012495764}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_24"
   m_TagString: Ground
@@ -2731,6 +2981,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &2209802703012495764
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900173519683}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900214812133
 GameObject:
   m_ObjectHideFlags: 0
@@ -2742,6 +3008,7 @@ GameObject:
   - component: {fileID: 5547237900214812132}
   - component: {fileID: 5547237900214812135}
   - component: {fileID: 5027071995701274408}
+  - component: {fileID: 2832001384063318513}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_20"
   m_TagString: Ground
@@ -2832,6 +3099,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &2832001384063318513
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900214812133}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900346391088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2843,6 +3126,7 @@ GameObject:
   - component: {fileID: 5547237900346391091}
   - component: {fileID: 5547237900346391090}
   - component: {fileID: 2793219358025649768}
+  - component: {fileID: 551367836066908953}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_17"
   m_TagString: Ground
@@ -2933,6 +3217,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &551367836066908953
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900346391088}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900382439907
 GameObject:
   m_ObjectHideFlags: 0
@@ -2944,6 +3244,7 @@ GameObject:
   - component: {fileID: 5547237900382439906}
   - component: {fileID: 5547237900382439917}
   - component: {fileID: 8911634033193236166}
+  - component: {fileID: 1595179833027936362}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_25"
   m_TagString: Ground
@@ -3034,6 +3335,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &1595179833027936362
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900382439907}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900383376857
 GameObject:
   m_ObjectHideFlags: 0
@@ -3045,6 +3362,7 @@ GameObject:
   - component: {fileID: 5547237900383376856}
   - component: {fileID: 5547237900383376859}
   - component: {fileID: 3320014836191015122}
+  - component: {fileID: 3995559699176463463}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_10"
   m_TagString: Ground
@@ -3135,6 +3453,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &3995559699176463463
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900383376857}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900400962030
 GameObject:
   m_ObjectHideFlags: 0
@@ -3146,6 +3480,7 @@ GameObject:
   - component: {fileID: 5547237900400962025}
   - component: {fileID: 5547237900400962024}
   - component: {fileID: 6546744175508825540}
+  - component: {fileID: 3340866970900386632}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_9"
   m_TagString: Ground
@@ -3236,6 +3571,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &3340866970900386632
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900400962030}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900417032595
 GameObject:
   m_ObjectHideFlags: 0
@@ -3247,6 +3598,7 @@ GameObject:
   - component: {fileID: 5547237900417032594}
   - component: {fileID: 5547237900417032605}
   - component: {fileID: 4066732096716925980}
+  - component: {fileID: 2585976494561955694}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_21"
   m_TagString: Ground
@@ -3337,6 +3689,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &2585976494561955694
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900417032595}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900463210387
 GameObject:
   m_ObjectHideFlags: 0
@@ -3348,6 +3716,7 @@ GameObject:
   - component: {fileID: 5547237900463210386}
   - component: {fileID: 5547237900463210397}
   - component: {fileID: 9051318897133910504}
+  - component: {fileID: 9093405439491225495}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_22"
   m_TagString: Ground
@@ -3438,6 +3807,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &9093405439491225495
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900463210387}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900556858586
 GameObject:
   m_ObjectHideFlags: 0
@@ -3449,6 +3834,7 @@ GameObject:
   - component: {fileID: 5547237900556858533}
   - component: {fileID: 5547237900556858532}
   - component: {fileID: 6936334964193861694}
+  - component: {fileID: 919789029114630546}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_26"
   m_TagString: Ground
@@ -3539,6 +3925,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &919789029114630546
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900556858586}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900564487547
 GameObject:
   m_ObjectHideFlags: 0
@@ -3550,6 +3952,7 @@ GameObject:
   - component: {fileID: 5547237900564487546}
   - component: {fileID: 5547237900564487493}
   - component: {fileID: 4356011393263970740}
+  - component: {fileID: 911029323190280448}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_12"
   m_TagString: Ground
@@ -3640,6 +4043,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &911029323190280448
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900564487547}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900600562287
 GameObject:
   m_ObjectHideFlags: 0
@@ -3651,6 +4070,7 @@ GameObject:
   - component: {fileID: 5547237900600562286}
   - component: {fileID: 5547237900600562281}
   - component: {fileID: 8232126401497374455}
+  - component: {fileID: 863373644421757672}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_4"
   m_TagString: Ground
@@ -3741,6 +4161,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &863373644421757672
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900600562287}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900630297051
 GameObject:
   m_ObjectHideFlags: 0
@@ -3752,6 +4188,7 @@ GameObject:
   - component: {fileID: 5547237900630297050}
   - component: {fileID: 5547237900630296997}
   - component: {fileID: 5706748442618360910}
+  - component: {fileID: 8411590342747237020}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_6"
   m_TagString: Ground
@@ -3842,6 +4279,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &8411590342747237020
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900630297051}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900678787191
 GameObject:
   m_ObjectHideFlags: 0
@@ -3853,6 +4306,7 @@ GameObject:
   - component: {fileID: 5547237900678787190}
   - component: {fileID: 5547237900678787185}
   - component: {fileID: 6094196604890270018}
+  - component: {fileID: 3064238440123445272}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_13"
   m_TagString: Ground
@@ -3943,6 +4397,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &3064238440123445272
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900678787191}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900893169781
 GameObject:
   m_ObjectHideFlags: 0
@@ -3954,6 +4424,7 @@ GameObject:
   - component: {fileID: 5547237900893169780}
   - component: {fileID: 5547237900893169783}
   - component: {fileID: 7750097034701704794}
+  - component: {fileID: 1338172061899190620}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_15"
   m_TagString: Ground
@@ -4044,6 +4515,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &1338172061899190620
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900893169781}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900936614583
 GameObject:
   m_ObjectHideFlags: 0
@@ -4055,6 +4542,7 @@ GameObject:
   - component: {fileID: 5547237900936614582}
   - component: {fileID: 5547237900936614577}
   - component: {fileID: 3389807376656204807}
+  - component: {fileID: 6183744849734418725}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_7"
   m_TagString: Ground
@@ -4145,6 +4633,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &6183744849734418725
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900936614583}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900970331061
 GameObject:
   m_ObjectHideFlags: 0
@@ -4156,6 +4660,7 @@ GameObject:
   - component: {fileID: 5547237900970331060}
   - component: {fileID: 5547237900970331063}
   - component: {fileID: 929523694731749949}
+  - component: {fileID: 5109732865689812928}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_16"
   m_TagString: Ground
@@ -4246,6 +4751,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &5109732865689812928
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900970331061}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5547237900999018379
 GameObject:
   m_ObjectHideFlags: 0
@@ -4257,6 +4778,7 @@ GameObject:
   - component: {fileID: 5547237900999018378}
   - component: {fileID: 5547237900999018389}
   - component: {fileID: 7967167163346688441}
+  - component: {fileID: 5559325716174244725}
   m_Layer: 19
   m_Name: "\u8708\u86A3Bone_2"
   m_TagString: Ground
@@ -4347,6 +4869,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.01}
   m_Size: {x: 4.35, y: 3.12}
   m_Direction: 1
+--- !u!70 &5559325716174244725
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547237900999018379}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.64, y: 0.05}
+  m_Size: {x: 4.35, y: 3.12}
+  m_Direction: 1
 --- !u!1 &5706837745149798901
 GameObject:
   m_ObjectHideFlags: 0
@@ -4357,13 +4895,16 @@ GameObject:
   m_Component:
   - component: {fileID: 7480005724866754600}
   - component: {fileID: 1341074395572130269}
-  m_Layer: 0
-  m_Name: GameObject
+  - component: {fileID: 6628440513111934307}
+  - component: {fileID: 8615854768563270650}
+  - component: {fileID: 8288559573540761798}
+  m_Layer: 19
+  m_Name: BossCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7480005724866754600
 Transform:
   m_ObjectHideFlags: 0
@@ -4429,6 +4970,56 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &6628440513111934307
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5706837745149798901}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.000020980835, y: -0.0000054836273}
+  serializedVersion: 2
+  m_Radius: 4.99
+--- !u!50 &8615854768563270650
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5706837745149798901}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &8288559573540761798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5706837745149798901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63da6c104a3923d4d86258f934920cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerIn: 0
 --- !u!1 &5758145898980819368
 GameObject:
   m_ObjectHideFlags: 0
