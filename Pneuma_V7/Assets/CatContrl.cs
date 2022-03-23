@@ -3245,8 +3245,8 @@ public class CatContrl : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-        
 
+        CatMorphTime_UI.SetActive(false);
         CanLongTrue = false;
         CanLong = false;
         GetComponent<Rigidbody2D>().gravityScale = 0f;
@@ -3322,7 +3322,7 @@ public class CatContrl : MonoBehaviour
         {
             doorRock[i].PlayerSave();
         }
-       
+        MorphTime = 0;
     }
 
     [Header("按了甚麼鍵")]
