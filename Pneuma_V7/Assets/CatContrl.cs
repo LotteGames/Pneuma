@@ -3308,7 +3308,11 @@ public class CatContrl : MonoBehaviour
         {
             say[0].CatSayNew(false);
         }
-      
+        Boss_BreakBox[] BreakBox = GameObject.FindObjectsOfType<Boss_BreakBox>();
+        for (int i = 0; i < BreakBox.Length; i++)
+        {
+            BreakBox[i].SetStart();
+        }
     }
     public void AllCoinSave()
     {
