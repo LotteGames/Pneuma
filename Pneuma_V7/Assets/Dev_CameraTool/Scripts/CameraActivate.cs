@@ -15,9 +15,9 @@ public class CameraActivate : MonoBehaviour
         for (int i = 0; i < cameraAreas.Length; i++)
         {
 
-#if (UNITY_EDITOR != true)
-    cameraAreas[i].SetDisplayClear();
-#endif
+
+            cameraAreas[i].SetDisplayClear();
+
             cameraAreas[i].SetCameraActivate(false);
             //cameraAreas[i].index = i;
 

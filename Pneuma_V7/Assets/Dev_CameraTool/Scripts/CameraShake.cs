@@ -25,6 +25,7 @@ public class CameraShake : MonoBehaviour
         }
         waitRoutine = StartCoroutine(Wait(amplitude, frequency, time));
     }
+
     Coroutine waitRoutine;
     IEnumerator Wait(float amplitude, float frequency, float time)
     {
@@ -36,12 +37,13 @@ public class CameraShake : MonoBehaviour
         channelPerlin.m_AmplitudeGain = 0;
         channelPerlin.m_FrequencyGain = 0;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z)) 
-        {
-            Shake(1, 1, 1);
-        }
-    }
+
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Z)) 
+    //    {
+    //        Shake(1, 1, 1);
+    //    }
+    //}
 
 }
