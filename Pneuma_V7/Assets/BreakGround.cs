@@ -21,6 +21,8 @@ public class BreakGround : MonoBehaviour
     Vector3 StartPos;
     [Header("震動速度")]
     public float ShockSpeed;
+    [Header("震動延遲時間")]
+    public float ShockDelayTime;
     float T;
     public IEnumerator DownDelay()
     {
@@ -45,11 +47,14 @@ public class BreakGround : MonoBehaviour
         if(Down == true && GetComponent<Collider2D>().isTrigger == false)
         {
             T += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, StartPos + new Vector3(ShockPower, 0, 0), 0.15f);
-            if(T >= ShockSpeed)
+            if(T >= ShockDelayTime)
             {
-                ShockPower = ShockPower * -0.9f;
-                T = 0;
+                transform.position = Vector3.Lerp(transform.position, StartPos + new Vector3(ShockPower, 0, 0), 0.15f);
+                if (T >= ShockDelayTime + ShockSpeed)
+                {
+                    ShockPower = ShockPower * -0.9f;
+                    T = ShockDelayTime;
+                }
             }
         }
     }

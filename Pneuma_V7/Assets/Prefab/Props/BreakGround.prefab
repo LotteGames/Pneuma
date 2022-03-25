@@ -149,8 +149,9 @@ MonoBehaviour:
   RockAni: {fileID: 4211902172854781842, guid: 0a3c0e9f58aa6c04aad823798276de1f, type: 3}
   Down: 0
   DownDelayTime: 0.8
-  ShockPower: 0.5
-  ShockSpeed: 0.05
+  ShockPower: 0.7
+  ShockSpeed: 0.07
+  ShockDelayTime: 0.2
 --- !u!95 &8468756492983705177
 Animator:
   serializedVersion: 3
