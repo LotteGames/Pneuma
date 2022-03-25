@@ -18,6 +18,8 @@ public class DoorRock : MonoBehaviour
 
     [Header("門開啟的特效")]
     public GameObject OpenAni;
+    [Header("門開啟的特效_光球")]
+    public GameObject OpenAni_LightBall;
 
     [Header("金幣儲存了")]
     public bool Save;
@@ -34,6 +36,7 @@ public class DoorRock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OpenAni_LightBall.transform.position = transform.position;
         myDoor.GetComponent<Animator>().enabled = false;
 
         for (int i = 0; i < IsGet.Length; i++)
@@ -52,6 +55,8 @@ public class DoorRock : MonoBehaviour
                 IsGet[i] = IsGetStart[i];
                 myRock[i].transform.position = myRockPos[i];
             }
+            OpenAni_LightBall.transform.position = transform.position;
+            myDoor.GetComponent<Animator>().enabled = false;
             myDoor.SetActive(true);
         }
     }
@@ -69,6 +74,7 @@ public class DoorRock : MonoBehaviour
 
         if(IsGet[0] == true && IsGet[1] == true && myDoor.active == true)
         {
+            OpenAni_LightBall.SetActive(true);
             myDoor.GetComponent<Animator>().enabled = true;
             StartCoroutine(DelayOpen());
         }
@@ -78,6 +84,7 @@ public class DoorRock : MonoBehaviour
     {
         yield return new WaitForSeconds(1.2f);
         myDoor.SetActive(false);
+        OpenAni_LightBall.SetActive(false);
         OpenAni.SetActive(true);
     }
 
