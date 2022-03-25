@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261519473549985779}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -162.67, y: 4.17, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -148,7 +148,9 @@ MonoBehaviour:
   Box: {fileID: 0}
   RockAni: {fileID: 4211902172854781842, guid: 0a3c0e9f58aa6c04aad823798276de1f, type: 3}
   Down: 0
-  DownDelayTime: 0.5
+  DownDelayTime: 0.8
+  ShockPower: 0.5
+  ShockSpeed: 0.05
 --- !u!95 &8468756492983705177
 Animator:
   serializedVersion: 3

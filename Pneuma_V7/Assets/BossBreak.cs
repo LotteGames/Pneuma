@@ -25,6 +25,7 @@ public class BossBreak : MonoBehaviour
         if(collision.GetComponent<Boss_Breaking>() != null)
         {
             Instantiate(BreakAni, PikeTooth.transform.position, Quaternion.Euler(-90, 0, 0));
+            collision.GetComponent<Boss_Breaking>().Breaking();
             collision.gameObject.SetActive(false);
         }
     }
@@ -34,6 +35,7 @@ public class BossBreak : MonoBehaviour
         if (collision.gameObject.GetComponent<Boss_Breaking>() != null)
         {
             Instantiate(BreakAni, PikeTooth.transform.position, Quaternion.Euler(-90, 0, 0));
+            collision.gameObject.GetComponent<Boss_Breaking>().Breaking();
             collision.gameObject.SetActive(false);
         }
     }

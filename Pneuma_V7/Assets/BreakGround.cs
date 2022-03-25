@@ -16,7 +16,12 @@ public class BreakGround : MonoBehaviour
     [Header("踩到後幾秒掉落")]
     public float DownDelayTime;
 
-
+    [Header("震動幅度")]
+    public float ShockPower;
+    Vector3 StartPos;
+    [Header("震動速度")]
+    public float ShockSpeed;
+    float T;
     public IEnumerator DownDelay()
     {
         yield return new WaitForSeconds(DownDelayTime);
@@ -28,6 +33,25 @@ public class BreakGround : MonoBehaviour
     {
         yield return new WaitForSeconds(Delay);
         gameObject.SetActive(true);
+    }
+
+    private void Start()
+    {
+        StartPos = transform.position;
+    }
+
+    public void Update()
+    {
+        if(Down == true && GetComponent<Collider2D>().isTrigger == false)
+        {
+            T += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, StartPos + new Vector3(ShockPower, 0, 0), 0.15f);
+            if(T >= ShockSpeed)
+            {
+                ShockPower = ShockPower * -0.9f;
+                T = 0;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
