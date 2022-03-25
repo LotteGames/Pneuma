@@ -35,6 +35,8 @@ public class CameraArea : MonoBehaviour
 
     public int areaNum = 0;
 
+
+    public CameraShake cameraShake;
     private void OnValidate()
     {
         #region--GetComponent--

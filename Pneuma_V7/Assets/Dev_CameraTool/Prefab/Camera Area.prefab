@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 146430907
-  m_SortingLayer: 1
+  m_SortingLayerID: 1514505977
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: d0cb7fdf3249e3746b9e4850ba0c17dc, type: 3}
   m_Color: {r: 0.64690024, g: 1, b: 0.73413664, a: 0.23529412}
@@ -171,11 +171,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 738efd1b65780624e80d2408e0666395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActivate: 0
   player: {fileID: 0}
   cameraType: 0
   isDisplay: 1
   color_Camera: {r: 0.64690024, g: 1, b: 0.73413664, a: 0.23529412}
   color_Space: {r: 1, g: 0.9748714, b: 0.6846361, a: 0.23529412}
+  areaNum: 0
+  cameraShake: {fileID: 5884837940822171452}
 --- !u!1 &5556093589699643245
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +190,7 @@ GameObject:
   - component: {fileID: 5556093589699643234}
   - component: {fileID: 5556093589699643232}
   - component: {fileID: 5556093589699643246}
+  - component: {fileID: 6476046866738006461}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -263,6 +267,23 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!114 &6476046866738006461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556093589699643245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &5556093589864814832
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +295,7 @@ GameObject:
   - component: {fileID: 5556093589864814838}
   - component: {fileID: 5556093589864814833}
   - component: {fileID: 5556093589864814834}
+  - component: {fileID: 5884837940822171452}
   - component: {fileID: 5556093589864814835}
   m_Layer: 0
   m_Name: VCam
@@ -349,6 +371,19 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 8325291913694234897}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!114 &5884837940822171452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556093589864814832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b562b511a8388744a57e02f178e6178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  channelPerlin: {fileID: 0}
 --- !u!114 &5556093589864814835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,8 +481,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 146430907
-  m_SortingLayer: 1
+  m_SortingLayerID: 1514505977
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: d0cb7fdf3249e3746b9e4850ba0c17dc, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0}

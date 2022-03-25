@@ -58,6 +58,13 @@ public class CameraActivate : MonoBehaviour
     {
         get
         {
+            return CurrentCamArea.areaNum;
+        }
+    }
+    public CameraArea CurrentCamArea
+    {
+        get
+        {
             int activateOne = -1;
             for (int i = 0; i < cameraAreas.Length; i++)
             {
@@ -67,7 +74,14 @@ public class CameraActivate : MonoBehaviour
                     break;
                 }
             }
-            return cameraAreas[activateOne].areaNum;
+            return cameraAreas[activateOne];
+        }
+    }
+    public CameraShake CurrentCamArea_Shake
+    {
+        get
+        {
+            return CurrentCamArea.cameraShake;
         }
     }
     public IEnumerator DelaySave()
