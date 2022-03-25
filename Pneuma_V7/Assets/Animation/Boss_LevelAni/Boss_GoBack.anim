@@ -13162,8 +13162,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.9166666
+  - time: 1.6666666
     functionName: Sonicing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 5.9333334
+    functionName: ShockStart
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 9.083333
+    functionName: ShockOver
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

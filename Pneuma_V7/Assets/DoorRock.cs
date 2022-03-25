@@ -36,6 +36,7 @@ public class DoorRock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OpenAni_LightBall.SetActive(false);
         OpenAni_LightBall.transform.position = transform.position;
         myDoor.GetComponent<Animator>().enabled = false;
 
