@@ -21,7 +21,7 @@ public class Boss_Bone : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.GetComponent<CatContrl>() != null && Circle.PlayerIn == true)
+        if(collision.GetComponent<CatContrl>() != null)
         {
             Vector2 direction = collision.transform.position - Circle.gameObject.transform.position;
 
@@ -37,7 +37,7 @@ public class Boss_Bone : MonoBehaviour
     }
     //private void OnCollisionStay2D(Collision2D collision)
     //{
-    //    if (collision.gameObject.GetComponent<CatContrl>() != null && Circle.PlayerIn == true)
+    //    if (collision.gameObject.GetComponent<CatContrl>() != null)
     //    {
     //        Vector2 direction = collision.transform.position - Circle.gameObject.transform.position;
 
