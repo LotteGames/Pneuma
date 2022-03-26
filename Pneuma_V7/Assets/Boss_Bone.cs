@@ -23,24 +23,28 @@ public class Boss_Bone : MonoBehaviour
     {
         if(collision.GetComponent<CatContrl>() != null && Circle.PlayerIn == true)
         {
-            Vector2 direction = collision.transform.position - transform.position;
+            Vector2 direction = collision.transform.position - Circle.gameObject.transform.position;
 
             direction.Normalize();
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            collision.transform.rotation = Quaternion.Euler(0, 0, targetAngle - 90);
+            collision.transform.rotation = Quaternion.Euler(0, Circle.gameObject.transform.parent.transform.rotation.y, targetAngle - 90);
+
+            Vector3 MovePath = new Vector3(direction.y, -direction.x, 0);
+
+            collision.transform.position += MovePath * Circle.Speed * Time.deltaTime;
         }
     }
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<CatContrl>() != null && Circle.PlayerIn == true)
-        {
-            Vector2 direction = collision.transform.position - transform.position;
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.GetComponent<CatContrl>() != null && Circle.PlayerIn == true)
+    //    {
+    //        Vector2 direction = collision.transform.position - Circle.gameObject.transform.position;
 
-            direction.Normalize();
-            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    //        direction.Normalize();
+    //        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            collision.transform.rotation = Quaternion.Euler(0, 0, targetAngle - 90);
-        }
-    }
+    //        collision.transform.rotation = Quaternion.Euler(0, Circle.gameObject.transform.parent.transform.rotation.y, targetAngle - 90);
+    //    }
+    //}
 }

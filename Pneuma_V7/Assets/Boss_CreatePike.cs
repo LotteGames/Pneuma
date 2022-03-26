@@ -20,7 +20,7 @@ public class Boss_CreatePike : MonoBehaviour
             Ani.Update(time);
         }
 
-        Instantiate(BonePike, transform.position, transform.rotation);
+        Instantiate(BonePike, transform.position, transform.rotation, transform);
     }
 
 
