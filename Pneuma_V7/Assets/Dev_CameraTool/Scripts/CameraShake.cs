@@ -38,12 +38,12 @@ public class CameraShake : MonoBehaviour
         channelPerlin.m_FrequencyGain = 0;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Shake(1, 1, 1);
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Z))
+    //    {
+    //        Shake(1, 1, 1);
+    //    }
+    //}
 
 }

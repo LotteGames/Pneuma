@@ -7,6 +7,8 @@ using UnityEngine.Events;
 [ExecuteAlways]
 public class CameraArea : MonoBehaviour
 {
+    public bool isFollowPlayer = true;
+
     public bool isActivate = false;
 
     public Transform player;
@@ -100,8 +102,11 @@ public class CameraArea : MonoBehaviour
             }
             else if (cameraType == E_CameraType.LimitedSpace_Free_Camera)
             {
-                virtualCamera.Follow = player;
 
+                if (isFollowPlayer)
+                {
+                    virtualCamera.Follow = player;
+                }
 
                 cinemachineConfiner.enabled = true;
 

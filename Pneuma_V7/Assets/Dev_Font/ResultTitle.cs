@@ -11,7 +11,7 @@ public class ResultTitle : MonoBehaviour
 
     public void ShowTitle_1()
     {
-        rectTransform_1.DOSizeDelta(new Vector2(700, 100), duration_1);
+        rectTransform_1.DOSizeDelta(new Vector2(728, 190), duration_1);
     }
 
     public GameObject btn;
