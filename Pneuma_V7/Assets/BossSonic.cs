@@ -37,8 +37,22 @@ public class BossSonic : MonoBehaviour
     {
         GameObject.FindObjectOfType<CameraActivate>().CurrentCamArea_Shake.Shake(2, 1);
     }
+    public void ShockStart_2()
+    {
+        GameObject.FindObjectOfType<CameraActivate>().CurrentCamArea_Shake.Shake(4, 2);
+    }
+
     public void ShockOver()
     {
         GameObject.FindObjectOfType<CameraActivate>().CurrentCamArea_Shake.Shake(0, 0);
+    }
+
+    public void Cat_OMG()
+    {
+        GameObject.FindObjectOfType<CatContrl>().Cat_CallDeathAni(18000);
+    }
+    public void Cat_OMG_NoJump()
+    {
+        GameObject.FindObjectOfType<CatContrl>().Cat_CallDeathAni(10);
     }
 }

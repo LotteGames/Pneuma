@@ -3275,6 +3275,39 @@ public class CatContrl : MonoBehaviour
         GetEnd_Left();
 #endif
     }
+    public void Cat_CallDeathAni(float Die_JumpPower)
+    {
+        NowCatAct = CatAct.CatStop;
+        NowCatMorph = CatMorph.NoMorph;
+        CanLongTrue = false;
+        CanLong = false;
+        Phone_UI.SetActive(false);
+        CatMusic.PlayMusic(1);
+        GetEnd_Left();
+        GetComponent<Animator>().SetBool("Cloud", false);
+        CatAni.SetBool("Die", true);
+        if (TurnRight == true)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 15);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 15);
+        }
+        //Black.SetActive(true);
+        //GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        GetComponent<Rigidbody2D>().gravityScale = 2.5f;
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, Die_JumpPower));
+        
+        WaterJumpPos_1.SetActive(false);
+        WaterJumpPos_2.SetActive(false);
+        GetComponent<Collider2D>().isTrigger = false;
+        CatAni.SetBool("Long", false);
+
+
+        //GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+    }
 
     public void AllStart()
     {
