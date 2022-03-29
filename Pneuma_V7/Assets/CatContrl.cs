@@ -3275,14 +3275,14 @@ public class CatContrl : MonoBehaviour
         GetEnd_Left();
 #endif
     }
-    public void Cat_CallDeathAni(float Die_JumpPower)
+    public void Cat_CallDeathAni(int CatNusic, float Die_JumpPower)
     {
         NowCatAct = CatAct.CatStop;
         NowCatMorph = CatMorph.NoMorph;
         CanLongTrue = false;
         CanLong = false;
         Phone_UI.SetActive(false);
-        CatMusic.PlayMusic(1);
+        CatMusic.PlayMusic(CatNusic);
         GetEnd_Left();
         GetComponent<Animator>().SetBool("Cloud", false);
         CatAni.SetBool("Die", true);
@@ -3345,6 +3345,12 @@ public class CatContrl : MonoBehaviour
         for (int i = 0; i < BreakBox.Length; i++)
         {
             BreakBox[i].SetStart();
+        }
+        LevelBossAni[] lvBoss = GameObject.FindObjectsOfType<LevelBossAni>();
+        for (int i = 0; i < lvBoss.Length; i++)
+        {
+            lvBoss[i].gameObject.SetActive(false);
+            lvBoss[i].gameObject.SetActive(true);
         }
     }
     public void AllCoinSave()

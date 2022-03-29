@@ -49,10 +49,10 @@ public class BossSonic : MonoBehaviour
 
     public void Cat_OMG()
     {
-        GameObject.FindObjectOfType<CatContrl>().Cat_CallDeathAni(18000);
+        GameObject.FindObjectOfType<CatContrl>().Cat_CallDeathAni(1,18000);
     }
     public void Cat_OMG_NoJump()
     {
-        GameObject.FindObjectOfType<CatContrl>().Cat_CallDeathAni(10);
+        GameObject.FindObjectOfType<CatContrl>().Cat_CallDeathAni(5,10);
     }
 }

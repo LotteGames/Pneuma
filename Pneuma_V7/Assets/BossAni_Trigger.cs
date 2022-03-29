@@ -14,10 +14,14 @@ public class BossAni_Trigger : MonoBehaviour
     public bool IsCatStop;
     [Header("貓咪關閉運作多久")]
     public float StopTime;
+
+    [Header("其他動畫")]
+    public GameObject elseBossAni;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.GetComponent<CatContrl>() != null)
         {
+            BossAni.SetActive(true);
             BossAni.GetComponent<Animator>().enabled = true;
             if (IsClose == true)
             {
@@ -34,6 +38,7 @@ public class BossAni_Trigger : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<CatContrl>() != null)
         {
+            BossAni.SetActive(true);
             BossAni.GetComponent<Animator>().enabled = true;
             if (IsClose == true)
             {
