@@ -74,6 +74,7 @@ public class CameraActivate : MonoBehaviour
                     break;
                 }
             }
+            if (activateOne == -1) { return null; }
             return cameraAreas[activateOne];
         }
     }
