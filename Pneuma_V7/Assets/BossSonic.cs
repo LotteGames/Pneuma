@@ -27,7 +27,10 @@ public class BossSonic : MonoBehaviour
             }
         }
     }
-
+    public void OpenMusic()
+    {
+        GetComponent<AudioSource>().enabled = true;
+    }
     public void Shock(float Time)
     {
         GameObject.FindObjectOfType<CameraActivate>().CurrentCamArea_Shake.Shake(3, 1, Time);
