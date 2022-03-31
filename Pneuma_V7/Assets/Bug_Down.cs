@@ -10,6 +10,8 @@ public class Bug_Down : MonoBehaviour
     {
         if(collision.GetComponent<CatContrl>() != null)
         {
+            collision.GetComponent<CatContrl>().CanLong = true;//可以延長
+
             collision.GetComponent<CatContrl>().CanJump = true;
             collision.GetComponent<CatContrl>().GetJump();
             Down();
