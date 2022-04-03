@@ -82,6 +82,7 @@ public class CameraActivate : MonoBehaviour
     {
         get
         {
+            if (CurrentCamArea == null) { return null; }
             return CurrentCamArea.cameraShake;
         }
     }
