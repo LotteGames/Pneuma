@@ -23,6 +23,7 @@ public class CoinBox : MonoBehaviour
         if(transform.GetChild(0).gameObject.active == false)
         {
             CoinSave = true;
+            GameObject.FindObjectOfType<CatContrl>().CatCoin++;
         }
     }
 }

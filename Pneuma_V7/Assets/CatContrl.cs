@@ -76,6 +76,8 @@ public class CatContrl : MonoBehaviour
     [Header("Idle後儲存")]
     public bool ReadySave;
 
+    [Header("貓咪在這關獲得的金幣數量")]
+    public int CatCoin;
 
     //[Header("伸長貓咪的光暈")]
     //public GameObject LongLight;

@@ -8534,8 +8534,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 3.75
+    functionName: MusicStart
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 4
     functionName: Cat_OMG
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 7.45
+    functionName: MusicStart_No
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -8548,7 +8562,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 13.3
+  - time: 13.316667
     functionName: ShockOver
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -8557,6 +8571,13 @@ AnimationClip:
     messageOptions: 0
   - time: 13.666667
     functionName: Cat_OMG_NoJump
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 14.5
+    functionName: MusicOver
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
