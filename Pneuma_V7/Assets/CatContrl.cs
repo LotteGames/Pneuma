@@ -1729,7 +1729,7 @@ public class CatContrl : MonoBehaviour
             {
                 if (hit_L_1.collider.gameObject.tag == "Ground" || hit_L_1.collider.gameObject.tag == "Wall")
                 {
-                    if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
+                    if ((Input.GetKey(KeyCode.A) || WhatKey_ == "A"))
                     {
                         RotX = -1;
                         IsClimb = true;
@@ -1781,7 +1781,7 @@ public class CatContrl : MonoBehaviour
             {
                 if (hit_L_2.collider.gameObject.tag == "Ground" || hit_L_2.collider.gameObject.tag == "Wall")
                 {
-                    if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
+                    if ((Input.GetKey(KeyCode.A) || WhatKey_ == "A"))
                     {
                         RotX = -1;
                         IsClimb = true;
@@ -1834,7 +1834,7 @@ public class CatContrl : MonoBehaviour
             {
                 if (hit_R_1.collider.gameObject.tag == "Ground" || hit_R_1.collider.gameObject.tag == "Wall")
                 {
-                    if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
+                    if ((Input.GetKey(KeyCode.D) || WhatKey_ == "D"))
                     {
                         RotX = 1;
                         IsClimb = true;
@@ -1872,7 +1872,7 @@ public class CatContrl : MonoBehaviour
             {
                 if (hit_R_2.collider.gameObject.tag == "Ground" || hit_R_2.collider.gameObject.tag == "Wall")
                 {
-                    if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
+                    if ((Input.GetKey(KeyCode.D) || WhatKey_ == "D"))
                     {
                         RotX = 1;
                         IsClimb = true;
@@ -2233,7 +2233,7 @@ public class CatContrl : MonoBehaviour
                     }
 
 
-                    if (Input.GetKey(KeyCode.D) || WhatKey_ == "D")
+                    if ((Input.GetKey(KeyCode.D) || WhatKey_ == "D") && NowCatAct != CatAct.Jump)
                     {
                         TurnRight = true;
                         CatAni.SetFloat("TurnRight", 1);
@@ -2245,7 +2245,7 @@ public class CatContrl : MonoBehaviour
                         }
                         GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
                     }
-                    else if (Input.GetKey(KeyCode.A) || WhatKey_ == "A")
+                    else if ((Input.GetKey(KeyCode.A) || WhatKey_ == "A") && NowCatAct != CatAct.Jump)
                     {
                         TurnRight = false;
                         CatAni.SetFloat("TurnRight", 0);
@@ -2283,7 +2283,7 @@ public class CatContrl : MonoBehaviour
             }
 
 
-            if ((Input.GetKey(KeyCode.D) || WhatKey_ == "D") && WaterJumpReady == false)
+            if ((Input.GetKey(KeyCode.D) || WhatKey_ == "D") && WaterJumpReady == false && NowCatAct != CatAct.Jump)
             {
                 TurnRight = true;
                 CatAni.SetFloat("TurnRight", 1);
@@ -2295,7 +2295,7 @@ public class CatContrl : MonoBehaviour
                 }
                 GetComponent<Rigidbody2D>().velocity = new Vector2(MoveSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
-            else if ((Input.GetKey(KeyCode.A) || WhatKey_ == "A") && WaterJumpReady == false)
+            else if ((Input.GetKey(KeyCode.A) || WhatKey_ == "A") && WaterJumpReady == false && NowCatAct != CatAct.Jump)
             {
                 TurnRight = false;
                 CatAni.SetFloat("TurnRight", 0);
@@ -3524,13 +3524,17 @@ public class CatContrl : MonoBehaviour
                 WaterFly = false;
             }
         }
-        if (collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Ground")
         {
             if (NowCatMorph == CatMorph.Climb)
             {
                 if (NowCatAct == CatAct.LongLongCat || NowCatAct == CatAct.LongDownCat || NowCatAct == CatAct.CatStop || NowCatAct == CatAct.Back)
                 {
 
+                }
+                else if(NowCatAct == CatAct.Jump)
+                {
+                    NowCatAct = CatAct.Idle;
                 }
                 else
                 {

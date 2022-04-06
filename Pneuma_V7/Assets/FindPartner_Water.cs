@@ -28,7 +28,7 @@ public class FindPartner_Water : MonoBehaviour
     {
         catContrl = GameObject.FindObjectOfType<CatContrl>();
         Partner = GameObject.FindObjectOfType<CatContrl>().gameObject;
-        StartCoroutine(DebugLong(1.1f));
+        StartCoroutine(DebugLong(0.1f));
     }
 
     // Update is called once per frame
@@ -189,6 +189,9 @@ public class FindPartner_Water : MonoBehaviour
 
     public IEnumerator DebugLong(float DelayTime)
     {
+        catContrl.NowCatAct = CatContrl.CatAct.Jump;
+        yield return new WaitForSeconds(0.01f);
+        catContrl.NowCatAct = CatContrl.CatAct.Jump;
         yield return new WaitForSeconds(DelayTime);
         GetComponent<Collider2D>().isTrigger = true;
         DebugBack = true;
