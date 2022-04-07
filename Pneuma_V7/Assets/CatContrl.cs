@@ -161,8 +161,15 @@ public class CatContrl : MonoBehaviour
         {
             MorphUpdate_NoMorph();
             GetComponent<Collider2D>().sharedMaterial = CatM_1;
-            LongPos.SetActive(true);
-            if(HH == true)
+            if(NowCatAct != CatAct.Back)
+            {
+                LongPos.SetActive(true);
+            }
+            else
+            {
+                LongPos.SetActive(false);
+            }
+            if (HH == true)
             {
                 HappyHat.SetActive(true);
             }
