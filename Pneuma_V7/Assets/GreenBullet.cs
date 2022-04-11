@@ -5,10 +5,10 @@ using UnityEngine;
 public class GreenBullet : MonoBehaviour
 {
 
-    private void Start()
-    {
-        GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, 1000));
-    }
+    //private void Start()
+    //{
+    //    GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0, 1000));
+    //}
 
     private void Update()
     {
@@ -33,11 +33,13 @@ public class GreenBullet : MonoBehaviour
             GetComponent<Animator>().enabled = true;
             GetComponent<Rigidbody2D>().gravityScale = 0;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        }
-        if (collision.GetComponent<MoveGround>() != null)
-        {
             gameObject.transform.parent = collision.gameObject.transform;
+
         }
+        //if (collision.GetComponent<MoveGround>() != null)
+        //{
+        //    gameObject.transform.parent = collision.gameObject.transform;
+        //}
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -46,11 +48,13 @@ public class GreenBullet : MonoBehaviour
             GetComponent<Animator>().enabled = true;
             GetComponent<Rigidbody2D>().gravityScale = 0;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        }
-        if (collision.gameObject.GetComponent<MoveGround>() != null)
-        {
             gameObject.transform.parent = collision.gameObject.transform;
+
         }
+        //if (collision.gameObject.GetComponent<MoveGround>() != null)
+        //{
+        //    gameObject.transform.parent = collision.gameObject.transform;
+        //}
     }
 
     public void Des()

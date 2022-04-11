@@ -50,5 +50,5 @@ public class BossAni_Trigger : MonoBehaviour
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             }
         }
-    }
+    }                                                                                                                                                                                   
 }

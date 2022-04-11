@@ -10,6 +10,9 @@ public class BossMusic : MonoBehaviour
     public GameObject RockAni;
     [Header("粒子特效出現的點")]
     public GameObject Pos;
+
+    [Header("聲音的大小")]
+    public float SoundPower;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +22,13 @@ public class BossMusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        MusicBox.GetComponent<AudioSource>().volume = Mathf.Lerp(MusicBox.GetComponent<AudioSource>().volume, SoundPower, 0.01f);
     }
 
     public void MusicStart()
     {
         MusicBox.GetComponent<AudioSource>().Play();
+        SoundPower = 0.7f;
         GameObject Ani = Instantiate(RockAni, Pos.transform.position, Quaternion.Euler(-90, 0, 0));
         Ani.GetComponent<AudioSource>().enabled = true;
         Destroy(Ani, 5);
@@ -37,10 +41,12 @@ public class BossMusic : MonoBehaviour
     public void MusicStart_NoAni()
     {
         MusicBox.GetComponent<AudioSource>().Play();
+        SoundPower = 0.7f;
     }
 
     public void MusicOver()
     {
-        MusicBox.GetComponent<AudioSource>().Stop();
+        SoundPower = 0;
+        //MusicBox.GetComponent<AudioSource>().Stop();
     }
 }

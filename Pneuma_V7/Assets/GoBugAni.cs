@@ -4,30 +4,39 @@ using UnityEngine;
 
 public class GoBugAni : MonoBehaviour
 {
+    [Header("貓咪")]
+    public CatContrl Cat;
+    [Header("大蟲蟲")]
+    public GameObject BigBug;
+    [Header("吼叫聲")]
+    public GameObject Sonic;
 
-    public bool Run;
-    public float Speed;
+    [Header("破壞的平台")]
+    public GameObject BreakGround;
+
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Run == true)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(Speed , GetComponent<Rigidbody2D>().velocity.y);
-        }
+        Cat = GameObject.FindObjectOfType<CatContrl>();
+        Sonic.SetActive(false);
+        BigBug.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.GetComponent<CatContrl>() != null)
         {
-            Run = true;
-            Destroy(gameObject, 3f);
+            Cat.StopCat(8);
+            Cat.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            Sonic.SetActive(true);
+            BigBug.SetActive(true);
+            GetComponent<Animator>().enabled = true;
         }
+    }
+
+    public void Close()
+    {
+        Destroy(BreakGround);
+        Destroy(gameObject);
     }
 }
