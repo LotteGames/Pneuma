@@ -19,8 +19,15 @@ public class DoorBreak : MonoBehaviour
 
         if (BreakAni != null)
         {
-            Instantiate(BreakAni, transform.position, Quaternion.Euler(-90, 0, 0));
+            GameObject Ani = Instantiate(BreakAni, transform.position, Quaternion.Euler(0, 0, 0));
+            Destroy(Ani, 6);
         }
     }
-
+    public void SetStart()
+    {
+        if (Active == true)
+        {
+            Door.SetActive(false);
+        }
+    }
 }

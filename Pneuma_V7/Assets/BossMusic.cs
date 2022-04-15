@@ -44,6 +44,11 @@ public class BossMusic : MonoBehaviour
         SoundPower = 0.7f;
     }
 
+    public void BigShock(float Time)
+    {
+        GameObject.FindObjectOfType<CameraActivate>().CurrentCamArea_Shake.Shake(10, 6, Time);
+    }
+
     public void MusicOver()
     {
         SoundPower = 0;
