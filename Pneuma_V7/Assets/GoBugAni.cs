@@ -14,6 +14,10 @@ public class GoBugAni : MonoBehaviour
     [Header("破壞的平台")]
     public GameObject BreakGround;
 
+    [Header("BOSS音樂")]
+    public AudioClip BossMusic;
+    [Header("攝影機")]
+    public GameObject Camera;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,5 +42,10 @@ public class GoBugAni : MonoBehaviour
     {
         Destroy(BreakGround);
         Destroy(gameObject);
+    }
+    public void ChangeMusic()
+    {
+        Camera.GetComponent<AudioSource>().clip = BossMusic;
+        Camera.GetComponent<AudioSource>().Play();
     }
 }

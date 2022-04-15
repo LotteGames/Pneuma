@@ -3361,6 +3361,11 @@ public class CatContrl : MonoBehaviour
             lvBoss[i].gameObject.SetActive(false);
             lvBoss[i].gameObject.SetActive(true);
         }
+        BossAniOpen[] bossAniOpen = GameObject.FindObjectsOfType<BossAniOpen>();
+        for (int i = 0; i < bossAniOpen.Length; i++)
+        {
+            bossAniOpen[i].Close();
+        }
     }
     public void AllCoinSave()
     {
