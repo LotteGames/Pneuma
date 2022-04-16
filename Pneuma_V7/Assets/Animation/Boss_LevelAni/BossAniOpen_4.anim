@@ -3905,6 +3905,13 @@ AnimationClip:
     floatParameter: 0.6
     intParameter: 0
     messageOptions: 0
+  - time: 3.95
+    functionName: OpenBossLife
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 4.5833335
     functionName: MusicOver
     data: 

@@ -11,6 +11,9 @@ public class BossMusic : MonoBehaviour
     [Header("粒子特效出現的點")]
     public GameObject Pos;
 
+    [Header("Boss血量")]
+    public GameObject Boss_Life;
+
     [Header("聲音的大小")]
     public float SoundPower;
     // Start is called before the first frame update
@@ -22,7 +25,10 @@ public class BossMusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MusicBox.GetComponent<AudioSource>().volume = Mathf.Lerp(MusicBox.GetComponent<AudioSource>().volume, SoundPower, 0.01f);
+        if(MusicBox.GetComponent<AudioSource>() != null)
+        {
+            MusicBox.GetComponent<AudioSource>().volume = Mathf.Lerp(MusicBox.GetComponent<AudioSource>().volume, SoundPower, 0.01f);
+        }
     }
 
     public void MusicStart()
@@ -53,5 +59,10 @@ public class BossMusic : MonoBehaviour
     {
         SoundPower = 0;
         //MusicBox.GetComponent<AudioSource>().Stop();
+    }
+
+    public void OpenBossLife()
+    {
+        Boss_Life.SetActive(true);
     }
 }
