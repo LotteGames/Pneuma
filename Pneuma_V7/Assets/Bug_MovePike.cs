@@ -30,7 +30,7 @@ public class Bug_MovePike : MonoBehaviour
     {
         if (GetComponent<Collider2D>().isTrigger == true)
         {
-            if(GetComponent<Rigidbody2D>().velocity.y <= 0)
+            if(GetComponent<Rigidbody2D>().velocity.y <= -0.01f)
             {
                 GetComponent<Collider2D>().isTrigger = false;
             }
