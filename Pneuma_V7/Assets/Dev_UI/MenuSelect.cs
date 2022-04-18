@@ -19,14 +19,45 @@ public class MenuSelect : MonoBehaviour
 
     public GameObject firstSelected;
 
+    public GraphicRaycaster graphicRaycaster;
+
+    public GameObject MouseHoverOn()
+    {
+        PointerEventData pointerEventData = new PointerEventData(eventSystem);
+        pointerEventData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+
+        graphicRaycaster.Raycast(pointerEventData, results);
+
+        GameObject hoverOn = null;
+
+        for (int i = 0; i < results.Count; i++)
+        {
+            if (results[i].gameObject.CompareTag("MenuSelect"))
+            {
+                hoverOn = results[i].gameObject;
+                break;
+            }
+        }
+        //if (hoverOn != null)
+        //{
+        //    Debug.LogError(hoverOn.name);
+        //}
+        return hoverOn;
+    }
+
     private void Start()
     {
-        eventSystem.SetSelectedGameObject(firstSelected);
+        //      eventSystem.SetSelectedGameObject(firstSelected);
+        lastObj = firstSelected;
     }
 
     private void Update()
     {
-        GameObject obj_1 = (eventSystem.currentSelectedGameObject);
+        //GameObject obj_1 = (eventSystem.currentSelectedGameObject);
+
+        GameObject obj_1 = (MouseHoverOn() != null) ? MouseHoverOn() : lastObj;
 
         if (obj_1 != lastObj)
         {
@@ -35,7 +66,6 @@ public class MenuSelect : MonoBehaviour
                 TextMeshProUGUI text = obj_1.GetComponentInChildren<TextMeshProUGUI>();
 
                 mark.DOMove(obj_1.GetComponent<RectTransform>().position, duration).SetEase(ease);
-
 
                 coroutine_obj = StartCoroutine(MoveObjText(text));
 
@@ -66,8 +96,8 @@ public class MenuSelect : MonoBehaviour
             //text.SetText( "< space = "+time+" em >"+ originText);
             yield return new WaitForEndOfFrame();
         }
-
     }
+
     IEnumerator MoveLastText(TextMeshProUGUI text)
     {
         float duration = this.duration, time = 0;
@@ -80,7 +110,7 @@ public class MenuSelect : MonoBehaviour
         {
             duration -= Time.deltaTime;
             // <space=5em> 
-            text.SetText("<space=" + ((duration < 0) ? 0 : duration) + "em>" + targetText);
+            text.SetText("<space=" + ((duration <= 0f) ? 0f : duration) + "em>" + targetText);
             //text.SetText("< space = " + duration + " em >" + originText);
             yield return new WaitForEndOfFrame();
         }
