@@ -11,6 +11,10 @@ public class CatMorphTime_UI : MonoBehaviour
     public float MorphTime;
     [Header("1~0")]
     public float OneCount;
+    [Header("Red")]
+    public Color Red;
+    [Header("Blue")]
+    public Color Blue;
     [Header("圖片")]
     public Image TimeForAmount;
     // Start is called before the first frame update
@@ -26,9 +30,10 @@ public class CatMorphTime_UI : MonoBehaviour
         OneCount = MorphTime / MorphTimeMax;
 
         TimeForAmount.fillAmount = OneCount;
-        GetComponent<Image>().color = new Color(1 - OneCount, 0, 0, 0.7f);
+        TimeForAmount.GetComponent<Image>().color = Color.Lerp(Red, Blue, OneCount);
+        GetComponent<Image>().color = Color.Lerp(Red, Blue, OneCount);
 
-        if(MorphTime <= 0)
+        if (MorphTime <= 0)
         {
             gameObject.SetActive(false);
         }

@@ -3265,16 +3265,17 @@ public class CatContrl : MonoBehaviour
         GetComponent<Animator>().SetBool("Cloud", false);
         GetComponent<Animator>().SetBool("Climb", false);
         transform.position = new Vector2(PlayerPrefs.GetFloat("CatPos_X"), PlayerPrefs.GetFloat("CatPos_Y")) + new Vector2(0, 0.2f);
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
         AllStart();
         CatAni.SetBool("Die", false);
 
 
         Black.SetActive(false);
-        yield return new WaitForSeconds(.15f);
+        yield return new WaitForSeconds(.25f);
         GameObject effectobj = Instantiate(effect,transform.position,Quaternion.identity);
-
         Destroy(effectobj,1);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.4f);
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         GetComponent<Rigidbody2D>().gravityScale = CatWeight;
         GetComponent<Collider2D>().isTrigger = false;
         
