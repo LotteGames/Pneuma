@@ -3271,10 +3271,10 @@ public class CatContrl : MonoBehaviour
 
 
         Black.SetActive(false);
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(.45f);
         GameObject effectobj = Instantiate(effect,transform.position,Quaternion.identity);
         Destroy(effectobj,1);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         GetComponent<Rigidbody2D>().gravityScale = CatWeight;
         GetComponent<Collider2D>().isTrigger = false;
