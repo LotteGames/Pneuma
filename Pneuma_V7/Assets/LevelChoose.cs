@@ -15,8 +15,8 @@ public class LevelChoose : MonoBehaviour
     [Header("關卡的按鈕的大小")]
     public Vector3[] LevelButtonSize;
 
-    [Header("關卡的按鈕紀錄動畫")]
-    public Animator[] Ani;
+    //[Header("關卡的按鈕紀錄動畫")]
+    //public Animator[] Ani;
 
     [Header("哪一個按鈕")]
     public int[] ButtonToWhereScense;
