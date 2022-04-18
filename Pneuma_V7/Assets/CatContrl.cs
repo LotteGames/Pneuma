@@ -3267,10 +3267,17 @@ public class CatContrl : MonoBehaviour
         transform.position = new Vector2(PlayerPrefs.GetFloat("CatPos_X"), PlayerPrefs.GetFloat("CatPos_Y")) + new Vector2(0, 0.2f);
         AllStart();
         CatAni.SetBool("Die", false);
-        yield return new WaitForSeconds(1);
+
+
+        Black.SetActive(false);
+        yield return new WaitForSeconds(.15f);
+        GameObject effectobj = Instantiate(effect,transform.position,Quaternion.identity);
+
+        Destroy(effectobj,1);
+        yield return new WaitForSeconds(1f);
         GetComponent<Rigidbody2D>().gravityScale = CatWeight;
         GetComponent<Collider2D>().isTrigger = false;
-        Black.SetActive(false);
+        
         NowCatMorph = CatMorph.NoMorph;
         NowCatAct = CatAct.Idle;
         CatAni.SetBool("Die", false);
@@ -3284,6 +3291,8 @@ public class CatContrl : MonoBehaviour
         GetEnd_Left();
 #endif
     }
+
+    public GameObject effect;
     public void Cat_CallDeathAni(int CatNusic, float Die_JumpPower)
     {
         NowCatAct = CatAct.CatStop;
