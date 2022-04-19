@@ -22,7 +22,7 @@ public class CounterUpdater : MonoBehaviour
         NumberCounter.Value = value;
     }
 
-    public void ShowResult() 
+    public void ShowResult()
     {
         StartCoroutine(ResultPresent());
     }
@@ -36,7 +36,7 @@ public class CounterUpdater : MonoBehaviour
         timerCounter.UpdateText();
         yield return new WaitForSeconds(timerCounter.duration);
 
-        NumberCounter.UpdateText(0);
+        NumberCounter.UpdateText(FindObjectOfType<CatContrl>().CatCoin);
         yield return new WaitForSeconds(NumberCounter.duration);
 
         resultTitle.SetBtnActive(true);
@@ -46,7 +46,7 @@ public class CounterUpdater : MonoBehaviour
     {
         if (collision.GetComponent<CatContrl>())
         {
-            ResultCanvas.GetComponent<Canvas>().enabled=(true);
+            ResultCanvas.GetComponent<Canvas>().enabled = (true);
             ShowResult();
         }
     }
