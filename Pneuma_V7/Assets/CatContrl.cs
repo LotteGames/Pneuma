@@ -396,7 +396,7 @@ public class CatContrl : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
             {
                 if (CanJump == true)
                 {
@@ -1628,90 +1628,110 @@ public class CatContrl : MonoBehaviour
                 if (hit_U_1.collider.gameObject.tag == "Ground" || hit_U_1.collider.gameObject.tag == "Wall")
                 {
 
-                    if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
+                    //if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
+                    //{
+                    //    RotY = 1;
+                    //    GetComponent<Rigidbody2D>().gravityScale = 0;
+                    //    IsClimb = true;
+
+                    //    if (hit_U_1.collider.GetComponent<MoveGround>() != null)
+                    //    {
+                    //        hit_U_1.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    //    }
+
+                    //    if (CanLongTrue == true)
+                    //    {
+                    //        //LongLight.SetActive(true);
+                    //        CanLong = true;
+                    //    }
+                    //    if (CanJumpTrue == true)
+                    //    {
+                    //        CanJump = true;
+                    //        CatAni.SetBool("Jump", false);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    if (NowCatMorph != CatMorph.Climb)
+                    //    {
+                    //        RotY = 0;
+                    //        if (WaterFly == false)
+                    //        {
+                    //            GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        RotY = 1;
+                    //    }
+                    //}
+                    if (NowCatMorph != CatMorph.Climb)
                     {
-                        RotY = 1;
-                        GetComponent<Rigidbody2D>().gravityScale = 0;
-                        IsClimb = true;
-
-                        if (hit_U_1.collider.GetComponent<MoveGround>() != null)
+                        RotY = 0;
+                        if (WaterFly == false)
                         {
-                            hit_U_1.collider.GetComponent<MoveGround>().MoveObject(gameObject);
-                        }
-
-                        if (CanLongTrue == true)
-                        {
-                            //LongLight.SetActive(true);
-                            CanLong = true;
-                        }
-                        if (CanJumpTrue == true)
-                        {
-                            CanJump = true;
-                            CatAni.SetBool("Jump", false);
+                            GetComponent<Rigidbody2D>().gravityScale = CatWeight;
                         }
                     }
                     else
                     {
-                        if (NowCatMorph != CatMorph.Climb)
-                        {
-                            RotY = 0;
-                            if (WaterFly == false)
-                            {
-                                GetComponent<Rigidbody2D>().gravityScale = CatWeight;
-                            }
-                        }
-                        else
-                        {
-                            RotY = 1;
-                        }
+                        RotY = 1;
                     }
                 }
-                //else
-                //{
-                //    RotY = 0;
-                //}
             }
             else if (hit_U_2.collider != null)
             {
                 if (hit_U_2.collider.gameObject.tag == "Ground" || hit_U_2.collider.gameObject.tag == "Wall")
                 {
-                    if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
+                    //if (Input.GetKey(KeyCode.W) || WhatKey_ == "W")
+                    //{
+                    //    RotY = 1;
+                    //    GetComponent<Rigidbody2D>().gravityScale = 0;
+                    //    IsClimb = true;
+
+                    //    if (hit_U_2.collider.GetComponent<MoveGround>() != null)
+                    //    {
+                    //        hit_U_2.collider.GetComponent<MoveGround>().MoveObject(gameObject);
+                    //    }
+
+
+                    //    if (CanLongTrue == true)
+                    //    {
+                    //        //LongLight.SetActive(true);
+                    //        CanLong = true;
+                    //    }
+                    //    if (CanJumpTrue == true)
+                    //    {
+                    //        CanJump = true;
+                    //        CatAni.SetBool("Jump", false);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    if (NowCatMorph != CatMorph.Climb)
+                    //    {
+                    //        RotY = 0;
+                    //        if (WaterFly == false)
+                    //        {
+                    //            GetComponent<Rigidbody2D>().gravityScale = CatWeight;
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        RotY = 1;
+                    //    }
+                    //}
+                    if (NowCatMorph != CatMorph.Climb)
                     {
-                        RotY = 1;
-                        GetComponent<Rigidbody2D>().gravityScale = 0;
-                        IsClimb = true;
-
-                        if (hit_U_2.collider.GetComponent<MoveGround>() != null)
+                        RotY = 0;
+                        if (WaterFly == false)
                         {
-                            hit_U_2.collider.GetComponent<MoveGround>().MoveObject(gameObject);
-                        }
-
-
-                        if (CanLongTrue == true)
-                        {
-                            //LongLight.SetActive(true);
-                            CanLong = true;
-                        }
-                        if (CanJumpTrue == true)
-                        {
-                            CanJump = true;
-                            CatAni.SetBool("Jump", false);
+                            GetComponent<Rigidbody2D>().gravityScale = CatWeight;
                         }
                     }
                     else
                     {
-                        if (NowCatMorph != CatMorph.Climb)
-                        {
-                            RotY = 0;
-                            if (WaterFly == false)
-                            {
-                                GetComponent<Rigidbody2D>().gravityScale = CatWeight;
-                            }
-                        }
-                        else
-                        {
-                            RotY = 1;
-                        }
+                        RotY = 1;
                     }
                 }
                 //else
@@ -2853,7 +2873,7 @@ public class CatContrl : MonoBehaviour
 
                 if (NowCatMorph != CatMorph.Climb)
                 {
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
                     {
                         if (CanJump == true)
                         {
@@ -2909,7 +2929,7 @@ public class CatContrl : MonoBehaviour
 
                 if (NowCatMorph != CatMorph.Climb)
                 {
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
                     {
                         if (CanJump == true)
                         {
@@ -3271,11 +3291,12 @@ public class CatContrl : MonoBehaviour
 
 
         Black.SetActive(false);
-        yield return new WaitForSeconds(.45f);
+        yield return new WaitForSeconds(.35f);
         GameObject effectobj = Instantiate(effect,transform.position,Quaternion.identity);
         Destroy(effectobj,1);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        yield return new WaitForSeconds(0.4f);
         GetComponent<Rigidbody2D>().gravityScale = CatWeight;
         GetComponent<Collider2D>().isTrigger = false;
         
@@ -3375,6 +3396,11 @@ public class CatContrl : MonoBehaviour
         for (int i = 0; i < bossAniOpen.Length; i++)
         {
             bossAniOpen[i].Close();
+        }
+        ElevatorContrl[] elevatorContrl = GameObject.FindObjectsOfType<ElevatorContrl>();
+        for (int i = 0; i < elevatorContrl.Length; i++)
+        {
+            elevatorContrl[i].CatDie();
         }
     }
     public void AllCoinSave()
@@ -3479,7 +3505,8 @@ public class CatContrl : MonoBehaviour
             }
             else
             {
-                if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || WhatKey_ == "A" || WhatKey_ == "D" || WhatKey_ == "W")
+                //if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || WhatKey_ == "A" || WhatKey_ == "D" || WhatKey_ == "W")
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || WhatKey_ == "A" || WhatKey_ == "D")
                 {
 
                 }

@@ -11,7 +11,8 @@ public class BossAniOpen : MonoBehaviour
     [Header("提示動畫")]
     public GameObject Ani;
 
-
+    [Header("動畫初始角度")]
+    public Vector3 AniRot;
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +35,11 @@ public class BossAniOpen : MonoBehaviour
     {
         Ani.SetActive(false);
         BigBug.SetActive(false);
-        GetComponent<Animator>().enabled = false;
+        BigBug.transform.rotation = Quaternion.Euler(AniRot);
+        BigBug.SetActive(true);
 
+        GetComponent<Animator>().enabled = false;
+        BigBug.SetActive(false);
         gameObject.SetActive(false);
         gameObject.SetActive(true);
     }
