@@ -21,7 +21,7 @@ public class CloudyMove : MonoBehaviour
         transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * MoveSpeed;
         if(transform.localPosition.x <= MiniPosX.x)
         {
-            transform.localPosition = new Vector3(-MiniPosX.x, MiniPosX.y, 0);
+            transform.localPosition = new Vector3(-MiniPosX.x, MiniPosX.y, 10);
         }
     }
 }
