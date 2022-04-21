@@ -31,7 +31,19 @@ public class Bug_Down_Box : MonoBehaviour
     public IEnumerator DelayCreate()
     {
         yield return new WaitForSeconds(CreateTime);
-        myBug = Instantiate(CreateBug, transform.position, Quaternion.Euler(0, 0, 0), transform);
-        GetComponent<LineRenderer_Contrl>().Pos[1] = myBug;
+        SetStart();
+    }
+
+    public void SetStart()
+    {
+        if(myBug != null)
+        {
+
+        }
+        else
+        {
+            myBug = Instantiate(CreateBug, transform.position, Quaternion.Euler(0, 0, 0), transform);
+            GetComponent<LineRenderer_Contrl>().Pos[1] = myBug;
+        }
     }
 }
