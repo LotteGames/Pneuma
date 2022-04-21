@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CreateBug: {fileID: 7642758390091270763, guid: a458ad631339289428d6f98473ac7c79, type: 3}
-  myBug: {fileID: 1737147404177474686}
   BugPos: {fileID: 1737147404747132666}
   CreateTime: 6
 --- !u!1 &1737147404747132666

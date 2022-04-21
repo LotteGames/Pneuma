@@ -3407,11 +3407,6 @@ public class CatContrl : MonoBehaviour
         {
             Destroy(greenBullet[i]);
         }
-        Bug_Down_Box[] bug_Down_Box = GameObject.FindObjectsOfType<Bug_Down_Box>();
-        for (int i = 0; i < bug_Down_Box.Length; i++)
-        {
-            bug_Down_Box[i].SetStart();
-        }
     }
     public void AllCoinSave()
     {
