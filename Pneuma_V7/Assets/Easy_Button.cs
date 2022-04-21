@@ -13,8 +13,9 @@ public class Easy_Button : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        EasyButton_OnClick();
     }
+
 
     public void EasyButton_OnClick()
     {

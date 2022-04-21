@@ -56,6 +56,13 @@ public class ElevatorContrl : MonoBehaviour
             RedBox.transform.GetChild(i).GetComponent<Bug_MovePikeBox>().AllStart(); 
         }
         RedBox.SetActive(false);
+
+
+        for (int i = 0; i < GreenBox.transform.childCount; i++)
+        {
+            GreenBox.transform.GetChild(i).gameObject.SetActive(true);
+            GreenBox.transform.GetChild(i).GetComponent<Bug_MovePikeBox>().AllStart();
+        }
         GreenBox.SetActive(false);
     }
 

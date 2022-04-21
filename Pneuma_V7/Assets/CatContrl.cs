@@ -3402,6 +3402,11 @@ public class CatContrl : MonoBehaviour
         {
             elevatorContrl[i].CatDie();
         }
+        GreenBullet[] greenBullet = GameObject.FindObjectsOfType<GreenBullet>();
+        for (int i = 0; i < greenBullet.Length; i++)
+        {
+            Destroy(greenBullet[i]);
+        }
     }
     public void AllCoinSave()
     {
