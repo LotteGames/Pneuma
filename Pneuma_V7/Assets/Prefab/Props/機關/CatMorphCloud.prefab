@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightType: 1
-  lightPresetId: 4
+  lightPresetId: 7
   eventPresetId: 0
-  lightLayer: 4
+  lightLayer: 7
   occlusionLayer: 0
   translucentLayer: 0
   translucentPresetId: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d62ac029b1017974ead8b6ad01623c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightLayer: 4
+  lightLayer: 7
   type: 0
   spriteMode: 0
   sprite: {fileID: -2413806693520163455, guid: 5f7516ba11b0bd04dad6bf76542016e5, type: 3}

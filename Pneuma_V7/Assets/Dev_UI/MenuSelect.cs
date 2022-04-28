@@ -5,23 +5,26 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
+/// <summary>
+/// 只呼叫物件去做事
+/// 
+/// 滑鼠懸浮在某個物件上時，會有文字的效果跟標記移動的效果
+/// 還會告訴物件滑鼠/鍵盤選在某個物件上，以及離開某個物件了
+/// 
+/// 鍵盤操作的話，則是鍵盤按了才會有文字效果，並且標記只會停留在當前選擇的物件上
+/// </summary>
 public class MenuSelect : MonoBehaviour
 {
-    public int index = 0;
-
-    public EventSystem eventSystem;
-    GameObject lastObj;
-
-    public RectTransform mark;
-
-    public Ease ease;
-    public float duration = 0.5f;
-
-    public GameObject firstSelected;
+    public GameObject firstSelected, lastSelected;
 
     public GraphicRaycaster graphicRaycaster;
+    public EventSystem eventSystem;
 
-    public GameObject MouseHoverOn()
+    public Transform mark;
+    public Ease ease;
+    public float markMoveSec;
+
+    public TextEffect MouseHoverOn()
     {
         PointerEventData pointerEventData = new PointerEventData(eventSystem);
         pointerEventData.position = Input.mousePosition;
@@ -30,91 +33,89 @@ public class MenuSelect : MonoBehaviour
 
         graphicRaycaster.Raycast(pointerEventData, results);
 
-        GameObject hoverOn = null;
-
         for (int i = 0; i < results.Count; i++)
         {
-            if (results[i].gameObject.CompareTag("MenuSelect"))
+            TextEffect hoverOn = results[i].gameObject.GetComponentInChildren<TextEffect>();
+
+            if (hoverOn != null)
             {
-                hoverOn = results[i].gameObject;
-                break;
+                return hoverOn;
             }
         }
-        //if (hoverOn != null)
-        //{
-        //    Debug.LogError(hoverOn.name);
-        //}
-        return hoverOn;
+        return null;
     }
+    public TextEffect lastTextEffect;
 
     private void Start()
     {
-        //      eventSystem.SetSelectedGameObject(firstSelected);
-        lastObj = firstSelected;
+        SetSelectedObj(firstSelected);
+        lastSelected = firstSelected;
+
+        lastTextEffect = firstSelected.GetComponentInChildren<TextEffect>();
+        lastTextEffect.IsHoverOn = true;
     }
 
     private void Update()
     {
-        //GameObject obj_1 = (eventSystem.currentSelectedGameObject);
-
-        GameObject obj_1 = (MouseHoverOn() != null) ? MouseHoverOn() : lastObj;
-
-        if (obj_1 != lastObj)
+        if (eventSystem.currentSelectedGameObject != null)
         {
-            if (obj_1 != null)
+            Debug.LogError(eventSystem.currentSelectedGameObject.name);
+        }
+        else
+        {
+            eventSystem.SetSelectedGameObject(lastSelected);
+        }
+
+
+        TextEffect textEffect = MouseHoverOn();
+        if (textEffect != null && lastTextEffect != textEffect)
+        {
+            textEffect.IsHoverOn = true;
+
+            lastTextEffect.IsHoverOn = false;
+
+            lastTextEffect = textEffect;
+
+
+            MoveMark(textEffect);
+
+
+            GameObject buttonObj = textEffect.GetComponentInParent<Button>().gameObject;
+            SetSelectedObj(buttonObj);
+            lastSelected = buttonObj;
+        }
+
+
+        GameObject currentSelectedObj = eventSystem.currentSelectedGameObject;
+
+        if (lastSelected != currentSelectedObj && currentSelectedObj != null)
+        {
+
+            TextEffect effect = currentSelectedObj.GetComponentInChildren<TextEffect>();
+
+            if (effect != null)
             {
-                TextMeshProUGUI text = obj_1.GetComponentInChildren<TextMeshProUGUI>();
+                effect.IsHoverOn = true;
 
-                mark.DOMove(obj_1.GetComponent<RectTransform>().position, duration).SetEase(ease);
+                lastTextEffect.IsHoverOn = false;
 
-                coroutine_obj = StartCoroutine(MoveObjText(text));
+                lastTextEffect = effect;
 
-                if (lastObj != null)
-                {
-                    coroutine_last = StartCoroutine(MoveLastText(lastObj.GetComponentInChildren<TextMeshProUGUI>()));
-                }
 
-                lastObj = obj_1;
+                MoveMark(effect);
+
             }
+
+            lastSelected = effect.GetComponentInParent<Button>().gameObject;
         }
     }
 
-
-
-    Coroutine coroutine_obj, coroutine_last;
-
-    IEnumerator MoveObjText(TextMeshProUGUI text)
+    public void MoveMark(TextEffect textEffect)
     {
-        float duration = this.duration, time = 0;
-
-        string originText = text.text;
-
-        while (time < duration)
-        {
-            time += Time.deltaTime;
-            text.SetText("<space=" + time + "em>" + originText);
-            //text.SetText( "< space = "+time+" em >"+ originText);
-            yield return new WaitForEndOfFrame();
-        }
+        mark.DOMoveY(textEffect.transform.position.y, markMoveSec).SetEase(ease);
     }
-
-    IEnumerator MoveLastText(TextMeshProUGUI text)
+    public void SetSelectedObj(GameObject selectedObj)
     {
-        float duration = this.duration, time = 0;
-
-        string originText = text.text;
-        string[] split = originText.Split('>');
-        string targetText = split[split.Length - 1];
-
-        while (time < duration)
-        {
-            duration -= Time.deltaTime;
-            // <space=5em> 
-            text.SetText("<space=" + ((duration <= 0f) ? 0f : duration) + "em>" + targetText);
-            //text.SetText("< space = " + duration + " em >" + originText);
-            yield return new WaitForEndOfFrame();
-        }
-        text.SetText(targetText);
+        eventSystem.SetSelectedGameObject(selectedObj);
     }
-
 }

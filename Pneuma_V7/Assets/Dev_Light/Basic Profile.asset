@@ -123,6 +123,22 @@ MonoBehaviour:
         - id: 6
           type: 0
           sorting: 0
+    - name: CollectObjs
+      type: 0
+      hdr: 1
+      darknessColor: {r: 0, g: 0, b: 0, a: 1}
+      depth: -100
+      resolution: 1
+      dayLayers:
+        list:
+        - id: 0
+          type: 0
+          sorting: 0
+      lightLayers:
+        list:
+        - id: 7
+          type: 0
+          sorting: 0
   lightPresets:
     list:
     - name: Sky Preset
@@ -202,6 +218,17 @@ MonoBehaviour:
           shadowEffectLayer: 0
           maskLit: 0
           maskLitDistance: 1
+    - name: CollectObjs
+      layerSetting:
+        list:
+        - layerID: 7
+          type: 0
+          sorting: 0
+          sortingIgnore: 0
+          shadowEffect: 2
+          shadowEffectLayer: 0
+          maskLit: 0
+          maskLitDistance: 1
   eventPresets:
     list:
     - name: 
@@ -213,8 +240,8 @@ MonoBehaviour:
         list:
         - layerID: 0
   qualitySettings:
-    lightTextureSize: 3
-    lightEffectTextureSize: 3
+    lightTextureSize: 2
+    lightEffectTextureSize: 2
     lightFilterMode: 0
     lightmapFilterMode: 0
     updateMethod: 0
@@ -237,6 +264,7 @@ MonoBehaviour:
       - Player Collider
       - PlantNear Collider
       - Default
+      - CollectObjs Collider
     lightLayers:
       names:
       - Sky Light
@@ -246,6 +274,7 @@ MonoBehaviour:
       - Player Light
       - PlantNear Light
       - Default
+      - CollectObjs Light
     dayLayers:
       names:
       - Default

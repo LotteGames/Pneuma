@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
-
+using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public List<RoleBubble> RoleBubbles;

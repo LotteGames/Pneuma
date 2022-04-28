@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.UI;
 /// <summary>
 /// For every character that need to speak, include cat
 /// </summary>
