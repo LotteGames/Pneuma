@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class BlurVelocity : MonoBehaviour
 {
+
+    public Transform targetTransform;
     public Material material;
     public Vector3 lastPos, vector;
     void Start()
     {
         material = GetComponent<SpriteRenderer>().material;
-        lastPos = transform.position;
+        lastPos = targetTransform.position;
     }
 
     void Update()
     {
-        vector = transform.position - lastPos;
+        vector = targetTransform.position - lastPos;
         material.SetVector("_Velocity", new Vector4(vector.x, vector.y, 0, 0));
 
 
-        lastPos = transform.position;
+        lastPos = targetTransform.position;
     }
 }

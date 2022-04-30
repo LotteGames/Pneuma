@@ -5,14 +5,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
-/// <summary>
-/// 只呼叫物件去做事
-/// 
-/// 滑鼠懸浮在某個物件上時，會有文字的效果跟標記移動的效果
-/// 還會告訴物件滑鼠/鍵盤選在某個物件上，以及離開某個物件了
-/// 
-/// 鍵盤操作的話，則是鍵盤按了才會有文字效果，並且標記只會停留在當前選擇的物件上
-/// </summary>
+
 public class MenuSelect : MonoBehaviour
 {
     public GameObject firstSelected, lastSelected;
