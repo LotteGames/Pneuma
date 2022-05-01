@@ -53,10 +53,14 @@ public class Bug_BulletAim : MonoBehaviour
     {
         GetComponent<Animator>().SetBool("Attack", false);
 
-        Vector2 Path = Cat.transform.position - transform.position;
-        Path.Normalize();
+        float Remove = transform.position.y - Cat.transform.position.y;
+        if (Remove >= -3 && Remove <= ShootRemove * 2f)
+        {
+            Vector2 Path = Cat.transform.position - transform.position;
+            Path.Normalize();
 
-        GameObject B = Instantiate(Bullet, Pos.transform.position, Quaternion.Euler(0, 0, 0));
-        B.GetComponent<Rigidbody2D>().AddRelativeForce(Path * ShootPower);
+            GameObject B = Instantiate(Bullet, Pos.transform.position, Quaternion.Euler(0, 0, 0));
+            B.GetComponent<Rigidbody2D>().AddRelativeForce(Path * ShootPower);
+        }
     }
 }

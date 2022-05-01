@@ -65,4 +65,10 @@ public class BossMusic : MonoBehaviour
     {
         Boss_Life.SetActive(true);
     }
+    [Header("粒子特效出現的點")]
+    public GameObject openObject;
+    public void OpenObject()
+    {
+        openObject.SetActive(true);
+    }
 }
