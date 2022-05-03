@@ -13,12 +13,14 @@ public class BlurVelocity : MonoBehaviour
         material = GetComponent<SpriteRenderer>().material;
         lastPos = targetTransform.position;
     }
+public bool useY=true,useHalfY=true;
 
     void Update()
     {
         vector = targetTransform.position - lastPos;
-        material.SetVector("_Velocity", new Vector4(vector.x, vector.y, 0, 0));
+        material.SetVector("_Velocity", new Vector4(vector.x,(useY?vector.y:0)*(useHalfY?.5f:1) , 0, 0));
 
+Debug.LogError("vector: "+vector);
 
         lastPos = targetTransform.position;
     }

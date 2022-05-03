@@ -77,10 +77,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Boolean_548b092945d74b84810fd4d21ba2df84: 0
-    - Vector1_3c54d1f6a26949e9a14eeb2f09b4fa06: 0
-    - Vector1_74d3061e79d345a4a3648f1af394b8e2: 0
-    - Vector1_b202e462fb454648ab2df2a17418c2c0: 0
-    - Vector1_c42422a8a5284c19a57c1e185800bc5c: 0
+    - Vector1_3c54d1f6a26949e9a14eeb2f09b4fa06: 0.03
+    - Vector1_74d3061e79d345a4a3648f1af394b8e2: 0.05
+    - Vector1_b202e462fb454648ab2df2a17418c2c0: 0.06
+    - Vector1_c42422a8a5284c19a57c1e185800bc5c: 0.04
     - _AlphaClip: 0
     - _Blend: 0
     - _BlurAmount: 0
@@ -103,9 +103,9 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Scale_1: 0.01
-    - _Scale_2: 0.02
-    - _Scale_3: 0.03
-    - _Scale_4: 0
+    - _Scale_2: 0.01
+    - _Scale_3: 0.01
+    - _Scale_4: 0.02
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
