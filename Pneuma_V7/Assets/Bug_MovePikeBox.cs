@@ -37,7 +37,7 @@ public class Bug_MovePikeBox : MonoBehaviour
     {
         T += Time.deltaTime;
 
-        if (T >= CreateTime - 3)
+        if (T >= CreateTime - 3.5f)
         {
             Bug_CreateAni.SetActive(true);
         }
